@@ -20,14 +20,19 @@ def calculator():
     http://127.0.0.1:5000/api/v1/calculator?operation=plus&num1=int&num2=int
 """
 
-
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_restful import fields, reqparse
+from flask_cors import CORS, cross_origin
+import json
+from suiter.suiter import generate_test_suite
 
 app = Flask(__name__)
+cors = CORS(app)
+
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/home')
-@app.route('/')
+@app.route('/') 
 def home():
     """
     Displays the home page accessible at '/' or '/home'
@@ -42,13 +47,26 @@ def echo():
     """
     return 'echo_reply'
 
-@app.route('/help')
+@app.route('/help') 
 def help():
     """
     Displays the Suiter guide page accessible at '/help'
     """
+    return render_template("help.html")
 
-@app.route('/api/v1/calculator', methods=["GET"])
+@app.route('/generate', methods=['GET', 'POST'])
+def generate():
+    """
+    Generate test suite for a specified SUT
+    """
+    sut = request.json
+    print(sut)
+
+    test_suite = generate_test_suite(sut)
+
+    return json.dumps(test_suite)
+
+@app.route('/api/v1/calculator', methods=['GET'])
 def calculator():
     """
     Basic calculator for testing purposes 
@@ -86,4 +104,4 @@ def calculator():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
+    app.run(debug=True)
