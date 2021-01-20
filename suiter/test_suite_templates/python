@@ -1,0 +1,12 @@
+import requests
+import random
+
+BASE = "http://127.0.0.1:5000/api/v1/calculator"
+
+json = {
+	"operation": "add","num1": 3,"num2": 2
+}
+
+response = requests.get(BASE, json)
+print(response.json())
+# assert(operation.1, num1.1, num2.1) = X

@@ -1,0 +1,15 @@
+martin.studeny@ANTB1953 MINGW64 ~/Documents/Education/Bachelory/git/SSH
+$ eval `ssh-agent`
+Agent pid 2315
+
+martin.studeny@ANTB1953 MINGW64 ~/Documents/Education/Bachelory/git/SSH
+$ ssh-add studenma
+Identity added: studenma (martin.studeny@ANTB1953)
+
+
+CORS error
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+
+
+TODO: logging in Python, Flask, javacript
