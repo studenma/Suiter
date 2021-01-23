@@ -1,0 +1,33 @@
+Git Setup:
+To create a new key:
+$ ssh-keygen 
+
+
+$ eval `ssh-agent`
+$ ssh-add studenma
+
+
+Combine Flask setup:
+1. Go to folder combine-master/combine/web_interface
+2. $ python3 -m venv venv
+3. $ source venv/bin/activate
+4. Change the port in 'combine-master/combine/web_interface/flask_app.py' to run two separated Flask apps
+5. Run the Flask app:
+$ python3 flask_app.py 
+
+
+Suiter Flask setup:
+$ source /venv/bin/activate
+$ deactivate
+
+
+
+Python modules location:
+/usr/lib/python3.8
+
+
+
+CORS error
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+TODO: logging in Python, Flask, javacript

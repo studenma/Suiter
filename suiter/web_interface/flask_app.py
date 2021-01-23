@@ -24,7 +24,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_restful import fields, reqparse
 from flask_cors import CORS, cross_origin
 import json
-from suiter.suiter import generate_test_suite
+# from suiter.suiter import generate_test_suite
 
 app = Flask(__name__)
 cors = CORS(app)
