@@ -27,7 +27,17 @@ Python modules location:
 
 
 
+
+Run a command 10 times:
+for run in {1..10}; do python3 suiter.py; done
+
+
 CORS error
 https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 TODO: logging in Python, Flask, javacript
+
+
+
+ALIASES
+alias lsout='ls -la ../test_suite_output/'
