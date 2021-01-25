@@ -42,6 +42,8 @@ def api_call_combine(api_end_point_base_url):
 		return response.json()
 	except ValueError: # includes json.decoder.JSONDecodeError
 		logging.error('Response from Combine is not in a valid JSON format')
+	# except ConnectionError:
+	# 	logging.error('Unable to connect to the Combine server')
 
 def parse_file_name(file_name):
 	"""
@@ -73,29 +75,48 @@ def create_test_suite_file():
 	global file_pointer
 	file_pointer = open(file_relative_path_name, "w")
 
-
 def test_suite_header():
 	logging.debug('Creating a header of a \'' + file_pointer.name +  '\' test script')
 	# import
+	file_pointer.write("from unittest import TestCase\n")
 	file_pointer.write("import requests\n\n")
 	# url
 	file_pointer.write("url = \"" + sut_api_url + "\"\n\n")
-	# payload
-	payload = "\"{\\\"operation\\\": \\\"add\\\",\\\"num1\\\": 3,\\\"num2\\\": 2}\""
-	file_pointer.write("payload = " + payload + "\n")
 	# header
 	headers = {
 		'Content-Type': 'application/json'
 	}
 	file_pointer.write("headers = " + json.dumps(headers) + "\n\n")
-	# API call 
-	file_pointer.write("response = requests.request(\"GET\", url, headers=headers, data=payload)\n\n")
-	# response
-	file_pointer.write("print(response.text)\n")
 	
 
-#def test_suite_class():
+def test_suite_class(test_cases):
+	logging.debug('Creating a test class of a \'' + file_pointer.name +  '\' test script')
+	# class
+	file_pointer.write("class TryTesting(TestCase):\n")
 	
+	# Test case loop
+	test_case_cnt = 1
+	for test in test_cases:
+		file_pointer.write("\tdef test_case_" + str(test_case_cnt) + "(self):\n")
+		# payload
+		payload = "\"{\\\"operation\\\": \\\"add\\\",\\\"num1\\\": " + str(test[0]) + ",\\\"num2\\\": " + str(test[1]) + "}\""
+		file_pointer.write("\t\tpayload = " + payload + "\n")
+		# API call 
+		file_pointer.write("\t\tresponse = requests.request(\"GET\", url, headers=headers, data=payload)\n")
+		# print response
+		# file_pointer.write("\t\tprint(response.text)\n\n")
+		# assert
+		file_pointer.write("\t\tassert response.status_code == 200\n")
+		file_pointer.write("\t\tassert response.json()['Result'] == TODO:\n\n")
+		"""
+		TODO: Add assert text
+		TODO: Make a GUI app to simply edit a resulted test suite
+		TODO: Make a readable template with tags - e.g. <?URL>
+		"""
+		
+		test_case_cnt+=1
+		
+
 
 def suiter(test_cases):
 	"""
@@ -103,12 +124,13 @@ def suiter(test_cases):
 	"""
 	create_test_suite_file()
 	test_suite_header()
-	#test_suite_class()
+	test_suite_class(test_cases)
 	
 	# close file
 	file_pointer.close()
 
 	
+
 
 
 if __name__ == "__main__":

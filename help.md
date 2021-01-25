@@ -43,3 +43,8 @@ TODO: logging in Python, Flask, javacript
 
 ALIASES
 alias lsout='ls -la ../test_suite_output/'
+
+
+
+EXTENSIONS:
+TODO Highlight - potreba pro zvyrazneni TODO v test suite
