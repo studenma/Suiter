@@ -16,7 +16,7 @@ test_script_language = "Python"
 file_path = "../test_suite_output/"
 file_name_base = "test_suite-"
 
-sut_api_url = "http://127.0.0.1:5000/api/calculator"
+sut_api_url = "http://127.0.0.1:5000/api/v1/calculator"
 
 """
 Logger configuration
@@ -38,6 +38,7 @@ def api_call_combine(api_end_point_base_url):
 	# Send REST API request
 	try:
 		response = requests.request("GET", api_end_point_base_url + "/generate", headers=headers, data=payload)
+		logging.debug('Combine response: ' + str(response.json()))
 		return response.json()
 	except ValueError: # includes json.decoder.JSONDecodeError
 		logging.error('Response from Combine is not in a valid JSON format')
@@ -69,18 +70,18 @@ def create_test_suite_file():
 
 	# Create a file 
 	logging.debug('Creating a file: ' + file_relative_path_name)
-	f = open(file_relative_path_name, "w")
-	return f
+	global file_pointer
+	file_pointer = open(file_relative_path_name, "w")
 
 
-def test_suite_header(file_pointer):
+def test_suite_header():
 	logging.debug('Creating a header of a \'' + file_pointer.name +  '\' test script')
 	# import
 	file_pointer.write("import requests\n\n")
 	# url
 	file_pointer.write("url = \"" + sut_api_url + "\"\n\n")
 	# payload
-	payload = "{\"operation\": \"add\",\"num1\": 3,\"num2\": 2}"
+	payload = "\"{\\\"operation\\\": \\\"add\\\",\\\"num1\\\": 3,\\\"num2\\\": 2}\""
 	file_pointer.write("payload = " + payload + "\n")
 	# header
 	headers = {
@@ -91,40 +92,23 @@ def test_suite_header(file_pointer):
 	file_pointer.write("response = requests.request(\"GET\", url, headers=headers, data=payload)\n\n")
 	# response
 	file_pointer.write("print(response.text)\n")
-	file_pointer.close()
-	exit(1)
+	
+
+#def test_suite_class():
+	
 
 def suiter(test_cases):
 	"""
 	Test suite creator for Python Requests
 	"""
-	file_pointer = create_test_suite_file()
-	test_suite_header(file_pointer)
+	create_test_suite_file()
+	test_suite_header()
+	#test_suite_class()
+	
+	# close file
+	file_pointer.close()
 
 	
-
-
-
-
-
-
-def python_test_file():
-	return "TEST"
-
-def generate_test_suite(test_suite):
-	"""
-	Returns a test suite for a given API endpoint with specified characteristics
-	"""
-	print("DEBUG: generate_test_suite()", flush=True)
-	test_suite = json.loads(test_suite)
-
-	for test_case in test_suite:
-		print(test_case, flush=True)
-
-	file = open("../../tests/testSuite.py", "w")
-	data = python_test_file()
-	file.write(data)
-	file.close()
 
 
 if __name__ == "__main__":

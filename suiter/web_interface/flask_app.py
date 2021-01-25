@@ -24,7 +24,13 @@ from flask import Flask, render_template, request, jsonify
 from flask_restful import fields, reqparse
 from flask_cors import CORS, cross_origin
 import json
+
+import os,sys,inspect
 # from suiter.suiter import generate_test_suite
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir) 
+from suiter import parse_file_name, logging
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -72,12 +78,15 @@ def calculator():
     Basic calculator for testing purposes 
     http://127.0.0.1:5000/api/v1/calculator?operation=plus&num1=int&num2=int
     """
-
+    logging.debug(request)
+    logging.debug(request.data)
+    
     calculator_fields = {
         'operation': fields.String,
         'num1': fields.Integer,
         'num2': fields.Integer
     }
+
     calculator_args = reqparse.RequestParser()
     calculator_args.add_argument("operation", type=str, help="Operation is required", required=True)
     calculator_args.add_argument("num1", type=int, help="Two numbers are required", required=True)
