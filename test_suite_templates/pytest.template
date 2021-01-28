@@ -1,9 +1,10 @@
 from unittest import TestCase
+from json import dumps
 <FROM_IMPORT>
 import requests
 <IMPORT>
 
-url = <URL>
+url = "<URL>"
 
 headers = <HEADERS>
 
@@ -11,7 +12,7 @@ class <CLASS_NAME>(TestCase):
 	<FOR>
 	def <TEST_NAME>(self):
 		payload = <PAYLOAD>
-		response = requests.request(<METHOD>, url, headers=headers, data=payload)
+		response = requests.request(<METHOD>, url, headers=headers, data=dumps(payload))
 		assert response.status_code == <STATUS_CODE>
 		assert response.json()['Result'] == <ASSERT_RESULT>
 	<END_FOR>

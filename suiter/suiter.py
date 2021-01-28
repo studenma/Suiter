@@ -4,9 +4,12 @@ Module provides a generator of test suits
 
 import sys
 import os
+import stat
 import json
 import requests
 import logging
+import subprocess
+
 
 from exceptions import LimitExceededError
 
@@ -17,6 +20,7 @@ file_path = "../test_suite_output/"
 file_name_base = "test_suite-"
 template_file_path = "../test_suite_templates/"
 template_file_name = "pytest.template"
+test_case_name = "test_case"
 
 sut_api_url = "http://127.0.0.1:5000/api/v1/calculator"
 
@@ -34,14 +38,24 @@ def api_call_combine(api_end_point_base_url):
 	headers = {
 		'Content-Type': 'application/json'
 	}
-	payload="{\r\n    \"name\": \"SUT name\", \r\n    \"t_strength\": \"2\", \r\n    \"dont_care_values\": \"no\", \r\n    \"values\": \"values\", \r\n    \"parameters\": [\r\n        {\"identificator\": \"P1\", \"type\": \"integer\", \"blocks\": [\"P1<0\", \"P1>0\", \"P1=0\"]}, \r\n        {\"identificator\": \"P2\", \"type\": \"integer\", \"blocks\": [\"P2<0\", \"P2>0\", \"P2=0\"]}\r\n    ], \r\n    \"constraints\": []\r\n}"
-		  
-	logging.debug('Calling: ' + api_end_point_base_url + '/generate:\n' + payload)
+
+	combine_output = []
+	#payload="{\r\n    \"name\": \"SUT name\", \r\n    \"t_strength\": \"2\", \r\n    \"dont_care_values\": \"no\", \r\n    \"values\": \"values\", \r\n    \"parameters\": [\r\n        {\"identificator\": \"num1\", \"type\": \"integer\", \"blocks\": [\"num1<0\", \"num1>0\", \"num1=0\"]}, \r\n        {\"identificator\": \"num2\", \"type\": \"integer\", \"blocks\": [\"num2<0\", \"num2>0\", \"num2=0\"]}\r\n    ], \r\n    \"constraints\": []\r\n}"
+	with open('combine_input.json', 'r') as content_file:
+		payload = content_file.read()
+	logging.debug('Calling: ' + api_end_point_base_url + '/generate:\n' + str(payload))
+
+	# getting the names of parameters
+	payload_json = json.loads(payload)
+	for var in payload_json['parameters']:
+		combine_output.append(var['identificator'])
+
 	# Send REST API request
 	try:
 		response = requests.request("GET", api_end_point_base_url + "/generate", headers=headers, data=payload)
 		logging.debug('Combine response: ' + str(response.json()))
-		return response.json()
+		logging.debug('Tuple is returned: ' + str((response.json(), combine_output)))
+		return response.json(), combine_output
 	except ValueError: # includes json.decoder.JSONDecodeError
 		logging.error('Response from Combine is not in a valid JSON format')
 	# except ConnectionError:
@@ -113,7 +127,7 @@ def test_suite_class(test_cases):
 		file_pointer.write("\t\tassert response.json()['Result'] == <TODO:>\n\n")
 		test_case_cnt+=1
 
-def edit_TODO_tags(file_name):
+def edit_ASSERT_tags(file_name):
 	logging.debug('Edditing TODO tags in ' + file_name)
 	# open file for reading only
 	f = open(file_name, "r")
@@ -124,9 +138,9 @@ def edit_TODO_tags(file_name):
 	print("Enter a expected result of following asserts:")
 	for line in f:
 		print(line, end=" ")
-		if '<TODO:>' in line:
+		if '<ASSERT_RESULT>' in line:
 			assert_result = input()
-			new_file_content += line.replace('<TODO:>', assert_result)
+			new_file_content += line.replace('<ASSERT_RESULT>', assert_result)
 		else:
 			new_file_content += line
 	f.close()
@@ -150,7 +164,7 @@ def edit_template_tags(file_name, test_cases):
 			duplicity_switch = 1
 		elif '<END_FOR>' in line:
 			duplicity_switch = 0
-			for _ in range(len(test_cases)): # for number of test cases
+			for _ in range(len(test_cases[0])): # for number of test cases
 				file_pointer.write(for_content + "\n")
 			for_content = ""
 		else:
@@ -158,24 +172,24 @@ def edit_template_tags(file_name, test_cases):
 				for_content += line
 			else:
 				file_pointer.write(line)
-	exit(1)
 
 	from_imports = [['math', 'fabs'], ['math', 'factorial']]
 	imports = ['sys', 'os']
 	import_headers = {'Content-Type': 'application/json'}
+	
 	y = {'Test':'TestValu'}
 	import_headers.update(y)
 
 	class_name = "TryTesting"
-	test_name = 'test_case_'
-	payload = []
-	for test in test_cases:
-		p = "\"{\\\"operation\\\": \\\"add\\\",\\\"num1\\\": " + str(test[0]) + ",\\\"num2\\\": " + str(test[1]) + "}\""
-		payload.append(p)
+
 	status_code = '200'
 	method = "GET"
+
+	file_pointer.close()
+	print(file_pointer.name)
+	file_p = open(file_pointer.name, 'r')
 	
-	for line in f:
+	for line in file_p:
 		if '<FROM_IMPORT>' in line:
 			for custom_from_import in from_imports:
 				new_file_content += 'from ' + custom_from_import[0] + ' import ' + custom_from_import[1] + '\n'
@@ -188,24 +202,52 @@ def edit_template_tags(file_name, test_cases):
 			new_file_content += line.replace('<HEADERS>', str(import_headers))
 		elif '<CLASS_NAME>' in line:
 			new_file_content += line.replace('<CLASS_NAME>', class_name)
-		elif '<TEST_NAME>' in line:
-			new_file_content += line.replace('<TEST_NAME>', test_name)
-		elif '<PAYLOAD>' in line:
-			new_file_content += line.replace('<PAYLOAD>', payload)
-		elif '<METHOD>' in line:
-			new_file_content += line.replace('<METHOD>', method)
-		elif '<STATUS_CODE>' in line:
-			new_file_content += line.replace('<STATUS_CODE>', status_code)
+		# elif '<TEST_NAME>' in line:
+		# 	new_file_content += line.replace('<TEST_NAME>', test_name)
+		# elif '<PAYLOAD>' in line:
+		# 	new_file_content += line.replace('<PAYLOAD>', payload)
+		# elif '<METHOD>' in line:
+		# 	new_file_content += line.replace('<METHOD>', method)
+		# elif '<STATUS_CODE>' in line:
+		# 	new_file_content += line.replace('<STATUS_CODE>', status_code)
 		else:
 			new_file_content += line
-	f.close()
+	file_p.close()
 
-	print("\n" + new_file_content)
-	exit(10)
-	
+	file_p = open(file_pointer.name, 'w')
+	file_p.write(new_file_content)
+	file_p.close()
+
+
+	payload = []
+	for i in range(len(test_cases[0])):
+		p = json.loads('{ "operation":"add"}')
+		p[test_cases[1][0]] = test_cases[0][i][0]
+		p[test_cases[1][1]] = test_cases[0][i][1]
+		payload.append(p)
+
+	fp = open(file_pointer.name, 'r')
+	new_file_content = ""
+	idx_case = 0
+	for line in fp:
+		if '<TEST_NAME>' in line:
+			idx_case += 1
+			new_file_content += line.replace('<TEST_NAME>', test_case_name + "_" + str(idx_case))
+		elif '<PAYLOAD>' in line:
+			new_file_content += line.replace('<PAYLOAD>', json.dumps(payload.pop(0)))
+		elif '<METHOD>' in line:
+			new_file_content += line.replace('<METHOD>', "\"GET\"")
+		elif '<STATUS_CODE>' in line:
+			new_file_content += line.replace('<STATUS_CODE>', "200")
+		else:
+			new_file_content += line
+	fp.close()
+
+	file_p = open(file_pointer.name, 'w')
+	file_p.write(new_file_content)
+	file_p.close()
 
 	
-		
 
 def suiter(test_cases):
 	"""
@@ -214,18 +256,22 @@ def suiter(test_cases):
 	file_name = create_test_suite_file()
 	#test_suite_header()
 	#test_suite_class(test_cases)
+
 	
-
-	# edit TODO tags
-	#edit_TODO_tags(file_name)
-
-
 	edit_template_tags(file_name, test_cases)
+	edit_ASSERT_tags(file_name)
 
-	
+	file_p = open('./run_test.sh', 'w')
+	file_p.write("#!/bin/bash\n")
+	strin = "pytest " + file_name
+	file_p.write(strin)
+	file_p.close()
+	st = os.stat('./run_test.sh')
+	os.chmod('./run_test.sh', st.st_mode | stat.S_IEXEC)
+	return_code = subprocess.call('./run_test.sh')
 
 
 
 if __name__ == "__main__":
-	test_cases = api_call_combine(COMBINE_URL)
+	test_cases = api_call_combine(COMBINE_URL) # tuple is returned (combine_result, par_names)
 	suiter(test_cases)
