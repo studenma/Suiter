@@ -48,3 +48,9 @@ alias lsout='ls -la ../test_suite_output/'
 
 EXTENSIONS:
 TODO Highlight - potreba pro zvyrazneni TODO v test suite
+
+
+"""
+TODO: Add assert text
+TODO: Make a GUI app to simply edit a resulted test suite
+"""

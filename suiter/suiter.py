@@ -15,6 +15,8 @@ COMBINE_URL = "https://combine.testos.org"
 test_script_language = "Python"
 file_path = "../test_suite_output/"
 file_name_base = "test_suite-"
+template_file_path = "../test_suite_templates/"
+template_file_name = "pytest.template"
 
 sut_api_url = "http://127.0.0.1:5000/api/v1/calculator"
 
@@ -57,7 +59,7 @@ def create_test_suite_file():
 	"""
 	Creates a test file
 	Max. supported number of test files is 999
-	Output: file pointer
+	Output: File name
 	"""
 	logging.debug('Creating a test suite file')
 	# Find the first available file number
@@ -74,6 +76,7 @@ def create_test_suite_file():
 	logging.debug('Creating a file: ' + file_relative_path_name)
 	global file_pointer
 	file_pointer = open(file_relative_path_name, "w")
+	return file_pointer.name
 
 def test_suite_header():
 	logging.debug('Creating a header of a \'' + file_pointer.name +  '\' test script')
@@ -107,27 +110,117 @@ def test_suite_class(test_cases):
 		# file_pointer.write("\t\tprint(response.text)\n\n")
 		# assert
 		file_pointer.write("\t\tassert response.status_code == 200\n")
-		file_pointer.write("\t\tassert response.json()['Result'] == TODO:\n\n")
-		"""
-		TODO: Add assert text
-		TODO: Make a GUI app to simply edit a resulted test suite
-		TODO: Make a readable template with tags - e.g. <?URL>
-		"""
-		
+		file_pointer.write("\t\tassert response.json()['Result'] == <TODO:>\n\n")
 		test_case_cnt+=1
-		
 
+def edit_TODO_tags(file_name):
+	logging.debug('Edditing TODO tags in ' + file_name)
+	# open file for reading only
+	f = open(file_name, "r")
+	
+	new_file_content = ""
+
+	# loop around all TODO tags and ask user for input
+	print("Enter a expected result of following asserts:")
+	for line in f:
+		print(line, end=" ")
+		if '<TODO:>' in line:
+			assert_result = input()
+			new_file_content += line.replace('<TODO:>', assert_result)
+		else:
+			new_file_content += line
+	f.close()
+
+	# write a new content into test suite file
+	f = open(file_name, 'w')
+	f.write(new_file_content)
+	f.close()
+
+
+def edit_template_tags(file_name, test_cases):
+	logging.debug('Edditing template tags')
+	f = open(template_file_path + template_file_name, 'r')
+	new_file_content = ""
+
+	# TODO: prekopirovat obsah sablony do noveho souboru + rozsirit o <FOR>
+	duplicity_switch = 0
+	for_content = ""
+	for line in f:
+		if '<FOR>' in line:
+			duplicity_switch = 1
+		elif '<END_FOR>' in line:
+			duplicity_switch = 0
+			for _ in range(len(test_cases)): # for number of test cases
+				file_pointer.write(for_content + "\n")
+			for_content = ""
+		else:
+			if duplicity_switch is 1:
+				for_content += line
+			else:
+				file_pointer.write(line)
+	exit(1)
+
+	from_imports = [['math', 'fabs'], ['math', 'factorial']]
+	imports = ['sys', 'os']
+	import_headers = {'Content-Type': 'application/json'}
+	y = {'Test':'TestValu'}
+	import_headers.update(y)
+
+	class_name = "TryTesting"
+	test_name = 'test_case_'
+	payload = []
+	for test in test_cases:
+		p = "\"{\\\"operation\\\": \\\"add\\\",\\\"num1\\\": " + str(test[0]) + ",\\\"num2\\\": " + str(test[1]) + "}\""
+		payload.append(p)
+	status_code = '200'
+	method = "GET"
+	
+	for line in f:
+		if '<FROM_IMPORT>' in line:
+			for custom_from_import in from_imports:
+				new_file_content += 'from ' + custom_from_import[0] + ' import ' + custom_from_import[1] + '\n'
+		elif '<IMPORT>' in line:
+			for custom_import in imports:
+				new_file_content += 'import ' + custom_import + '\n'
+		elif '<URL>' in line:
+			new_file_content += line.replace('<URL>', sut_api_url)
+		elif '<HEADERS>' in line:
+			new_file_content += line.replace('<HEADERS>', str(import_headers))
+		elif '<CLASS_NAME>' in line:
+			new_file_content += line.replace('<CLASS_NAME>', class_name)
+		elif '<TEST_NAME>' in line:
+			new_file_content += line.replace('<TEST_NAME>', test_name)
+		elif '<PAYLOAD>' in line:
+			new_file_content += line.replace('<PAYLOAD>', payload)
+		elif '<METHOD>' in line:
+			new_file_content += line.replace('<METHOD>', method)
+		elif '<STATUS_CODE>' in line:
+			new_file_content += line.replace('<STATUS_CODE>', status_code)
+		else:
+			new_file_content += line
+	f.close()
+
+	print("\n" + new_file_content)
+	exit(10)
+	
+
+	
+		
 
 def suiter(test_cases):
 	"""
 	Test suite creator for Python Requests
 	"""
-	create_test_suite_file()
-	test_suite_header()
-	test_suite_class(test_cases)
+	file_name = create_test_suite_file()
+	#test_suite_header()
+	#test_suite_class(test_cases)
 	
-	# close file
-	file_pointer.close()
+
+	# edit TODO tags
+	#edit_TODO_tags(file_name)
+
+
+	edit_template_tags(file_name, test_cases)
 
 	
 

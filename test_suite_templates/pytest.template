@@ -1,0 +1,17 @@
+from unittest import TestCase
+<FROM_IMPORT>
+import requests
+<IMPORT>
+
+url = <URL>
+
+headers = <HEADERS>
+
+class <CLASS_NAME>(TestCase):
+	<FOR>
+	def <TEST_NAME>(self):
+		payload = <PAYLOAD>
+		response = requests.request(<METHOD>, url, headers=headers, data=payload)
+		assert response.status_code == <STATUS_CODE>
+		assert response.json()['Result'] == <ASSERT_RESULT>
+	<END_FOR>
