@@ -53,4 +53,6 @@ TODO Highlight - potreba pro zvyrazneni TODO v test suite
 """
 TODO: Add assert text
 TODO: Make a GUI app to simply edit a resulted test suite
+TODO: Make script to setup ssh
+TODO: code celanup
 """
