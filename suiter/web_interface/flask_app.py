@@ -23,7 +23,9 @@ def calculator():
 from flask import Flask, render_template, request, jsonify
 from flask_restful import fields, reqparse
 from flask_cors import CORS, cross_origin
+from flask_swagger_ui import get_swaggerui_blueprint
 import json
+import yaml
 
 import os,sys,inspect
 # from suiter.suiter import generate_test_suite
@@ -36,6 +38,29 @@ app = Flask(__name__)
 cors = CORS(app)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI
+API_URL = 'http://127.0.0.1:5000/api/v1/calculator/swagger.yaml'
+
+# Call factory function to create our blueprint
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    API_URL,
+    config={  # Swagger UI config overrides
+        'app_name': "Test application"
+    },
+    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
+    #    'clientId': "your-client-id",
+    #    'clientSecret': "your-client-secret-if-required",
+    #    'realm': "your-realms",
+    #    'appName': "your-app-name",
+    #    'scopeSeparator': " ",
+    #    'additionalQueryStringParams': {'test': "hello"}
+    # }
+)
+
+app.register_blueprint(swaggerui_blueprint)
 
 @app.route('/home')
 @app.route('/') 
@@ -71,6 +96,18 @@ def generate():
     test_suite = generate_test_suite(sut)
 
     return json.dumps(test_suite)
+
+
+@app.route('/api/v1/calculator/swagger.yaml', methods=['GET'])
+def calculator_swagger():  
+    """
+    Swagger API documentation for calculator API service
+    """  
+    f = open('./static/swagger.yaml', 'r')
+    response = f.read()
+    f.close()
+    return yaml.safe_load(response)
+
 
 @app.route('/api/v1/calculator', methods=['GET'])
 def calculator():

@@ -6,6 +6,7 @@ import sys
 import os
 import stat
 import json
+import yaml
 import requests
 import logging
 import subprocess
@@ -168,7 +169,7 @@ def edit_template_tags(file_name, test_cases):
 				file_pointer.write(for_content + "\n")
 			for_content = ""
 		else:
-			if duplicity_switch is 1:
+			if duplicity_switch == 1:
 				for_content += line
 			else:
 				file_pointer.write(line)
@@ -271,7 +272,39 @@ def suiter(test_cases):
 	return_code = subprocess.call('./run_test.sh')
 
 
+def parse_swagger(swag):
+	with open(swag, 'r') as stream:
+		try:
+			content = yaml.safe_load(stream)
+		except yaml.YAMLError as exc:
+			print(exc)
+
+	"""
+	Get API informations - [endpoint=[method=[]]]
+	API_desc = [
+		{
+			endpoint: "/calculator", 
+			method: "GET", 
+			params: []
+		}
+	]
+	"""
+	API_desc = []
+	# for all functions
+	for func in content['paths']:
+		# for all methods
+		for meth in content['paths'][func]:
+			test_class = {}
+			test_class['endpoint'] = func
+			test_class['method'] = meth
+			test_class['params'] = content['paths'][func][meth]['parameters']
+			API_desc.append(test_class)				
+	return API_desc
+
+
 
 if __name__ == "__main__":
+	API_desc = parse_swagger('./web_interface/static/swagger.yaml')
+	# TODO: Use API_desc to generate test suite
 	test_cases = api_call_combine(COMBINE_URL) # tuple is returned (combine_result, par_names)
 	suiter(test_cases)
