@@ -1,0 +1,18 @@
+{
+    "test_case": [
+        {
+            "name": "",
+            "t_strength": "",
+            "dont_care_values": "",
+            "values": "",
+            "parameters": [
+               {
+                  "identificator": "",
+                  "type": "",
+                  "blocks": []
+               }
+            ],
+            "constraints": []
+        }
+    ]
+}

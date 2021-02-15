@@ -6,13 +6,18 @@ import sys
 import os
 import stat
 import json
+import simplejson
 import yaml
 import requests
 import logging
 import subprocess
+import copy
 
 
 from exceptions import LimitExceededError
+from pprint import pprint
+
+
 
 COMBINE_LOCAL = "http://127.0.0.1:3000"
 COMBINE_URL = "https://combine.testos.org"
@@ -42,7 +47,7 @@ def api_call_combine(api_end_point_base_url):
 
 	combine_output = []
 	#payload="{\r\n    \"name\": \"SUT name\", \r\n    \"t_strength\": \"2\", \r\n    \"dont_care_values\": \"no\", \r\n    \"values\": \"values\", \r\n    \"parameters\": [\r\n        {\"identificator\": \"num1\", \"type\": \"integer\", \"blocks\": [\"num1<0\", \"num1>0\", \"num1=0\"]}, \r\n        {\"identificator\": \"num2\", \"type\": \"integer\", \"blocks\": [\"num2<0\", \"num2>0\", \"num2=0\"]}\r\n    ], \r\n    \"constraints\": []\r\n}"
-	with open('combine_input.json', 'r') as content_file:
+	with open('combine_input5.json', 'r') as content_file:
 		payload = content_file.read()
 	logging.debug('Calling: ' + api_end_point_base_url + '/generate:\n' + str(payload))
 
@@ -59,6 +64,7 @@ def api_call_combine(api_end_point_base_url):
 		return response.json(), combine_output
 	except ValueError: # includes json.decoder.JSONDecodeError
 		logging.error('Response from Combine is not in a valid JSON format')
+		exit(9)
 	# except ConnectionError:
 	# 	logging.error('Unable to connect to the Combine server')
 
@@ -154,6 +160,7 @@ def edit_ASSERT_tags(file_name):
 
 def edit_template_tags(file_name, test_cases):
 	logging.debug('Edditing template tags')
+	print(test_cases)
 	f = open(template_file_path + template_file_name, 'r')
 	new_file_content = ""
 
@@ -187,7 +194,6 @@ def edit_template_tags(file_name, test_cases):
 	method = "GET"
 
 	file_pointer.close()
-	print(file_pointer.name)
 	file_p = open(file_pointer.name, 'r')
 	
 	for line in file_p:
@@ -222,9 +228,9 @@ def edit_template_tags(file_name, test_cases):
 
 	payload = []
 	for i in range(len(test_cases[0])):
-		p = json.loads('{ "operation":"add"}')
-		p[test_cases[1][0]] = test_cases[0][i][0]
-		p[test_cases[1][1]] = test_cases[0][i][1]
+		p = {}
+		for j in range(len(test_cases[0][i])):
+			p[test_cases[1][j]] = test_cases[0][i][j]
 		payload.append(p)
 
 	fp = open(file_pointer.name, 'r')
@@ -257,7 +263,6 @@ def suiter(test_cases):
 	file_name = create_test_suite_file()
 	#test_suite_header()
 	#test_suite_class(test_cases)
-
 	
 	edit_template_tags(file_name, test_cases)
 	edit_ASSERT_tags(file_name)
@@ -283,6 +288,7 @@ def parse_swagger(swag):
 	Get API informations - [endpoint=[method=[]]]
 	API_desc = [
 		{
+			tag: "class_name"
 			endpoint: "/calculator", 
 			method: "GET", 
 			params: []
@@ -295,6 +301,7 @@ def parse_swagger(swag):
 		# for all methods
 		for meth in content['paths'][func]:
 			test_class = {}
+			test_class['tag'] = content['paths'][func][meth]['tags'][0]
 			test_class['endpoint'] = func
 			test_class['method'] = meth
 			test_class['params'] = content['paths'][func][meth]['parameters']
@@ -302,9 +309,101 @@ def parse_swagger(swag):
 	return API_desc
 
 
+def get_characteristics(parameter):
+	print(parameter)
+	value = {}
+	n = parameter['name']
+	if parameter['type'] == 'string':
+		value['identificator'] = n
+		value['type'] = "string"
+		value['blocks'] = []
+		value['blocks'].append(n + "='add'")
+		value['blocks'].append(n + "='substract'")
+		value['blocks'].append(n + "='multiply'")
+	elif parameter['type'] == 'integer':
+		value['identificator'] = n
+		value['type'] = "integer"
+		value['blocks'] = []
+		value['blocks'].append(n + ">0")
+		value['blocks'].append(n + "<0")
+		value['blocks'].append(n + "=0")
+	else:
+		print("Je to neco jineho")
+		exit(33)
+	return value
+
+
+
+def prepare_combine_calls(description):
+	"""
+	Test class attributes: endpoint, method, params, tag
+	test_suite = [
+		{
+			class_name
+			url 
+
+		}
+	]
+	"""
+	# get combine_input_template
+	f = open('./combine_input.template', 'r')
+	content = f.read()
+	f.close()
+
+
+	# make a json out of it 
+	content = json.loads(content)
+	
+	# duplicate numer of test_cases
+	for test_idx in range(1, len(description)):
+		temp = copy.copy(content['test_case'][0])
+		content['test_case'].append(temp)
+	
+	# fill up the template
+	idx = 0
+	for test_class in description:
+		name = test_class['tag'] + "_" + test_class['method'] 
+		content['test_case'][idx]['values'] = 'values'
+		content['test_case'][idx]['dont_care_values'] = 'no'
+		content['test_case'][idx]['name'] = name
+		content['test_case'][idx]['t_strength'] = "2"
+
+		content['test_case'][idx]['parameters'].pop()
+
+		# for all params
+		for par in test_class['params']:
+			val = get_characteristics(par)
+			content['test_case'][idx]['parameters'].append(val)
+		idx += 1
+		break
+
+	# co = json.dumps(content['test_case'][0])
+	# print("--------------")
+	# print(json.dumps(content['test_case']))
+	# exit(444)
+	co = content['test_case'][0]
+	# TODO: with open('combine_input2.json', 'r') as content_file:
+	
+	# parsed = json.dump(co)
+	# print("-------------")
+	# print(type(parsed))
+	# print("-------------")
+	# print(parsed)
+	
+	f = open('combine_input5.json', 'w')
+	# f.write(simplejson.dumps(co, sort_keys=True))
+	temp_string = json.dumps(co)
+	# temp_string = temp_string.replace('\'', '\"')
+	f.write(temp_string)
+	# json.dump(co, f)
+	f.close()
+	# exit(5)
+
+
 
 if __name__ == "__main__":
 	API_desc = parse_swagger('./web_interface/static/swagger.yaml')
 	# TODO: Use API_desc to generate test suite
+	prepare_combine_calls(API_desc)
 	test_cases = api_call_combine(COMBINE_URL) # tuple is returned (combine_result, par_names)
 	suiter(test_cases)
