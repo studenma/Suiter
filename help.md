@@ -56,3 +56,17 @@ TODO: Make a GUI app to simply edit a resulted test suite
 TODO: Make script to setup ssh
 TODO: code celanup
 """
+
+
+
+DOXYGEN configuration:
+PROJECT_NAME      = "Python"
+OUTPUT_DIRECTORY  = pyexample
+GENERATE_LATEX    = NO
+GENERATE_MAN      = NO
+GENERATE_RTF      = NO
+OPTIMIZE_OUTPUT_JAVA = YES
+INPUT             = pyexample.py
+QUIET             = YES
+JAVADOC_AUTOBRIEF = YES
+SEARCHENGINE      = NO

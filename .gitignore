@@ -3,3 +3,4 @@ suiter/__pycache__/
 suiter/web_interface/venv/
 test_suite_output/
 run_test.sh
+docs/

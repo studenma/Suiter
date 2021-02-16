@@ -1,5 +1,6 @@
-"""
-Module provides a generator of test suits
+"""!@brief Module provides a generator of test suits
+
+More details
 """
 
 import sys
@@ -17,17 +18,26 @@ import copy
 from exceptions import LimitExceededError
 from pprint import pprint
 
-
-
-COMBINE_LOCAL = "http://127.0.0.1:3000"
+"""
+Global variables
+"""
+## Local Combine URL
+COMBINE_LOCAL = "http://127.0.0.1:3000" 
+## Cobine hostname
 COMBINE_URL = "https://combine.testos.org"
+## The language of resulted test script
 test_script_language = "Python"
+## Suiter output
 file_path = "../test_suite_output/"
+## Base name of a resulted test script
 file_name_base = "test_suite-"
+## Template folder
 template_file_path = "../test_suite_templates/"
+## Template name 
 template_file_name = "pytest.template"
+## Test case name
 test_case_name = "test_case"
-
+## URL of a SUT
 sut_api_url = "http://127.0.0.1:5000/api/v1/calculator"
 
 """
@@ -36,6 +46,13 @@ Logger configuration
 log_format = '[%(asctime)s.%(msecs)d]-%(name)s-%(levelname)s: %(module)s.%(funcName)s: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=log_format, datefmt='%H:%M:%S')
 logging.basicConfig(level=logging.ERROR, format=log_format, datefmt='%H:%M:%S')
+
+def func():
+    """!@brief Documentation for a function.
+ 
+    More details.
+    """
+    pass
 
 def api_call_combine(api_end_point_base_url):
 	"""
@@ -75,7 +92,6 @@ def parse_file_name(file_name):
 	"""
 	return file_name[-6:][:3]
 
-
 def create_test_suite_file():
 	"""
 	Creates a test file
@@ -112,7 +128,6 @@ def test_suite_header():
 	}
 	file_pointer.write("headers = " + json.dumps(headers) + "\n\n")
 	
-
 def test_suite_class(test_cases):
 	logging.debug('Creating a test class of a \'' + file_pointer.name +  '\' test script')
 	# class
@@ -156,7 +171,6 @@ def edit_ASSERT_tags(file_name):
 	f = open(file_name, 'w')
 	f.write(new_file_content)
 	f.close()
-
 
 def edit_template_tags(file_name, test_cases):
 	logging.debug('Edditing template tags')
@@ -254,10 +268,8 @@ def edit_template_tags(file_name, test_cases):
 	file_p.write(new_file_content)
 	file_p.close()
 
-	
-
 def suiter(test_cases):
-	"""
+	"""Documentation dor a function
 	Test suite creator for Python Requests
 	"""
 	file_name = create_test_suite_file()
@@ -276,8 +288,18 @@ def suiter(test_cases):
 	os.chmod('./run_test.sh', st.st_mode | stat.S_IEXEC)
 	return_code = subprocess.call('./run_test.sh')
 
-
 def parse_swagger(swag):
+	"""
+	Retrieves a desired information from a swagger file
+	Input: .yaml
+	Output: Array of following dictionaries:
+			{
+				tag: "class_name"
+				endpoint: "/calculator", 
+				method: "GET", 
+				params: []
+			}
+	"""
 	with open(swag, 'r') as stream:
 		try:
 			content = yaml.safe_load(stream)
@@ -288,10 +310,7 @@ def parse_swagger(swag):
 	Get API informations - [endpoint=[method=[]]]
 	API_desc = [
 		{
-			tag: "class_name"
-			endpoint: "/calculator", 
-			method: "GET", 
-			params: []
+			
 		}
 	]
 	"""
@@ -305,9 +324,11 @@ def parse_swagger(swag):
 			test_class['endpoint'] = func
 			test_class['method'] = meth
 			test_class['params'] = content['paths'][func][meth]['parameters']
-			API_desc.append(test_class)				
-	return API_desc
+			API_desc.append(test_class)	
 
+	pprint(API_desc)
+	exit(1)			
+	return API_desc
 
 def get_characteristics(parameter):
 	print(parameter)
@@ -331,8 +352,6 @@ def get_characteristics(parameter):
 		print("Je to neco jineho")
 		exit(33)
 	return value
-
-
 
 def prepare_combine_calls(description):
 	"""
@@ -377,32 +396,17 @@ def prepare_combine_calls(description):
 		idx += 1
 		break
 
-	# co = json.dumps(content['test_case'][0])
-	# print("--------------")
-	# print(json.dumps(content['test_case']))
-	# exit(444)
 	co = content['test_case'][0]
 	# TODO: with open('combine_input2.json', 'r') as content_file:
-	
-	# parsed = json.dump(co)
-	# print("-------------")
-	# print(type(parsed))
-	# print("-------------")
-	# print(parsed)
+
 	
 	f = open('combine_input5.json', 'w')
-	# f.write(simplejson.dumps(co, sort_keys=True))
 	temp_string = json.dumps(co)
-	# temp_string = temp_string.replace('\'', '\"')
 	f.write(temp_string)
-	# json.dump(co, f)
 	f.close()
-	# exit(5)
-
-
 
 if __name__ == "__main__":
-	API_desc = parse_swagger('./web_interface/static/swagger.yaml')
+	API_description = parse_swagger('./web_interface/static/swagger.yaml')
 	# TODO: Use API_desc to generate test suite
 	prepare_combine_calls(API_desc)
 	test_cases = api_call_combine(COMBINE_URL) # tuple is returned (combine_result, par_names)
