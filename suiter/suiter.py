@@ -1,6 +1,5 @@
-"""!@brief Module provides a generator of test suits
-
-More details
+"""
+Module provides a generator of test suits
 """
 
 import sys
@@ -14,30 +13,20 @@ import logging
 import subprocess
 import copy
 
-
 from exceptions import LimitExceededError
 from pprint import pprint
 
 """
 Global variables
 """
-## Local Combine URL
 COMBINE_LOCAL = "http://127.0.0.1:3000" 
-## Cobine hostname
 COMBINE_URL = "https://combine.testos.org"
-## The language of resulted test script
 test_script_language = "Python"
-## Suiter output
 file_path = "../test_suite_output/"
-## Base name of a resulted test script
 file_name_base = "test_suite-"
-## Template folder
 template_file_path = "../test_suite_templates/"
-## Template name 
-template_file_name = "pytest.template"
-## Test case name
+template_file_name = "test_pytest.py"
 test_case_name = "test_case"
-## URL of a SUT
 sut_api_url = "http://127.0.0.1:5000/api/v1/calculator"
 
 """
@@ -46,13 +35,6 @@ Logger configuration
 log_format = '[%(asctime)s.%(msecs)d]-%(name)s-%(levelname)s: %(module)s.%(funcName)s: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=log_format, datefmt='%H:%M:%S')
 logging.basicConfig(level=logging.ERROR, format=log_format, datefmt='%H:%M:%S')
-
-def func():
-    """!@brief Documentation for a function.
- 
-    More details.
-    """
-    pass
 
 def api_call_combine(api_end_point_base_url):
 	"""
@@ -327,7 +309,7 @@ def parse_swagger(swag):
 			API_desc.append(test_class)	
 
 	pprint(API_desc)
-	exit(1)			
+	# exit(1)			
 	return API_desc
 
 def get_characteristics(parameter):
@@ -408,6 +390,6 @@ def prepare_combine_calls(description):
 if __name__ == "__main__":
 	API_description = parse_swagger('./web_interface/static/swagger.yaml')
 	# TODO: Use API_desc to generate test suite
-	prepare_combine_calls(API_desc)
+	prepare_combine_calls(API_description)
 	test_cases = api_call_combine(COMBINE_URL) # tuple is returned (combine_result, par_names)
 	suiter(test_cases)

@@ -37,6 +37,8 @@ from suiter import parse_file_name, logging
 app = Flask(__name__)
 cors = CORS(app)
 
+calculator_operation = "add"
+
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -143,11 +145,78 @@ def calculator():
     elif operation == "divide":
         result = num1 / num2
     else:
-        return 'Error: Operation is not supported', 400
+        return { 'Error': 'Operation is not supported'}, 400
 
     response = {"Result": result}
     return response, 200
 
+@app.route('/api/v1/stateCalculator/viewOperation', methods=['GET'])
+def viewOperation():
+    """
+    View operation of API calculator
+    http://127.0.0.1:5000/api/v1/stateCalculator/viewOperation
+    """
+    response = {"Result": calculator_operation}
+    return response, 200
+
+@app.route('/api/v1/stateCalculator/changeOperation', methods=['GET'])
+def changeOperation():
+    """
+    Change operation of API calculator
+    http://127.0.0.1:5000/api/v1/stateCalculator/changeOperation
+    """
+    change_operation_arg = reqparse.RequestParser()
+    change_operation_arg.add_argument("operation", type=str, help="Operation is required", required=True)
+
+    args = change_operation_arg.parse_args()
+    operation = args["operation"]
+
+    global calculator_operation
+    
+    if operation in ['add', 'substract', 'multiply', 'divide']:
+        calculator_operation = operation
+    else:
+        return { 'Error': 'Operation is not supported'}, 400
+    
+    str_response = "Operation changed to " + calculator_operation
+    response = {"Result": str_response}
+    return response, 200 
+
+@app.route('/api/v1/stateCalculator', methods=['GET'])
+def stateCalculator():
+    """
+    Calculator for API testing purposes - testing the API with states
+    http://127.0.0.1:5000/api/v1/stateCalculator?&num1=int&num2=int
+    """
+    logging.debug(request)
+    logging.debug(request.data)
+    
+    calculator_fields = {
+        'operation': fields.String
+    }
+
+    calculator_args = reqparse.RequestParser()
+    calculator_args.add_argument("num1", type=int, help="Two numbers are required", required=True)
+    calculator_args.add_argument("num2", type=int, help="Two numbers are required", required=True)
+
+    args = calculator_args.parse_args()
+    num1 = args["num1"]
+    num2 = args["num2"]
+
+
+    if calculator_operation == "add":
+        result = num1 + num2
+    elif calculator_operation == "substract":
+        result = num1 - num2
+    elif calculator_operation == "multiply":
+        result = num1 * num2
+    elif calculator_operation == "divide":
+        result = num1 / num2
+    else:
+        return 'Error: Calculator operation is not supported', 400
+
+    response = {"Result": result}
+    return response, 200
 
 if __name__ == "__main__":
     app.run(debug=True)
