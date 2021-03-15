@@ -1,0 +1,12 @@
+{
+	"test_cases": [
+		{
+            "endpoint": ["https://mydomain/addUser"],
+		    "method": ["GET","POST"],
+			"header": ["header1.yaml"],
+			"body": ["body1.json", "body2.json", "body3.json", "body4.json"],
+			"T-strength": 2
+		}
+	]
+}
+1*2*1*4=8

@@ -1,0 +1,59 @@
+
+other MIME types 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+
+
+XML
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to at=<"Val1","Val2","Val3"> >Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to at="Val1"><aaaaa,bbb,cccc></to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <@
+  	[	
+      <to at="Val1">aaaaa</to>
+      <from>Jani</from>
+      <heading>Reminder</heading>
+      <body>Don't forget me this weekend!</body>
+    ],
+	[	
+      <to at="Val1">bbbbb</to>
+      <from>Martin</from>
+      <heading>fsdfsdfsdf</heading>
+      <body>dhdfjfsjfghfshfhfh</body>
+    ]
+  >
+</note>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to at=<"Val1","Val2","Val3"> > <"aaaaaa","bbbbb","cccccc"> </to>
+  <from> <"martin","jana"> </from>
+  <heading>Reminder</heading>
+  <body> <"sfsdfsdfdsfsd", "aaaadafwegcopxkvc", "qweqwpwqropweor"> </body>
+</note>
