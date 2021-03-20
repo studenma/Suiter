@@ -53,7 +53,7 @@ def get_header_from_file(header_path):
     """ 
     Get the headers from a input file
     """
-    logger.debug("calling the get_header_from_file method with following parameter: " + header_path)
+    logger.debug("Calling the get_header_from_file method with following parameter: " + header_path)
     
     try:
         f = open(header_path, 'r')

@@ -6,8 +6,9 @@ def setup():
     #####################################
     # TODO: HERE IS YOUR CODE
     # Insert your code to define prerequisities of SUT
+    None
 
-def verify(test_case, request_id):
+def verify(test_case, request_id, response, context):
     """
     Method to describe the expected values for all test cases
     Take into account that these if-else statements will be duplicated for all test cases
@@ -17,10 +18,6 @@ def verify(test_case, request_id):
     # DO NOT TOUCH THIS <DUPLICATE>
 <VERIFY>    
     # DO NOT TOUCH THIS </DUPLICATE>
-    #####################################
-    # TODO: HERE IS YOUR RETURN STATEMENT
-    # example:
-    ## return (statusCode, json)
     
 def teardown():
     #####################################
@@ -29,6 +26,7 @@ def teardown():
     # if it is dependend on given test_case, add a 'test_case' parameter to this function
     # and write a code for all test_cases
     ## def teardown(test_case):
+    None
 
 def list_of_all_cases(test_case, request_id):
     """
@@ -39,20 +37,5 @@ def list_of_all_cases(test_case, request_id):
     # DO NOT TOUCH THIS </DUPLICATE>
     return (url, method, header, body)
 
-
 class TestClass(TestCase): 
-    # DO NOT TOUCH THIS <DUPLICATE>
-    def test_sequence(self):
-        """
-        SUT Setup
-        """
-        setup()
-
-<REQUESTS>
-<VERIFICATION>
-
-        """
-        SUT Teardown
-        """
-        teardown()
-    # DO NOT TOUCH THIS </DUPLICATE>
+<TEST_SEQUENCE>

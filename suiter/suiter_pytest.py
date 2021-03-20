@@ -37,44 +37,66 @@ tab = "    "
 call_identifier = "call_"
 test_case_identifier = "test_case_"
 
+TC_VARIABLE_NAME = "test_case"
+CALL_VARIABLE_NAME = "request_id"
+TEST_CASE_CNT_START = 1
+EXPECTION_ELSE_MESSAGE = "\"Should have never gotten here: [{{}},{{}}]\".format({},{})".format(TC_VARIABLE_NAME, CALL_VARIABLE_NAME)
+
+def prefix_format_calculation(case_amount):
+    return "{{0:0{}}}".format(len(str(abs(case_amount))))
+
+
 def prepare_verify_tag(tc):
     """
     Prepare the text which should replace <VERIFY> tag in pre-template
     """
     logger.debug("Calling the prepare_verify_tag method")
-
+    prefix_format = prefix_format_calculation(len(tc))
     result = ""
-    test_case_counter = 1
+    test_case_counter = TEST_CASE_CNT_START
     for test_case in tc:
+        # change the test counter number to a format calculated by the number of test cases
+        stringified_tc_counter = prefix_format.format(test_case_counter)
+
         # get the number of calls in the test case
         call_cnt = len(test_case)
 
-        if test_case_counter == 1:
-            result += indent("if test_case == \"{}\":\n".format(test_case_identifier + str(test_case_counter)), tab)
+        if test_case_counter == TEST_CASE_CNT_START:
+            result += indent("if {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         else:
-            result += indent("elif test_case == \"{}\":\n".format(test_case_identifier + str(test_case_counter)), tab)
+            result += indent("elif {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         block = []
-        block.append('#####################################\n')
-        block.append('# TODO: HERE IS YOUR CODE TO PREDEFINE ALL TEST CASE VERIFICATION\n')
-        block.append('# example:\n')
-        block.append('## statusCode = None\n')
-        block.append('## json = {\'Result\': None}\n')
+        # block.append('#####################################\n')
+        # block.append('# TODO: HERE IS YOUR CODE TO DEFINE ALL TEST CASE VERIFICATION\n')
+        # block.append('# example:\n')
+        # block.append('print(\"\\n\"+str(context))\n')
+        block.append('assert response.status_code == 200\n')
+        # block.append('# assert response.json == {\'Result\': None}\n')
     
         if call_cnt > 1:
-            for call_idx in range(1, call_cnt):
+            for call_idx in range(1, call_cnt+1):
                 if call_idx == 1:
-                    new_line = indent("if request_id == \"{}\":\n".format(call_identifier + str(call_idx)), 2*tab)
+                    new_line = indent("if {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier + str(call_idx)), 2*tab)
                 else:
-                    new_line = indent("elif request_id == \"{}\":\n".format(call_identifier + str(call_idx)), 2*tab)
+                    new_line = indent("elif {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier + str(call_idx)), 2*tab)
                 result += new_line
                 for line in block:
                     line = indent(line, 3*tab)
                     result += line
+            # else statement - raise error 
+            new_line = indent("else:\n", 2*tab)
+            new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 3*tab)
+            result += new_line
         else:
             for line in block:
                 line = indent(line, 2*tab)
                 result += line
         test_case_counter += 1
+    
+    # else statement - raise error 
+    new_line = indent("else:\n", 1*tab)
+    new_line += indent("raise Exception({})".format(EXPECTION_ELSE_MESSAGE), 2*tab)
+    result += new_line
     
     return result
 
@@ -85,22 +107,26 @@ def prepare_test_case_list_tag(tc):
     logger.debug("Calling the prepare_test_case_list_tag method")
 
     result = ""
-    test_case_counter = 1
+    test_case_counter = TEST_CASE_CNT_START
+    prefix_format = prefix_format_calculation(len(tc))
     for test_case in tc:
+        # change the test counter number to following format: '000'
+        stringified_tc_counter = prefix_format.format(test_case_counter)
+
         # get the number of calls in the first test_case
         call_cnt = len(test_case)
         
-        if test_case_counter == 1:
-            result += indent("if test_case == \"{}\":\n".format(test_case_identifier + str(test_case_counter)), tab)
+        if test_case_counter == TEST_CASE_CNT_START:
+            result += indent("if {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         else:
-            result += indent("elif test_case == \"{}\":\n".format(test_case_identifier + str(test_case_counter)), tab)
+            result += indent("elif {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         
         if call_cnt > 1:
             for call_idx in range(call_cnt):
                 if call_idx == 0:
-                    new_line = indent("if request_id == \"req" + str(call_idx+1) + "\":\n", 2*tab)
+                    new_line = indent("if {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier+str(call_idx+1)), 2*tab)
                 else:
-                    new_line = indent("elif request_id == \"req" + str(call_idx+1) + "\":\n", 2*tab)
+                    new_line = indent("elif {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier+str(call_idx+1)), 2*tab)
                 result += new_line
                 # URL
                 new_line = indent("url = \"" + str(test_case[call_idx][0]) + "\"\n", 3*tab)
@@ -115,6 +141,9 @@ def prepare_test_case_list_tag(tc):
                 # BODY
                 new_line = indent("body = \"" + str(test_case[call_idx][3]) + "\"\n", 3*tab)
                 result += new_line
+            new_line = indent("else:\n", 2*tab)
+            new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 3*tab)
+            result += new_line
         else:
             # URL
             new_line = indent("url = \"" + str(test_case[0][0]) + "\"\n", 2*tab)
@@ -130,61 +159,64 @@ def prepare_test_case_list_tag(tc):
             new_line = indent("body = \"" + str(test_case[0][3]) + "\"\n", 2*tab)
             result += new_line     
         test_case_counter += 1
+
+    # else statement - raise error 
+    new_line = indent("else:\n", 1*tab)
+    new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 2*tab)
+    result += new_line
+
     return result
 
-def prepare_requests_tag(test_case):
+def prepare_sequence_tag(tc):
     """
-    Prepare the text which should replace <REQUESTS> tag in pre-template
+    Prepare the text which should replace <TEST_SEQUENCE> tag in pre-template
     """
-    logger.debug("Calling the prepare_requests_tag method")
+    logger.debug("Calling the prepare_sequence_tag method")
 
-    # get the number of calls in the first test_case
-    call_cnt = len(test_case)
-    
     result = ""
+    test_case_counter = TEST_CASE_CNT_START
+    prefix_format = prefix_format_calculation(len(tc))
+    for test_case in tc:
+        # change the test counter number to following format: '000'
+        stringified_tc_counter = prefix_format.format(test_case_counter)
 
-    for call_idx in range(1, call_cnt+1):
-        call_tag = 'call' + str(call_idx)
-        
+        # get the number of calls in the first test_case
+        call_cnt = len(test_case)
+
         # each element represents a new line
+        result += indent("def test_sequence_{}(self):\n".format(stringified_tc_counter), tab)
+
+        # SETUP
         block = []
         block.append('\"\"\"')
-        block.append('{}. Request'.format(call_idx))
+        block.append('SUT Setup')
         block.append('\"\"\"')
-        block.append('# execution')
-        block.append('call = list_of_all_cases(test_case_id, \"{}\")'.format(call_tag))
-        block.append('response = requests.request(call[1], call[0], headers=call[2], data=dumps(call[3]))')
-        block.append('# request verification')
-        block.append('expected_response = verify(test_case_id, \"{}\")'.format(call_tag))
-        block.append('#####################################')
-        block.append('# TODO: HERE MAY BE YOUR ASSERTIONS')
-        block.append('# delete this part otherwise')
-        block.append('# the assertions have to be based on \'expected_response\' variable')
-        block.append('# example:')
-        block.append('# assert response.status_code == expected_response.status_code')
-        block.append('# assert response.json() == expected_response.json')
+        block.append('setup()')
+
+        for call_idx in range(1, call_cnt+1):
+            call_tag = call_identifier + str(call_idx)
+            # CALLS
+            block.append('\"\"\"')
+            block.append('{}. Request'.format(call_idx))
+            block.append('\"\"\"')
+            block.append('# execution')
+            block.append('call = list_of_all_cases(\"{}{}\", \"{}\")'.format(test_case_identifier, stringified_tc_counter, call_tag))
+            block.append('with open(call[3],\'rb\') as payload:')
+            block.append('{}response = requests.request(call[1], call[0], headers=call[2], data=payload)'.format(tab))
+            block.append('# request verification')
+            block.append('verify(\"{}{}\", \"{}\", response, call)'.format(test_case_identifier, stringified_tc_counter, call_tag))
         
+        # TEARDOWN
+        block.append('\"\"\"')
+        block.append('SUT Teardown')
+        block.append('\"\"\"')
+        block.append('teardown()')
+
         for line in block:
             result += indent(line + "\n", 2*tab)
         result += "\n"
-    return result
-
-def prepare_verification_tag(test_case):
-    result = ""
-
-    block = []
-    block.append('\"\"\"')
-    block.append('SUT Verification')
-    block.append('\"\"\"')
-    block.append('result = verify(test_case_id, "sut")')
-    block.append('#####################################')
-    block.append('# TODO: HERE MAY BE YOUR ASSERTIONS')
-    block.append('# delete this part otherwise')
-    block.append('# the assertions have to be based on \'result\' variable')
-        
-    for line in block:
-        result += indent(line + "\n", 2*tab)
-
+        test_case_counter += 1
+    
     return result
 
 def fill_the_pre_template(path, tc):
@@ -194,6 +226,8 @@ def fill_the_pre_template(path, tc):
     """
     logger_message = "Calling the fill_the_pre_template method with following parameters: [{}, {}]".format(path,tc)
     logger.debug(logger_message)
+
+    tc_amount = len(tc)
 
     # Open file for reading only
     try:
@@ -206,23 +240,19 @@ def fill_the_pre_template(path, tc):
     new_file_content = ""
     for line in f:
         if '<VERIFY>' in line:
-            new_line = prepare_verify_tag(tc)
-            new_file_content += line.replace('<VERIFY>', new_line)
+            verify_code_block = prepare_verify_tag(tc)
+            new_file_content += line.replace('<VERIFY>', verify_code_block)
         elif '<TEST_CASE_LIST>' in line:
-            print(tc)
-            new_line = prepare_test_case_list_tag(tc)
-            new_file_content += line.replace('<TEST_CASE_LIST>', new_line)
-        elif '<REQUESTS>' in line:
-            new_line = prepare_requests_tag(tc)
-            new_file_content += line.replace('<REQUESTS>', new_line)
-        elif '<VERIFICATION>' in line:
-            new_line = prepare_verification_tag(tc)
-            new_file_content += line.replace('<VERIFICATION>', new_line)
+            test_case_list_code_block = prepare_test_case_list_tag(tc)
+            new_file_content += line.replace('<TEST_CASE_LIST>', test_case_list_code_block)
+        elif '<TEST_SEQUENCE>' in line:
+            test_sequence_code_block = prepare_sequence_tag(tc)
+            new_file_content += line.replace('<TEST_SEQUENCE>', test_sequence_code_block)
         else:
             # if all test cases should be generated, the duplicate tag is not needed anymore
             if ('<DUPLICATE>' in line) or ('</DUPLICATE>' in line):
                 if len(tc) == 1:
-                    new_file_content += line
+                    new_file_content += line 
             else:
                 new_file_content += line
     
