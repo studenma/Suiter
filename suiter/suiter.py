@@ -697,7 +697,7 @@ if __name__ == "__main__":
 	framework = get_framework("Pytest") 
 
 	# get all test cases
-	test_cases = get_test_cases("../test_cases/calls_10/tests_1000")
+	test_cases = get_test_cases("../test_cases/calls_4/tests_1")
 
 	"""
 	First test case only / All test cases

@@ -14,6 +14,10 @@ def verify(test_case, request_id, response, context):
     Take into account that these if-else statements will be duplicated for all test cases
     You can also rewrite whole method from scretch and use [TODO:] argument while calling 
     suiter to avoid code duplicate 
+    context[0] = URL (string)
+    context[1] = METHOD (string)
+    context[2] = HEADERS (list)
+    context[3] = BODY (file path)
     """
     # DO NOT TOUCH THIS <DUPLICATE>
 <VERIFY>    

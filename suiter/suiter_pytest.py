@@ -40,6 +40,7 @@ test_case_identifier = "test_case_"
 TC_VARIABLE_NAME = "test_case"
 CALL_VARIABLE_NAME = "request_id"
 TEST_CASE_CNT_START = 1
+CALL_CNT_START = 1
 EXPECTION_ELSE_MESSAGE = "\"Should have never gotten here: [{{}},{{}}]\".format({},{})".format(TC_VARIABLE_NAME, CALL_VARIABLE_NAME)
 
 def prefix_format_calculation(case_amount):
@@ -51,6 +52,7 @@ def prepare_verify_tag(tc):
     Prepare the text which should replace <VERIFY> tag in pre-template
     """
     logger.debug("Calling the prepare_verify_tag method")
+
     prefix_format = prefix_format_calculation(len(tc))
     result = ""
     test_case_counter = TEST_CASE_CNT_START
@@ -59,7 +61,7 @@ def prepare_verify_tag(tc):
         stringified_tc_counter = prefix_format.format(test_case_counter)
 
         # get the number of calls in the test case
-        call_cnt = len(test_case)
+        call_amount = len(test_case)
 
         if test_case_counter == TEST_CASE_CNT_START:
             result += indent("if {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
@@ -73,12 +75,16 @@ def prepare_verify_tag(tc):
         block.append('assert response.status_code == 200\n')
         # block.append('# assert response.json == {\'Result\': None}\n')
     
-        if call_cnt > 1:
-            for call_idx in range(1, call_cnt+1):
-                if call_idx == 1:
-                    new_line = indent("if {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier + str(call_idx)), 2*tab)
+        if call_amount > 1:
+            prefix_call_format = prefix_format_calculation(call_amount)
+            for call_idx in range(CALL_CNT_START, CALL_CNT_START+call_amount):
+                # change the call counter number to a format calculated by the number of calls
+                stringified_call_counter = prefix_call_format.format(call_idx)
+
+                if call_idx == CALL_CNT_START:
+                    new_line = indent("if {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 else:
-                    new_line = indent("elif {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier + str(call_idx)), 2*tab)
+                    new_line = indent("elif {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 result += new_line
                 for line in block:
                     line = indent(line, 3*tab)
@@ -92,11 +98,12 @@ def prepare_verify_tag(tc):
                 line = indent(line, 2*tab)
                 result += line
         test_case_counter += 1
-    
-    # else statement - raise error 
-    new_line = indent("else:\n", 1*tab)
-    new_line += indent("raise Exception({})".format(EXPECTION_ELSE_MESSAGE), 2*tab)
-    result += new_line
+
+    if len(tc) != 1:
+        # else statement - raise error 
+        new_line = indent("else:\n", 1*tab)
+        new_line += indent("raise Exception({})".format(EXPECTION_ELSE_MESSAGE), 2*tab)
+        result += new_line
     
     return result
 
@@ -114,32 +121,36 @@ def prepare_test_case_list_tag(tc):
         stringified_tc_counter = prefix_format.format(test_case_counter)
 
         # get the number of calls in the first test_case
-        call_cnt = len(test_case)
+        call_amount = len(test_case)
         
         if test_case_counter == TEST_CASE_CNT_START:
             result += indent("if {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         else:
             result += indent("elif {} == \"{}{}\":\n".format(TC_VARIABLE_NAME, test_case_identifier, stringified_tc_counter), tab)
         
-        if call_cnt > 1:
-            for call_idx in range(call_cnt):
-                if call_idx == 0:
-                    new_line = indent("if {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier+str(call_idx+1)), 2*tab)
+        if call_amount > 1:
+            prefix_call_format = prefix_format_calculation(call_amount)
+            for call_idx in range(CALL_CNT_START, CALL_CNT_START+call_amount):
+                # change the call counter number to a format calculated by the number of calls
+                stringified_call_counter = prefix_call_format.format(call_idx)
+
+                if call_idx == CALL_CNT_START:
+                    new_line = indent("if {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 else:
-                    new_line = indent("elif {} == \"{}\":\n".format(CALL_VARIABLE_NAME, call_identifier+str(call_idx+1)), 2*tab)
+                    new_line = indent("elif {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 result += new_line
                 # URL
-                new_line = indent("url = \"" + str(test_case[call_idx][0]) + "\"\n", 3*tab)
+                new_line = indent("url = \"" + str(test_case[call_idx-1][0]) + "\"\n", 3*tab)
                 result += new_line
                 # METHOD
-                new_line = indent("method = \"" + str(test_case[call_idx][1]) + "\"\n", 3*tab)
+                new_line = indent("method = \"" + str(test_case[call_idx-1][1]) + "\"\n", 3*tab)
                 result += new_line
                 # HEADER
-                header = get_header_from_file(test_case[call_idx][2])
+                header = get_header_from_file(test_case[call_idx-1][2])
                 new_line = indent("header = " + str(header) + "\n", 3*tab)
                 result += new_line
                 # BODY
-                new_line = indent("body = \"" + str(test_case[call_idx][3]) + "\"\n", 3*tab)
+                new_line = indent("body = \"" + str(test_case[call_idx-1][3]) + "\"\n", 3*tab)
                 result += new_line
             new_line = indent("else:\n", 2*tab)
             new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 3*tab)
@@ -160,10 +171,11 @@ def prepare_test_case_list_tag(tc):
             result += new_line     
         test_case_counter += 1
 
-    # else statement - raise error 
-    new_line = indent("else:\n", 1*tab)
-    new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 2*tab)
-    result += new_line
+    if len(tc) != 1:
+        # else statement - raise error 
+        new_line = indent("else:\n", 1*tab)
+        new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 2*tab)
+        result += new_line
 
     return result
 
@@ -181,35 +193,42 @@ def prepare_sequence_tag(tc):
         stringified_tc_counter = prefix_format.format(test_case_counter)
 
         # get the number of calls in the first test_case
-        call_cnt = len(test_case)
+        call_amount = len(test_case)
 
         # each element represents a new line
         result += indent("def test_sequence_{}(self):\n".format(stringified_tc_counter), tab)
 
         # SETUP
         block = []
-        block.append('\"\"\"')
-        block.append('SUT Setup')
-        block.append('\"\"\"')
+        # block.append('\"\"\"')
+        # block.append('SUT Setup')
+        # block.append('\"\"\"')
+        block.append('### SUT Setup ###')
         block.append('setup()')
 
-        for call_idx in range(1, call_cnt+1):
-            call_tag = call_identifier + str(call_idx)
+        prefix_call_format = prefix_format_calculation(call_amount)
+        for call_idx in range(CALL_CNT_START, CALL_CNT_START+call_amount):
+            # change the call counter number to a format calculated by the number of calls
+            stringified_call_counter = prefix_call_format.format(call_idx)
+
+            call_tag = call_identifier + stringified_call_counter
             # CALLS
-            block.append('\"\"\"')
-            block.append('{}. Request'.format(call_idx))
-            block.append('\"\"\"')
-            block.append('# execution')
+            # block.append('\"\"\"')
+            # block.append('{}. Request'.format(stringified_call_counter))
+            # block.append('\"\"\"')
+            block.append('### {}. Request ###'.format(stringified_call_counter))
+            # block.append('# execution')
             block.append('call = list_of_all_cases(\"{}{}\", \"{}\")'.format(test_case_identifier, stringified_tc_counter, call_tag))
             block.append('with open(call[3],\'rb\') as payload:')
             block.append('{}response = requests.request(call[1], call[0], headers=call[2], data=payload)'.format(tab))
-            block.append('# request verification')
+            # block.append('# request verification')
             block.append('verify(\"{}{}\", \"{}\", response, call)'.format(test_case_identifier, stringified_tc_counter, call_tag))
         
         # TEARDOWN
-        block.append('\"\"\"')
-        block.append('SUT Teardown')
-        block.append('\"\"\"')
+        # block.append('\"\"\"')
+        # block.append('SUT Teardown')
+        # block.append('\"\"\"')
+        block.append('### SUT Teardown ###')
         block.append('teardown()')
 
         for line in block:
