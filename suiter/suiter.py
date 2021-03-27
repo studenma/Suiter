@@ -670,6 +670,7 @@ from template_picker import get_executable_template
 from input_parser import get_framework
 from input_parser import get_test_cases
 from input_parser import get_first_test_case
+from input_parser import parse_input_file
 
 full_template = True
 
@@ -696,8 +697,11 @@ if __name__ == "__main__":
 	# framework selection
 	framework = get_framework("Pytest") 
 
+	# parse the input file
+	parse_input_file('../input/input_file.json')
+
 	# get all test cases
-	test_cases = get_test_cases("../test_cases/calls_4/tests_1")
+	test_cases = get_test_cases("../test_cases/calls_4/tests_100")
 
 	"""
 	First test case only / All test cases
