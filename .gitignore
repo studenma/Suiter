@@ -1,3 +1,6 @@
 suiter/web_interface/__pycache__/
 suiter/__pycache__/
-venv/
+*venv/*
+suiter/venv/*
+../venv/*
+*__init__*

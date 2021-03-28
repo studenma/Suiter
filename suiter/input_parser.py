@@ -209,21 +209,7 @@ def url_parser(url):
     # { variableName: CombineIdentifier }
     global_variables_to_set = {}
 
-    url_param_set = {}
-
-
-    url = 'https://mydomain/addUser/<:user:>/<1,2,3>/<:user2:>/<>/<9,8,7>'
-    
-    cnt = 0
-    cnt2 = 0
-    for _ in url:
-        if(cnt % 10 == 0):
-            print(cnt2, end="")
-            cnt2+=1
-        else:
-            print(" ", end="")
-        cnt+=1 
-    print("")
+    url_param_set = {}  
     
     # find out which of the start tag is more important
     priority_tag = conf_variable_substring_evaluation(URL_PARAM_ENUM_START_TAG, URL_PARAM_VARIABLE_START_TAG)
@@ -246,15 +232,9 @@ def url_parser(url):
         It is neccessary to find out which one if them is only substring
         The non substring one has always the priority (priority_tag)
         """
-
-        print(url)
-        print("e={}".format(enum_idx))
-        print("v={}".format(vari_idx))
         # Relation between 'enum_idx' and 'vari_idx'
         if enum_idx == vari_idx:
             if priority_tag is URL_PARAM_ENUM_START_TAG:
-                print("ENUM - eq")
-
                 url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
                 temp = url
             
@@ -263,14 +243,12 @@ def url_parser(url):
                 position = len(temp[:position]) + url_tuple[2]
 
                 p = {"type": "enumerate", "content": content, "id": cnt_param}
-                print(p)
                 parameters.append(p)
 
                 # this idx is solved for both of them
                 e_change = enum_idx
                 v_change = vari_idx
             elif priority_tag is URL_PARAM_VARIABLE_START_TAG:
-                print("VARI - eq")
                 # Get the variable name
                 url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
                 temp = url
@@ -279,7 +257,6 @@ def url_parser(url):
                 position = len(temp[:position]) + url_tuple[2]
 
                 p = {"type": "variable", "content": variable, "id": cnt_param}
-                print(p)
                 parameters.append(p)
 
                 # this idx is solved for both of them
@@ -291,8 +268,6 @@ def url_parser(url):
         else:
             if enum_idx < vari_idx:
                 if enum_idx == -1:
-                    print("VARI")
-
                     url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
                     temp = url
                     url = url[:position] + url_tuple[0]
@@ -300,13 +275,11 @@ def url_parser(url):
                     position = len(temp[:position]) + url_tuple[2]
 
                     p = {"type": "variable", "content": variable, "id": cnt_param}
-                    print(p)
                     parameters.append(p)
 
                     v_change = vari_idx
                     e_change = vari_idx
                 else:
-                    print("ENUM")
                     url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
                     temp = url
                     url = url[:position] + url_tuple[0]
@@ -314,13 +287,11 @@ def url_parser(url):
                     position = len(temp[:position]) + url_tuple[2]
                    
                     p = {"type": "enumerate", "content": content, "id": cnt_param}
-                    print(p)
                     parameters.append(p)
                     e_change = enum_idx
                     v_change = enum_idx
             elif vari_idx < enum_idx:
                 if vari_idx == -1:
-                    print("ENUM")
                     url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
                     temp = url
                     url = url[:position] + url_tuple[0]
@@ -328,14 +299,11 @@ def url_parser(url):
                     position = len(temp[:position]) + url_tuple[2]
 
                     p = {"type": "enumerate", "content": content, "id": cnt_param}
-                    print(p)
                     parameters.append(p)
                     # TODO: do something with content
                     e_change = enum_idx
                     v_change = enum_idx
                 else:
-                    print("VARI")
-
                     url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
                     temp = url
                     url = url[:position] + url_tuple[0]
@@ -343,7 +311,6 @@ def url_parser(url):
                     position = len(temp[:position]) + url_tuple[2]
 
                     p = {"type": "variable", "content": variable, "id": cnt_param}
-                    print(p)
                     parameters.append(p)
 
                     v_change = vari_idx
@@ -351,10 +318,6 @@ def url_parser(url):
             else:
                 # TODO; raise proper exception
                 exit(1)
-        print("e_change: {}".format(e_change))
-        print("v_change: {}".format(v_change))
-
-        print("----")
 
         """
         WHILE EVALUATION
@@ -373,6 +336,7 @@ def url_parser(url):
         else:
             cnt_while += 1
     
+    return url,parameters
     print(url)
     for idx in range(len(parameters)):
         print(parameters[idx])

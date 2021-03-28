@@ -70,3 +70,6 @@ INPUT             = pyexample.py
 QUIET             = YES
 JAVADOC_AUTOBRIEF = YES
 SEARCHENGINE      = NO
+
+
+https://docs.python-guide.org/writing/structure/#structure-of-the-repository
