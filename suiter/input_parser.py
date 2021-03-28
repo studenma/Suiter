@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 combine_call = {}
 combine_parameter_identifier = 0
+  
 
 def get_framework(user_input):
     """
@@ -487,6 +488,9 @@ def parse_input_file(file_path):
     try:
         with open(file_path) as json_file:
             input_dict = json.load(json_file)
+    except ValueError:
+        message = "The given file is not a json: {}".format(file_path)
+        raise InputFileError(__name__, "parse_input_file", message) 
     except:
         message = "Could not open a input json file: " + file_path
         raise OpenFileError(__name__, "parse_input_file", message) 
@@ -509,5 +513,5 @@ def parse_input_file(file_path):
     # URL_PARAM_ENUM_SEPARATOR=','
     # URL_PARAM_VARIABLE_START_TAG='<:'
     # URL_PARAM_VARAIBLE_END_TAG=':>'
-
+    
     exit(1)
