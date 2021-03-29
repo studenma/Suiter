@@ -20,5 +20,4 @@ BODY_PARAM_VARIABLE_START_TAG='<:'
 BODY_PARAM_VARIABLE_END_TAG=':>'
 
 default_framework="Pytest"
-default_input_file="../input/input_file.json"
-default_output_folder="./result/"
+default_output_folder="./result"

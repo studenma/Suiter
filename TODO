@@ -1,0 +1,20 @@
+1. Cesta ke slozce v konfiguracnim souboru
+    default_output_folder="./result"
+    default_output_folder="./result/"
+
+2. Input file by nemel mit defaultni hodnotu a mel by byt povinny positional argument
+    * zatim jen pro snadnejsi testovani
+
+3. Zjistit, jakym zpusobem lze pustit pouze jedna classa v test suite
+# https://stackoverflow.com/questions/26406844/why-pytest-mark-parametrize-does-not-work-with-classes-in-pytest
+
+4. Udelat configuracni soubor dostupny z vice mist + zjistit, jakym spravnym zpusobem se config file parsuje
+https://docs.python.org/3/library/configparser.html
+
+
+5. Co je povinne v endpointu (Test zatim pouze na exitenci url) - Ostatni eleemnty budou ignorovanyt? Nebo vyhodit chybu?
+"endpoint": {
+    "url": "https://mydomain/addUser/<:user:>",
+    "allow-duplicities": 1,
+    "local_params": []
+},

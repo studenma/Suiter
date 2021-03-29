@@ -17,26 +17,6 @@ logger = logging.getLogger(__name__)
 
 combine_call = {}
 combine_parameter_identifier = 0
-  
-
-def get_framework(user_input):
-    """
-    Get the name of a framework to use
-    """
-    logger.debug("Calling the get_framework with a following parameter: " + user_input)
-
-    framework = ""
-    if user_input == "Python":
-        framework = "Python"
-    elif user_input == "Pytest":
-        framework = "Pytest"
-    elif user_input == "JavaScript":
-        framework = "JavaScript"
-    else:
-        message = "The following framework is not supprted: " + user_input
-        raise TemplateError(__name__, "get_framework", message)
-
-    return framework
 
 def get_test_cases(path):
     """
@@ -81,60 +61,66 @@ def is_input_json_valid(dictionary):
     """ 
     Check if the input json is valid 
     """
-    logger.debug("Calling the is_input_json_valid method")
+    logger.debug("Calling the is_input_json_valid function")
 
     # the first level should contain only two keys: 'test_sequence' and 'global_params'
     first_level_keys = ['test_sequence', 'global_params']
     first_level_input_keys = dictionary.keys()
     if len(first_level_input_keys) != len(first_level_keys):
         message = "The number of keys at the first level of input json file is not correct"
-        raise InputFileError(__name__, "is_input_json_valid", message)
+        return False,message
     for element in first_level_keys:
         if element not in first_level_input_keys:
             message = "The '{}' element was not found in input json file".format(element) 
-            raise InputFileError(__name__, "is_input_json_valid", message) 
+            return False,message
 
     """ test_case branch check """
-    # the test_case should be an array
+    # the test_sequence should be an array
     if type(dictionary['test_sequence']) is not list:
-        message = "The 'test_sequence' key in the input json file was expected to be a list, but the {} is given".format(type(dictionary['test_cases']))
-        raise InputFileError(__name__, "is_input_json_valid", message)
+        message = "The 'test_sequence' key in the input json file was expected to be a list, but the {} is given".format(type(dictionary['test_sequence']))
+        return False,message
 
-    """ check every element in 'test_case' array """
+    """ check every element in 'test_sequence' array """
     test_case_array_length = len(dictionary['test_sequence'])
+    if test_case_array_length == 0:
+        message = "The test_sequence array is empty"
+        return False,message
     # following keys have to exist in every call
     call_keys = ['endpoint', 'method', 'header', 'body']
     for idx in range(test_case_array_length):
         # is dict?
         if type(dictionary['test_sequence'][idx]) is not dict:
             message = "The test_sequence[{}] is not a dict".format(idx)
-            raise InputFileError(__name__, "is_input_json_valid", message)
+            return False,message
         # check call keys
         for element in call_keys:
             if element not in dictionary['test_sequence'][idx].keys():
                 message = "The '{}' element was not found in call keys in input file".format(element) 
-                raise InputFileError(__name__, "is_input_json_valid", message) 
+                return False,message
         # check endpoint keys
         endpoint_keys = ['url']
+        if type(dictionary['test_sequence'][idx]['endpoint']) is not dict:
+            message = "The endpoint element is not a dictionary"
+            return False,message
         for element in endpoint_keys:
             if element not in dictionary['test_sequence'][idx]['endpoint'].keys():
                 message = "The '{}' element was not found in endpoint dictionary".format(element) 
-                raise InputFileError(__name__, "is_input_json_valid", message)
+                return False,message
         # method
         method_keys = ['values']
         for element in method_keys:
             if element not in dictionary['test_sequence'][idx]['method'].keys():
                 message = "The '{}' element was not found in method dictionary".format(element) 
-                raise InputFileError(__name__, "is_input_json_valid", message)
+                return False,message
         # header
         if type(dictionary['test_sequence'][idx]['header']) is not list:
             message = "The header is not an array"
-            raise InputFileError(__name__, "is_input_json_valid", message)
+            return False,message
         # body
         if type(dictionary['test_sequence'][idx]['body']) is not list:
             message = "The body is not an array"
-            raise InputFileError(__name__, "is_input_json_valid", message)
-    return True
+            return False,message
+    return True,None
 
 def conf_variable_substring_evaluation(var1, var2):
     """
@@ -480,8 +466,11 @@ def get_endpoint_info(request):
     # if (URL_PARAM_ENUM_START_TAG and URL_PARAM_ENUM_END_TAG) in request['url']
     exit(1)
 
-def parse_input_file(file_path):
-    """ TODO: """
+def input_file_parser(file_path):
+    """ 
+    Parse the input file 
+    """
+    logging.debug('Calling the input_file_parser function with a following parameter: {}'.format(file_path))
 
     global input_dict
     # open input json file and load its content
@@ -490,16 +479,15 @@ def parse_input_file(file_path):
             input_dict = json.load(json_file)
     except ValueError:
         message = "The given file is not a json: {}".format(file_path)
-        raise InputFileError(__name__, "parse_input_file", message) 
+        raise InputFileError(__name__, "input_file_parser", message) 
     except:
         message = "Could not open a input json file: " + file_path
-        raise OpenFileError(__name__, "parse_input_file", message) 
+        raise OpenFileError(__name__, "input_file_parser", message) 
 
     # check if the input file is valid
-    try: 
-        is_input_json_valid(input_dict)
-    except:
-        message = "Something went wrong with input json file"
+    is_valid = is_input_json_valid(input_dict)
+    if is_valid[0] == False:
+        message = is_valid[1]
         raise InputFileError(__name__, "is_input_json_valid", message)
 
     # for each test sequence
