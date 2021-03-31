@@ -86,40 +86,119 @@ def is_input_json_valid(dictionary):
         message = "The test_sequence array is empty"
         return False,message
     # following keys have to exist in every call
-    call_keys = ['endpoint', 'method', 'header', 'body']
+    call_keys_optional = ['t-way', 'allow_duplicities', 'all-in-one-test']
+    call_keys_mandatory = ['endpoint', 'method', 'header', 'body']
+    allowed_methods = ["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"]
     for idx in range(test_case_array_length):
         # is dict?
         if type(dictionary['test_sequence'][idx]) is not dict:
             message = "The test_sequence[{}] is not a dict".format(idx)
             return False,message
-        # check call keys
-        for element in call_keys:
+        # check mandatory call keys
+        for element in call_keys_mandatory:
             if element not in dictionary['test_sequence'][idx].keys():
                 message = "The '{}' element was not found in call keys in input file".format(element) 
                 return False,message
-        # check endpoint keys
-        endpoint_keys = ['url']
+        # check any other call keys
+        for element in dictionary['test_sequence'][idx].keys():
+            if (element not in call_keys_mandatory) and (element not in call_keys_optional):
+                message = "The '{}' element is not supported".format(element) 
+                return False,message
+            if element in call_keys_optional:
+                el_type = type(dictionary['test_sequence'][idx][element])
+                if el_type is not int:
+                    message = "The '{}' element is expected to be a integer, {} is given".format(element,el_type) 
+                    return False,message
+        # check if endpoint is a dict
         if type(dictionary['test_sequence'][idx]['endpoint']) is not dict:
             message = "The endpoint element is not a dictionary"
             return False,message
-        for element in endpoint_keys:
+        # check mandatory endpoint keys
+        endpoint_keys_mandatory = ['url', 'local_params']
+        endpoint_keys_optional = ['t-way', 'allow-duplicities']
+        for element in endpoint_keys_mandatory:
             if element not in dictionary['test_sequence'][idx]['endpoint'].keys():
                 message = "The '{}' element was not found in endpoint dictionary".format(element) 
                 return False,message
-        # method
+        # check all endpoint keys
+        for element in dictionary['test_sequence'][idx]['endpoint'].keys():
+            if (element not in endpoint_keys_mandatory) and (element not in endpoint_keys_optional):
+                message = "The '{}' element is not supported".format(element) 
+                return False,message
+            # all optional keys should be integers
+            if element in endpoint_keys_optional:
+                el_type = type(dictionary['test_sequence'][idx]['endpoint'][element])
+                if el_type is not int:
+                    message = "The '{}' element does not have a valid type: expected: integer, {} is given".format(element, el_type) 
+                    return False,message         
+        # check local_param is array
+        local_params_type = type(dictionary['test_sequence'][idx]['endpoint']['local_params'])
+        if local_params_type is not list:
+            message = "The local_params element is not a dictionary, but {}".format(local_params_type) 
+            return False,message
+        # check if url is string
+        url_type = type(dictionary['test_sequence'][idx]['endpoint']['url'])
+        if url_type is not str:
+            message = "The url element is not a string, but {}".format(url_type) 
+            return False,message
+        # check if method is a dict
+        method_type = type(dictionary['test_sequence'][idx]['method'])
+        if method_type is not dict:
+            message = "The method element is not a dictionary, but {}".format(method_type)
+            return False,message
+        # method content
         method_keys = ['values']
-        for element in method_keys:
-            if element not in dictionary['test_sequence'][idx]['method'].keys():
+        for element in dictionary['test_sequence'][idx]['method'].keys():
+            if element not in method_keys:
                 message = "The '{}' element was not found in method dictionary".format(element) 
                 return False,message
+        # method value type check
+        method_val_type = type(dictionary['test_sequence'][idx]['method']['values'])
+        if method_val_type is not list:
+            message = "The value element in method is not an array, but {}".format(method_val_type) 
+            return False,message
+        # method value content type check 
+        for element in dictionary['test_sequence'][idx]['method']['values']:
+            if element not in allowed_methods:
+                message = "The element '{}' in method values array is not in allowed http methods".format(element) 
+                return False,message    
         # header
-        if type(dictionary['test_sequence'][idx]['header']) is not list:
-            message = "The header is not an array"
+        header_type = type(dictionary['test_sequence'][idx]['header'])
+        if header_type is not list:
+            message = "The header is not an array, but {}".format(header_type)
             return False,message
+        # header content
+        for element in dictionary['test_sequence'][idx]['header']:
+            if type(element) is not str:
+                message = "The header content is not a string, but {}".format(type(element))
+                return False,message
         # body
-        if type(dictionary['test_sequence'][idx]['body']) is not list:
-            message = "The body is not an array"
+        body_type = type(dictionary['test_sequence'][idx]['body'])
+        if body_type is not list:
+            message = "The body is not an array, but {}".format(body_type)
             return False,message
+        # body content 
+        for element in dictionary['test_sequence'][idx]['body']:
+            if type(element) is not str:
+                message = "The body content is not a string, but {}".format(type(element))
+                return False,message
+    """ check global_params element """
+    global_params_type = type(dictionary['global_params'])
+    if global_params_type is not dict:
+        message = "The global_params is not a dictionary, but {}".format(global_params_type)
+        return False,message
+    for element in dictionary['global_params']:
+        el_type = type(dictionary['global_params'][element])
+        if el_type is not list:
+            message = "The global_params's element {} is not a array, but {}".format(element, el_type)
+            return False,message
+    for element in dictionary['global_params']:
+        # empty array is not allowed
+        variable_array_len = len(dictionary['global_params'][element])
+        if variable_array_len == 0:
+            message = "The global_params's element {} is empty".format(element)
+            return False,message
+    
     return True,None
 
 def conf_variable_substring_evaluation(var1, var2):
