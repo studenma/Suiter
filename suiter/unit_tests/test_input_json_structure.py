@@ -48,6 +48,8 @@ TestClass_test_global_params
 import pytest
 import json
 
+config_file = '../../config.ini'
+
 """ import suiter package """ 
 import os,sys,inspect
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -55,6 +57,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir) 
 from input_parser import input_file_parser
 from input_parser import is_input_json_valid
+from input_configuration import read_config_file
 from exceptions import *
 
 mandatory_elements_array = ["test_sequence", "global_params"]
@@ -86,15 +89,17 @@ class TestClassFileCheck:
 
     @pytest.mark.parametrize("input_file_path", ["./test_input/notvalid.json"])
     def test_not_valid_input_json(self, input_file_path):
+        conf = read_config_file(config_file)
         # open input file
         with pytest.raises(InputFileError):
-            assert input_file_parser(input_file_path)
+            assert input_file_parser(input_file_path, conf)
 
     @pytest.mark.parametrize("input_file_path", ["./test_input/NonExistingFile.json"])
     def test_non_existing_input_json(self, input_file_path):    
+        conf = read_config_file(config_file)
         # open input file
         with pytest.raises(OpenFileError):
-            assert input_file_parser(input_file_path)
+            assert input_file_parser(input_file_path, conf)
 
 class TestClassFirstLevel: 
     def test_not_valid_element(self):

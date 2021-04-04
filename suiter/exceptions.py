@@ -36,3 +36,10 @@ class ConfigurationFileError(Error):
         self.module = module
         self.method = method
         self.message = message  
+
+class EndpointSemanticError(Error):
+    """ Raised when something is wrong with a endpoint semantics"""
+    def __init__(self, module, method, message):
+        self.module = module
+        self.method = method
+        self.message = message  

@@ -7,8 +7,9 @@ from exceptions import TemplateError
 from exceptions import OpenFileError
 from exceptions import InputFileError
 from exceptions import ConfigurationFileError
+from exceptions import EndpointSemanticError
 from file_handling import get_file_content
-from input_configuration import *
+# from input_configuration import *
 from ast import literal_eval
 import json
 
@@ -17,6 +18,16 @@ logger = logging.getLogger(__name__)
 
 combine_call = {}
 combine_parameter_identifier = 0
+global_params = {}
+
+def get_data_from_input(content, config):
+    global global_params
+    # retrieve global variables
+    global_params = content['global_params']
+
+    # retreive calls
+    for element in content['test_sequence']:
+        endpoint = get_endpoint_info(element['endpoint'], config)
 
 def get_test_cases(path):
     """
@@ -218,20 +229,24 @@ def conf_variable_substring_evaluation(var1, var2):
     else:
         None
 
-def find_between(string, first, last):
+def find_between(string, first, last, conf):
     """ Return the substring + the original string without this substring """
     try:
         start = string.index(first) + len(first)
         end = string.index(last, start)
         # remove the start and end tag
-        newstr = string[:(start-len(first))] + URL_PARAM_ENUM_START_TAG + URL_PARAM_ENUM_END_TAG + string[(end+len(last)):]
+        newstr = string[:(start-len(first))] + conf.url_enum_start + conf.url_enum_end + string[(end+len(last)):]
         # put the start and the end tag again (always ENUM is used)
-        # newstr = newstr[:(start-len(first))] + URL_PARAM_ENUM_START_TAG + URL_PARAM_ENUM_END_TAG + newstr[(start-len(first)):]
-        position = start-len(first) + len(URL_PARAM_ENUM_START_TAG) + len(URL_PARAM_ENUM_END_TAG)
+        # newstr = newstr[:(start-len(first))] + conf.url_enum_start + conf.url_enum_end + newstr[(start-len(first)):]
+        position = start-len(first) + len(conf.url_enum_start) + len(conf.url_enum_end)
+        name = string[start:end]
+        if (conf.url_enum_start in name) or (conf.url_enum_end in name) or (conf.url_variable_start in name) or (conf.url_variable_end in name):
+            message = "The url contains nested tags"
+            raise EndpointSemanticError(__name__, "find_between", message)
         return (newstr, string[start:end], position)
     except ValueError:
-        print(string, first, last)
-        exit(1)
+        message = "Some of the tag was probably not ended"
+        raise EndpointSemanticError(__name__, "find_between", message)
 
 def  prepare_combine_call():
     return {
@@ -267,10 +282,12 @@ def get_the_data_type_string(type):
     elif type is str:
         return "string"
 
-def url_parser(url):
+def url_parser(url, conf):
+    """ TODO: """
+    logging.debug('Calling the url_parser function with a following parameter: {}'.format(url))
+    # list of parameters in url
+    # {'type': 'variable', 'name': 'user', 'id': 0}
     parameters = []
-    new_url = url
-    global_var_list = {'user2': 12345, 'method': "GET"}
 
     # { variableName: CombineIdentifier }
     global_variables_to_set = {}
@@ -278,7 +295,7 @@ def url_parser(url):
     url_param_set = {}  
     
     # find out which of the start tag is more important
-    priority_tag = conf_variable_substring_evaluation(URL_PARAM_ENUM_START_TAG, URL_PARAM_VARIABLE_START_TAG)
+    priority_tag = conf_variable_substring_evaluation(conf.url_enum_start, conf.url_variable_start)
 
     """
     repeat the finding process until no more parameters are found
@@ -289,8 +306,8 @@ def url_parser(url):
     url_length = len(url)
 
     # the first search of start url tags
-    enum_idx = url.find(URL_PARAM_ENUM_START_TAG)
-    vari_idx = url.find(URL_PARAM_VARIABLE_START_TAG)
+    enum_idx = url.find(conf.url_enum_start)
+    vari_idx = url.find(conf.url_variable_start)
     while enum_idx != -1 or vari_idx != -1:       
         """
         If the ENUM and VARIABLE indexes were found in the same index
@@ -300,8 +317,8 @@ def url_parser(url):
         """
         # Relation between 'enum_idx' and 'vari_idx'
         if enum_idx == vari_idx:
-            if priority_tag is URL_PARAM_ENUM_START_TAG:
-                url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
+            if priority_tag is conf.url_enum_start:
+                url_tuple = find_between(url[position:], conf.url_enum_start, conf.url_enum_end, conf)
                 temp = url
             
                 url = url[:position] + url_tuple[0]
@@ -314,9 +331,9 @@ def url_parser(url):
                 # this idx is solved for both of them
                 e_change = enum_idx
                 v_change = vari_idx
-            elif priority_tag is URL_PARAM_VARIABLE_START_TAG:
+            elif priority_tag is conf.url_variable_start:
                 # Get the variable name
-                url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
+                url_tuple = find_between(url[position:], conf.url_variable_start, conf.url_variable_end, conf)
                 temp = url
                 url = url[:position] + url_tuple[0]
                 variable = url_tuple[1]
@@ -329,12 +346,12 @@ def url_parser(url):
                 v_change = vari_idx
                 e_change = enum_idx
             else:
-                # TODO: raise a proper exception
-                exit(1)
+                message = "Should have never gotten here"
+                raise EndpointSemanticError(__name__, "url_parser", message)
         else:
             if enum_idx < vari_idx:
                 if enum_idx == -1:
-                    url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
+                    url_tuple = find_between(url[position:], conf.url_variable_start, conf.url_variable_end, conf)
                     temp = url
                     url = url[:position] + url_tuple[0]
                     variable = url_tuple[1]
@@ -346,7 +363,7 @@ def url_parser(url):
                     v_change = vari_idx
                     e_change = vari_idx
                 else:
-                    url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
+                    url_tuple = find_between(url[position:], conf.url_enum_start, conf.url_enum_end, conf)
                     temp = url
                     url = url[:position] + url_tuple[0]
                     content = url_tuple[1]
@@ -358,7 +375,7 @@ def url_parser(url):
                     v_change = enum_idx
             elif vari_idx < enum_idx:
                 if vari_idx == -1:
-                    url_tuple = find_between(url[position:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
+                    url_tuple = find_between(url[position:], conf.url_enum_start, conf.url_enum_end, conf)
                     temp = url
                     url = url[:position] + url_tuple[0]
                     content = url_tuple[1]
@@ -370,7 +387,7 @@ def url_parser(url):
                     e_change = enum_idx
                     v_change = enum_idx
                 else:
-                    url_tuple = find_between(url[position:], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
+                    url_tuple = find_between(url[position:], conf.url_variable_start, conf.url_variable_end, conf)
                     temp = url
                     url = url[:position] + url_tuple[0]
                     variable = url_tuple[1]
@@ -382,8 +399,8 @@ def url_parser(url):
                     v_change = vari_idx
                     e_change = vari_idx
             else:
-                # TODO; raise proper exception
-                exit(1)
+                message = "Should have never gotten here"
+                raise EndpointSemanticError(__name__, "url_parser", message)
 
         """
         WHILE EVALUATION
@@ -392,97 +409,102 @@ def url_parser(url):
         (enum_idx+1 and vari_idx+1 means it starts to search from this index)
         if nothing is found -> -1 is returned
         """
-        enum_idx = url.find(URL_PARAM_ENUM_START_TAG, e_change+1)
-        vari_idx = url.find(URL_PARAM_VARIABLE_START_TAG, v_change+1)
+        enum_idx = url.find(conf.url_enum_start, e_change+1)
+        vari_idx = url.find(conf.url_variable_start, v_change+1)
         cnt_param += 1
 
         if cnt_while > url_length:
-            # TODO: Raise a proper exception
-            exit(1)
+            message = "Should have never gotten here"
+            raise EndpointSemanticError(__name__, "url_parser", message)
         else:
             cnt_while += 1
     
     return url,parameters
-    print(url)
-    for idx in range(len(parameters)):
-        print(parameters[idx])
-    exit(9)
 
-    e_idx = 0
-    v_idx = 0
-    cnt = 0
-    while True:
-        cnt += 1
-        # find the first occurence of ENUM start tag or VARIABLE start tag
-        enum_idx = url.find(URL_PARAM_ENUM_START_TAG, e_idx)
-        vari_idx = url.find(URL_PARAM_VARIABLE_START_TAG, v_idx)
-        print("Nasel jsem enum na {}".format(enum_idx))
-        print("Nasel jsem vari na {}".format(vari_idx))
+    # print(url)
+    # for idx in range(len(parameters)):
+    #     print(parameters[idx])
+    # exit(9)
+
+    # dictionary already set globals
+    # global_var_list = {'user2': 12345, 'method': "GET"}
+    # new_url = url
+
+    # e_idx = 0
+    # v_idx = 0
+    # cnt = 0
+    # while True:
+    #     cnt += 1
+    #     # find the first occurence of ENUM start tag or VARIABLE start tag
+    #     enum_idx = url.find(conf.url_enum_start, e_idx)
+    #     vari_idx = url.find(conf.url_variable_start, v_idx)
+    #     print("Nasel jsem enum na {}".format(enum_idx))
+    #     print("Nasel jsem vari na {}".format(vari_idx))
         
-        # wnd of a while cycle - no more parameteres were found
-        if enum_idx == -1 and vari_idx == -1:
-            break
+    #     # wnd of a while cycle - no more parameteres were found
+    #     if enum_idx == -1 and vari_idx == -1:
+    #         break
 
-        # substring issue
-        if enum_idx == vari_idx:
-            # find out which of the start is more important
-            priority_tag = conf_variable_substring_evaluation(URL_PARAM_ENUM_START_TAG,URL_PARAM_VARIABLE_START_TAG)
-            print("priority is {}".format(priority_tag))
+    #     # substring issue
+    #     if enum_idx == vari_idx:
+    #         # find out which of the start is more important
+    #         priority_tag = conf_variable_substring_evaluation(conf.url_enum_start,conf.url_variable_start)
+    #         print("priority is {}".format(priority_tag))
 
-            # enum has priority
-            if priority_tag is URL_PARAM_ENUM_START_TAG:
-                print("ENUM")
-                # TODO: check if there are some values specified or it is empty
-                # TODO: EMPTY -> prepare the call with a local variables
-                # TODO: NOT EMPTY -> retrieve the values and prepare the call to combine
-            # variable has priority
-            else:
-                print("VAR")
-                v_idx = vari_idx + 1
-                e_idx = vari_idx + 1
-                print(v_idx)
-                # retrieve the variable out of this tag
-                url_tuple = find_between(url, URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
-                old_url = url_tuple[0]
-                variable = url_tuple[1]
-                position = url_tuple[2]
+    #         # enum has priority
+    #         if priority_tag is conf.url_enum_start:
+    #             print("ENUM")
+    #             # TODO: check if there are some values specified or it is empty
+    #             # TODO: EMPTY -> prepare the call with a local variables
+    #             # TODO: NOT EMPTY -> retrieve the values and prepare the call to combine
+    #         # variable has priority
+    #         else:
+    #             print("VAR")
+    #             v_idx = vari_idx + 1
+    #             e_idx = vari_idx + 1
+    #             print(v_idx)
+    #             # retrieve the variable out of this tag
+    #             url_tuple = find_between(url, conf.url_variable_start, conf.url_variable_end)
+    #             old_url = url_tuple[0]
+    #             variable = url_tuple[1]
+    #             position = url_tuple[2]
 
-                # check if the variable is already used previously
-                if variable in global_var_list:
-                    # YES -> replace this value (it is not part of the combinations)
-                    # new_url = old_url[:position] + str(global_var_list[variable]) + old_url[position:]
-                    new_url = old_url[:position] + URL_PARAM_ENUM_START_TAG + URL_PARAM_ENUM_END_TAG + old_url[position:]
-                    print(new_url)
-                    url_param_set[0] = global_var_list[variable]
-                else:
-                    # NO -> set the variable and prepare the values for combine (these values will be combined only here)
-                    values = get_the_values_of_global_parameter(variable)
-                    data_type = get_the_data_type_string(type(values[0]))
-                    # TODO: check if all types in values are the same
-                    param = add_parameter_to_combine_call(data_type, values)
-                    print("------------")
-                    print(param)
-                    global_variables_to_set[variable] = param['identificator']
-        elif enum_idx < vari_idx:
-            print("ENUM 1 ")
-            url_tuple = find_between(url[enum_idx:], URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
-            print(url[enum_idx:])
-            print(url_tuple)
-            # TODO: add values to combine and remove it from new_url
-            new_url = new_url[:position] + URL_PARAM_ENUM_START_TAG + URL_PARAM_ENUM_END_TAG + new_url[position:]
-            print(new_url)
-            # url_param_set[]
-        elif enum_idx > vari_idx:
-            None
-        else:
-            # TODO: raise proper error
-            exit(1)
-        if cnt == 2:
-            exit(1)
+    #             # check if the variable is already used previously
+    #             if variable in global_var_list:
+    #                 # YES -> replace this value (it is not part of the combinations)
+    #                 # new_url = old_url[:position] + str(global_var_list[variable]) + old_url[position:]
+    #                 new_url = old_url[:position] + conf.url_enum_start + conf.url_enum_end + old_url[position:]
+    #                 print(new_url)
+    #                 url_param_set[0] = global_var_list[variable]
+    #             else:
+    #                 # NO -> set the variable and prepare the values for combine (these values will be combined only here)
+    #                 values = get_the_values_of_global_parameter(variable)
+    #                 data_type = get_the_data_type_string(type(values[0]))
+    #                 # TODO: check if all types in values are the same
+    #                 param = add_parameter_to_combine_call(data_type, values)
+    #                 print("------------")
+    #                 print(param)
+    #                 global_variables_to_set[variable] = param['identificator']
+    #     elif enum_idx < vari_idx:
+    #         print("ENUM 1 ")
+    #         url_tuple = find_between(url[enum_idx:], conf.url_enum_start, conf.url_enum_end)
+    #         print(url[enum_idx:])
+    #         print(url_tuple)
+    #         # TODO: add values to combine and remove it from new_url
+    #         new_url = new_url[:position] + conf.url_enum_start + conf.url_enum_end + new_url[position:]
+    #         print(new_url)
+    #         # url_param_set[]
+    #     elif enum_idx > vari_idx:
+    #         None
+    #     else:
+    #         # TODO: raise proper error
+    #         exit(1)
+    #     if cnt == 2:
+    #         exit(1)
 
     # for idx in range(len(url)):
     #     actual = url[idx]
-    #     if actual is URL_PARAM_VARIABLE_START_TAG[0]:
+    #     if actual is conf.url_variable_start[0]:
 
     #     print(actual)
 
@@ -500,7 +522,7 @@ def url_parser(url):
     print(url)
     url_tuple = (url, "")
     while True:
-        url_tuple = find_between(url_tuple[0], URL_PARAM_VARIABLE_START_TAG, URL_PARAM_VARAIBLE_END_TAG)
+        url_tuple = find_between(url_tuple[0], conf.url_variable_start, conf.url_variable_end, conf)
         # end of the while cycle
         if url_tuple is False:
             break
@@ -509,7 +531,7 @@ def url_parser(url):
 
     # https://mydomain/addUser/<:user>/<a,b,c,d>
     # in this case we have to look for the <: first
-    # is_substring = conf_variable_substring_evaluation(URL_PARAM_ENUM_START_TAG,URL_PARAM_VARIABLE_START_TAG)
+    # is_substring = conf_variable_substring_evaluation(conf.url_enum_start,conf.url_variable_start)
     # if type(is_substring) is list:
     #     # one of them is substring of the second one 
 
@@ -518,7 +540,7 @@ def url_parser(url):
 
     # url = 'https://mydomain/addUser/<:user:>/<1,2,3>/<:user2:>/<>/<9,8,7>'
     # print(url)
-    # temp = find_enum_param(url, URL_PARAM_ENUM_START_TAG, URL_PARAM_ENUM_END_TAG)
+    # temp = find_enum_param(url, conf.url_enum_start, conf.url_enum_end)
     # print(temp)
     # import re
 
@@ -530,28 +552,29 @@ def url_parser(url):
     # print(url.find("<:"))
     exit(1)
 
-def get_endpoint_info(request):
+def get_endpoint_info(request, config):
     """
     https://mydomain/addUser/<:user:>/<a,b,c,d>/<:user1:>/<:user2:>
     https://mydomain/addUser/<a,b,c,s,d>
     https://mydomain/addUser/sdvsdvsdvsd
     """
-
     global combine_call
     combine_call = prepare_combine_call()
-    url_parser(request['url'])
+    url_param_tuple = url_parser(request['url'], config)
+    print(url_param_tuple)
 
     
-    # if (URL_PARAM_ENUM_START_TAG and URL_PARAM_ENUM_END_TAG) in request['url']
+    # if (conf.url_enum_start and conf.url_enum_end) in request['url']
     exit(1)
 
-def input_file_parser(file_path):
+def input_file_parser(file_path, config):
     """ 
     Parse the input file 
     """
     logging.debug('Calling the input_file_parser function with a following parameter: {}'.format(file_path))
 
     global input_dict
+    
     # open input json file and load its content
     try:
         with open(file_path) as json_file:
@@ -569,16 +592,18 @@ def input_file_parser(file_path):
         message = is_valid[1]
         raise InputFileError(__name__, "is_input_json_valid", message)
 
+    get_data_from_input(input_dict, config)
+
     # for each test sequence
     for element in input_dict['test_sequence']:
         # get information about endpoint
         endpoint = get_endpoint_info(element['endpoint'])
         print(endpoint)
-    # print(URL_PARAM_ENUM_START_TAG)
-    # URL_PARAM_ENUM_START_TAG='<'
-    # URL_PARAM_ENUM_END_TAG='>'
+    # print(conf.url_enum_start)
+    # conf.url_enum_start='<'
+    # conf.url_enum_end='>'
     # URL_PARAM_ENUM_SEPARATOR=','
-    # URL_PARAM_VARIABLE_START_TAG='<:'
-    # URL_PARAM_VARAIBLE_END_TAG=':>'
+    # conf.url_variable_start='<:'
+    # conf.url_variable_end=':>'
     
     exit(1)
