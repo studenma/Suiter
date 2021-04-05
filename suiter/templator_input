@@ -1,0 +1,108 @@
+[
+    [
+        ['https://mydomain/addUser/4/ABC/1/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/4?fo4rmat=json', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/4', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/DEF/2/456', 'POST', 'header1.yaml', ''],
+        ['https://mydomain/getUser/52?fo52rmat=yaml', 'POST', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/52', 'POST', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/G/3/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/3?fo3rmat=xml', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/3', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/52/ABC/2/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/1?fo1rmat=json', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/1', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/52/DEF/1/456', 'POST', 'header1.yaml', ''],
+        ['https://mydomain/getUser/4?fo4rmat=json', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/4', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/52/G/4/456', 'POST', 'header1.yaml', ''],
+        ['https://mydomain/getUser/77?fo77rmat=json', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/deleteUser/77', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/3/ABC/3/456', 'POST', 'header1.yaml', ''],
+        ['https://mydomain/getUser/99?fo99rmat=json', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/3/DEF/4/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/-1?fo-1rmat=json', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/3/G/1/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/2?fo2rmat=json', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/1/ABC/4/456', 'GET', 'header1.yaml', ''],
+        ['https://mydomain/getUser/999999?fo999999rmat=json', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/1/DEF/3/456', 'POST', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/1/G/2/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/ABC/5/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/DEF/1/456', 'POST', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/G/2/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/77/ABC/1/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/77/DEF/5/456', 'POST', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/77/G/2/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/3/G/5/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/3/ABC/2/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/77/ABC/3/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/52/ABC/5/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/1/ABC/1/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/ABC/4/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/ABC/5/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/77/ABC/4/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/1/ABC/5/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/ABC/4/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/52/ABC/3/456', 'GET', 'header1.yaml', '']
+    ],
+    [
+        ['https://mydomain/addUser/4/ABC/3/456', 'GET', 'header1.yaml', '']
+    ]
+]

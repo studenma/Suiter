@@ -100,7 +100,7 @@ def argument_parser():
 if __name__ == "__main__":
     """ The entry point of Suiter application """
     # read config file
-    create_default_config(config_path)
+    # create_default_config(config_path)
     
     # logging configuration
     log_config() 
@@ -114,8 +114,11 @@ if __name__ == "__main__":
     # parse the input file
     input_file_parser(input_file_path, conf)
 
+    exit(1)
+
     # get all test cases
-    test_cases = get_test_cases("../test_cases/calls_4/tests_100")
+    test_cases = get_test_cases("./templator_input")
+    # test_cases = get_test_cases("../test_cases/calls_4/tests_100")
 
     """
     First test case only / All test cases

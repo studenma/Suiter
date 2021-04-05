@@ -21,3 +21,11 @@ https://docs.python.org/3/library/configparser.html
 
 
 6. config check - all values should be mandatory
+
+
+7. unused global variable
+    global variable does not exist
+    global variable with already set value
+
+
+8. poradi elementu v input jsonu

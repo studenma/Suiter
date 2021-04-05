@@ -24,7 +24,7 @@ def api_call_combine(api_end_point_base_url):
 		logging.debug('Tuple is returned: ' + str((response.json(), combine_output)))
 		return response.json(), combine_output
 	except ValueError: # includes json.decoder.JSONDecodeError
-		logging.error('Response from Combine is not in a valid JSON format')
+		logging.error('Response from Combine is not in a valid JSON format 1')
 		exit(9)
 	# except ConnectionError:
 	# 	logging.error('Unable to connect to the Combine server')
