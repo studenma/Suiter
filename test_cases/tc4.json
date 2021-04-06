@@ -55,3 +55,7 @@ body1.json
 
 
 {"name":"SUT name","t_strength":"5","dont_care_values":"no","values":"values","parameters":[{"identificator":"a","type":"string","blocks":["a='Title1'","a='Title2'","a='Title3'"]},{"identificator":"b","type":"integer","blocks":["b=123","b=456","b=789"]},{"identificator":"c","type":"enum","blocks":["True","False","null"]},{"identificator":"e","type":"enum","blocks":["['AAA1', 'AAA2']","['BBB1', 'BBB2']","['BBB3', 'BBB3']"]},{"identificator":"d","type":"enum","blocks":["{ 'name':'John', 'age':30, 'city':'New York' }","{ 'name':'Martin', 'age':20, 'city':'Prostejov' }"]}],"constraints":[]}
+
+
+
+

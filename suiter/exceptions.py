@@ -2,6 +2,20 @@ class Error(Exception):
     """Base class for other exceptions"""
     pass
 
+class LoggerError(Error):
+    """ Raised when something is wrong with a endpoint semantics"""
+    def __init__(self, module, method, message):
+        self.module = module
+        self.method = method
+        self.message = message  
+
+class ArgumentError(Error):
+    """ Raised when something is wrong with a endpoint semantics"""
+    def __init__(self, module, method, message):
+        self.module = module
+        self.method = method
+        self.message = message
+
 class LimitExceededError(Error):
     """ Raised when some limit is exceeded """
     def __init__(self, module, method, message):

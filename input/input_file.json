@@ -2,7 +2,7 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"url": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:used:>",
+		    	"values": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:used:>",
 			    "local_params": [
 					{
 						"values": ["ABC", "DEF", "G"]
@@ -10,15 +10,22 @@
 				]
 		    },
 		    "method": {
-				"values": ["GET", "POST"]
+				"values": "<:GEsT:>",
+				"local_params": []
 			},
-			"header": ["header1.yaml"],
-			"body": [],
+			"header": {
+				"values" : {"Content-Type": "json", "test": "test"},
+				"local_params": []
+			},
+			"body": {
+				"values": [],
+				"local_params": []
+			},
 			"t-way": 2
 		},
 		{
 		    "endpoint": {
-		    	"url": "https://mydomain/getUser/<>?fo<>rmat=<json,yaml,xml>",
+		    	"values": "https://mydomain/getUser/<>?fo<>rmat=<json,yaml,xml>",
 			    "local_params": [
 			       {
 			          "values": [4,52,3,1,4,77,99,-1,2,999999]
@@ -29,23 +36,37 @@
 			    ]
 		    },
 		    "method": {
-				"values": ["GET","POST"]
+				"values": "<GET,POST>",
+				"local_params": []
 			},
-			"header": ["header1.yaml", "header2.yaml"],
-			"body": ["body1.json","body2.json"],
+			"header": {
+				"values": "header1.yaml,header2.yaml",
+				"local_params": []
+			},
+			"body": {
+				"values": ["body1.json","body2.json"],
+				"local_params": []
+			},
 			"t-way": 1,
 			"all-in-one-test": 1
 		},
 		{
 		    "endpoint": {
-		    	"url": "https://mydomain/deleteUser/<:user:>",
+		    	"values": "https://mydomain/deleteUser/<:user:>",
 			    "local_params": []
 		    },
 		    "method": {
-				"values": ["GET","POST"]
+				"values": "<:method_variable:>",
+				"local_params": []
 			},
-			"header": ["header1.yaml"],
-			"body": [],
+			"header": {
+				"values": "<>",
+				"local_params": []
+			},
+			"body": {
+				"values": [],
+				"local_params": []
+			},
 			"t-way": 1
 		}
 	],

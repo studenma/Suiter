@@ -29,3 +29,6 @@ https://docs.python.org/3/library/configparser.html
 
 
 8. poradi elementu v input jsonu
+
+9. pokud bude priority_start_tag enumerate a priority_end_tag varaible -> udela to hroznej bordel
+* pouze nastavit tak, ze se zkontroluje v config classe, zda nenastala tahle situace -> vyhodit chybu s tim, z eto neni podporovane
