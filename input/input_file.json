@@ -2,23 +2,24 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:used:>",
+		    	"values": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:userStr:>",
 			    "local_params": [
 					{
 						"values": ["ABC", "DEF", "G"]
 					}
-				]
+				],
+				"t-way": 1
 		    },
 		    "method": {
 				"values": "<:GEsT:>",
 				"local_params": []
 			},
 			"header": {
-				"values" : {"Content-Type": "json", "test": "test"},
+				"values" : {"Content-type": "json", "test": "test_value"},
 				"local_params": []
 			},
 			"body": {
-				"values": [],
+				"values": "<body1.json,body2.json,body3.json>",
 				"local_params": []
 			},
 			"t-way": 2
@@ -44,7 +45,7 @@
 				"local_params": []
 			},
 			"body": {
-				"values": ["body1.json","body2.json"],
+				"values": "<>",
 				"local_params": []
 			},
 			"t-way": 1,
@@ -64,7 +65,7 @@
 				"local_params": []
 			},
 			"body": {
-				"values": [],
+				"values": "<:body_variable:>",
 				"local_params": []
 			},
 			"t-way": 1
@@ -73,6 +74,7 @@
 	"t-way": 2,
 	"global_params": {
 		"user": [4,52,3,1,4,77],
+		"userStr": ["usr1", "usr2"],
 		"method": ["GET", "POST", "DELETE"]
 	}
 }

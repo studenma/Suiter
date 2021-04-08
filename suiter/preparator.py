@@ -1,7 +1,9 @@
+import json
+import re
 import logging
 logger = logging.getLogger(__name__)
 
-from exceptions import EndpointSemanticError
+from exceptions import *
 import suiter_classes_and_globals as globe
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
@@ -43,10 +45,10 @@ def tag_substring_evaluation(tag1, tag2):
     else:
         None
 
-def url_string_parser(url):
+def general_string_parser(content_string, location):
     """ 
-    Parse the given url 
-    * search for all parameters in url
+    Parse the given string of header/url content 
+    * search for all parameters in this string
     * evaluate what type of parameter it is:
         ** enumerate type
         ** global variable type
@@ -54,36 +56,49 @@ def url_string_parser(url):
     * add these parameteres to a 'globe.all_parameters'
     * all params are replaced with a starting and ending symbol of non priority tag
     Return a tuple:
-        * modified url 
+        * modified string -> every parameter is replaced with a low-prio start and end tag 
             ** before: https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:used:>
             ** after:  https://mydomain/addUser/<>/<>/<>/<>
-        * url_parameters_array:
+            # before:  {'Content-type': '<123,456>', '<>': '<:var:>'}
+            # after:   {'Content-type': '<>', '<>': '<>'}
+        * list of found parameters:
         [
-            {'location': 'endpoint', 'type': 'variable', 'content': '', 'name': 'user', 'id': 0}
-            {'location': 'endpoint', 'type': 'enumerate', 'content': '', 'id': 1}
-            {'location': 'endpoint', 'type': 'enumerate', 'content': '1,2,3,4,5', 'id': 2}
-            {'location': 'endpoint', 'type': 'variable', 'content': '', 'name': 'used', 'id': 3}
+            {'location': $location, 'type': 'global_variable', 'name': 'user', 'id': 0}
+            {'location': $location, 'type': 'global_variable', 'name': 'used', 'id': 1}
+            {'location': $location, 'type': 'local_variable', 'id': 2}
+            {'location': $location, 'type': 'enumerate', 'content': 'ABC', 'id': 3}
+            {'location': $location, 'type': 'enumerate', 'content': '1,2,3,4,5', 'id': 4}
+            
         ]
     """
-    logging.debug('Calling the url_parser function with a following parameter: {}'.format(url))
+    logging.debug('Calling the general_string_parser function with a following parameters: [{}, {}]'.format(content_string, location))
 
+    # if the location is endpoint -> the varaibles in global class are stored as 'url', not 'endpoint'
+    if location == "endpoint":
+        globe_location = 'url'
+    else:
+        # otherwise it is the same name as in the location variable passed by function parameter
+        globe_location = location
+    
     # starting and ending variables
-    enum_start_tag = globe.config.url.enum.start
-    enum_end_tag = globe.config.url.enum.end
-    variable_start_tag = globe.config.url.variable.start
-    variable_end_tag = globe.config.url.variable.end
+    enum_start_tag = getattr(globe.config, globe_location).enum.start
+    enum_end_tag = getattr(globe.config, globe_location).enum.end
+    variable_start_tag = getattr(globe.config, globe_location).variable.start
+    variable_end_tag = getattr(globe.config, globe_location).variable.end
     # prio and non prio variables
-    prio_start_tag = globe.config.url.priority_start
-    non_prio_start_tag = globe.config.url.non_priority_start
-    prio_end_tag = globe.config.url.priority_end
-    non_prio_end_tag = globe.config.url.non_priority_end 
+    prio_start_tag = getattr(globe.config, globe_location).priority_start
+    prio_end_tag = getattr(globe.config, globe_location).priority_end
+    non_prio_start_tag = getattr(globe.config, globe_location).non_priority_start
+    non_prio_end_tag = getattr(globe.config, globe_location).non_priority_end
+    # list of all parameters in given string
+    parameters = []
 
     """
-    Search for all parameters in url
+    Search for all parameters in header/url
     variables:
         * e_idx     = index of location, where the enumerate start tag was found
         * v_idx     = index of location, where the variable start tag was found
-        * position  = indicates the location of pointer in url (to avoid searching tags which were already been found)
+        * position  = indicates the location of pointer in string (to avoid searching tags which were already been found)
         * globe.param_id_counter = current parameter id (global varaible - is reseted to 0 after every combine call)
         * globe.all_parameters   = list of all parameters collected (reseted after every combine call) 
     used functions:
@@ -91,9 +106,9 @@ def url_string_parser(url):
             ** returns: 
     """
     position = 0
-    # the first searchs of url enumerate and varaible starting tags
-    e_idx = url.find(globe.config.url.enum.start)
-    v_idx = url.find(globe.config.url.variable.start)
+    # the first search of enumerate and varaible starting tags in string
+    e_idx = content_string.find(enum_start_tag)
+    v_idx = content_string.find(variable_start_tag)
     # end this loop when no more starting tags were found
     while e_idx != -1 or v_idx != -1:   
         """
@@ -104,22 +119,26 @@ def url_string_parser(url):
         if e_idx == v_idx:
             if prio_start_tag == enum_start_tag:
                 """
-                Modify url for current parameter
+                Modify contnet_string for current parameter
                 Get the content of current parameter
                 Count the position for next search
                 """
-                # get (modified_url, content, position)
-                url_tuple = find_between(url[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                temp = url
-                url = url[:position] + url_tuple[0]
-                content = url_tuple[1]
-                position = len(temp[:position]) + url_tuple[2]
+                # get (modified_content_string, content, position)
+                resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
+                temp = content_string
+                content_string = content_string[:position] + resulted_tuple[0]
+                content = resulted_tuple[1]
+                position = len(temp[:position]) + resulted_tuple[2]
 
-                """
-                Add the information about this parameter to a global variable 'globe.all_parameters'
-                """
-                p = {"location": "endpoint", "type": "enumerate", "content": content, "id": globe.param_id_counter}
-                globe.all_parameters.append(p)
+                # check if the content is empty string -> it is a local variable
+                # otherwise it is enumerate type
+                if len(content) == 0:
+                    p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
+                else:
+                    p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
+                
+                # add the information about this parameter to a reulted array
+                parameters.append(p)
 
                 """
                 Evaluate which tag was already evaluated
@@ -130,22 +149,20 @@ def url_string_parser(url):
                 v_change = v_idx
             elif prio_start_tag is variable_start_tag:
                 """
-                Modify url for current parameter
+                Modify content_string for current parameter
                 Get the content of current parameter (variable)
                 Count the position for next search
                 """
-                # get (modified_url, content, position)
-                url_tuple = find_between(url[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                temp = url
-                url = url[:position] + url_tuple[0]
-                variable = url_tuple[1]
-                position = len(temp[:position]) + url_tuple[2]
+                # get (modified_content_string, content, position)
+                resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
+                temp = content_string
+                content_string = content_string[:position] + resulted_tuple[0]
+                variable = resulted_tuple[1]
+                position = len(temp[:position]) + resulted_tuple[2]
+                p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
 
-                """
-                Add the information about this parameter to a global variable 'globe.all_parameters'
-                """
-                p = {"location": "endpoint", "type": "variable", "content": '', "name": variable, "id": globe.param_id_counter}
-                globe.all_parameters.append(p)
+                # add the information about this parameter to a reulted array
+                parameters.append(p)
 
                 """
                 Evaluate which tag was already evaluated
@@ -156,7 +173,7 @@ def url_string_parser(url):
                 e_change = e_idx
             else:
                 message = "Should have never gotten here"
-                raise EndpointSemanticError(__name__, "url_parser", message)
+                raise EndpointSemanticError(__name__, "general_string_parser", message)
         else:
             if e_idx < v_idx:
                 """
@@ -166,22 +183,20 @@ def url_string_parser(url):
                 """
                 if e_idx == -1:
                     """
-                    Modify url for current parameter
+                    Modify content_string for current parameter
                     Get the content of current parameter (variable)
                     Count the position for next search
                     """
-                    # get (modified_url, content, position)
-                    url_tuple = find_between(url[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = url
-                    url = url[:position] + url_tuple[0]
-                    variable = url_tuple[1]
-                    position = len(temp[:position]) + url_tuple[2]
-
-                    """
-                    Add the information about this parameter to a global variable 'globe.all_parameters'
-                    """
-                    p = {"location": "endpoint", "type": "variable", "content": '', "name": variable, "id": globe.param_id_counter}
-                    globe.all_parameters.append(p)
+                    # get (modified_content_string, content, position)
+                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
+                    temp = content_string
+                    content_string = content_string[:position] + resulted_tuple[0]
+                    variable = resulted_tuple[1]
+                    position = len(temp[:position]) + resulted_tuple[2]
+                    p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
+                    
+                    # add the information about this parameter to a reulted array
+                    parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
@@ -193,22 +208,26 @@ def url_string_parser(url):
                     e_change = v_idx
                 else:
                     """
-                    Modify url for current parameter
+                    Modify content_string for current parameter
                     Get the content of current parameter (content)
                     Count the position for next search
                     """
-                    # get (modified_url, content, position)
-                    url_tuple = find_between(url[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = url
-                    url = url[:position] + url_tuple[0]
-                    content = url_tuple[1]
-                    position = len(temp[:position]) + url_tuple[2]
-                   
-                    """
-                    Add the information about this parameter to a global variable 'globe.all_parameters'
-                    """
-                    p = {"location": "endpoint", "type": "enumerate", "content": content, "id": globe.param_id_counter}
-                    globe.all_parameters.append(p)
+                    # get (modified_content_string, content, position)
+                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
+                    temp = content_string
+                    content_string = content_string[:position] + resulted_tuple[0]
+                    content = resulted_tuple[1]
+                    position = len(temp[:position]) + resulted_tuple[2]
+
+                    # check if the content is empty string -> it is a local variable
+                    # otherwise it is enumerate type
+                    if len(content) == 0:
+                        p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
+                    else:
+                        p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
+
+                    # add the information about this parameter to a reulted array
+                    parameters.append(p)
                     
                     """
                     Evaluate which tag was already evaluated
@@ -226,22 +245,26 @@ def url_string_parser(url):
                 """
                 if v_idx == -1:
                     """
-                    Modify url for current parameter
+                    Modify content_string for current parameter
                     Get the content of current parameter (content)
                     Count the position for next search
                     """
-                    # get (modified_url, content, position)
-                    url_tuple = find_between(url[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = url
-                    url = url[:position] + url_tuple[0]
-                    content = url_tuple[1]
-                    position = len(temp[:position]) + url_tuple[2]
+                    # get (modified_content_string, content, position)
+                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
+                    temp = content_string
+                    content_string = content_string[:position] + resulted_tuple[0]
+                    content = resulted_tuple[1]
+                    position = len(temp[:position]) + resulted_tuple[2]
 
-                    """
-                    Add the information about this parameter to a global variable 'globe.all_parameters'
-                    """
-                    p = {"location": "endpoint", "type": "enumerate", "content": content, "id": globe.param_id_counter}
-                    globe.all_parameters.append(p)
+                    # check if the content is empty string -> it is a local variable
+                    # otherwise it is enumerate type
+                    if len(content) == 0:
+                        p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
+                    else:
+                        p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
+
+                    # add the information about this parameter to a reulted array
+                    parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
@@ -253,22 +276,20 @@ def url_string_parser(url):
                     v_change = e_idx
                 else:
                     """
-                    Modify url for current parameter
+                    Modify content_string for current parameter
                     Get the content of current parameter (content)
                     Count the position for next search
                     """
-                    # get (modified_url, content, position)
-                    url_tuple = find_between(url[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = url
-                    url = url[:position] + url_tuple[0]
-                    variable = url_tuple[1]
-                    position = len(temp[:position]) + url_tuple[2]
-
-                    """
-                    Add the information about this parameter to a global variable 'globe.all_parameters'
-                    """
-                    p = {"location": "endpoint", "type": "variable", "content": '', "name": variable, "id": globe.param_id_counter}
-                    globe.all_parameters.append(p)
+                    # get (modified_content_string, content, position)
+                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
+                    temp = content_string
+                    content_string = content_string[:position] + resulted_tuple[0]
+                    variable = resulted_tuple[1]
+                    position = len(temp[:position]) + resulted_tuple[2]
+                    p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
+                    
+                    # add the information about this parameter to a reulted array
+                    parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
@@ -280,20 +301,145 @@ def url_string_parser(url):
                     e_change = v_idx
             else:
                 message = "Should have never gotten here"
-                raise EndpointSemanticError(__name__, "url_parser", message)
+                raise EndpointSemanticError(__name__, "general_string_parser", message)
 
         """
         WHILE EVALUATION
         Find the first occurence of ENUM start tag or VARIABLE start tag
-        in the next iteration of while, the already evaluated part of url is ignored
+        in the next iteration of while, the already evaluated part of content_string is ignored
         (e_change+1 and v_change+1 means it starts to search from this index)
         if nothing is found -> -1 is returned
         """
-        e_idx = url.find(enum_start_tag, e_change+1)
-        v_idx = url.find(variable_start_tag, v_change+1)
+        e_idx = content_string.find(enum_start_tag, e_change+1)
+        v_idx = content_string.find(variable_start_tag, v_change+1)
         globe.param_id_counter += 1
     
-    return url,globe.all_parameters
+    return content_string,parameters
+
+# https://stackoverflow.com/questions/35091557/replace-nth-occurrence-of-substring-in-string
+def replace_the_tag_with_value(taged_string, tag, content, nth):
+    """ 
+    TODO:
+    Pozor, content muze byt jak string, tak array with one value 
+    check if the key in string even exist -> always replace the first occurence
+    """
+    if type(content) is list:
+        # transfer it to string
+        if len(content) == 1:
+            content = str(content[0])
+        else:
+            raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
+    elif type(content) is str:
+        content = content
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
+    
+    print(taged_string, tag, content, nth)
+    # replace the nth occurence in taged string
+    if nth < 0: 
+        raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
+    try:
+        where = [m.start() for m in re.finditer(tag, taged_string)][nth]
+        before = taged_string[:where]
+        after = taged_string[where:]
+        after = after.replace(tag, content, 1)
+        new_string = before + after
+        return new_string
+    except:
+        raise LimitExceededError(__name__, "replace_the_tag_with_value", "This string does not contain nth ({}) occurence".format(nth))
+
+def remove_single_values_params(taged_string, param_array):
+    """ Remove the single values parameters and replace odpovidajici tag ve stringu """
+    # TODO: this function is not tested at all -> just with one use case
+    single_params_array = []
+    combine_params_array = []
+
+    param_array[3]['content'] = [1651]
+
+    # pop all values from param_array one by one
+    param_idx = 0
+    while len(param_array) != 0:
+        parameter = param_array.pop(0)
+        print(parameter)
+        if parameter['type'] == 'global_variable':
+            """ GLOBAL VARIABLE """
+            # if there is 'value' key -> it is a global variable with a already existing value
+            if 'value' in parameter.keys():
+                # so, it should be removed and replaced
+                single_params_array.append(parameter)
+                # TODO: replace the value in string
+            else:
+                # check if the 'content' element does exist or is not array
+                if ('content' not in parameter.keys()) or (type(parameter['content']) is not list):
+                    raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+                # check if the content does have only one element (TODO: should this even be allowed?)
+                if len(parameter['content']) == 1:
+                    single_params_array.append(parameter)
+                    tag = str(globe.config.url.non_priority_start) + str(globe.config.url.non_priority_end)
+                    taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                    print("-----------------------")
+                    print(taged_string)
+                    print("jsem tady po pauze")
+                    exit(5)
+                else:
+                    combine_params_array.append(parameter)
+        elif parameter['type'] == 'local_variable':
+            """ LOCAL VARIABLE """
+            # content key should exist in param info
+            if 'content' not in parameter.keys():
+                raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+            # content should be an array
+            if type(parameter['content']) is not list:
+                raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+            # check if the content does have only one element
+            if len(parameter['content']) == 1:
+                single_params_array.append(parameter)
+                # TODO: replace the value in string
+            else:
+                combine_params_array.append(parameter)
+        elif parameter['type'] == 'enumerate':
+            """ ENUMERATE """
+            # can be string or list (should have not have a list with one value, but it is supported here as well)
+            # all values should be stored in 'content' element
+            # check if 'content' element does exist
+            if 'content' not in parameter.keys():
+                raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+            # check if the type of content is array or string
+            if type(parameter['content']) is str:
+                single_params_array.append(parameter)
+                # TODO: replace the value in string
+            elif type(parameter['content']) is list:
+                # check if the content does have only one element
+                if len(parameter['content']) == 1:
+                    single_params_array.append(parameter)
+                    # TODO:
+                else:
+                    combine_params_array.append(parameter)
+            else:
+                # other types are not supported 
+                raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+        else:
+            raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+        param_idx+=1
+
+    print("<3")
+    for element in single_params_array:
+        print(element)
+    print("---------------")
+    for element in combine_params_array:
+        print(element)
+    # TODO: check if single_params_array+combine_params_array=param_array
+    # TODO: check if all tags in taged string were replaced - or at least the number of combine params match the numbeer of tags in string
+    exit(21)
+
+    #     content = param_array[par_idx]['content']
+    #     # if is list with more then one value
+    #     if (type(content) is list) and (len(content) != 1):
+    #         combine_calls.append(all_calls[par_idx])
+    #     # single value param
+    #     else:
+    #         single_calls.append(all_calls[par_idx])
+    # return single_calls,combine_calls
 
 def get_endpoint_info(endpoint_element):
     """
@@ -306,8 +452,101 @@ def get_endpoint_info(endpoint_element):
     TODO: Check if the url structure is valid - nested tags and so on
     Get the information about url
     """
-    url_param_tuple = url_string_parser(endpoint_element['values'])
-    return url_param_tuple
+    # (modified_string, params_array)
+    parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
+
+    """
+    Evaluate the string parser resulted parameter
+    * check if a global variable already has a value
+    * separate the enumerate string by separator
+    * remove single values parameters
+    * check if the number of local variables is the same as the nubmer of values in local_params
+    * check if the global variable does have the value in global_params
+    """
+
+    """
+    Iterate over all elements in returned param array
+    * evaluate global_variable
+    * evaluate local_variable
+    * evaluate enumerate
+    """ 
+   
+    inputed_global_params = globe.inputData.global_params
+    separator = globe.config.url.enum.separator
+    for parameter in parameters_tuple[1]:
+        if parameter['type'] == 'global_variable':
+            """ GLOBAL VARAIBLE """
+            # check if the global variable already has assigned value
+            if parameter['name'] in globe.global_params_with_value.keys():
+                # it alredy have some value -> get the value and insert it into parameter info
+                parameter['value'] = globe.global_params_with_value[parameter['name']]
+            else:
+                # the global parameter does not have assigned value yet
+                # check if it does exist in input data
+                if parameter['name'] not in inputed_global_params:
+                    message = "The global parameter '{}' does not exist in input data".format(parameter['name'])
+                    raise EndpointSemanticError(__name__, "get_endpoint_info", message)
+                # insert the content array of this global variable into param information
+                parameter['content'] = inputed_global_params[parameter['name']]
+        
+        elif parameter['type'] == 'local_variable':
+            """ LOCAL VARAIBLE """
+            # Pop and get the first value of local parameters 
+            try:
+                pop_result = endpoint_element['local_params'].pop(0)
+            except IndexError:
+                message = "There is not enough local parameters in endpoint"
+                raise EndpointSemanticError(__name__, "get_endpoint_info", message)
+            
+            # insert these values into parameter information
+            try:
+                parameter['content'] = pop_result['values']
+            except:
+                message = "There is something wrong with a local_parameter '{}' (probably missing 'values')".format(parameter['name'])
+                raise EndpointSemanticError(__name__, "get_endpoint_info", message)         
+        elif parameter['type'] == 'enumerate':
+            """ ENUMERATE VARAIBLE """
+            # separate the content by a separator
+            splited = parameter['content'].split(separator)
+
+            # if there is only one element in splited array -> make it a string
+            splited_length = len(splited)
+            if splited_length == 1:
+                splited = str(splited[0])
+            elif splited_length == 0:
+                raise ShouldHaveNotGottenHereError(__name__, "get_endpoint_info") 
+
+            # insert the separated values into parameter information
+            parameter['content'] = splited
+        else:
+            ShouldHaveNotGottenHereError(__name__, "get_endpoint_info")
+
+    # check if the local params array is empty
+    # otherwise it means there is some extra local param which will not be used
+    if len(endpoint_element['local_params']) != 0:
+        message = "The amount of local parameters is bigger than needed"
+        raise EndpointSemanticError(__name__, "get_endpoint_info", message)   
+
+    # remove the single values parameters -> also replace their value in modified string
+    for element in parameters_tuple[1]:
+        print(element)
+    print(parameters_tuple[0])
+    remove_single_values_params(parameters_tuple[0], parameters_tuple[1])
+
+    # TODO: check if the number of parameteres is equal to the number of occurence of tags in midofied string
+    exit(36)
+
+    """ 
+    check the optional keys 
+    """
+    # check if the t-way element is on endpoint dictionary
+    if 't-way' in endpoint_element.keys():
+        print("t-way key je obsazen")
+        # the combine will be called for this part as well
+
+    
+    exit(1)
+    return modified_url
 
 
 def method_string_parser(method_string):
@@ -561,15 +800,11 @@ def header_string_parser(header_string):
     else:
         # there is no starting tag of priority and non-priority -> it's a string with a single value
         """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-        p = {"location": "header", 'type': 'enumerate', 'content': header_string, 'id': globe.param_id_counter}
+        content = header_string
+        p = {"location": "header", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
         globe.all_parameters.append(p)
         globe.param_id_counter += 1
-    return p
-
-def header_dictionary_parser(header_dict):
-    print(header_dict)
-
-    exit(5)
+    return content
 
 def get_header_info(header_element):
     """
@@ -614,15 +849,17 @@ def get_header_info(header_element):
     # check what type of value is given
     if values_type is str:
         # value is string
-        p = header_string_parser(header_element['values'])
+        header_value_string = header_string_parser(header_element['values'])
+        return header_value_string
     elif values_type is dict:
-        # value is dictionary
-        p = header_dictionary_parser(header_element['values'])
+        # value is dictionary -> change the type to from dictionary to string
+        header_value_string = json.dumps(header_element['values'])
+        modified_header_string = general_string_parser(header_value_string, 'header')
+        return modified_header_string
     else:
         # error should be raised
+        print("proper error should be raised")
         exit(2)
-
-    exit(1)
 
 def get_body_info(body_element):
     """
@@ -640,4 +877,6 @@ def get_body_info(body_element):
     * similiar logic to header FILE
     """
     logging.debug('Getting info about body part')
-    None
+
+    modified_body_string = general_string_parser(body_element['values'], 'body')
+    return modified_body_string

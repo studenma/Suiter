@@ -32,3 +32,7 @@ https://docs.python.org/3/library/configparser.html
 
 9. pokud bude priority_start_tag enumerate a priority_end_tag varaible -> udela to hroznej bordel
 * pouze nastavit tak, ze se zkontroluje v config classe, zda nenastala tahle situace -> vyhodit chybu s tim, z eto neni podporovane
+
+10. stejne globalni promenna v ramci jednoho endpointu?
+
+11. pokud bude parametr enumerate <1,2,3,45,6> -> vzdycky bude string -> not a bug, it is a feature

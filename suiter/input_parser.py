@@ -252,12 +252,34 @@ def input_json_structure_validator(json_content):
         if body_type is not dict:
             message = "The body is not a dict, but {}".format(body_type)
             return False,message
-        # TODO:
-        # body content 
-        for element in json_content['test_sequence'][idx]['body']:
-            if type(element) is not str:
-                message = "The body content is not a string, but {}".format(type(element))
+        # check mandatory body keys
+        body_keys_mandatory = ['values', 'local_params']
+        body_keys_optional = ['t-way']
+        for element in body_keys_mandatory:
+            if element not in json_content['test_sequence'][idx]['body'].keys():
+                message = "The '{}' element was not found in body json_content".format(element) 
                 return False,message
+        # check all body keys
+        for element in json_content['test_sequence'][idx]['body'].keys():
+            if (element not in body_keys_mandatory) and (element not in body_keys_optional):
+                message = "The '{}' element is not supported".format(element) 
+                return False,message
+            # all optional keys should be integers
+            if element in body_keys_optional:
+                el_type = type(json_content['test_sequence'][idx]['body'][element])
+                if el_type is not int:
+                    message = "The '{}' element does not have a valid type: expected: integer, {} is given".format(element, el_type) 
+                    return False,message 
+        # check local_param is array
+        local_params_type = type(json_content['test_sequence'][idx]['body']['local_params'])
+        if local_params_type is not list:
+            message = "The local_params element is not a json_content, but {}".format(local_params_type) 
+            return False,message
+        # body value should be dictionary or string
+        body_value_type = type(json_content['test_sequence'][idx]['body']['values'])
+        if body_value_type is not str:
+            message = "The body value is not a string, but {}".format(body_value_type)
+            return False,message
     
     """ GLOBAL PARAMS
     """

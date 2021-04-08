@@ -57,7 +57,7 @@ import argparse
 from input_parser import read_config_file, open_input_json_file, input_json_structure_validator
 from exceptions import *
 from suiter_classes_and_globals import InputDataClass
-from preparator import get_endpoint_info, get_method_info, get_header_info
+from preparator import get_endpoint_info, get_method_info, get_header_info, get_body_info
 import suiter_classes_and_globals as globe
 
 def logger_config():
@@ -163,10 +163,6 @@ if __name__ == "__main__":
     # store
     logging.debug('Creating the InputDataClass')
     globe.inputData = InputDataClass(file_content)
-    
-    # print(inputData.test_sequence)
-    # print(inputData.global_params)
-    # print(inputData.main_level_tway)
 
     """ CREATE FILE FOR TEMPLATOR
     Go through all calls in test sequence
@@ -178,20 +174,15 @@ if __name__ == "__main__":
         endpoint = get_endpoint_info(call['endpoint'])
         method = get_method_info(call['method'])
         header = get_header_info(call['header'])
+        body = get_body_info(call['body'])
         print("---------------------")
         for element in globe.all_parameters:
             print(element)
         exit(4)
-        body = get_body_info(call['body'])
         # TODO: jsem tady po pauze: je potreba dodelat header a body get information
         # TODO: dodelat promennou v metode
         print("jsem tady po pauze")
         exit(5)
-
-    #     method = get_method_info(element['method'], config)
-    #     header = get_header_info(element['header'], config)
-    #     body = get_body_info(element['body'], config)
-    # input_file_parser(input_file_path, conf)
     
     exit(1)
 

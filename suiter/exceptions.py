@@ -57,3 +57,10 @@ class EndpointSemanticError(Error):
         self.module = module
         self.method = method
         self.message = message  
+
+class ShouldHaveNotGottenHereError(Error):
+    """ Raised when it went into part of a code where it should have never be """
+    def __init__(self, module, method):
+        self.module = module
+        self.method = method
+        self.message = "Should have never gotten here"  
