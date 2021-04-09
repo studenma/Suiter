@@ -9,6 +9,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from suiter_classes_and_globals import ConfigDataClass
+from exceptions import *
 
 def create_default_config(file_path):
     """ change the configuration values - used for testing purposes """

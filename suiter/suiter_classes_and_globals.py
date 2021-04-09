@@ -13,6 +13,7 @@ not_priority_tag_end = ''
 param_id_counter = 0
 all_parameters = []
 global_params_with_value = {}
+combine_request = None
 
 list_of_allowed_http_methods = ["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"]
 
@@ -132,3 +133,16 @@ class InputDataClass(object):
         self.test_sequence = json_content['test_sequence']
         self.global_params = json_content['global_params']
         self.main_level_tway = json_content['t-way']
+
+class CombineCallClass(object):
+    def __init__(self):
+        self.url = "https://combine.testos.org/generate"
+        self.header = {"Content-Type": "application/json"}
+        self.body = {
+            "name": "SUT name",
+            "t_strength": "",
+            "dont_care_values": "no",
+            "values":"values",
+            "parameters": [],
+            "constraints": []
+        }

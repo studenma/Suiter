@@ -1,10 +1,11 @@
 import json
-import re
 import logging
 logger = logging.getLogger(__name__)
 
 from exceptions import *
 import suiter_classes_and_globals as globe
+from combine_request import create_combine_call, api_call_combine, evaluate_combine_response, add_parameter_to_combine_call
+from general import replace_the_tag_with_value
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
     """ Return the substring + the original string without this substring """
@@ -316,51 +317,37 @@ def general_string_parser(content_string, location):
     
     return content_string,parameters
 
-# https://stackoverflow.com/questions/35091557/replace-nth-occurrence-of-substring-in-string
-def replace_the_tag_with_value(taged_string, tag, content, nth):
-    """ 
-    TODO:
-    Pozor, content muze byt jak string, tak array with one value 
-    check if the key in string even exist -> always replace the first occurence
-    """
-    if type(content) is list:
-        # transfer it to string
-        if len(content) == 1:
-            content = str(content[0])
-        else:
-            raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
-    elif type(content) is str:
-        content = content
-    else:
-        raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
-    
-    print(taged_string, tag, content, nth)
-    # replace the nth occurence in taged string
-    if nth < 0: 
-        raise ShouldHaveNotGottenHereError(__name__, "replace_the_tag_with_value")
-    try:
-        where = [m.start() for m in re.finditer(tag, taged_string)][nth]
-        before = taged_string[:where]
-        after = taged_string[where:]
-        after = after.replace(tag, content, 1)
-        new_string = before + after
-        return new_string
-    except:
-        raise LimitExceededError(__name__, "replace_the_tag_with_value", "This string does not contain nth ({}) occurence".format(nth))
-
-def remove_single_values_params(taged_string, param_array):
+def remove_single_values_params(taged_string, param_array, location):
     """ Remove the single values parameters and replace odpovidajici tag ve stringu """
     # TODO: this function is not tested at all -> just with one use case
     single_params_array = []
-    combine_params_array = []
+    combine_params_array = []  
+    param_array_size = len(param_array)
 
-    param_array[3]['content'] = [1651]
+    """
+    Decide which tag should be replaced - endpoint, method, body and header may have different non-priority tag
+    Taged string is taged with a non-priority tag
+    This function is called only with a param_array with the same locations
+    """
+    if location == 'endpoint':
+        tag = str(globe.config.url.non_priority_start) + str(globe.config.url.non_priority_end)
+    elif location == 'method':
+        tag = str(globe.config.method.non_priority_start) + str(globe.config.method.non_priority_end)
+    elif location == 'header':
+        tag = str(globe.config.header.non_priority_start) + str(globe.config.header.non_priority_end)
+    elif location == 'body':
+        tag = str(globe.config.location.non_priority_start) + str(globe.config.location.non_priority_end)
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
 
     # pop all values from param_array one by one
     param_idx = 0
     while len(param_array) != 0:
         parameter = param_array.pop(0)
         print(parameter)
+        """
+        Decide what type of parameter is this one - should be the same for all array which is sent
+        """
         if parameter['type'] == 'global_variable':
             """ GLOBAL VARIABLE """
             # if there is 'value' key -> it is a global variable with a already existing value
@@ -375,12 +362,7 @@ def remove_single_values_params(taged_string, param_array):
                 # check if the content does have only one element (TODO: should this even be allowed?)
                 if len(parameter['content']) == 1:
                     single_params_array.append(parameter)
-                    tag = str(globe.config.url.non_priority_start) + str(globe.config.url.non_priority_end)
                     taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
-                    print("-----------------------")
-                    print(taged_string)
-                    print("jsem tady po pauze")
-                    exit(5)
                 else:
                     combine_params_array.append(parameter)
         elif parameter['type'] == 'local_variable':
@@ -394,7 +376,7 @@ def remove_single_values_params(taged_string, param_array):
             # check if the content does have only one element
             if len(parameter['content']) == 1:
                 single_params_array.append(parameter)
-                # TODO: replace the value in string
+                taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
             else:
                 combine_params_array.append(parameter)
         elif parameter['type'] == 'enumerate':
@@ -407,12 +389,12 @@ def remove_single_values_params(taged_string, param_array):
             # check if the type of content is array or string
             if type(parameter['content']) is str:
                 single_params_array.append(parameter)
-                # TODO: replace the value in string
+                taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
             elif type(parameter['content']) is list:
                 # check if the content does have only one element
                 if len(parameter['content']) == 1:
                     single_params_array.append(parameter)
-                    # TODO:
+                    taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
                 else:
                     combine_params_array.append(parameter)
             else:
@@ -422,39 +404,20 @@ def remove_single_values_params(taged_string, param_array):
             raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
         param_idx+=1
 
-    print("<3")
-    for element in single_params_array:
-        print(element)
-    print("---------------")
-    for element in combine_params_array:
-        print(element)
-    # TODO: check if single_params_array+combine_params_array=param_array
-    # TODO: check if all tags in taged string were replaced - or at least the number of combine params match the numbeer of tags in string
-    exit(21)
+    # Check if size of single_params_array and size of combine_params_array = param_array's size
+    # param_array is already 0, because all values were poped -> the param_array_size is evaluated in the beggining of function
+    if len(single_params_array) + len(combine_params_array) != param_array_size:
+        raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+    
+    # Check if all tags in taged string were replaced - or at least the number of combine params match the numbeer of tags in string
+    tag_count = taged_string.count(tag)
+    if tag_count != len(combine_params_array):
+        # the number of parameters which will be sent to combine does not correspond to the number of tags in string
+        raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+    
+    return taged_string,combine_params_array
 
-    #     content = param_array[par_idx]['content']
-    #     # if is list with more then one value
-    #     if (type(content) is list) and (len(content) != 1):
-    #         combine_calls.append(all_calls[par_idx])
-    #     # single value param
-    #     else:
-    #         single_calls.append(all_calls[par_idx])
-    # return single_calls,combine_calls
-
-def get_endpoint_info(endpoint_element):
-    """
-    Get the information about endpoint part in call
-    Tuple (modified_url, endpoint_params) is returned
-    """
-    logging.debug('Getting info about endpoint part')
-
-    """ URL 
-    TODO: Check if the url structure is valid - nested tags and so on
-    Get the information about url
-    """
-    # (modified_string, params_array)
-    parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
-
+def edit_the_parameter_array(endpoint_element, parameter_array, location):
     """
     Evaluate the string parser resulted parameter
     * check if a global variable already has a value
@@ -463,17 +426,15 @@ def get_endpoint_info(endpoint_element):
     * check if the number of local variables is the same as the nubmer of values in local_params
     * check if the global variable does have the value in global_params
     """
-
     """
     Iterate over all elements in returned param array
     * evaluate global_variable
     * evaluate local_variable
     * evaluate enumerate
     """ 
-   
     inputed_global_params = globe.inputData.global_params
-    separator = globe.config.url.enum.separator
-    for parameter in parameters_tuple[1]:
+    separator = getattr(globe.config, location).enum.separator
+    for parameter in parameter_array:
         if parameter['type'] == 'global_variable':
             """ GLOBAL VARAIBLE """
             # check if the global variable already has assigned value
@@ -525,29 +486,69 @@ def get_endpoint_info(endpoint_element):
     # otherwise it means there is some extra local param which will not be used
     if len(endpoint_element['local_params']) != 0:
         message = "The amount of local parameters is bigger than needed"
-        raise EndpointSemanticError(__name__, "get_endpoint_info", message)   
+        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
+    # # return is not neccessary because it is modified due deep copy
+    # return parameter_array
+
+def get_endpoint_info(endpoint_element):
+    """
+    Get the information about endpoint part in call
+    Tuple (modified_url, endpoint_params) is returned
+    Return:
+        * Differenet output if the combine was called and if not
+        COMBINE CALLED  -> (already filled url cases,True)
+        NOT CALLED      -> ((taged_string, parameter_info),False)
+    """
+    logging.debug('Getting info about endpoint part')
+
+    # get the tag of a taged_string - is in endpoint -> get the url non prio tag
+    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+
+    """ URL 
+    TODO: Check if the url structure is valid - nested tags and so on
+    Get the information about url
+    """
+    # (modified_string, params_array)
+    parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
+
+    #########################################################################################
+    # this function was removed from this part and then modified to support endpoint,method, header and body
+    edit_the_parameter_array(endpoint_element, parameters_tuple[1], 'url')
+    #########################################################################################
 
     # remove the single values parameters -> also replace their value in modified string
-    for element in parameters_tuple[1]:
-        print(element)
-    print(parameters_tuple[0])
-    remove_single_values_params(parameters_tuple[0], parameters_tuple[1])
+    combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'endpoint')
 
-    # TODO: check if the number of parameteres is equal to the number of occurence of tags in midofied string
-    exit(36)
+    """
+    If the combine call body is not prepared yet, create it (just the class with some default values is set)
+    """
+    if globe.combine_request == None:
+        create_combine_call(combine_params[1])
+    """
+    Prepare the json body for a combine - add the parameters to the body
+    """
+    for parameter in combine_params[1]:
+        add_parameter_to_combine_call(parameter)
 
     """ 
-    check the optional keys 
+    check the optional keys
     """
     # check if the t-way element is on endpoint dictionary
     if 't-way' in endpoint_element.keys():
-        print("t-way key je obsazen")
-        # the combine will be called for this part as well
+        # t-way key je pouzit -> combine call will be requested
+        globe.combine_request.body['t_strength'] = str(endpoint_element['t-way'])
+        # TODO: check if the t_strength in combine call does make sense
+        # TODO: t_strength = 1 -> how to call combine? Or should I implement it by myself?
+        """
+        Call the combine
+        """
+        combine_response = api_call_combine()
+        endpoint_test_cases = evaluate_combine_response(combine_response, combine_params[0], tag)
+        # true indicated that the combine was called in this layer already
+        return endpoint_test_cases,True 
 
-    
-    exit(1)
-    return modified_url
-
+    # false indcates that the combine was not called and have to be called in upper layer
+    return combine_params,False
 
 def method_string_parser(method_string):
     """
@@ -680,8 +681,29 @@ def get_method_info(method_element):
     """
     logging.debug('Getting info about method part')
 
-    method_p = method_string_parser(method_element['values'])
-    return method_p
+    # method_p = method_string_parser(method_element['values'])
+    parameters_tuple = general_string_parser(method_element['values'], 'method')
+
+    edit_the_parameter_array(method_element, parameters_tuple[1], 'method')
+
+    """
+    Evaluate if the method should be added to a combine call -> if there is a signle value, the method is just set to this value
+    """
+    # # remove the single values parameters -> also replace their value in modified string
+    # combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'endpoint')
+
+    # """
+    # If the combine call body is not prepared yet, create it (just the class with some default values is set)
+    # """
+    # if globe.combine_request == None:
+    #     create_combine_call(combine_params[1])
+    # """
+    # Prepare the json body for a combine - add the parameters to the body
+    # """
+    # for parameter in combine_params[1]:
+    #     add_parameter_to_combine_call(parameter)
+
+    return parameters_tuple
     # # get the array size of a method values
     # arr_size = len(method_element['values'])
     # # there is only one element in value array

@@ -2,16 +2,15 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:userStr:>",
+		    	"values": "https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:userStr:>/<asd>/<A,B,C,D>",
 			    "local_params": [
 					{
 						"values": ["ABC", "DEF", "G"]
 					}
-				],
-				"t-way": 1
+				]
 		    },
 		    "method": {
-				"values": "<:GEsT:>",
+				"values": "<:user:>",
 				"local_params": []
 			},
 			"header": {

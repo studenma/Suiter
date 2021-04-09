@@ -173,12 +173,23 @@ if __name__ == "__main__":
         logging.debug('Getting info about call')
         endpoint = get_endpoint_info(call['endpoint'])
         method = get_method_info(call['method'])
+
+        print("---------------------")
+        print(method)
+        # for element in endpoint[0]:
+        #     print(element)
+        exit(4)
+        
         header = get_header_info(call['header'])
         body = get_body_info(call['body'])
-        print("---------------------")
-        for element in globe.all_parameters:
-            print(element)
-        exit(4)
+
+
+        if endpoint[1] == True:
+            # TODO: 
+            # for endpoint combine was already called
+            None
+        
+        
         # TODO: jsem tady po pauze: je potreba dodelat header a body get information
         # TODO: dodelat promennou v metode
         print("jsem tady po pauze")

@@ -64,3 +64,10 @@ class ShouldHaveNotGottenHereError(Error):
         self.module = module
         self.method = method
         self.message = "Should have never gotten here"  
+
+class CombineCallError(Error):
+    """ Raised when something is wrong with a combine request """
+    def __init__(self, module, method, message):
+        self.module = module
+        self.method = method
+        self.message = message
