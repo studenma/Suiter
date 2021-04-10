@@ -6,22 +6,43 @@ from exceptions import *
 import suiter_classes_and_globals as globe
 from general import replace_the_tag_with_value
 
-def evaluate_combine_response(response, taged_string, tag):
+def evaluate_combine_response(response, str_and_array, tag, location):
     """
     Evaluate the response from combine -> replace the values in taged string for each test_case and 
     create an araray oyt of all of these
     """
-    endpoint_cases = []
+    taged_string = str_and_array[0]
+    list_of_parameters_in_string = str_and_array[1]
 
+    endpoint_cases = []
     for test_case in response:
         tmp_taged_string = taged_string
-        # print(test_case)
-        value_idx = 0
-        while len(test_case) > 0:
-            value = test_case.pop(0)
-            tmp_taged_string = replace_the_tag_with_value(tmp_taged_string, tag, str(value), 0)
-            value_idx+=1
-        endpoint_cases.append(tmp_taged_string)
+        tmp_list_of_parameters_in_string = list_of_parameters_in_string.copy()
+        local_globes = {}
+        # while there are some values in list of all params
+        while len(tmp_list_of_parameters_in_string) > 0:
+            parameter = tmp_list_of_parameters_in_string.pop(0)
+            # if the combine is called with endpoint and url locations, the param array would't be empty at the end
+            if parameter['location'] == location:
+                # if the next param is global variable
+                if parameter['type'] == 'global_variable':
+                    # check if the value is already set
+                    if parameter['name'] in local_globes.keys():
+                        # value should be taken from globe
+                        value = local_globes[parameter['name']]
+                    else:
+                        # if not, the value should be poped from a combine response and saved as a global varaible with this name
+                        value = test_case.pop(0)
+                        local_globes[parameter['name']] = value
+                    tmp_taged_string = replace_the_tag_with_value(tmp_taged_string, tag, str(value), 0)
+                else:
+                    # otherwise, the value should be poped from a combine response a replaced in string
+                    value = test_case.pop(0)
+                    tmp_taged_string = replace_the_tag_with_value(tmp_taged_string, tag, str(value), 0)
+        # check if the test_case array is empty and the param array is empty as well
+        if len(test_case) != 0 and len(parameter) != 0:
+            raise ShouldHaveNotGottenHereError(__name__, "evaluate_combine_response")
+        endpoint_cases.append((tmp_taged_string, local_globes))
 
     return endpoint_cases
 
@@ -72,6 +93,10 @@ def add_parameter_to_combine_call(parameter):
     combine_block_array = []
     # prepare identificator
     identificator = 'id_' + str(parameter['id'])
+
+    # check if there is a reserved global variable - should not be added to combine request, but it is neccessary to replace it afterwards
+    if 'reserved' in parameter.keys() and parameter['reserved'] == True and parameter['type'] == 'global_variable':
+        return
     
     # prepare value_array (different for enum, integer,..)
     # TODO: what if there are different types of values in one array -> so far, only the first element of an array is evaluated

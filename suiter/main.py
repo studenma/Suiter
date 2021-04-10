@@ -171,18 +171,29 @@ if __name__ == "__main__":
     """
     for call in globe.inputData.test_sequence:
         logging.debug('Getting info about call')
-        endpoint = get_endpoint_info(call['endpoint'])
+        endpoint,was_called_combine = get_endpoint_info(call['endpoint'])
         method = get_method_info(call['method'])
 
-        print("---------------------")
+        print("TODO: Je potreba vyzkouset volani combine na nulte urovni")
+        print("TODO: Je potreba dodelat body a header")
+
         print(method)
-        # for element in endpoint[0]:
-        #     print(element)
+
+        print("---------------------")
+        for element in endpoint[1]:
+            print(element)
+        for element in method[1]:
+            print(element)
+        # endpoint_test_cases,endpoint_globals
+        # for element in endpoint:
+        #     endpoint_test_case = element[0]
+        #     endpoint_globals = element[1]
+        #     print(endpoint_test_case, endpoint_globals)
+        # print(method[1])
         exit(4)
         
         header = get_header_info(call['header'])
         body = get_body_info(call['body'])
-
 
         if endpoint[1] == True:
             # TODO: 

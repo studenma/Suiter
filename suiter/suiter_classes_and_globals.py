@@ -13,6 +13,7 @@ not_priority_tag_end = ''
 param_id_counter = 0
 all_parameters = []
 global_params_with_value = {}
+global_params_reserved = []
 combine_request = None
 
 list_of_allowed_http_methods = ["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"]
