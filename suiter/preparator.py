@@ -4,8 +4,8 @@ logger = logging.getLogger(__name__)
 
 from exceptions import *
 import suiter_classes_and_globals as globe
-from combine_request import create_combine_call, api_call_combine, evaluate_combine_response, add_parameter_to_combine_call
-from general import replace_the_tag_with_value
+from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_indexes_of_parameter_to_combine_call
+from general import replace_the_tag_with_value, get_file_content
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
     """ Return the substring + the original string without this substring """
@@ -324,6 +324,11 @@ def remove_single_values_params(taged_string, param_array, location):
     combine_params_array = []  
     param_array_size = len(param_array)
 
+    # print("---- JSEM NA ZACATKU ---")
+    # print(taged_string)
+    # for element in param_array:
+    #     print(element)
+    # print(location)
     """
     Decide which tag should be replaced - endpoint, method, body and header may have different non-priority tag
     Taged string is taged with a non-priority tag
@@ -336,15 +341,14 @@ def remove_single_values_params(taged_string, param_array, location):
     elif location == 'header':
         tag = str(globe.config.header.non_priority_start) + str(globe.config.header.non_priority_end)
     elif location == 'body':
-        tag = str(globe.config.location.non_priority_start) + str(globe.config.location.non_priority_end)
+        tag = str(globe.config.body.non_priority_start) + str(globe.config.body.non_priority_end)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
 
     # pop all values from param_array one by one
-    param_idx = 0
+    param_idx = 0 # this idx indcates on which occurence in struing the tag should be replaced -> it is neccessary to be here
     while len(param_array) != 0:
         parameter = param_array.pop(0)
-        print(parameter)
         """
         Decide what type of parameter is this one - should be the same for all array which is sent
         """
@@ -368,6 +372,7 @@ def remove_single_values_params(taged_string, param_array, location):
                     if len(parameter['content']) == 1:
                         single_params_array.append(parameter)
                         taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                        param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
                     else:
                         combine_params_array.append(parameter)
         elif parameter['type'] == 'local_variable':
@@ -382,6 +387,7 @@ def remove_single_values_params(taged_string, param_array, location):
             if len(parameter['content']) == 1:
                 single_params_array.append(parameter)
                 taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
             else:
                 combine_params_array.append(parameter)
         elif parameter['type'] == 'enumerate':
@@ -395,11 +401,13 @@ def remove_single_values_params(taged_string, param_array, location):
             if type(parameter['content']) is str:
                 single_params_array.append(parameter)
                 taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
             elif type(parameter['content']) is list:
                 # check if the content does have only one element
                 if len(parameter['content']) == 1:
                     single_params_array.append(parameter)
                     taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                    param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
                 else:
                     combine_params_array.append(parameter)
             else:
@@ -407,6 +415,7 @@ def remove_single_values_params(taged_string, param_array, location):
                 raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
         else:
             raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+        # TODO: removed to fix one problem -> not sure if another problem will not occur
         param_idx+=1
 
     # Check if size of single_params_array and size of combine_params_array = param_array's size
@@ -420,6 +429,9 @@ def remove_single_values_params(taged_string, param_array, location):
         # the number of parameters which will be sent to combine does not correspond to the number of tags in string
         raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
     
+    # print(taged_string)
+    # print("---- JSEM NA KONCI ---")
+    # exit(4)
     return taged_string,combine_params_array
 
 def edit_the_parameter_array(endpoint_element, parameter_array, location):
@@ -465,7 +477,7 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
             try:
                 pop_result = endpoint_element['local_params'].pop(0)
             except IndexError:
-                message = "There is not enough local parameters in endpoint"
+                message = "There is not enough local parameters in {}".format(location)
                 raise EndpointSemanticError(__name__, "get_endpoint_info", message)
             
             # insert these values into parameter information
@@ -491,11 +503,13 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
         else:
             ShouldHaveNotGottenHereError(__name__, "get_endpoint_info")
 
-    # check if the local params array is empty
-    # otherwise it means there is some extra local param which will not be used
-    if len(endpoint_element['local_params']) != 0:
-        message = "The amount of local parameters is bigger than needed"
-        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
+    # TODO: TODO: TODO: TODO: TODO: this have to be moved somewhere else
+    # if the parameters are in file, it would fail
+    # # check if the local params array is empty
+    # # otherwise it means there is some extra local param which will not be used
+    # if len(endpoint_element['local_params']) != 0:
+    #     message = "The amount of local parameters is bigger than needed"
+    #     raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
     # # return is not neccessary because it is modified due deep copy
     # return parameter_array
 
@@ -650,36 +664,50 @@ def get_endpoint_info(endpoint_element):
     # remove the single values parameters -> also replace their value in modified string
     combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'endpoint')
 
-    """
-    If the combine call body is not prepared yet, create it (just the class with some default values is set)
-    """
-    if globe.combine_request == None:
-        create_combine_call(combine_params[1])
-    """
-    Prepare the json body for a combine - add the parameters to the body
-    """
-    for parameter in combine_params[1]:
-        add_parameter_to_combine_call(parameter)
 
-    """ 
-    check the optional keys
     """
-    # check if the t-way element is on endpoint dictionary
+    T-WAY
+    """
+    # check if the t-way element
     if 't-way' in endpoint_element.keys():
-        # t-way key je pouzit -> combine call will be requested
-        globe.combine_request.body['t_strength'] = str(endpoint_element['t-way'])
-        # TODO: check if the t_strength in combine call does make sense
-        # TODO: t_strength = 1 -> how to call combine? Or should I implement it by myself?
-        """
-        Call the combine
-        """
-        combine_response = api_call_combine()
-        endpoint_test_cases_tuple = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint')
-        # true indicated that the combine was called in this layer already
-        return endpoint_test_cases_tuple,True 
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(endpoint_element['t-way'])
 
-    # false indcates that the combine was not called and have to be called in upper layer
+        for parameter in combine_params[1]:
+            # add_parameter_to_combine_call(parameter, local_combine_call)
+            add_indexes_of_parameter_to_combine_call(parameter, local_combine_call)
+       
+        """ Call the combine """
+        combine_response = api_call_combine(local_combine_call)
+        endpoint_test_cases = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint', [])
+        return endpoint_test_cases,True     
     return combine_params,False
+        
+    # """
+    # Prepare the json body for a combine - add the parameters to the body
+    # """
+    # for parameter in combine_params[1]:
+    #     add_parameter_to_combine_call(parameter, globe.combine_request)
+
+    # """ 
+    # check the optional keys
+    # """
+    # # check if the t-way element is on endpoint dictionary
+    # if 't-way' in endpoint_element.keys():
+    #     # t-way key je pouzit -> combine call will be requested
+    #     globe.combine_request.body['t_strength'] = str(endpoint_element['t-way'])
+    #     # TODO: check if the t_strength in combine call does make sense
+    #     # TODO: t_strength = 1 -> how to call combine? Or should I implement it by myself?
+    #     """
+    #     Call the combine
+    #     """
+    #     combine_response = api_call_combine(globe.combine_request)
+    #     endpoint_test_cases_tuple = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint')
+    #     # true indicated that the combine was called in this layer already
+    #     return endpoint_test_cases_tuple,True 
+
+    # # false indcates that the combine was not called and have to be called in upper layer
+    # return combine_params,False
 
 def get_method_info(method_element):
     """
@@ -700,7 +728,7 @@ def get_method_info(method_element):
     """
     # remove the single values parameters -> also replace their value in modified string
     combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'method')
-    return combine_params
+    return combine_params,False
 
 def header_string_parser(header_string):
     """
@@ -841,18 +869,58 @@ def get_header_info(header_element):
     values_type = type(header_element['values'])
     # check what type of value is given
     if values_type is str:
-        # value is string
-        header_value_string = header_string_parser(header_element['values'])
-        return header_value_string
+        # value is string -> the content is a file
+        # header = header_string_parser(header_element['values'])
+        header_tuple = general_string_parser(header_element['values'], 'header')
+
+        # edit the output
+        edit_the_parameter_array(header_element, header_tuple[1], 'header')
+        # remove the single value parameters
+        # if there are no more parameters left, it means there is only one file -> we should repead the process of 
+        # seraching parameters, but this time in file content
+        header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
+        if len(header_params[1]) == 0:
+            # all parameteres have been already filled -> there is only one file
+            # look it in file content
+            file_content = get_file_content(header_params[0])
+            header_file_tuple = general_string_parser(file_content, 'header')
+            edit_the_parameter_array(header_element, header_file_tuple[1], 'header')
+            header_params = remove_single_values_params(header_file_tuple[0], header_file_tuple[1], 'header')
     elif values_type is dict:
         # value is dictionary -> change the type to from dictionary to string
         header_value_string = json.dumps(header_element['values'])
-        modified_header_string = general_string_parser(header_value_string, 'header')
-        return modified_header_string
+        header_tuple = general_string_parser(header_value_string, 'header')
+        # edit the output
+        edit_the_parameter_array(header_element, header_tuple[1], 'header')
+        header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
     else:
-        # error should be raised
         print("proper error should be raised")
         exit(2)
+
+    # check if the local params array is empty
+    # otherwise it means there is some extra local param which will not be used
+    if len(header_element['local_params']) != 0:
+        message = "The amount of local parameters is bigger than needed"
+        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
+
+    tag = globe.config.header.non_priority_start + globe.config.header.non_priority_end
+
+    """
+    T-WAY
+    """
+    # check if the t-way element is on endpoint dictionary
+    if 't-way' in header_element.keys():
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(header_element['t-way'])
+
+        for parameter in header_params[1]:
+            add_parameter_to_combine_call(parameter, local_combine_call)
+       
+        """ Call the combine """
+        combine_response = api_call_combine(local_combine_call)
+        endpoint_test_cases = evaluate_combine_response(combine_response, header_params, tag, 'header', [])
+        return endpoint_test_cases,True 
+    return header_params,False
 
 def get_body_info(body_element):
     """
@@ -871,5 +939,62 @@ def get_body_info(body_element):
     """
     logging.debug('Getting info about body part')
 
-    modified_body_string = general_string_parser(body_element['values'], 'body')
-    return modified_body_string
+    print(body_element)
+
+    values_type = type(body_element['values'])
+    # check what type of value is given
+    if values_type is str:
+        # value is string -> the content is a file
+        body_tuple = general_string_parser(body_element['values'], 'body')
+
+        # edit the output
+        edit_the_parameter_array(body_element, body_tuple[1], 'body')
+        # remove the single value parameters
+        # if there are no more parameters left, it means there is only one file -> we should repead the process of 
+        # seraching parameters, but this time in file content
+        body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
+        if len(body_params[1]) == 0:
+            # all parameteres have been already filled -> there is only one file
+            # look it in file content
+            file_content = get_file_content(body_params[0])
+            body_file_tuple = general_string_parser(file_content, 'body')
+            edit_the_parameter_array(body_element, body_file_tuple[1], 'body')
+            body_params = remove_single_values_params(body_file_tuple[0], body_file_tuple[1], 'body')
+    elif values_type is dict:
+        # value is dictionary -> change the type to from dictionary to string
+        body_value_string = json.dumps(body_element['values'])
+        body_tuple = general_string_parser(body_value_string, 'body')
+        # edit the output
+        edit_the_parameter_array(body_element, body_tuple[1], 'body')
+        body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
+    else:
+        print("proper error should be raised")
+        exit(2)
+
+    # check if the local params array is empty
+    # otherwise it means there is some extra local param which will not be used
+    if len(body_element['local_params']) != 0:
+        message = "The amount of local parameters is bigger than needed"
+        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
+
+    tag = globe.config.body.non_priority_start + globe.config.body.non_priority_end
+    
+    """
+    T-WAY
+    """
+    # check if the t-way element
+    if 't-way' in body_element.keys():
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(body_element['t-way'])
+
+        for parameter in body_params[1]:
+            add_parameter_to_combine_call(parameter, local_combine_call)
+       
+        """ Call the combine """
+        combine_response = api_call_combine(local_combine_call)
+        endpoint_test_cases = evaluate_combine_response(combine_response, body_params, tag, 'body', [])
+        return endpoint_test_cases,True 
+    return body_params,False
+
+    # modified_body_string = general_string_parser(body_element['values'], 'body')
+    # return modified_body_string

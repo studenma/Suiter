@@ -59,6 +59,7 @@ from exceptions import *
 from suiter_classes_and_globals import InputDataClass
 from preparator import get_endpoint_info, get_method_info, get_header_info, get_body_info
 import suiter_classes_and_globals as globe
+from combine_request import create_combine_call, add_array_to_a_combine_call, add_parameter_to_combine_call, api_call_combine, evaluate_combine_response
 
 def logger_config():
     """
@@ -121,13 +122,12 @@ if __name__ == "__main__":
 
     """ CONFIG
     * Read configuration file
-    * Create a ConfigDataClass (see suiter_classes module) out of it
-    * Store this class into a 'config' global variable stored in global_stuff module
+    * Create a ConfigDataClass out of it (see suiter_classes module) 
+    * Store this class into a 'config' global variable stored in suiter_classes_and_globals module
     * Extend the config class of a priority and non priority tags
-    ** for cases where one tag is substring of another one (the priority one is searched first)
+    ** for cases where one tag is substring of another one (the priority ones are searched first)
     """
     globe.config = read_config_file(globe.config_path)
-    # extend the config class of a priority and non priority tags
     globe.config.extend_of_priority_tags()
 
     """ ARGUMENT
@@ -171,29 +171,201 @@ if __name__ == "__main__":
     """
     for call in globe.inputData.test_sequence:
         logging.debug('Getting info about call')
-        endpoint,was_called_combine = get_endpoint_info(call['endpoint'])
-        method = get_method_info(call['method'])
+
+        """ create a combine request for this 'call' layer """
+        combine_call = globe.CombineCallClass()
+        combine_call.body['t_strength'] = call['t-way']
+
+        endpoint,was_called_combine_in_endpoint = get_endpoint_info(call['endpoint'])
+        method,was_called_combine_in_method = get_method_info(call['method'])
+        header,was_called_combine_in_header = get_header_info(call['header'])
+        body,was_called_combine_in_body = get_body_info(call['body'])
+
+        print("-------1-----")
+        print(body[0])
+        for element in body[1]:
+            print(element)
+        exit(1)
+
+        print("-----------\nEVALUATIAON\n-----------")
+        print("ENDPOINT")
+        if was_called_combine_in_endpoint:
+            # get an array of URL values
+            url_array_values = []
+            for element in endpoint:
+                url_array_values.append(element[0])
+            for element in url_array_values:
+                print(element)
+            add_array_to_a_combine_call(url_array_values, combine_call, "URL")
+        else:
+            print(endpoint[0])
+            for parameter in endpoint[1]:
+                print(parameter)
+                add_parameter_to_combine_call(parameter, combine_call)
+
+        print("-----")
+        print("METHOD")
+        if was_called_combine_in_method:
+            # DEAD CODE - nikdy se sem nemuze dostat
+            for element in method:
+                print(element)
+        else:
+            print(method[0])
+            # if the method was filled already
+            if len(method[1]) == 0:
+                method = method[0]
+                was_called_combine_in_method = True # indicates that the values is set alredy
+            else:
+                for parameter in method[1]:
+                    print(parameter)
+                    # vzdycky tu bude jen jeden parameter
+                    add_parameter_to_combine_call(parameter, combine_call)
+            
+
+        print("-----")
+        print("HEADER")
+        if was_called_combine_in_header:
+                # get an array of BODY values
+                array_values = []
+                for element in header:
+                    array_values.append(element[0])
+                for element in array_values:
+                    print(element)
+                add_array_to_a_combine_call(array_values, combine_call, "HEADER")
+        else:
+            print(header[0])
+            for element in header[1]:
+                print(element)
+                add_parameter_to_combine_call(element, combine_call)
+
+        print("-----")
+        print("BODY")
+        if was_called_combine_in_body:
+            # get an array of BODY values
+            body_array_values = []
+            for element in body:
+                body_array_values.append(element[0])
+            for element in url_array_values:
+                print(element)
+            add_array_to_a_combine_call(url_array_values, combine_call, "BODY")
+        else:
+            print(body[0])
+            for element in body[1]:
+                print(element)
+                add_parameter_to_combine_call(element, combine_call)
+
+        print("-----")
+        print("COMBINE PARAMS")
+        for element in combine_call.body['parameters']:
+            print(element)
+
+        combine_response = api_call_combine(combine_call)
+        for element in combine_response:
+            print(element)
+
+        """
+        Evaluate the combine response
+        Look into endooint taged url 
+            -> are there any tags? Or is it fulfiled? Should I have some toggle to indicate that?
+            -> fill the tags with values -> what with a global variables behaviour -> should be similiar 
+                algorithm to the one before -> but it has to support global variables across the all parts
+        Look into method taged string 
+            -> should it be skiped? Or should the value be taken
+        Look into header taged string
+        Look into body taged string
+        """
+        globes = []
+
+        for element in endpoint:
+            print(element)
+        exit(4)
+        print("---------------------")
+
+        # ENDPOINT
+        if not was_called_combine_in_endpoint:
+            tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+            test_cases_endpoint = evaluate_combine_response(combine_response, endpoint, tag, 'endpoint', [])
+            print("------------------")
+            for tc in test_cases_endpoint:
+                print(tc) # (filled string, global_params)
+            # get the global variables from endpoint
+            for element in test_cases_endpoint:
+                globes.append(element[1])
+        else:
+            for idx in range(len(endpoint)):
+                for variable in endpoint[idx][1]:
+                    globes[idx][variable] = endpoint[idx][1][variable]
+
+                # exit(85)
+                # globes[idx]
+                # globes[idx].append(endpoint[idx][1])
+            # globalni promenne z endpointu je i tak potreba zaradit
+
+        for element in globes:
+            print(element)
+        exit(1)
+
+        if not was_called_combine_in_method:
+            # check the globals in endpoint
+            tag = globe.config.method.non_priority_start + globe.config.method.non_priority_end
+            test_cases_method = evaluate_combine_response(combine_response, method, tag, 'method', globes) 
+            print("------------------")
+            for tc in test_cases_method:
+                print(tc)
+            for element in test_cases_method:
+                globes.append(element[1])
+
+        if not was_called_combine_in_header:
+            tag = globe.config.header.non_priority_start + globe.config.header.non_priority_end
+            test_cases_header = evaluate_combine_response(combine_response, header, tag, 'header', globes) 
+            print("------------------")
+            for tc in test_cases_header:
+                print(tc)
+            for element in test_cases_header:
+                globes.append(element[1])
+        
+        if not was_called_combine_in_body:
+            tag = globe.config.body.non_priority_start + globe.config.body.non_priority_end
+            test_cases_body = evaluate_combine_response(combine_response, body, tag, 'body', globes) 
+            print("------------------")
+            for tc in test_cases_body:
+                print(tc)
+            for element in test_cases_body:
+                globes.append(element[1])
+
+        for element in combine_response:
+            print(element)
+            if len(element) != 0:
+                print("raise proper exception")
+                exit(99)
+
+        e_len = len(test_cases_endpoint)
+        m_len = len(test_cases_method)
+        h_len = len(test_cases_header)
+        b_len = len(test_cases_body)
+        
+        if not (e_len == m_len == h_len == b_len):
+            print("TODO exception")
+            exit(5)
+
+        call_result = []
+        for idx in range(e_len):
+            call_result.append( [ test_cases_endpoint[idx][0], test_cases_method[idx][0], test_cases_header[idx][0], test_cases_body[idx][0] ] )
+
+        
+        print("----")
+        for element in call_result:
+            print(element)
+            
+
+        # endpoint_test_cases = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint')
+        exit(2)
 
         print("TODO: Je potreba vyzkouset volani combine na nulte urovni")
         print("TODO: Je potreba dodelat body a header")
-
-        print(method)
-
-        print("---------------------")
-        for element in endpoint[1]:
-            print(element)
-        for element in method[1]:
-            print(element)
-        # endpoint_test_cases,endpoint_globals
-        # for element in endpoint:
-        #     endpoint_test_case = element[0]
-        #     endpoint_globals = element[1]
-        #     print(endpoint_test_case, endpoint_globals)
-        # print(method[1])
-        exit(4)
+      
         
-        header = get_header_info(call['header'])
-        body = get_body_info(call['body'])
+        
 
         if endpoint[1] == True:
             # TODO: 

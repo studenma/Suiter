@@ -1,0 +1,86 @@
+{
+	"test_sequence": [
+		{
+			"endpoint": {
+		    	"values": "https://mydomain/addUser/<:user:>/<:method:>/<>/<1,2,3,4,5>/<:userStr:>/<asd>/<:user:>/<A,B,C,D>",
+			    "local_params": [
+					{
+						"values": ["ABC", "DEF", "G"]
+					}
+				],
+				"t-way": 2
+		    },
+		    "method": {
+				"values": "<>",
+				"local_params": [
+					{
+						"values": ["GET"]
+					}
+				]
+			},
+			"header": {
+				"values": {"Content-type": "<1,2,3,4>", "test": "<:user:>"},
+				"local_params": []
+			},
+			"body": {
+				"values": "<body1.json,body2.json,body3.json>",
+				"local_params": []
+			},
+			"t-way": 2
+		},
+		{
+		    "endpoint": {
+		    	"values": "https://mydomain/getUser/<>?fo<>rmat=<json,yaml,xml>",
+			    "local_params": [
+			       {
+			          "values": [4,52,3,1,4,77,99,-1,2,999999]
+			       },
+				   {
+					"values": [4,52,3,1,4,77,99,-1,2,999999]
+				 	}
+			    ]
+		    },
+		    "method": {
+				"values": "<GET,POST>",
+				"local_params": []
+			},
+			"header": {
+				"values": "header1.yaml,header2.yaml",
+				"local_params": []
+			},
+			"body": {
+				"values": "<>",
+				"local_params": []
+			},
+			"t-way": 1,
+			"all-in-one-test": 1
+		},
+		{
+		    "endpoint": {
+		    	"values": "https://mydomain/deleteUser/<:user:>",
+			    "local_params": []
+		    },
+		    "method": {
+				"values": "<:method_variable:>",
+				"local_params": []
+			},
+			"header": {
+				"values": "<>",
+				"local_params": []
+			},
+			"body": {
+				"values": "<:body_variable:>",
+				"local_params": []
+			},
+			"t-way": 1
+		}
+	],
+	"t-way": 2,
+	"global_params": {
+		"user": [4,52,3,1,4,77],
+		"userStr": ["usr1", "usr2"],
+		"method": ["GET", "POST", "DELETE"],
+		"test": ["test"],
+		"glob_header": ["../input/header1", "../input/header2"]
+	}
+}

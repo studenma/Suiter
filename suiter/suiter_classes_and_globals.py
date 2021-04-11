@@ -133,7 +133,7 @@ class InputDataClass(object):
     def __init__(self, json_content):
         self.test_sequence = json_content['test_sequence']
         self.global_params = json_content['global_params']
-        self.main_level_tway = json_content['t-way']
+        # self.main_level_tway = json_content['t-way']
 
 class CombineCallClass(object):
     def __init__(self):

@@ -6,15 +6,32 @@ from exceptions import *
 import suiter_classes_and_globals as globe
 from general import replace_the_tag_with_value
 
-def evaluate_combine_response(response, str_and_array, tag, location):
+def evaluate_combine_response(response, str_and_array, tag, location, global_variables):
     """
     Evaluate the response from combine -> replace the values in taged string for each test_case and 
     create an araray oyt of all of these
     """
+    print("-*-*-*-*--*-")
+    for resp in response:
+        print(resp)
+    print("\n")
+    print(str_and_array[0])
+    for el in str_and_array[1]:
+        print(el)
+    print("\n")
+    print(tag)
+    print("\n")
+    print(location)
+    print("\n")
+    print(global_variables)
+
+    if location == "body":
+        exit(1)
     taged_string = str_and_array[0]
     list_of_parameters_in_string = str_and_array[1]
 
     endpoint_cases = []
+    tc_idx = 0
     for test_case in response:
         tmp_taged_string = taged_string
         tmp_list_of_parameters_in_string = list_of_parameters_in_string.copy()
@@ -26,8 +43,13 @@ def evaluate_combine_response(response, str_and_array, tag, location):
             if parameter['location'] == location:
                 # if the next param is global variable
                 if parameter['type'] == 'global_variable':
+                    ############################# this part was added from main
+                    if len(global_variables) != 0:
+                        if parameter['name'] in global_variables[tc_idx].keys():
+                            value = global_variables[tc_idx][parameter['name']]
+                    #############################
                     # check if the value is already set
-                    if parameter['name'] in local_globes.keys():
+                    elif parameter['name'] in local_globes.keys():
                         # value should be taken from globe
                         value = local_globes[parameter['name']]
                     else:
@@ -40,23 +62,25 @@ def evaluate_combine_response(response, str_and_array, tag, location):
                     value = test_case.pop(0)
                     tmp_taged_string = replace_the_tag_with_value(tmp_taged_string, tag, str(value), 0)
         # check if the test_case array is empty and the param array is empty as well
-        if len(test_case) != 0 and len(parameter) != 0:
-            raise ShouldHaveNotGottenHereError(__name__, "evaluate_combine_response")
+        # TODO: this was removed to support global call as well -> in local call it worked well -> all arrays was empty, but if there are more parts in response, there will be some parameteres of course
+        # if len(test_case) != 0 and len(parameter) != 0:
+        #     raise ShouldHaveNotGottenHereError(__name__, "evaluate_combine_response")
         endpoint_cases.append((tmp_taged_string, local_globes))
+        tc_idx+=1
 
     return endpoint_cases
 
 
-def api_call_combine():
+def api_call_combine(combine_info):
     """
     REST API call to combine
     """
     logging.debug('Calling call_combine function')
 
     # get the information of request
-    url = globe.combine_request.url
-    header = globe.combine_request.header
-    body = globe.combine_request.body
+    url = combine_info.url
+    header = combine_info.header
+    body = combine_info.body
 
     try:
         response = requests.request("GET", url, headers=header, json=body)
@@ -72,9 +96,10 @@ def api_call_combine():
             """
             Some of the suiter variables have to be reseted
             """
-            globe.combine_request = None
-            globe.param_id_counter = 0
-            globe.all_parameters = []
+            if combine_info == globe.combine_request:
+                globe.combine_request = None
+                globe.param_id_counter = 0
+                globe.all_parameters = []
             # return the response
             return response.json()
         else:
@@ -82,13 +107,45 @@ def api_call_combine():
             raise CombineCallError(__name__, "", message)
     except ValueError: # includes json.decoder.JSONDecodeError
         message = 'Response from Combine is not in a valid JSON format'
-        raise CombineCallError(__name__, "", message)
+        raise CombineCallError(__name__, "api_call_combine", message)
 
-def add_parameter_to_combine_call(parameter):
+def add_array_to_a_combine_call(array_of_values, combineClass, identificator):
+    """ add a array of values to the global combine call """
+    
+    new_param = {
+        "identificator": identificator,
+        "type": "enum",
+        "blocks": array_of_values
+    }
+    combineClass.body['parameters'].append(new_param)
+
+def add_indexes_of_parameter_to_combine_call(parameter, combineClass):
+    """
+    Add an index of parameter to the combine call
+    """
+    print(parameter)
+    print(len(parameter['content']))
+    exit(14)
+    # combine_block_array = []
+    # # prepare identificator
+    # identificator = 'id_' + str(parameter['id'])
+
+    # # check if there is a reserved global variable - should not be added to combine request, but it is neccessary to replace it afterwards
+    # if 'reserved' in parameter.keys() and parameter['reserved'] == True and parameter['type'] == 'global_variable':
+    #     return
+    
+    # new_param = {
+    #     "identificator": identificator,
+    #     "type": parameter_values_type,
+    #     "blocks": combine_block_array
+    # }
+    
+    # combineClass.body['parameters'].append(new_param) 
+
+def add_parameter_to_combine_call(parameter, combineClass):
     """
     Add a given parameter to the prepared global combine class
     """
-    logging.debug('Calling add_parameter_to_combine_call function')
 
     combine_block_array = []
     # prepare identificator
@@ -118,10 +175,11 @@ def add_parameter_to_combine_call(parameter):
         "type": parameter_values_type,
         "blocks": combine_block_array
     }
-    globe.combine_request.body['parameters'].append(new_param)
+    
+    combineClass.body['parameters'].append(new_param)
     
 
-def create_combine_call(param_array):
+def create_combine_call():
     """
     Prepare the combine call with a default header and url values
     Body has to be retrieved from a given parameter array

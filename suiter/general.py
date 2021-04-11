@@ -31,3 +31,14 @@ def replace_the_tag_with_value(taged_string, tag, content, nth):
         return new_string
     except:
         raise LimitExceededError(__name__, "replace_the_tag_with_value", "This string does not contain nth ({}) occurence".format(nth))
+
+def get_file_content(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            data = file.read()
+        return data
+    except:
+        message = 'The file could not be opened'
+        raise OpenFileError(__name__, "get_file_content", message)
+
+    

@@ -86,7 +86,7 @@ def input_json_structure_validator(json_content):
             (after combining all API calls, also the combination of them has to be done)
     """
     logger.debug("Validating of a first level")
-    first_level_keys = ['test_sequence', 'global_params', 't-way']
+    first_level_keys = ['test_sequence', 'global_params']
     first_level_input_keys = json_content.keys()
     if len(first_level_input_keys) != len(first_level_keys):
         message = "The number of keys at the first level of input json file is not correct"
