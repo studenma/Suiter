@@ -297,8 +297,8 @@ def input_json_structure_validator(json_content):
     for element in json_content['global_params']:
         # empty array is not allowed
         variable_array_len = len(json_content['global_params'][element])
-        if variable_array_len == 0:
-            message = "The global_params's element {} is empty".format(element)
+        if variable_array_len < 2:
+            message = "The global_params's element {} is empty or there is only one element".format(element)
             return False,message
 
     """ T-WAY

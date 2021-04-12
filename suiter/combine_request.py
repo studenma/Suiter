@@ -11,22 +11,13 @@ def evaluate_combine_response(response, str_and_array, tag, location, global_var
     Evaluate the response from combine -> replace the values in taged string for each test_case and 
     create an araray oyt of all of these
     """
-    print("-*-*-*-*--*-")
-    for resp in response:
-        print(resp)
-    print("\n")
-    print(str_and_array[0])
-    for el in str_and_array[1]:
-        print(el)
-    print("\n")
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print(response)
+    print(str_and_array)
     print(tag)
-    print("\n")
     print(location)
-    print("\n")
     print(global_variables)
-
-    if location == "body":
-        exit(1)
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     taged_string = str_and_array[0]
     list_of_parameters_in_string = str_and_array[1]
 
@@ -110,8 +101,7 @@ def api_call_combine(combine_info):
         raise CombineCallError(__name__, "api_call_combine", message)
 
 def add_array_to_a_combine_call(array_of_values, combineClass, identificator):
-    """ add a array of values to the global combine call """
-    
+    """ add a array of values to the global combine call """    
     new_param = {
         "identificator": identificator,
         "type": "enum",
@@ -123,9 +113,7 @@ def add_indexes_of_parameter_to_combine_call(parameter, combineClass):
     """
     Add an index of parameter to the combine call
     """
-    print(parameter)
-    print(len(parameter['content']))
-    exit(14)
+    None
     # combine_block_array = []
     # # prepare identificator
     # identificator = 'id_' + str(parameter['id'])

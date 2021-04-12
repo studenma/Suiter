@@ -11,11 +11,11 @@
 				"t-way": 2
 		    },
 		    "method": {
-				"values": "GET",
+				"values": "<GET>",
 				"local_params": []
 			},
 			"header": {
-				"values": {"Content-type": "<json>", "test": "<TestValue>"},
+				"values": {"Content-type": "<json,yaml>", "test": "<TestValue, SecondValue>", "dalsiTest": "<:user:>"},
 				"local_params": []
 			},
 			"body": {
@@ -28,13 +28,32 @@
 				"t-way": 2
 			},
 			"t-way": 2
+		},
+		{
+		    "endpoint": {
+		    	"values": "https://<:user:>/<:method:>/<:userStr:>/<:user:>/<:UUUUUUUUU:>",
+			    "local_params": []
+		    },
+		    "method": {
+				"values": "GET",
+				"local_params": []
+			},
+			"header": {
+				"values": "<header1.yaml,header2.yaml>",
+				"local_params": []
+			},
+			"body": {
+				"values": "<body1,body2>",
+				"local_params": []
+			},
+			"t-way": 2
 		}
 	],
 	"global_params": {
 		"user": [4,52,3,1,4,77],
 		"userStr": ["usr1", "usr2"],
 		"method": ["GET", "POST", "DELETE"],
-		"test": ["test"],
-		"glob_header": ["../input/header1", "../input/header2"]
+		"glob_header": ["../input/header1", "../input/header2"],
+		"UUUUUUUUU": ["a", "b", "c"]
 	}
 }

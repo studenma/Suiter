@@ -1,0 +1,631 @@
+**************************************
+**************************************
+Call number 0 in sequence
+**************************************
+**************************************
+***********************
+get_endpoint_info
+***********************
+------- GENERAL STRING PARSER -----------
+https://mydomain/addUser/<>/<>/<>/<>/<>/<>/<>/<>/<>
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 0}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'method', 'id': 1}
+{'location': 'endpoint', 'type': 'local_variable', 'id': 2}
+{'location': 'endpoint', 'type': 'enumerate', 'content': '1,2,3,4,5', 'id': 3}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'userStr', 'id': 4}
+{'location': 'endpoint', 'type': 'enumerate', 'content': 'asd', 'id': 5}
+{'location': 'endpoint', 'type': 'enumerate', 'content': 'fgh', 'id': 6}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 7}
+{'location': 'endpoint', 'type': 'enumerate', 'content': 'A,B,C,D', 'id': 8}
+------- EDIT THE PARAMETER ARRAY -----------
+https://mydomain/addUser/<>/<>/<>/<>/<>/<>/<>/<>/<>
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 0, 'content': [4, 52, 3, 1, 4, 77]}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'method', 'id': 1, 'content': ['GET', 'POST', 'DELETE']}
+{'location': 'endpoint', 'type': 'local_variable', 'id': 2, 'content': ['ABC', 'DEF', 'G']}
+{'location': 'endpoint', 'type': 'enumerate', 'content': ['1', '2', '3', '4', '5'], 'id': 3}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'userStr', 'id': 4, 'content': ['usr1', 'usr2']}
+{'location': 'endpoint', 'type': 'enumerate', 'content': 'asd', 'id': 5}
+{'location': 'endpoint', 'type': 'enumerate', 'content': 'fgh', 'id': 6}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 7, 'reserved': True}
+{'location': 'endpoint', 'type': 'enumerate', 'content': ['A', 'B', 'C', 'D'], 'id': 8}
+-------- REMOVE SINGLE VALUES PARAMS ----------
+https://mydomain/addUser/<>/<>/<>/<>/<>/asd/fgh/<user>/<>
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 0, 'content': [4, 52, 3, 1, 4, 77]}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'method', 'id': 1, 'content': ['GET', 'POST', 'DELETE']}
+{'location': 'endpoint', 'type': 'local_variable', 'id': 2, 'content': ['ABC', 'DEF', 'G']}
+{'location': 'endpoint', 'type': 'enumerate', 'content': ['1', '2', '3', '4', '5'], 'id': 3}
+{'location': 'endpoint', 'type': 'global_variable', 'name': 'userStr', 'id': 4, 'content': ['usr1', 'usr2']}
+{'location': 'endpoint', 'type': 'enumerate', 'content': ['A', 'B', 'C', 'D'], 'id': 8}
+----------COMBNINE INPUT-----------
+{'identificator': 'id_0', 'type': 'integer', 'blocks': ['id_0=4', 'id_0=52', 'id_0=3', 'id_0=1', 'id_0=4', 'id_0=77']}
+{'identificator': 'id_1', 'type': 'enum', 'blocks': ['GET', 'POST', 'DELETE']}
+{'identificator': 'id_2', 'type': 'enum', 'blocks': ['ABC', 'DEF', 'G']}
+{'identificator': 'id_3', 'type': 'enum', 'blocks': ['1', '2', '3', '4', '5']}
+{'identificator': 'id_4', 'type': 'enum', 'blocks': ['usr1', 'usr2']}
+{'identificator': 'id_8', 'type': 'enum', 'blocks': ['A', 'B', 'C', 'D']}
+----------COMBINE RESPONSE-----------
+[4, 'GET', 'ABC', '1', 'usr1', 'A']
+[4, 'POST', 'DEF', '2', 'usr2', 'B']
+[4, 'DELETE', 'G', '3', 'usr1', 'C']
+[52, 'GET', 'DEF', '3', 'usr2', 'D']
+[52, 'POST', 'ABC', '4', 'usr1', 'B']
+[52, 'DELETE', 'ABC', '2', 'usr2', 'A']
+[3, 'GET', 'G', '2', 'usr1', 'D']
+[3, 'POST', 'ABC', '3', 'usr2', 'C']
+[3, 'DELETE', 'DEF', '1', 'usr1', 'B']
+[1, 'GET', 'ABC', '5', 'usr1', 'B']
+[1, 'POST', 'G', '1', 'usr2', 'A']
+[1, 'DELETE', 'DEF', '4', 'usr2', 'C']
+[4, 'GET', 'ABC', '4', 'usr1', 'D']
+[4, 'POST', 'DEF', '5', 'usr2', 'A']
+[4, 'DELETE', 'G', '5', 'usr1', 'B']
+[77, 'GET', 'ABC', '1', 'usr1', 'C']
+[77, 'POST', 'DEF', '2', 'usr2', 'D']
+[77, 'DELETE', 'G', '4', 'usr1', 'A']
+[52, 'GET', 'G', '1', 'usr1', 'C']
+[77, 'GET', 'ABC', '3', 'usr1', 'B']
+[4, 'GET', 'ABC', '3', 'usr1', 'A']
+[3, 'GET', 'ABC', '4', 'usr1', 'A']
+[77, 'GET', 'ABC', '5', 'usr1', 'C']
+[52, 'DELETE', 'ABC', '5', 'usr1', 'D']
+[4, 'GET', 'ABC', '5', 'usr1', 'D']
+[4, 'GET', 'ABC', '1', 'usr1', 'C']
+[3, 'GET', 'ABC', '5', 'usr1', 'A']
+[1, 'GET', 'ABC', '3', 'usr1', 'D']
+[4, 'GET', 'ABC', '2', 'usr1', 'C']
+[1, 'GET', 'ABC', '2', 'usr1', 'A']
+[4, 'GET', 'ABC', '4', 'usr1', 'A']
+[4, 'GET', 'ABC', '1', 'usr1', 'D']
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[[4, 'GET', 'ABC', '1', 'usr1', 'A'], [4, 'POST', 'DEF', '2', 'usr2', 'B'], [4, 'DELETE', 'G', '3', 'usr1', 'C'], [52, 'GET', 'DEF', '3', 'usr2', 'D'], [52, 'POST', 'ABC', '4', 'usr1', 'B'], [52, 'DELETE', 'ABC', '2', 'usr2', 'A'], [3, 'GET', 'G', '2', 'usr1', 'D'], [3, 'POST', 'ABC', '3', 'usr2', 'C'], [3, 'DELETE', 'DEF', '1', 'usr1', 'B'], [1, 'GET', 'ABC', '5', 'usr1', 'B'], [1, 'POST', 'G', '1', 'usr2', 'A'], [1, 'DELETE', 'DEF', '4', 'usr2', 'C'], [4, 'GET', 'ABC', '4', 'usr1', 'D'], [4, 'POST', 'DEF', '5', 'usr2', 'A'], [4, 'DELETE', 'G', '5', 'usr1', 'B'], [77, 'GET', 'ABC', '1', 'usr1', 'C'], [77, 'POST', 'DEF', '2', 'usr2', 'D'], [77, 'DELETE', 'G', '4', 'usr1', 'A'], [52, 'GET', 'G', '1', 'usr1', 'C'], [77, 'GET', 'ABC', '3', 'usr1', 'B'], [4, 'GET', 'ABC', '3', 'usr1', 'A'], [3, 'GET', 'ABC', '4', 'usr1', 'A'], [77, 'GET', 'ABC', '5', 'usr1', 'C'], [52, 'DELETE', 'ABC', '5', 'usr1', 'D'], [4, 'GET', 'ABC', '5', 'usr1', 'D'], [4, 'GET', 'ABC', '1', 'usr1', 'C'], [3, 'GET', 'ABC', '5', 'usr1', 'A'], [1, 'GET', 'ABC', '3', 'usr1', 'D'], [4, 'GET', 'ABC', '2', 'usr1', 'C'], [1, 'GET', 'ABC', '2', 'usr1', 'A'], [4, 'GET', 'ABC', '4', 'usr1', 'A'], [4, 'GET', 'ABC', '1', 'usr1', 'D']]
+('https://mydomain/addUser/<>/<>/<>/<>/<>/asd/fgh/<user>/<>', [{'location': 'endpoint', 'type': 'global_variable', 'name': 'user', 'id': 0, 'content': [4, 52, 3, 1, 4, 77]}, {'location': 'endpoint', 'type': 'global_variable', 'name': 'method', 'id': 1, 'content': ['GET', 'POST', 'DELETE']}, {'location': 'endpoint', 'type': 'local_variable', 'id': 2, 'content': ['ABC', 'DEF', 'G']}, {'location': 'endpoint', 'type': 'enumerate', 'content': ['1', '2', '3', '4', '5'], 'id': 3}, {'location': 'endpoint', 'type': 'global_variable', 'name': 'userStr', 'id': 4, 'content': ['usr1', 'usr2']}, {'location': 'endpoint', 'type': 'enumerate', 'content': ['A', 'B', 'C', 'D'], 'id': 8}])
+<>
+endpoint
+[]
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+----------EVALUATED COMBINE RESPONSE-----------
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/<user>/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/POST/DEF/2/usr2/asd/fgh/<user>/B', {'user': 4, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/DELETE/G/3/usr1/asd/fgh/<user>/C', {'user': 4, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/GET/DEF/3/usr2/asd/fgh/<user>/D', {'user': 52, 'method': 'GET', 'userStr': 'usr2'})
+('https://mydomain/addUser/52/POST/ABC/4/usr1/asd/fgh/<user>/B', {'user': 52, 'method': 'POST', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/DELETE/ABC/2/usr2/asd/fgh/<user>/A', {'user': 52, 'method': 'DELETE', 'userStr': 'usr2'})
+('https://mydomain/addUser/3/GET/G/2/usr1/asd/fgh/<user>/D', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/POST/ABC/3/usr2/asd/fgh/<user>/C', {'user': 3, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/3/DELETE/DEF/1/usr1/asd/fgh/<user>/B', {'user': 3, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/5/usr1/asd/fgh/<user>/B', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/POST/G/1/usr2/asd/fgh/<user>/A', {'user': 1, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/1/DELETE/DEF/4/usr2/asd/fgh/<user>/C', {'user': 1, 'method': 'DELETE', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/GET/ABC/4/usr1/asd/fgh/<user>/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/POST/DEF/5/usr2/asd/fgh/<user>/A', {'user': 4, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/DELETE/G/5/usr1/asd/fgh/<user>/B', {'user': 4, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/1/usr1/asd/fgh/<user>/C', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/POST/DEF/2/usr2/asd/fgh/<user>/D', {'user': 77, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/77/DELETE/G/4/usr1/asd/fgh/<user>/A', {'user': 77, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/GET/G/1/usr1/asd/fgh/<user>/C', {'user': 52, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/3/usr1/asd/fgh/<user>/B', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/3/usr1/asd/fgh/<user>/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/GET/ABC/4/usr1/asd/fgh/<user>/A', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/5/usr1/asd/fgh/<user>/C', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/DELETE/ABC/5/usr1/asd/fgh/<user>/D', {'user': 52, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/5/usr1/asd/fgh/<user>/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/<user>/C', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/GET/ABC/5/usr1/asd/fgh/<user>/A', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/3/usr1/asd/fgh/<user>/D', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/2/usr1/asd/fgh/<user>/C', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/2/usr1/asd/fgh/<user>/A', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/4/usr1/asd/fgh/<user>/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/<user>/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+----------POSTPROCESSING AFTER COMBINE-----------
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/4/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/POST/DEF/2/usr2/asd/fgh/4/B', {'user': 4, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/DELETE/G/3/usr1/asd/fgh/4/C', {'user': 4, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/GET/DEF/3/usr2/asd/fgh/52/D', {'user': 52, 'method': 'GET', 'userStr': 'usr2'})
+('https://mydomain/addUser/52/POST/ABC/4/usr1/asd/fgh/52/B', {'user': 52, 'method': 'POST', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/DELETE/ABC/2/usr2/asd/fgh/52/A', {'user': 52, 'method': 'DELETE', 'userStr': 'usr2'})
+('https://mydomain/addUser/3/GET/G/2/usr1/asd/fgh/3/D', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/POST/ABC/3/usr2/asd/fgh/3/C', {'user': 3, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/3/DELETE/DEF/1/usr1/asd/fgh/3/B', {'user': 3, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/5/usr1/asd/fgh/1/B', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/POST/G/1/usr2/asd/fgh/1/A', {'user': 1, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/1/DELETE/DEF/4/usr2/asd/fgh/1/C', {'user': 1, 'method': 'DELETE', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/GET/ABC/4/usr1/asd/fgh/4/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/POST/DEF/5/usr2/asd/fgh/4/A', {'user': 4, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/4/DELETE/G/5/usr1/asd/fgh/4/B', {'user': 4, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/1/usr1/asd/fgh/77/C', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/POST/DEF/2/usr2/asd/fgh/77/D', {'user': 77, 'method': 'POST', 'userStr': 'usr2'})
+('https://mydomain/addUser/77/DELETE/G/4/usr1/asd/fgh/77/A', {'user': 77, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/GET/G/1/usr1/asd/fgh/52/C', {'user': 52, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/3/usr1/asd/fgh/77/B', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/3/usr1/asd/fgh/4/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/GET/ABC/4/usr1/asd/fgh/3/A', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/77/GET/ABC/5/usr1/asd/fgh/77/C', {'user': 77, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/52/DELETE/ABC/5/usr1/asd/fgh/52/D', {'user': 52, 'method': 'DELETE', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/5/usr1/asd/fgh/4/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/4/C', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/3/GET/ABC/5/usr1/asd/fgh/3/A', {'user': 3, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/3/usr1/asd/fgh/1/D', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/2/usr1/asd/fgh/4/C', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/1/GET/ABC/2/usr1/asd/fgh/1/A', {'user': 1, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/4/usr1/asd/fgh/4/A', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/4/D', {'user': 4, 'method': 'GET', 'userStr': 'usr1'})
+***********************
+get_method_info
+***********************
+------- GENERAL STRING PARSER -----------
+<>
+{'location': 'method', 'type': 'enumerate', 'content': 'GET', 'id': 9}
+------- EDIT THE PARAMETER ARRAY -----------
+<>
+{'location': 'method', 'type': 'enumerate', 'content': 'GET', 'id': 9}
+-------- REMOVE SINGLE VALUES PARAMS (RETURNED) ----------
+GET
+***********************
+get_header_info
+***********************
+------- GENERAL STRING PARSER (DICT) -----------
+{"Content-type": "<>", "test": "<>", "dalsiTest": "<>"}
+{'location': 'header', 'type': 'enumerate', 'content': 'json,yaml', 'id': 10}
+{'location': 'header', 'type': 'enumerate', 'content': 'TestValue, SecondValue', 'id': 11}
+{'location': 'header', 'type': 'global_variable', 'name': 'user', 'id': 12}
+------- EDIT THE PARAMETER ARRAY (DICT) -----------
+{"Content-type": "<>", "test": "<>", "dalsiTest": "<>"}
+{'location': 'header', 'type': 'enumerate', 'content': ['json', 'yaml'], 'id': 10}
+{'location': 'header', 'type': 'enumerate', 'content': ['TestValue', ' SecondValue'], 'id': 11}
+{'location': 'header', 'type': 'global_variable', 'name': 'user', 'id': 12, 'reserved': True}
+-------- REMOVE SINGLE VALUES PARAMS (DICT) ----------
+{"Content-type": "<>", "test": "<>", "dalsiTest": "<user>"}
+{'location': 'header', 'type': 'enumerate', 'content': ['json', 'yaml'], 'id': 10}
+{'location': 'header', 'type': 'enumerate', 'content': ['TestValue', ' SecondValue'], 'id': 11}
+***********************
+get_body_info
+***********************
+------- GENERAL STRING PARSER (STR) -----------
+<>
+{'location': 'body', 'type': 'enumerate', 'content': '../input/body1.json', 'id': 13}
+------- EDIT THE PARAMETER ARRAY (STR) -----------
+<>
+{'location': 'body', 'type': 'enumerate', 'content': '../input/body1.json', 'id': 13}
+-------- REMOVE SINGLE VALUES PARAMS (STR) ----------
+../input/body1.json
+------- GENERAL STRING PARSER (FILE CONTENT) -----------
+sdklfnskfnm<>sdkmnfsdk;lfmsld;fm,sdfsdsd
+dg
+df
+gd<>
+gd<>
+gds<>
+gds<>
+gdf
+gdsgdsfgdsfgdsfgsdgdsfgdgd<>
+{'location': 'body', 'type': 'local_variable', 'id': 14}
+{'location': 'body', 'type': 'global_variable', 'name': 'user', 'id': 15}
+{'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 16}
+{'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 17}
+{'location': 'body', 'type': 'enumerate', 'content': 'aaaa,bbb,ccccc', 'id': 18}
+{'location': 'body', 'type': 'enumerate', 'content': 'AAAAAAAAAAAAAa', 'id': 19}
+------- EDIT THE PARAMETER ARRAY (FILE CONTENT) -----------
+sdklfnskfnm<>sdkmnfsdk;lfmsld;fm,sdfsdsd
+dg
+df
+gd<>
+gd<>
+gds<>
+gds<>
+gdf
+gdsgdsfgdsfgdsfgsdgdsfgdgd<>
+{'location': 'body', 'type': 'local_variable', 'id': 14, 'content': [1, 2, 3]}
+{'location': 'body', 'type': 'global_variable', 'name': 'user', 'id': 15, 'reserved': True}
+{'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 16, 'content': ['a', 'b', 'c']}
+{'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 17, 'reserved': True}
+{'location': 'body', 'type': 'enumerate', 'content': ['aaaa', 'bbb', 'ccccc'], 'id': 18}
+{'location': 'body', 'type': 'enumerate', 'content': 'AAAAAAAAAAAAAa', 'id': 19}
+-------- REMOVE SINGLE VALUES PARAMS (FILE CONTENT) ----------
+sdklfnskfnm<>sdkmnfsdk;lfmsld;fm,sdfsdsd
+dg
+df
+gd<user>
+gd<>
+gds<UUUUUUUUU>
+gds<>
+gdf
+gdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa
+{'location': 'body', 'type': 'local_variable', 'id': 14, 'content': [1, 2, 3]}
+{'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 16, 'content': ['a', 'b', 'c']}
+{'location': 'body', 'type': 'enumerate', 'content': ['aaaa', 'bbb', 'ccccc'], 'id': 18}
+----------COMBNINE INPUT-----------
+{'identificator': 'id_14', 'type': 'integer', 'blocks': ['id_14=1', 'id_14=2', 'id_14=3']}
+{'identificator': 'id_16', 'type': 'enum', 'blocks': ['a', 'b', 'c']}
+{'identificator': 'id_18', 'type': 'enum', 'blocks': ['aaaa', 'bbb', 'ccccc']}
+----------COMBINE RESPONSE-----------
+[1, 'a', 'aaaa']
+[1, 'b', 'bbb']
+[1, 'c', 'ccccc']
+[2, 'a', 'bbb']
+[2, 'b', 'aaaa']
+[2, 'c', 'aaaa']
+[3, 'a', 'ccccc']
+[3, 'b', 'aaaa']
+[3, 'c', 'bbb']
+[2, 'b', 'ccccc']
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[[1, 'a', 'aaaa'], [1, 'b', 'bbb'], [1, 'c', 'ccccc'], [2, 'a', 'bbb'], [2, 'b', 'aaaa'], [2, 'c', 'aaaa'], [3, 'a', 'ccccc'], [3, 'b', 'aaaa'], [3, 'c', 'bbb'], [2, 'b', 'ccccc']]
+('sdklfnskfnm<>sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngd<>\ngds<UUUUUUUUU>\ngds<>\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', [{'location': 'body', 'type': 'local_variable', 'id': 14, 'content': [1, 2, 3]}, {'location': 'body', 'type': 'global_variable', 'name': 'UUUUUUUUU', 'id': 16, 'content': ['a', 'b', 'c']}, {'location': 'body', 'type': 'enumerate', 'content': ['aaaa', 'bbb', 'ccccc'], 'id': 18}])
+<>
+body
+[]
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+----------EVALUATED COMBINE RESPONSE-----------
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngds<UUUUUUUUU>\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngds<UUUUUUUUU>\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngds<UUUUUUUUU>\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngds<UUUUUUUUU>\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngds<UUUUUUUUU>\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngds<UUUUUUUUU>\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngds<UUUUUUUUU>\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngds<UUUUUUUUU>\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngds<UUUUUUUUU>\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngds<UUUUUUUUU>\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+----------POSTPROCESSING AFTER COMBINE-----------
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'})
+('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})
+------ MAIN COMBINE CALLS ----
+{'identificator': 'URL', 'type': 'enum', 'blocks': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']}
+{'identificator': 'id_10', 'type': 'enum', 'blocks': ['json', 'yaml']}
+{'identificator': 'id_11', 'type': 'enum', 'blocks': ['TestValue', ' SecondValue']}
+{'identificator': 'BODY', 'type': 'enum', 'blocks': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}
+------ INFO ABOUT BLOCKS -----
+{'location': 'endpoint', 'type': 'indexes'}
+{'location': 'header', 'type': 'parameters'}
+{'location': 'header', 'type': 'parameters'}
+{'location': 'body', 'type': 'indexes'}
+----------COMBINE MAIN RESPONSE-----------
+['0', 'json', 'TestValue', '0']
+['0', 'yaml', ' SecondValue', '1']
+['1', 'json', ' SecondValue', '2']
+['1', 'yaml', 'TestValue', '3']
+['2', 'json', 'TestValue', '1']
+['2', 'yaml', ' SecondValue', '0']
+['3', 'json', 'TestValue', '4']
+['3', 'yaml', ' SecondValue', '5']
+['4', 'json', 'TestValue', '5']
+['4', 'yaml', ' SecondValue', '4']
+['5', 'json', 'TestValue', '6']
+['5', 'yaml', ' SecondValue', '7']
+['6', 'json', 'TestValue', '7']
+['6', 'yaml', ' SecondValue', '6']
+['7', 'json', 'TestValue', '8']
+['7', 'yaml', ' SecondValue', '9']
+['8', 'json', 'TestValue', '9']
+['8', 'yaml', ' SecondValue', '8']
+['9', 'json', 'TestValue', '2']
+['9', 'yaml', ' SecondValue', '3']
+['10', 'json', 'TestValue', '3']
+['10', 'yaml', ' SecondValue', '2']
+['11', 'json', 'TestValue', '0']
+['11', 'yaml', ' SecondValue', '1']
+['12', 'json', 'TestValue', '0']
+['12', 'yaml', ' SecondValue', '1']
+['13', 'json', 'TestValue', '0']
+['13', 'yaml', ' SecondValue', '1']
+['14', 'json', 'TestValue', '0']
+['14', 'yaml', ' SecondValue', '1']
+['15', 'json', 'TestValue', '0']
+['15', 'yaml', ' SecondValue', '1']
+['16', 'json', 'TestValue', '0']
+['16', 'yaml', ' SecondValue', '1']
+['17', 'json', 'TestValue', '0']
+['17', 'yaml', ' SecondValue', '1']
+['18', 'json', 'TestValue', '0']
+['18', 'yaml', ' SecondValue', '1']
+['19', 'json', 'TestValue', '0']
+['19', 'yaml', ' SecondValue', '1']
+['20', 'json', 'TestValue', '0']
+['20', 'yaml', ' SecondValue', '1']
+['21', 'json', 'TestValue', '0']
+['21', 'yaml', ' SecondValue', '1']
+['22', 'json', 'TestValue', '0']
+['22', 'yaml', ' SecondValue', '1']
+['23', 'json', 'TestValue', '0']
+['23', 'yaml', ' SecondValue', '1']
+['24', 'json', 'TestValue', '0']
+['24', 'yaml', ' SecondValue', '1']
+['25', 'json', 'TestValue', '0']
+['25', 'yaml', ' SecondValue', '1']
+['26', 'json', 'TestValue', '0']
+['26', 'yaml', ' SecondValue', '1']
+['27', 'json', 'TestValue', '0']
+['27', 'yaml', ' SecondValue', '1']
+['28', 'json', 'TestValue', '0']
+['28', 'yaml', ' SecondValue', '1']
+['29', 'json', 'TestValue', '0']
+['29', 'yaml', ' SecondValue', '1']
+['30', 'json', 'TestValue', '0']
+['30', 'yaml', ' SecondValue', '1']
+['31', 'json', 'TestValue', '0']
+['31', 'yaml', ' SecondValue', '1']
+['10', 'json', 'TestValue', '0']
+['14', 'json', 'TestValue', '9']
+['23', 'json', 'TestValue', '4']
+['22', 'json', 'TestValue', '9']
+['18', 'json', 'TestValue', '4']
+['22', 'json', 'TestValue', '5']
+['18', 'json', 'TestValue', '2']
+['5', 'json', 'TestValue', '0']
+['31', 'json', 'TestValue', '6']
+['26', 'json', 'TestValue', '6']
+['30', 'json', 'TestValue', '7']
+['1', 'json', 'TestValue', '7']
+['9', 'json', 'TestValue', '7']
+['13', 'json', 'TestValue', '6']
+['9', 'json', 'TestValue', '1']
+['21', 'json', 'TestValue', '2']
+['17', 'json', 'TestValue', '5']
+['21', 'json', 'TestValue', '4']
+['17', 'json', 'TestValue', '9']
+['0', 'json', 'TestValue', '4']
+['25', 'json', 'TestValue', '9']
+['25', 'json', 'TestValue', '3']
+['12', 'json', 'TestValue', '5']
+['8', 'json', 'TestValue', '2']
+['12', 'json', 'TestValue', '7']
+['20', 'json', 'TestValue', '7']
+['16', 'json', 'TestValue', '6']
+['20', 'json', 'TestValue', '3']
+['3', 'json', 'TestValue', '6']
+['24', 'json', 'TestValue', '4']
+['28', 'json', 'TestValue', '9']
+['24', 'json', 'TestValue', '8']
+['7', 'json', 'TestValue', '1']
+['6', 'json', 'TestValue', '8']
+['19', 'json', 'TestValue', '4']
+['7', 'json', 'TestValue', '7']
+['15', 'json', 'TestValue', '7']
+['19', 'json', 'TestValue', '2']
+['2', 'json', 'TestValue', '7']
+['6', 'json', 'TestValue', '4']
+['19', 'json', 'TestValue', '8']
+['2', 'json', 'TestValue', '5']
+['27', 'json', 'TestValue', '8']
+['15', 'json', 'TestValue', '3']
+['27', 'json', 'TestValue', '6']
+['14', 'json', 'TestValue', '6']
+['23', 'json', 'TestValue', '5']
+['22', 'json', 'TestValue', '2']
+['18', 'json', 'TestValue', '3']
+['5', 'json', 'TestValue', '5']
+['1', 'json', 'TestValue', '4']
+['30', 'json', 'TestValue', '4']
+['13', 'json', 'TestValue', '7']
+['26', 'json', 'TestValue', '5']
+['1', 'json', 'TestValue', '8']
+['9', 'json', 'TestValue', '8']
+['13', 'json', 'TestValue', '3']
+['26', 'json', 'TestValue', '9']
+['17', 'json', 'TestValue', '6']
+['21', 'json', 'TestValue', '9']
+['29', 'json', 'TestValue', '9']
+['0', 'json', 'TestValue', '9']
+['4', 'json', 'TestValue', '6']
+['0', 'json', 'TestValue', '3']
+['29', 'json', 'TestValue', '5']
+['25', 'json', 'TestValue', '4']
+['12', 'json', 'TestValue', '2']
+['12', 'json', 'TestValue', '4']
+['8', 'json', 'TestValue', '1']
+['16', 'json', 'TestValue', '5']
+['28', 'json', 'TestValue', '6']
+['24', 'json', 'TestValue', '3']
+['28', 'json', 'TestValue', '8']
+['11', 'json', 'TestValue', '3']
+['24', 'json', 'TestValue', '7']
+['7', 'json', 'TestValue', '2']
+['19', 'json', 'TestValue', '5']
+['15', 'json', 'TestValue', '8']
+['6', 'json', 'TestValue', '3']
+['19', 'json', 'TestValue', '9']
+['27', 'json', 'TestValue', '9']
+['15', 'json', 'TestValue', '4']
+['10', 'json', 'TestValue', '4']
+['14', 'json', 'TestValue', '5']
+['23', 'json', 'TestValue', '6']
+['10', 'json', 'TestValue', '8']
+['18', 'json', 'TestValue', '8']
+['18', 'json', 'TestValue', '6']
+['31', 'json', 'TestValue', '2']
+['1', 'json', 'TestValue', '1']
+['5', 'json', 'TestValue', '8']
+['30', 'json', 'TestValue', '3']
+['13', 'json', 'TestValue', '8']
+['30', 'json', 'TestValue', '9']
+['13', 'json', 'TestValue', '2']
+['9', 'json', 'TestValue', '5']
+['13', 'json', 'TestValue', '4']
+['4', 'json', 'TestValue', '9']
+['17', 'json', 'TestValue', '3']
+['0', 'json', 'TestValue', '8']
+['17', 'json', 'TestValue', '7']
+['0', 'json', 'TestValue', '2']
+['25', 'json', 'TestValue', '7']
+['29', 'json', 'TestValue', '6']
+['8', 'json', 'TestValue', '6']
+['12', 'json', 'TestValue', '3']
+['8', 'json', 'TestValue', '0']
+['16', 'json', 'TestValue', '4']
+['3', 'json', 'TestValue', '0']
+['28', 'json', 'TestValue', '5']
+['24', 'json', 'TestValue', '2']
+['28', 'json', 'TestValue', '7']
+['11', 'json', 'TestValue', '4']
+['11', 'json', 'TestValue', '2']
+['7', 'json', 'TestValue', '3']
+['19', 'json', 'TestValue', '6']
+['6', 'json', 'TestValue', '0']
+['15', 'json', 'TestValue', '9']
+['2', 'json', 'TestValue', '9']
+['15', 'json', 'TestValue', '5']
+['14', 'json', 'TestValue', '2']
+['14', 'json', 'TestValue', '8']
+['22', 'json', 'TestValue', '8']
+['10', 'json', 'TestValue', '1']
+['23', 'json', 'TestValue', '7']
+['10', 'json', 'TestValue', '7']
+['31', 'json', 'TestValue', '7']
+['18', 'json', 'TestValue', '7']
+['22', 'json', 'TestValue', '4']
+['18', 'json', 'TestValue', '5']
+['5', 'json', 'TestValue', '1']
+['31', 'json', 'TestValue', '3']
+['5', 'json', 'TestValue', '3']
+['30', 'json', 'TestValue', '6']
+['9', 'json', 'TestValue', '6']
+['9', 'json', 'TestValue', '0']
+['21', 'json', 'TestValue', '5']
+['4', 'json', 'TestValue', '8']
+['17', 'json', 'TestValue', '4']
+['21', 'json', 'TestValue', '7']
+['4', 'json', 'TestValue', '2']
+['29', 'json', 'TestValue', '7']
+['0', 'json', 'TestValue', '7']
+['17', 'json', 'TestValue', '8']
+['25', 'json', 'TestValue', '8']
+['29', 'json', 'TestValue', '3']
+['25', 'json', 'TestValue', '2']
+['8', 'json', 'TestValue', '5']
+['16', 'json', 'TestValue', '9']
+['20', 'json', 'TestValue', '6']
+['16', 'json', 'TestValue', '3']
+['3', 'json', 'TestValue', '3']
+['3', 'json', 'TestValue', '1']
+['28', 'json', 'TestValue', '2']
+['3', 'json', 'TestValue', '7']
+['28', 'json', 'TestValue', '4']
+['11', 'json', 'TestValue', '7']
+['11', 'json', 'TestValue', '5']
+['7', 'json', 'TestValue', '4']
+['6', 'json', 'TestValue', '9']
+['2', 'json', 'TestValue', '4']
+['6', 'json', 'TestValue', '5']
+['2', 'json', 'TestValue', '2']
+['27', 'json', 'TestValue', '3']
+['15', 'json', 'TestValue', '6']
+['10', 'json', 'TestValue', '6']
+['14', 'json', 'TestValue', '7']
+['23', 'json', 'TestValue', '2']
+['22', 'json', 'TestValue', '7']
+['23', 'json', 'TestValue', '8']
+['31', 'json', 'TestValue', '8']
+['22', 'json', 'TestValue', '3']
+['5', 'json', 'TestValue', '2']
+['31', 'json', 'TestValue', '4']
+['1', 'json', 'TestValue', '5']
+['5', 'json', 'TestValue', '4']
+['26', 'json', 'TestValue', '4']
+['30', 'json', 'TestValue', '5']
+['1', 'json', 'TestValue', '9']
+['26', 'json', 'TestValue', '2']
+['9', 'json', 'TestValue', '9']
+['26', 'json', 'TestValue', '8']
+['21', 'json', 'TestValue', '6']
+['4', 'json', 'TestValue', '7']
+['21', 'json', 'TestValue', '8']
+['4', 'json', 'TestValue', '1']
+['29', 'json', 'TestValue', '8']
+['0', 'json', 'TestValue', '6']
+['4', 'json', 'TestValue', '3']
+['29', 'json', 'TestValue', '2']
+['25', 'json', 'TestValue', '5']
+['29', 'json', 'TestValue', '4']
+['8', 'json', 'TestValue', '4']
+['12', 'json', 'TestValue', '9']
+['20', 'json', 'TestValue', '9']
+['16', 'json', 'TestValue', '8']
+['20', 'json', 'TestValue', '5']
+['16', 'json', 'TestValue', '2']
+['3', 'json', 'TestValue', '2']
+['3', 'json', 'TestValue', '8']
+['24', 'json', 'TestValue', '6']
+['28', 'json', 'TestValue', '3']
+['11', 'json', 'TestValue', '8']
+['11', 'json', 'TestValue', '6']
+['7', 'json', 'TestValue', '5']
+['6', 'json', 'TestValue', '2']
+['2', 'json', 'TestValue', '3']
+['27', 'json', 'TestValue', '4']
+['27', 'json', 'TestValue', '2']
+['14', 'json', 'TestValue', '4']
+['10', 'json', 'TestValue', '5']
+['23', 'json', 'TestValue', '3']
+['23', 'json', 'TestValue', '9']
+['10', 'json', 'TestValue', '9']
+['31', 'json', 'TestValue', '9']
+['18', 'json', 'TestValue', '9']
+['22', 'json', 'TestValue', '6']
+['31', 'json', 'TestValue', '5']
+['1', 'json', 'TestValue', '6']
+['5', 'json', 'TestValue', '9']
+['30', 'json', 'TestValue', '2']
+['13', 'json', 'TestValue', '9']
+['1', 'json', 'TestValue', '0']
+['26', 'json', 'TestValue', '3']
+['30', 'json', 'TestValue', '8']
+['13', 'json', 'TestValue', '5']
+['26', 'json', 'TestValue', '7']
+['9', 'json', 'TestValue', '4']
+['21', 'json', 'TestValue', '3']
+['17', 'json', 'TestValue', '2']
+['4', 'json', 'TestValue', '0']
+['0', 'json', 'TestValue', '5']
+['25', 'json', 'TestValue', '6']
+['12', 'json', 'TestValue', '6']
+['8', 'json', 'TestValue', '3']
+['12', 'json', 'TestValue', '8']
+['20', 'json', 'TestValue', '8']
+['20', 'json', 'TestValue', '2']
+['8', 'json', 'TestValue', '7']
+['16', 'json', 'TestValue', '7']
+['20', 'json', 'TestValue', '4']
+['3', 'json', 'TestValue', '9']
+['24', 'json', 'TestValue', '5']
+['11', 'json', 'TestValue', '9']
+['24', 'json', 'TestValue', '9']
+['7', 'json', 'TestValue', '0']
+['19', 'json', 'TestValue', '3']
+['7', 'json', 'TestValue', '6']
+['2', 'json', 'TestValue', '8']
+['6', 'json', 'TestValue', '1']
+['19', 'json', 'TestValue', '7']
+['2', 'json', 'TestValue', '6']
+['27', 'json', 'TestValue', '7']
+['15', 'json', 'TestValue', '2']
+['27', 'json', 'TestValue', '5']
+['14', 'json', 'TestValue', '3']
+------------
+------------
+----------INFO ABOUT COMBINE BLOCKS-----------
+{'location': 'endpoint', 'type': 'indexes'}
+{'location': 'header', 'type': 'parameters'}
+{'location': 'header', 'type': 'parameters'}
+{'location': 'body', 'type': 'indexes'}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', ' SecondValue'], ['yaml', 'TestValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['yaml', ' SecondValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue'], ['json', 'TestValue']]
+('{"Content-type": "<>", "test": "<>", "dalsiTest": "<user>"}', [{'location': 'header', 'type': 'enumerate', 'content': ['json', 'yaml'], 'id': 10}, {'location': 'header', 'type': 'enumerate', 'content': ['TestValue', ' SecondValue'], 'id': 11}])
+<>
+header
+[]
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+[('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'}), ('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'}), ('sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'}), ('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'}), ('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'}), ('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'}), ('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngda\ngdsa\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'a'}), ('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'}), ('sdklfnskfnm3sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdc\ngdsc\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'c'}), ('sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd<user>\ngdb\ngdsb\ngdsccccc\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa', {'UUUUUUUUU': 'b'})]
+<>
+body
+[]
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

@@ -1,6 +1,7 @@
 import json
 import logging
 logger = logging.getLogger(__name__)
+logger.propagate = False
 
 from exceptions import *
 import suiter_classes_and_globals as globe
@@ -54,7 +55,7 @@ def general_string_parser(content_string, location):
         ** enumerate type
         ** global variable type
         ** local variable type
-    * add these parameteres to a 'globe.all_parameters'
+    * add these parameteres to a 'globe.all_parameters' (indikuje, jake globalni promenne bybly pouzity v cele aplikace)
     * all params are replaced with a starting and ending symbol of non priority tag
     Return a tuple:
         * modified string -> every parameter is replaced with a low-prio start and end tag 
@@ -72,7 +73,7 @@ def general_string_parser(content_string, location):
             
         ]
     """
-    logging.debug('Calling the general_string_parser function with a following parameters: [{}, {}]'.format(content_string, location))
+    # logging.debug('Calling the general_string_parser function with a following parameters: [{}, {}]'.format(content_string, location))
 
     # if the location is endpoint -> the varaibles in global class are stored as 'url', not 'endpoint'
     if location == "endpoint":
@@ -148,7 +149,7 @@ def general_string_parser(content_string, location):
                 """
                 e_change = e_idx
                 v_change = v_idx
-            elif prio_start_tag is variable_start_tag:
+            elif prio_start_tag == variable_start_tag:
                 """
                 Modify content_string for current parameter
                 Get the content of current parameter (variable)
@@ -160,9 +161,9 @@ def general_string_parser(content_string, location):
                 content_string = content_string[:position] + resulted_tuple[0]
                 variable = resulted_tuple[1]
                 position = len(temp[:position]) + resulted_tuple[2]
-                p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
 
                 # add the information about this parameter to a reulted array
+                p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
                 parameters.append(p)
 
                 """
@@ -336,12 +337,20 @@ def remove_single_values_params(taged_string, param_array, location):
     """
     if location == 'endpoint':
         tag = str(globe.config.url.non_priority_start) + str(globe.config.url.non_priority_end)
+        start_tag = str(globe.config.url.non_priority_start)
+        end_tag = str(globe.config.url.non_priority_end)
     elif location == 'method':
         tag = str(globe.config.method.non_priority_start) + str(globe.config.method.non_priority_end)
+        start_tag = str(globe.config.method.non_priority_start)
+        end_tag = str(globe.config.method.non_priority_end)
     elif location == 'header':
         tag = str(globe.config.header.non_priority_start) + str(globe.config.header.non_priority_end)
+        start_tag = str(globe.config.header.non_priority_start)
+        end_tag = str(globe.config.header.non_priority_end)
     elif location == 'body':
         tag = str(globe.config.body.non_priority_start) + str(globe.config.body.non_priority_end)
+        start_tag = str(globe.config.body.non_priority_start)
+        end_tag = str(globe.config.body.non_priority_end)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
 
@@ -358,20 +367,29 @@ def remove_single_values_params(taged_string, param_array, location):
             if 'value' in parameter.keys():
                 # so, it should be removed and replaced
                 single_params_array.append(parameter)
+                replacement = parameter['value']
+                taged_string = replace_the_tag_with_value(taged_string, tag, replacement, param_idx)
+                param_idx-=1
                 # TODO: replace the value in string
             else:
                 # check if the 'reserved' element does exist (the global variable has already been added)
                 if ('reserved' in parameter.keys()) and (parameter['reserved'] == True):
-                    # if the 'reserved' element is contained -> it is added to combine call without any change
-                    combine_params_array.append(parameter)
+                    # if the 'reserved' element is contained -> it is replaced in a string with a <:varaible_name:> 
+                    replacement = start_tag + parameter['name'] + end_tag
+                    taged_string = replace_the_tag_with_value(taged_string, tag, replacement, param_idx)
+                    single_params_array.append(parameter)
+                    param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
                 # check if the 'content' element does exist or is not array
                 elif ('content' not in parameter.keys()) or (type(parameter['content']) is not list):
                     raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
                 else:
                     # check if the content does have only one element (TODO: should this even be allowed?)
                     if len(parameter['content']) == 1:
+                        # GLOBLANI PROMENNA BYLA STANOVENA NA ZAKLADE TOHO, ZE TAM JE JEN JEDEN PARAMETER -> MUSI SE PRIDAT DO LOKALNICH PROMENNYCH
+                        globe.global_params_with_value[parameter['name']] = parameter['content'][0]
+                        # globe.global_params_reserved.append(parameter['name'])
                         single_params_array.append(parameter)
-                        taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
+                        taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'][0], param_idx)
                         param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
                     else:
                         combine_params_array.append(parameter)
@@ -454,11 +472,7 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
     for parameter in parameter_array:
         if parameter['type'] == 'global_variable':
             """ GLOBAL VARAIBLE """
-            # check if the global variable already has assigned value
-            if parameter['name'] in globe.global_params_with_value.keys():
-                # it alredy have some value -> get the value and insert it into parameter info
-                parameter['value'] = globe.global_params_with_value[parameter['name']]
-            elif parameter['name'] in globe.global_params_reserved:
+            if parameter['name'] in globe.global_params_reserved:
                 # check if this global variable was used in current combine call
                 parameter['reserved'] = True
             else:
@@ -466,7 +480,7 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
                 # check if it does exist in input data
                 if parameter['name'] not in inputed_global_params:
                     message = "The global parameter '{}' does not exist in input data".format(parameter['name'])
-                    raise EndpointSemanticError(__name__, "get_endpoint_info", message)
+                    raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)
                 # insert the content array of this global variable into param information
                 parameter['content'] = inputed_global_params[parameter['name']]
                 # add this global to a reserved global variables (if the variable with a smae name occures in the same combine call)
@@ -478,14 +492,14 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
                 pop_result = endpoint_element['local_params'].pop(0)
             except IndexError:
                 message = "There is not enough local parameters in {}".format(location)
-                raise EndpointSemanticError(__name__, "get_endpoint_info", message)
+                raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)
             
             # insert these values into parameter information
             try:
                 parameter['content'] = pop_result['values']
             except:
                 message = "There is something wrong with a local_parameter '{}' (probably missing 'values')".format(parameter['name'])
-                raise EndpointSemanticError(__name__, "get_endpoint_info", message)         
+                raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)         
         elif parameter['type'] == 'enumerate':
             """ ENUMERATE VARAIBLE """
             # separate the content by a separator
@@ -496,12 +510,12 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
             if splited_length == 1:
                 splited = str(splited[0])
             elif splited_length == 0:
-                raise ShouldHaveNotGottenHereError(__name__, "get_endpoint_info") 
+                raise ShouldHaveNotGottenHereError(__name__, "edit_the_parameter_array") 
 
             # insert the separated values into parameter information
             parameter['content'] = splited
         else:
-            ShouldHaveNotGottenHereError(__name__, "get_endpoint_info")
+            ShouldHaveNotGottenHereError(__name__, "edit_the_parameter_array")
 
     # TODO: TODO: TODO: TODO: TODO: this have to be moved somewhere else
     # if the parameters are in file, it would fail
@@ -635,6 +649,31 @@ def method_string_parser(method_string):
             raise EndpointSemanticError(__name__, "method_string_parser", message)
     return p
 
+def single_remove_global_from_string(taged_string, global_values, location):
+    """
+    Input: 
+    ('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/<user>/A', {'user': 4, 'method': 'GET'})
+    Output:
+    ('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/4/A', {'user': 4, 'method': 'GET'})
+    """
+    start_tag = getattr(globe.config, location).non_priority_start
+    end_tag = getattr(globe.config, location).non_priority_end
+    for key in global_values.keys():
+        tag = start_tag + key + end_tag
+        while tag in taged_string:
+            replacement = str(global_values[key])
+            taged_string = replace_the_tag_with_value(taged_string, tag, replacement, 0)
+    return taged_string
+
+
+def postprocessing_of_globals(tagedString_globals_array, location):
+    new_array = []
+    for element in tagedString_globals_array:
+        new_taged = single_remove_global_from_string(element[0], element[1], location)
+        tuple_replacement = (new_taged,element[1])
+        new_array.append(tuple_replacement)
+    return new_array
+
 def get_endpoint_info(endpoint_element):
     """
     Get the information about endpoint part in call
@@ -646,24 +685,41 @@ def get_endpoint_info(endpoint_element):
     """
     logging.debug('Getting info about endpoint part')
 
-    # get the tag of a taged_string - is in endpoint -> get the url non prio tag
     tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+    start_tag = globe.config.url.non_priority_start
+    end_tag = globe.config.url.non_priority_end
 
     """ URL 
     TODO: Check if the url structure is valid - nested tags and so on
     Get the information about url
     """
-    # (modified_string, params_array)
+
+    print("***********************")
+    print("get_endpoint_info")
+    print("***********************")
+    
     parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
+    print("------- GENERAL STRING PARSER -----------")
+    print(parameters_tuple[0])
+    for element in parameters_tuple[1]:
+        print(element)
 
     #########################################################################################
     # this function was removed from this part and then modified to support endpoint,method, header and body
     edit_the_parameter_array(endpoint_element, parameters_tuple[1], 'url')
     #########################################################################################
+    print("------- EDIT THE PARAMETER ARRAY -----------")
+    print(parameters_tuple[0])
+    for element in parameters_tuple[1]:
+        print(element)
+
 
     # remove the single values parameters -> also replace their value in modified string
     combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'endpoint')
-
+    print("-------- REMOVE SINGLE VALUES PARAMS ----------")
+    print(combine_params[0])
+    for element in combine_params[1]:
+        print(element)    
 
     """
     T-WAY
@@ -674,41 +730,41 @@ def get_endpoint_info(endpoint_element):
         local_combine_call.body['t_strength'] = str(endpoint_element['t-way'])
 
         for parameter in combine_params[1]:
-            # add_parameter_to_combine_call(parameter, local_combine_call)
-            add_indexes_of_parameter_to_combine_call(parameter, local_combine_call)
+            add_parameter_to_combine_call(parameter, local_combine_call)
        
+        print("----------COMBNINE INPUT-----------")
+        for element in local_combine_call.body['parameters']:
+            print(element)
+
         """ Call the combine """
         combine_response = api_call_combine(local_combine_call)
+
+        print("----------COMBINE RESPONSE-----------")
+        for element in combine_response:
+            print(element)
+
         endpoint_test_cases = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint', [])
-        return endpoint_test_cases,True     
-    return combine_params,False
+
+        print("----------EVALUATED COMBINE RESPONSE-----------")
+        for element in endpoint_test_cases:
+            print(element)
         
-    # """
-    # Prepare the json body for a combine - add the parameters to the body
-    # """
-    # for parameter in combine_params[1]:
-    #     add_parameter_to_combine_call(parameter, globe.combine_request)
 
-    # """ 
-    # check the optional keys
-    # """
-    # # check if the t-way element is on endpoint dictionary
-    # if 't-way' in endpoint_element.keys():
-    #     # t-way key je pouzit -> combine call will be requested
-    #     globe.combine_request.body['t_strength'] = str(endpoint_element['t-way'])
-    #     # TODO: check if the t_strength in combine call does make sense
-    #     # TODO: t_strength = 1 -> how to call combine? Or should I implement it by myself?
-    #     """
-    #     Call the combine
-    #     """
-    #     combine_response = api_call_combine(globe.combine_request)
-    #     endpoint_test_cases_tuple = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint')
-    #     # true indicated that the combine was called in this layer already
-    #     return endpoint_test_cases_tuple,True 
+        new_array = postprocessing_of_globals(endpoint_test_cases, 'url')
+        
+        print("----------POSTPROCESSING AFTER COMBINE-----------")
+        for element in new_array:
+            print(element)
 
-    # # false indcates that the combine was not called and have to be called in upper layer
-    # return combine_params,False
-
+        return new_array,True   
+    else:
+        print("-------NOT TWAY RESULT-----------")
+        print(combine_params[0])
+        for element in combine_params[1]:
+            print(element)
+        # TODO: check if the correct number of tags are in string (should be equal to the number of param infos)
+        return combine_params,False
+        
 def get_method_info(method_element):
     """
     Get the information about endpoint part in call
@@ -718,16 +774,34 @@ def get_method_info(method_element):
     """
     logging.debug('Getting info about method part')
 
+    print("***********************")
+    print("get_method_info")
+    print("***********************")
+
     # method_p = method_string_parser(method_element['values'])
     parameters_tuple = general_string_parser(method_element['values'], 'method')
+    print("------- GENERAL STRING PARSER -----------")
+    print(parameters_tuple[0])
+    for element in parameters_tuple[1]:
+        print(element)
 
     edit_the_parameter_array(method_element, parameters_tuple[1], 'method')
+    print("------- EDIT THE PARAMETER ARRAY -----------")
+    print(parameters_tuple[0])
+    for element in parameters_tuple[1]:
+        print(element)
+
 
     """
     Evaluate if the method should be added to a combine call -> if there is a signle value, the method is just set to this value
     """
     # remove the single values parameters -> also replace their value in modified string
     combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'method')
+    print("-------- REMOVE SINGLE VALUES PARAMS (RETURNED) ----------")
+    print(combine_params[0])
+    for element in combine_params[1]:
+        print(element)  
+
     return combine_params,False
 
 def header_string_parser(header_string):
@@ -849,6 +923,9 @@ def get_header_info(header_element):
 		Host: <:var:>
     """
     logging.debug('Getting info about header part')
+    print("***********************")
+    print("get_header_info")
+    print("***********************")
 
     """ Co je potreba udelat
     1. Podivat se, co mi to vlastne bylo predano
@@ -872,13 +949,26 @@ def get_header_info(header_element):
         # value is string -> the content is a file
         # header = header_string_parser(header_element['values'])
         header_tuple = general_string_parser(header_element['values'], 'header')
+        print("------- GENERAL STRING PARSER (STR) -----------")
+        print(header_tuple[0])
+        for element in header_tuple[1]:
+            print(element)
 
         # edit the output
         edit_the_parameter_array(header_element, header_tuple[1], 'header')
+        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
+        print(header_tuple[0])
+        for element in header_tuple[1]:
+            print(element)
         # remove the single value parameters
         # if there are no more parameters left, it means there is only one file -> we should repead the process of 
         # seraching parameters, but this time in file content
         header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
+        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
+        print(header_params[0])
+        for element in header_params[1]:
+            print(element)  
+            
         if len(header_params[1]) == 0:
             # all parameteres have been already filled -> there is only one file
             # look it in file content
@@ -890,9 +980,23 @@ def get_header_info(header_element):
         # value is dictionary -> change the type to from dictionary to string
         header_value_string = json.dumps(header_element['values'])
         header_tuple = general_string_parser(header_value_string, 'header')
+        print("------- GENERAL STRING PARSER (DICT) -----------")
+        print(header_tuple[0])
+        for element in header_tuple[1]:
+            print(element)
+
         # edit the output
         edit_the_parameter_array(header_element, header_tuple[1], 'header')
+        print("------- EDIT THE PARAMETER ARRAY (DICT) -----------")
+        print(header_tuple[0])
+        for element in header_tuple[1]:
+            print(element)
+
         header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
+        print("-------- REMOVE SINGLE VALUES PARAMS (DICT) ----------")
+        print(header_params[0])
+        for element in header_params[1]:
+            print(element)  
     else:
         print("proper error should be raised")
         exit(2)
@@ -939,27 +1043,58 @@ def get_body_info(body_element):
     """
     logging.debug('Getting info about body part')
 
-    print(body_element)
+    print("***********************")
+    print("get_body_info")
+    print("***********************")
 
     values_type = type(body_element['values'])
     # check what type of value is given
     if values_type is str:
         # value is string -> the content is a file
         body_tuple = general_string_parser(body_element['values'], 'body')
+        print("------- GENERAL STRING PARSER (STR) -----------")
+        print(body_tuple[0])
+        for element in body_tuple[1]:
+            print(element)
 
         # edit the output
         edit_the_parameter_array(body_element, body_tuple[1], 'body')
+        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
+        print(body_tuple[0])
+        for element in body_tuple[1]:
+            print(element)
+
         # remove the single value parameters
         # if there are no more parameters left, it means there is only one file -> we should repead the process of 
         # seraching parameters, but this time in file content
         body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
+        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
+        print(body_params[0])
+        for element in body_params[1]:
+            print(element)  
+
         if len(body_params[1]) == 0:
             # all parameteres have been already filled -> there is only one file
             # look it in file content
             file_content = get_file_content(body_params[0])
             body_file_tuple = general_string_parser(file_content, 'body')
+            print("------- GENERAL STRING PARSER (FILE CONTENT) -----------")
+            print(body_file_tuple[0])
+            for element in body_file_tuple[1]:
+                print(element)
+
             edit_the_parameter_array(body_element, body_file_tuple[1], 'body')
+            print("------- EDIT THE PARAMETER ARRAY (FILE CONTENT) -----------")
+            print(body_file_tuple[0])
+            for element in body_file_tuple[1]:
+                print(element)
+
             body_params = remove_single_values_params(body_file_tuple[0], body_file_tuple[1], 'body')
+            print("-------- REMOVE SINGLE VALUES PARAMS (FILE CONTENT) ----------")
+            print(body_params[0])
+            for element in body_params[1]:
+                print(element)  
+
     elif values_type is dict:
         # value is dictionary -> change the type to from dictionary to string
         body_value_string = json.dumps(body_element['values'])
@@ -977,7 +1112,9 @@ def get_body_info(body_element):
         message = "The amount of local parameters is bigger than needed"
         raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
 
-    tag = globe.config.body.non_priority_start + globe.config.body.non_priority_end
+    start_tag = globe.config.body.non_priority_start
+    end_tag = globe.config.body.non_priority_end
+    tag = start_tag + end_tag
     
     """
     T-WAY
@@ -989,12 +1126,33 @@ def get_body_info(body_element):
 
         for parameter in body_params[1]:
             add_parameter_to_combine_call(parameter, local_combine_call)
-       
+
+        print("----------COMBNINE INPUT-----------")
+        for element in local_combine_call.body['parameters']:
+            print(element)
+
         """ Call the combine """
         combine_response = api_call_combine(local_combine_call)
-        endpoint_test_cases = evaluate_combine_response(combine_response, body_params, tag, 'body', [])
-        return endpoint_test_cases,True 
-    return body_params,False
+        print("----------COMBINE RESPONSE-----------")
+        for element in combine_response:
+            print(element)
+        
+        body_test_cases = evaluate_combine_response(combine_response, body_params, tag, 'body', [])
+        print("----------EVALUATED COMBINE RESPONSE-----------")
+        for element in body_test_cases:
+            print(element)
+
+        new_array = postprocessing_of_globals(body_test_cases, 'body')
+        print("----------POSTPROCESSING AFTER COMBINE-----------")
+        for element in new_array:
+            print(element)            
+        return new_array,True 
+    else:
+        print("-------NOT TWAY RESULT-----------")
+        print(body_params[0])
+        for element in body_params[1]:
+            print(element)
+        return body_params,False
 
     # modified_body_string = general_string_parser(body_element['values'], 'body')
     # return modified_body_string
