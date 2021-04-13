@@ -756,14 +756,17 @@ def get_endpoint_info(endpoint_element):
         for element in new_array:
             print(element)
 
-        return new_array,True   
+        return new_array,"indexes"   
     else:
         print("-------NOT TWAY RESULT-----------")
         print(combine_params[0])
         for element in combine_params[1]:
             print(element)
-        # TODO: check if the correct number of tags are in string (should be equal to the number of param infos)
-        return combine_params,False
+
+        if len(combine_params[1]) == 0:
+            return combine_params,"done_string"
+        else:
+            return combine_params,"parameters"
         
 def get_method_info(method_element):
     """
@@ -797,12 +800,16 @@ def get_method_info(method_element):
     """
     # remove the single values parameters -> also replace their value in modified string
     combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'method')
+
     print("-------- REMOVE SINGLE VALUES PARAMS (RETURNED) ----------")
     print(combine_params[0])
     for element in combine_params[1]:
         print(element)  
 
-    return combine_params,False
+    if len(combine_params[1]) == 0:
+        return combine_params,'done_string'
+    else:
+        return combine_params,'parameters'
 
 def header_string_parser(header_string):
     """
@@ -1023,8 +1030,11 @@ def get_header_info(header_element):
         """ Call the combine """
         combine_response = api_call_combine(local_combine_call)
         endpoint_test_cases = evaluate_combine_response(combine_response, header_params, tag, 'header', [])
-        return endpoint_test_cases,True 
-    return header_params,False
+        return endpoint_test_cases,'indexes' 
+
+    if len(header_params[1]) == 0:
+        return header_params,'done_string'
+    return header_params,'parameters'
 
 def get_body_info(body_element):
     """
@@ -1146,13 +1156,14 @@ def get_body_info(body_element):
         print("----------POSTPROCESSING AFTER COMBINE-----------")
         for element in new_array:
             print(element)            
-        return new_array,True 
+        return new_array,'indexes' 
     else:
         print("-------NOT TWAY RESULT-----------")
         print(body_params[0])
         for element in body_params[1]:
             print(element)
-        return body_params,False
 
-    # modified_body_string = general_string_parser(body_element['values'], 'body')
-    # return modified_body_string
+        if len(body_params[1]) == 0:
+            return body_params,'done_string' 
+        return body_params,'parameters'
+

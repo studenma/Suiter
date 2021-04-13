@@ -11,13 +11,13 @@ def evaluate_combine_response(response, str_and_array, tag, location, global_var
     Evaluate the response from combine -> replace the values in taged string for each test_case and 
     create an araray oyt of all of these
     """
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    print(response)
-    print(str_and_array)
-    print(tag)
-    print(location)
-    print(global_variables)
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    # print(response)
+    # print(str_and_array)
+    # print(tag)
+    # print(location)
+    # print(global_variables)
+    # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     taged_string = str_and_array[0]
     list_of_parameters_in_string = str_and_array[1]
 
@@ -58,7 +58,6 @@ def evaluate_combine_response(response, str_and_array, tag, location, global_var
         #     raise ShouldHaveNotGottenHereError(__name__, "evaluate_combine_response")
         endpoint_cases.append((tmp_taged_string, local_globes))
         tc_idx+=1
-
     return endpoint_cases
 
 
@@ -79,7 +78,8 @@ def api_call_combine(combine_info):
         if response.status_code == 502:
             # try to call it 5 more times
             for _ in range(5):
-                response = requests.request("GET", combine_url, headers=headers, json=combine_body)
+                # response = requests.request("GET", combine_url, headers=headers, json=combine_body)
+                response = requests.request("GET", url, headers=header, json=body)
                 # if some of the request is not Proxy error, break this loop and do not call combine anymore
                 if response.status_code != 502:
                     break
