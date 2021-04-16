@@ -41,4 +41,19 @@ def get_file_content(file_path):
         message = 'The file could not be opened'
         raise OpenFileError(__name__, "get_file_content", message)
 
+
+def verify_tway_value(tway_value, number_of_parameteres):
+    """ 
+    Verify if the value of t_way does make sense in comparison with number of parameters
+    """
+    if tway_value < 1 or tway_value > 6:
+        message = "T-way value has to be in following range: <1,6>"
+        raise InputFileError(__name__, "verify_tway_value", message)
+    # tway value has to be less or equal to nubmer of parameters
+    if tway_value > number_of_parameteres:
+        message = "T-way value has to be less or equal to number of parameters"
+        raise InputFileError(__name__, "verify_tway_value", message)
+
+
+
     

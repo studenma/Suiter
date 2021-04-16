@@ -17,7 +17,8 @@ def evaluate_combine_response(response, str_and_array, tag, location, global_var
     # print(tag)
     # print(location)
     # print(global_variables)
-    # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    # print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
     taged_string = str_and_array[0]
     list_of_parameters_in_string = str_and_array[1]
 
@@ -68,9 +69,21 @@ def api_call_combine(combine_info):
     logging.debug('Calling call_combine function')
 
     # get the information of request
-    url = combine_info.url
+    url = 'https://combine.testos.org/generate'
     header = combine_info.header
     body = combine_info.body
+
+    print("**************************************")
+    print("**************************************")
+    print(body)
+    print("Called combine with following body:")
+    print(body['name'])
+    print(body['t_strength'])
+    for parameter in body['parameters']:
+        print(parameter['type'])
+        print(parameter['blocks'])
+    print("**************************************")
+    print("**************************************")
 
     try:
         response = requests.request("GET", url, headers=header, json=body)
@@ -79,7 +92,7 @@ def api_call_combine(combine_info):
             # try to call it 5 more times
             for _ in range(5):
                 # response = requests.request("GET", combine_url, headers=headers, json=combine_body)
-                response = requests.request("GET", url, headers=header, json=body)
+                response = requests.request("POST", url, headers=header, json=body)
                 # if some of the request is not Proxy error, break this loop and do not call combine anymore
                 if response.status_code != 502:
                     break

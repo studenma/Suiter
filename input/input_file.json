@@ -2,30 +2,32 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/<:user:>/<:method:>/<>/<1,2,3,4,5>/<:userStr:>/<asd>/<fgh>/<:user:>/<A,B,C,D>",
+		    	"values": "https://mydomain/addUser/<>",
 			    "local_params": [
 					{
 						"values": ["ABC", "DEF", "G"]
 					}
-				],
-				"t-way": 2
+				]
 		    },
 		    "method": {
-				"values": "<GET>",
-				"local_params": []
+				"values": "<>",
+				"local_params": [
+					{
+						"values": ["GET","POST"]
+					}
+				]
 			},
 			"header": {
 				"values": {"Content-type": "<json,yaml>", "test": "<TestValue, SecondValue>", "dalsiTest": "<:user:>"},
 				"local_params": []
 			},
 			"body": {
-				"values": "<../input/body1.json>",
+				"values": "<../input/body0.json>",
 				"local_params": [
 					{
 						"values": [1,2,3]
 					}
-				],
-				"t-way": 2
+				]
 			},
 			"t-way": 2
 		},

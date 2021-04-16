@@ -61,6 +61,7 @@ from preparator import get_endpoint_info, get_method_info, get_header_info, get_
 import suiter_classes_and_globals as globe
 from combine_request import create_combine_call, add_array_to_a_combine_call, add_parameter_to_combine_call, api_call_combine, evaluate_combine_response
 from general import replace_the_tag_with_value
+
 def logger_config():
     """
     Logger configuration
@@ -110,7 +111,7 @@ if __name__ == "__main__":
     The entry point of Suiter application 
     """
 
-    """ LOGGER
+    """
     Setup the logging messages 
     """
     try:
@@ -120,454 +121,64 @@ if __name__ == "__main__":
         message = 'Something went wrong with a logging message configuration'
         raise LoggerError(__name__, "main", message)
 
-    """ CONFIG
-    * Read configuration file
+    """
+    Read configuration file
     * Create a ConfigDataClass out of it (see suiter_classes module) 
-    * Store this class into a 'config' global variable stored in suiter_classes_and_globals module
+    * Store this class into a 'config' global variable
     * Extend the config class of a priority and non priority tags
     ** for cases where one tag is substring of another one (the priority ones are searched first)
     """
     globe.config = read_config_file(globe.config_path)
     globe.config.extend_of_priority_tags()
 
-    """ ARGUMENT
-    * Parse the arguments
+    """ 
+    Parse the arguments
     * Store following arguments into variable:
     ** file path a to an input json file
     ** what framework should be used
     ** the path to a dir where the output should be stored
     """
     try:
+        logging.debug('Parsing the arguments')
         args = argument_parser()
-        # store 
         input_file_path = args.filename
         framework = args.framework
         output_path = args.output
-        logging.debug('Parsing the arguments was succeful')
     except:
         message = 'Something went wrong with parsing of arguments'
         raise ArgumentError(__name__, "main", message)
 
-    """ INPUT FILE PARSER
-    Check if the given input file is valid (has to be json with a specific structure)
-    Retrieve the data from input json file
-    Create an object 'inputClass' store these data into it
     """
-    # open
+    Check the input json file structure
+    * Retrieve the data from input json file
+    * Create an object 'inputClass' and store those data into it
+    """
+    logging.debug('Checking the input json file structure')
     file_content = open_input_json_file(input_file_path)
-    # validate
     is_valid = input_json_structure_validator(file_content)
     if is_valid[0] == False:
         message = is_valid[1]
         raise InputFileError(__name__, "main", message)
-    # store
-    logging.debug('Creating the InputDataClass')
     globe.inputData = InputDataClass(file_content)
 
 
-    """ CREATE FILE FOR TEMPLATOR
-    Go through all calls in test sequence
-    Get the information about each mandatory key (endpoint, method, header, body)
-    Get the values of optional keys
     """
+    Create a input file for templator module
+    * Go through all requests in test sequence
+    ** Get the information about each mandatory key (endpoint, method, header, body)
+    *** call a combine if the 't-way' element is inside
+    ** Call a combine to get all requests with combined values of endpoint, method, header and body
+    * Combine all the resulted requests together with other requests in sequence
+    """
+    from preparator import create_input_file_for_templator
+    super_duper_result = create_input_file_for_templator()
 
-    call_idx = -1
-    super_duper_result = []
-    for call in globe.inputData.test_sequence:
-        call_idx+=1
-        logging.debug('Getting info about call')
-
-        print("**************************************")
-        print("**************************************")
-        print("Call number {} in sequence".format(call_idx))
-        print("**************************************")
-        print("**************************************")
-
-        """ create a combine request for this 'call' layer """
-        combine_call = globe.CombineCallClass()
-        combine_call.body['t_strength'] = call['t-way']
-
-        endpoint,endpoint_toggle = get_endpoint_info(call['endpoint'])
-        method,method_toggle = get_method_info(call['method'])
-        header,header_toggle = get_header_info(call['header'])
-        body,body_toggle = get_body_info(call['body'])
-
-        info_about_combine_blocks = []
-        """
-        Add values to combine request body
-        """
-        """ ENDPOINT """
-        if endpoint_toggle == 'indexes':
-            # -> pridava se do combine indexy v array (i s globalnimi promennymi) 
-            list_of_indexes = []
-            for idx in range(len(endpoint)):
-                list_of_indexes.append(str(idx))
-            add_array_to_a_combine_call(list_of_indexes, combine_call, "URL")
-            info_about_combine_blocks.append({'location': 'endpoint', 'type': 'indexes'})
-        elif endpoint_toggle == 'parameters':
-            # all parameters should be added to a combine call
-            for parameter in endpoint[1]:
-                add_parameter_to_combine_call(parameter, combine_call)
-                info_about_combine_blocks.append({'location': 'endpoint', 'type': 'parameters'})
-        elif endpoint_toggle == 'done_string':
-            # nothing needs to be done
-            None
-        else:
-            print("Chyba tady")
-            exit(1)
-
-        """ METHOD """
-        if method_toggle == 'parameters':
-            # in method can be only one parameter
-            if len(method[1]) != 1:
-                print("Proper exception")
-                exit(1)
-            for parameter in method[1]:
-                add_parameter_to_combine_call(parameter, combine_call)
-                info_about_combine_blocks.append({'location': 'method', 'type': 'parameters'})
-        elif method_toggle == 'done_string':
-            # nothing needs to be done
-            None
-        else:
-            print("Raise proper exception")
-            exit(1)
-        
-        """ HEADER """
-        if header_toggle == 'indexes':
-            # get an array of BODY values
-            array_values = []
-            for element in header:
-                array_values.append(element[0])
-            add_array_to_a_combine_call(array_values, combine_call, "HEADER")
-            info_about_combine_blocks.append({'location': 'header', 'type': 'indexes'})
-        elif header_toggle == 'parameters':
-            # pridaji se pouze informace o parametru
-            for element in header[1]:
-                add_parameter_to_combine_call(element, combine_call)
-                info_about_combine_blocks.append({'location': 'header', 'type': 'parameters'})
-        elif header_toggle == 'done_string':
-            # nothing needs to be done
-            None
-        else:
-            print("raise proepr exception")
-            exit(1)
-
-        """ BODY """
-        if body_toggle == 'indexes':
-            # get an array of BODY values
-            list_of_indexes = []
-            for idx in range(len(body)):
-                list_of_indexes.append(str(idx))
-            add_array_to_a_combine_call(list_of_indexes, combine_call, "BODY")
-            info_about_combine_blocks.append({'location': 'body', 'type': 'indexes'})
-        elif body_toggle == 'parameters':
-            # pridaji se pouze informace o parametru
-            for element in body[1]:
-                add_parameter_to_combine_call(element, combine_call)
-                info_about_combine_blocks.append({'location': 'body', 'type': 'parameters'})
-        elif body_toggle == 'done_string':
-            # nothing needs to be done
-            None
-        else:
-            print("raise proper exception")
-            exit(1)
-
-        print("------ MAIN COMBINE CALLS ----")
-        for element in combine_call.body['parameters']:
-            print(element)
-
-        print("------ INFO ABOUT BLOCKS -----")
-        for element in info_about_combine_blocks:
-            print(element)
-        
-        """
-        COMBINE CALL
-        """
-        combine_response = api_call_combine(combine_call)
-
-        print("----------COMBINE MAIN RESPONSE-----------")
-        for element in combine_response:
-            print(element)
-
-        """
-        check if the number of values for the first case is equal to the number of it's descriptions
-        """
-        if len(info_about_combine_blocks) != len(combine_response[0]):
-            print("Proper exception is raised")
-            exit(4)
-
-
-
-        """
-        Evaluate the combine response
-        Look into endooint taged url 
-            -> are there any tags? Or is it fulfiled? Should I have some toggle to indicate that?
-            -> fill the tags with values -> what with a global variables behaviour -> should be similiar 
-                algorithm to the one before -> but it has to support global variables across the all parts
-        Look into method taged string 
-            -> should it be skiped? Or should the value be taken
-        Look into header taged string
-        Look into body taged string
-        """
-        globes = []
-
-        
-        """
-        result = [
-            ([URL, method, header, body], {GLOBALS}),
-            ([URL, method, header, body], {GLOBALS})
-            ....
-        ]
-        """
-        result = []
-
-
-        print("----------INFO ABOUT COMBINE BLOCKS-----------")
-        for element in info_about_combine_blocks:
-            print(element)
-
-        endpoint_is_evaluated = False
-
-
-
-        endpoint_test_cases = []
-        method_test_cases = []
-        header_test_cases = []
-        body_test_cases = []
-        
-        endpoint_param_array = []
-        method_param_array = []
-        header_param_array = []
-        body_param_array = []     
-        # Projdi jednotlive pripady z combine response
-        case_cnt = 0
-        for case in combine_response:
-            # TODO: co udelat for idx in len combine response + call=combine_response.pop()
-            test_case_parts = []
-            headies = []
-            bodies = []
-            endies = []
-            methies = []
-            # projdi vsechny jeho hodnoty
-            for value_idx in range(len(case)):
-                # get the infromation about this value
-                info_about_current_block = info_about_combine_blocks[value_idx]
-                if info_about_current_block['location'] == 'endpoint':
-                    """ ENDPOINT """
-                    if info_about_current_block['type'] == 'indexes':
-                        """ indexes """
-                        value_of_case = endpoint[int(case[value_idx])]
-                        endpoint_test_cases.append(value_of_case)
-                    elif info_about_current_block['type'] == 'parameters':
-                        """ parameters """
-                        value_of_case = case[value_idx]
-                        endies.append(value_of_case)
-                    else:
-                        print("Chyba")
-                        exit(1)
-                    endpoint_is_evaluated = True
-                elif info_about_current_block['location'] == 'method':
-                    """ METHOD """
-                    if info_about_current_block['type'] == 'parameters':
-                        """ parameters """
-                        value_of_case = case[value_idx]
-                        methies.append(value_of_case)
-                    else:
-                        exit(1)
-                elif info_about_current_block['location'] == 'header':
-                    """ HEADER """
-                    if info_about_current_block['type'] == 'indexes':
-                        """ indexes """
-                        value_of_case = header[int(case[value_idx])]
-                        header_test_cases.append(value_of_case)
-                    elif info_about_current_block['type'] == 'parameters':
-                        """ parameters """
-                        value_of_case = case[value_idx]
-                        headies.append(value_of_case)
-                    else:
-                        exit(1)
-                elif info_about_current_block['location'] == 'body':
-                    """ BODY """
-                    if info_about_current_block['type'] == 'indexes':
-                        """ indexes """
-                        value_of_case = body[int(case[value_idx])]
-                        body_test_cases.append(value_of_case)
-                    elif info_about_current_block['type'] == 'parameters':
-                        """ parameters """
-                        value_of_case = case[value_idx]
-                        bodies.append(value_of_case)
-                    else:
-                        exit(1)
-                else:
-                    exit(1)
-            endpoint_param_array.append(endies)
-            method_param_array.append(methies)
-            header_param_array.append(headies)
-            body_param_array.append(bodies)
-            case_cnt+=1
-
-        """ ENDPOINT """
-        if endpoint_toggle == 'indexes':
-            # nothing needs to be done
-            endpoint_test_cases = endpoint_test_cases
-        elif endpoint_toggle == 'parameters':
-            endpoint_test_cases = evaluate_combine_response(endpoint_param_array, endpoint, '<>', 'endpoint', [])
-        elif endpoint_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (endpoint[0], {})
-            for _ in range(len(combine_response)):
-                endpoint_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
-        """ METHOD """
-        if method_toggle == 'parameters':
-            method_test_cases = evaluate_combine_response(method_param_array, method, '<>', 'method', [])
-        elif method_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (method[0], {})
-            for _ in range(len(combine_response)):
-                method_test_cases.append(temp_tuple)
-        else:
-            exit(4)
-
-        """ HEADER """
-        if header_toggle == 'indexes':
-            # nothing needs to be done
-            header_test_cases = header_test_cases
-        elif header_toggle == 'parameters':
-            header_test_cases = evaluate_combine_response(header_param_array, header, '<>', 'header', [])
-        elif header_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (header[0], {})
-            for _ in range(len(combine_response)):
-                header_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
-        """ BODY """
-        if body_toggle == 'indexes':
-            # nothing needs to be done
-            body_test_cases = body_test_cases
-        elif body_toggle == 'parameters':
-            body_test_cases = evaluate_combine_response(body_param_array, body, '<>', 'body', [])
-        elif body_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (body[0], {})
-            for _ in range(len(combine_response)):
-                body_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
-        print("----------ENDPOINT TEST CASES-----------")
-        for element in endpoint_test_cases:
-            print(element)
-        print("----------METHOD TEST CASES-----------")
-        for element in method_test_cases:
-            print(element)
-        print("----------HEADER TEST CASES-----------")
-        for element in header_test_cases:
-            print(element)
-        print("----------BODY TEST CASES-----------")
-        for element in body_test_cases:
-            print(element)
-
-
-
-        combine_response_length = len(combine_response)
-        endpoint_test_cases_length = len(endpoint_test_cases)
-        method_test_cases_length = len(method_test_cases)
-        header_test_cases_length = len(header_test_cases)
-        body_test_cases_length = len(body_test_cases)
-        print("----------ENDPOINT TEST CASES LENGTH-----------")
-        print(combine_response_length)
-        print(endpoint_test_cases_length)
-        print(method_test_cases_length)
-        print(header_test_cases_length)
-        print(body_test_cases_length)
-        if not (combine_response_length == endpoint_test_cases_length == method_test_cases_length == header_test_cases_length == body_test_cases_length):
-            print("Ty sracky se sobe nerovnaji")
-            exit(5)
-
-
-
-
-        for test_case_idx in range(len(combine_response)):
-            endpoint,endpoint_globals = endpoint_test_cases[test_case_idx]
-            method,method_globals = method_test_cases[test_case_idx]
-            header,header_globals = header_test_cases[test_case_idx]
-            body,body_globals = body_test_cases[test_case_idx]
-
-            all_globals = {}
-            all_globals.update(endpoint_globals)
-            all_globals.update(method_globals)
-            all_globals.update(header_globals)
-            all_globals.update(body_globals)
-
-            """
-            Nahrad globalni promenne
-            """
-            for key in all_globals.keys():
-                # endpoint
-                start_tag = globe.config.url.non_priority_start
-                end_tag = globe.config.url.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in endpoint:
-                    endpoint = replace_the_tag_with_value(endpoint, tag, str(all_globals[key]), 0)
-                    print("ENDPOINT REPLACEMENT")
-
-                # method
-                start_tag = globe.config.method.non_priority_start
-                end_tag = globe.config.method.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in method:
-                    method = replace_the_tag_with_value(method, tag, str(all_globals[key]), 0)
-                    print("METHOD REPLACEMENT")
-
-                # header
-                start_tag = globe.config.header.non_priority_start
-                end_tag = globe.config.header.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in header:
-                    header = replace_the_tag_with_value(header, tag, str(all_globals[key]), 0)
-                    print("HEADER REPLACEMENT")
-
-                # body
-                start_tag = globe.config.body.non_priority_start
-                end_tag = globe.config.body.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in body:
-                    body = replace_the_tag_with_value(body, tag, str(all_globals[key]), 0)
-                    print("BODY REPLACEMENT")
-            test_case = [endpoint, method, header, body]
-            resulted_tuple = (test_case, all_globals)
-            result.append(resulted_tuple)
-
-        
-
-        print("----------RESULT-----------")
-        for element in result:
-            print(element)
-
-        super_duper_result.append(result)
-        for idx in range(len(super_duper_result)):
-            print("----------SUPER DUPER RESULT {}-----------".format(idx))
-            for element in super_duper_result[idx]:
-                print(element)
-
-        # if call_idx == 1:
-        #     print("jsem tady9")
-        #     print(call_idx)
-        #     exit(3)
-
-        # KONEC MEGA FORU
 
     print("**************************************")
     print("**************************************")
     print(" SUPERDUPER UPLNEJ KONEC")
     print("**************************************")
     print("**************************************")
-
     """ SUPER DUPER COMBINE REQUEST """
     super_duper_call = globe.CombineCallClass()
     super_duper_call.body['t_strength'] = 2
@@ -634,6 +245,154 @@ if __name__ == "__main__":
     print("**************************************")
     for element in final_result:
         print(element)
+
+
+
+
+    # create a file for templator
+    try:
+        f = open('templator_input2', 'w')
+    except:
+        message = "Could not open a templator input file: " + header_path
+        raise OpenFileError(__name__, "crate_templator_input_file", message)
+    
+    # pretify the string for templator to the readable format
+    tab = '\t'
+    print("----------")
+    # FIRST LAYER
+    f.write('[' + '\n')
+    current_tc_idx = 0
+    index_of_last_tc = len(final_result) - 1
+    for test_case in final_result:
+        # SECOND LAYER
+        f.write(tab+'[' + '\n')
+        index_of_last_call = len(test_case) - 1
+        current_call_idx = 0
+        for call in test_case:
+            # THIRD LAYER
+            if current_call_idx == index_of_last_call:
+                # no comma at the end
+                f.write(2*tab + str(call) + '\n')
+            else:
+                # comma at the end
+                f.write(2*tab + str(call) + ',\n')
+            # END THIRD LAYER
+            current_call_idx += 1
+        # SECOND LAYER END
+        if current_tc_idx == index_of_last_tc:
+            # no comma at the end
+            f.write(tab+']' + '\n')
+        else:
+            # comma at the end
+            f.write(tab+']' + ',\n')
+        current_tc_idx+=1
+    # FIRST LAYER END
+    f.write(']' + '\n')
+    f.close()
+
+    exit(1)
+
+    from input_parser import get_test_cases, get_executable_template
+    # test_cases = get_test_cases("../test_cases/calls_4/tests_100")
+    test_cases = get_test_cases("./templator_input2")
+    template = get_executable_template("Pytest", test_cases)
+    
+    # from ast import literal_eval
+    # from general import get_file_content
+    # from decider import get_executable_template
+    # content = get_file_content("./templator_input2")
+    # content_array = literal_eval(content)
+    # from suiter_pytest import create_template as create
+    # create('./pre-templates/pytest.py', content_array)
+    # template = get_executable_template('Pytest', content_array)
+    exit(42)
+
+    # """
+    # First test case only / All test cases
+    # """
+    # if full_template == False:
+    #     # get first test case
+    #     first_test_case = get_first_test_case(test_cases)
+    #     # create a executable template based on a first test case
+    #     template = get_executable_template(framework, first_test_case)
+    # else:
+    #     # create a executable template based on all test cases
+    #     template = get_executable_template(framework, test_cases)
+
+    exit(1)
+
+    
+    
+    
+
+
+    
+
+    # print('[' + '\n')
+    # # projdi vsechny test cases
+    # for test_case in final_result:
+    #     for call in test_case:
+    #         print(call)
+    #     exit(1)
+
+    # f.write('[' + '\n')
+    # tc_cnt = 0
+    # # get the length of a first test case
+    # last_tc = len(final_result[0])-1
+    # for test_cases in final_result[0]:
+    #     print(test_cases)
+    #     exit(1)
+    #     seq_cnt = 0
+    #     last_seq = len(test_cases)-1
+    #     f.write(tab+'[' + '\n')
+    #     for tc in test_cases:
+    #         if seq_cnt == last_seq:
+    #             f.write(2*tab + str(tc) + '\n')
+    #         else:
+    #             f.write(2*tab + str(tc) + ',\n')
+    #         seq_cnt+=1
+    #     if tc_cnt == last_tc:
+    #         f.write(tab+']' + '\n')
+    #     else:
+    #         f.write(tab+'],' + '\n')
+    #         tc_cnt+=1
+    
+    # global test_cnt
+    # test_cnt += 1
+
+    # for element in templator_file_input:
+    #     print(element)
+
+    # templator_file_input = [templator_file_input] 
+    
+    # try:
+    #     f = open('templator_input', 'w')
+    # except:
+    #     message = "Could not open a templator input file: " + header_path
+    #     raise OpenFileError(__name__, "crate_templator_input_file", message)
+    
+    # f.write('[' + '\n')
+    # tc_cnt = 0
+    # last_tc = len(templator_file_input[0])-1
+    # for test_cases in templator_file_input[0]:
+    #     seq_cnt = 0
+    #     last_seq = len(test_cases)-1
+    #     f.write(tab+'[' + '\n')
+    #     for tc in test_cases:
+    #         if seq_cnt == last_seq:
+    #             f.write(2*tab + str(tc) + '\n')
+    #         else:
+    #             f.write(2*tab + str(tc) + ',\n')
+    #         seq_cnt+=1
+    #     if tc_cnt == last_tc:
+    #         f.write(tab+']' + '\n')
+    #     else:
+    #         f.write(tab+'],' + '\n')
+    #         tc_cnt+=1
+
+    # f.write(']' + '\n')
+    # f.close()
+    # exit(4)
 
     print("JSEM NA UPLNEM KONCI")
     exit(42)

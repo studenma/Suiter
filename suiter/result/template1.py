@@ -1139,22 +1139,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1162,22 +1162,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1185,22 +1185,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1208,22 +1208,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1231,22 +1231,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1254,22 +1254,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1277,22 +1277,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1300,22 +1300,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1323,22 +1323,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1346,22 +1346,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1369,22 +1369,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1392,22 +1392,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1415,22 +1415,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1438,22 +1438,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1461,22 +1461,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1484,22 +1484,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1507,22 +1507,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1530,22 +1530,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1553,22 +1553,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1576,22 +1576,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1599,22 +1599,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1622,22 +1622,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1645,22 +1645,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1668,22 +1668,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1691,22 +1691,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1714,22 +1714,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1737,22 +1737,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1760,22 +1760,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1783,22 +1783,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1806,22 +1806,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1829,22 +1829,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1852,22 +1852,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1875,22 +1875,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1898,22 +1898,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1921,22 +1921,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1944,22 +1944,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1967,22 +1967,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -1990,22 +1990,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2013,22 +2013,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2036,22 +2036,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2059,22 +2059,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2082,22 +2082,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2105,22 +2105,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2128,22 +2128,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2151,22 +2151,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2174,22 +2174,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2197,22 +2197,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2220,22 +2220,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2243,22 +2243,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2266,22 +2266,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2289,22 +2289,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2312,22 +2312,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2335,22 +2335,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2358,22 +2358,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2381,22 +2381,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2404,22 +2404,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2427,22 +2427,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2450,22 +2450,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2473,22 +2473,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2496,22 +2496,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2519,22 +2519,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2542,22 +2542,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2565,22 +2565,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2588,22 +2588,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2611,22 +2611,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2634,22 +2634,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2657,22 +2657,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2680,22 +2680,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2703,22 +2703,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2726,22 +2726,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2749,22 +2749,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2772,22 +2772,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2795,22 +2795,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2818,22 +2818,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2841,22 +2841,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2864,22 +2864,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2887,22 +2887,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2910,22 +2910,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2933,22 +2933,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2956,22 +2956,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -2979,22 +2979,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3002,22 +3002,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3025,22 +3025,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3048,22 +3048,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3071,22 +3071,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3094,22 +3094,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3117,22 +3117,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3140,22 +3140,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3163,22 +3163,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3186,22 +3186,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3209,22 +3209,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3232,22 +3232,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3255,22 +3255,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3278,22 +3278,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3301,22 +3301,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3324,22 +3324,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3347,22 +3347,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body2.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3370,22 +3370,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body3.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3393,22 +3393,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))
@@ -3416,22 +3416,22 @@ def list_of_all_cases(test_case, request_id):
         if request_id == "call_1":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=substract"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_3":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=multiply"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         elif request_id == "call_4":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=divide"
             method = "GET"
-            header = {'Content-Type': 'application/json'}
+            header = {'Content-Type': '<json,yaml>', 'Host': '<>', 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Accept-Encoding': 'gzip,deflate', 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'Keep-Alive': '300', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
             body = "../input/body1.json"
         else:
             raise Exception("Should have never gotten here: [{},{}]".format(test_case,request_id))

@@ -24,8 +24,6 @@ Input has a following strucure (the result of input_parser module):
 *** Output ***
 The test suite for python
 """
-
-from input_parser import get_test_cases
 from input_parser import get_header_from_file
 from exceptions import OpenFileError
 from textwrap import indent
@@ -45,7 +43,6 @@ EXPECTION_ELSE_MESSAGE = "\"Should have never gotten here: [{{}},{{}}]\".format(
 
 def prefix_format_calculation(case_amount):
     return "{{0:0{}}}".format(len(str(abs(case_amount))))
-
 
 def prepare_verify_tag(tc):
     """
@@ -282,7 +279,6 @@ def fill_the_pre_template(path, tc):
     f = open('./result/template.py', 'w')
     f.write(new_file_content)
     f.close()
-
 
 def create_template(content, tc):
     """
