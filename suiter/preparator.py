@@ -1,3 +1,11 @@
+"""
+This module provides the funcionality to create the input file for a templator module. 
+It reads the input json file, retrieve all the data out of it and combine its parameters 
+with respect to the user's specifications
+
+Functions:
+"""
+
 import json
 import logging
 logger = logging.getLogger(__name__)
@@ -5,164 +13,171 @@ logger.propagate = False
 
 from exceptions import *
 import suiter_classes_and_globals as globe
-from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_indexes_of_parameter_to_combine_call, add_array_to_a_combine_call
+from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_array_to_a_combine_call
 from general import replace_the_tag_with_value, get_file_content, verify_tway_value
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
-    """ Return the substring + the original string without this substring """
+    """ 
+    Get the content between start_tag and end_tag
+    Replace this content and its tags with a non- priority tags (doesn't really matter which one is used, but it has to be unified in whole application)    
+    EXAMPLE: https://<:variable:>/the/rest/of/a/url
+    Returns a tuple:
+    * string cut of:
+        * after: <>/the/rest/of/a/url
+    * content between the tags
+        * 'variable'
+    * position in url
+        * 10
+    """
     try:
         # get the index-range of content between start_tag and end_tag
         get_from = string.index(start_tag) + len(start_tag)
         get_to = string.index(end_tag, get_from)
-        # get the content of it
+        # get the content between them
         content = string[get_from:get_to]
-
-        # remove this start and end tag and replace it with non-priority ones (doesn't really matter which one is used, but it has to be unified)
+        # remove this content from string together with it's tags -> replace it with non-priority tags
         modified_string = string[:(get_from-len(start_tag))] + replace_with_start + replace_with_end + string[(get_to+len(end_tag)):]
-
-        # get the position of already evaluated part of string (this function is going to be called more than a once for the same string)
-        # So, next iteration has to start from this position, otherwise it will find the same tag
+        """
+        Get the position of already evaluated part of string (this function is going to be called more than a once for the same string)
+        So, next iteration has to start from this position, otherwise it will find the same tag
+        """
         position = get_from-len(start_tag) + len(replace_with_start) + len(replace_with_end)
     except ValueError:
         message = "Some of the tag was probably not ended"
         raise EndpointSemanticError(__name__, "find_between", message)
-
     return (modified_string, content, position)
-
-def tag_substring_evaluation(tag1, tag2):
-    """
-    Return a more important tag:
-        if the first variable is the substring of the second one: return tuple (tag2,tag1)
-        if the second variable is the substring of the first one: return tuple (tag1,tag2)
-    Return None if none of them are substrings
-    """
-    logging.debug('Evaluating the tag substrings: {} and {}'.format(tag1, tag2))
-    if tag1 == tag2:
-        message = "The start tag '{}' and it's end '{}' can not be the same".format(tag1,tag2)
-        raise ConfigurationFileError(__name__, "conf_variabletag_substring_evaluation_substring_evaluation", message)
-    elif tag1 in tag2:
-        return (tag2,tag1)
-    elif tag2 in tag1:
-        return (tag1,tag2)
-    else:
-        None
 
 def general_string_parser(content_string, location):
     """ 
-    Parse the given string of header/url content 
+    Parse the given string of endpoint/method/header/body content 
     * search for all parameters in this string
+    **  all params are replaced with a starting and ending symbol of non priority tag
     * evaluate what type of parameter it is:
         ** enumerate type
         ** global variable type
         ** local variable type
-    * add these parameteres to a 'globe.all_parameters' (indikuje, jake globalni promenne bybly pouzity v cele aplikace)
-    * all params are replaced with a starting and ending symbol of non priority tag
+    * add these parameteres to a 'globe.all_parameters' (to indicate which global variable names were used within this application run)
     Return a tuple:
-        * modified string -> every parameter is replaced with a low-prio start and end tag 
+        * modified string -> every parameter is replaced with a non priority start and end tag 
             ** before: https://mydomain/addUser/<:user:>/<>/<1,2,3,4,5>/<:used:>
             ** after:  https://mydomain/addUser/<>/<>/<>/<>
             # before:  {'Content-type': '<123,456>', '<>': '<:var:>'}
             # after:   {'Content-type': '<>', '<>': '<>'}
-        * list of found parameters:
+        * list of parameters found:
         [
             {'location': $location, 'type': 'global_variable', 'name': 'user', 'id': 0}
             {'location': $location, 'type': 'global_variable', 'name': 'used', 'id': 1}
             {'location': $location, 'type': 'local_variable', 'id': 2}
             {'location': $location, 'type': 'enumerate', 'content': 'ABC', 'id': 3}
             {'location': $location, 'type': 'enumerate', 'content': '1,2,3,4,5', 'id': 4}
-            
         ]
     """
-    # logging.debug('Calling the general_string_parser function with a following parameters: [{}, {}]'.format(content_string, location))
-
-    # if the location is endpoint -> the varaibles in global class are stored as 'url', not 'endpoint'
-    if location == "endpoint":
-        globe_location = 'url'
-    else:
-        # otherwise it is the same name as in the location variable passed by function parameter
-        globe_location = location
+    logging.debug('Calling the general_string_parser function with a following parameters: [{}, {}]'.format(content_string, location))
     
-    # starting and ending variables
-    enum_start_tag = getattr(globe.config, globe_location).enum.start
-    enum_end_tag = getattr(globe.config, globe_location).enum.end
-    variable_start_tag = getattr(globe.config, globe_location).variable.start
-    variable_end_tag = getattr(globe.config, globe_location).variable.end
-    # prio and non prio variables
-    prio_start_tag = getattr(globe.config, globe_location).priority_start
-    prio_end_tag = getattr(globe.config, globe_location).priority_end
-    non_prio_start_tag = getattr(globe.config, globe_location).non_priority_start
-    non_prio_end_tag = getattr(globe.config, globe_location).non_priority_end
+    """
+    Get the format of tags
+    * 2 types of tags in each part
+    ** enumerate and local_variable (default <>)
+    ** global_variable (default <::>)
+    * By default, the enumerate tag is substring of global variable tag
+    ** the priority tag is the one which should be searched in string first
+    ** by default, priority tag is global_variable
+    """
+    # enumerate tags
+    enum_start_tag = getattr(globe.config, location).enum.start
+    enum_end_tag = getattr(globe.config, location).enum.end
+    # global varaible tags
+    variable_start_tag = getattr(globe.config, location).variable.start
+    variable_end_tag = getattr(globe.config, location).variable.end
+    # priority tags
+    prio_start_tag = getattr(globe.config, location).priority_start
+    prio_end_tag = getattr(globe.config, location).priority_end
+    # non priority tags
+    non_prio_start = getattr(globe.config, location).non_priority_start
+    non_prio_end = getattr(globe.config, location).non_priority_end
+
     # list of all parameters in given string
     parameters = []
-
     """
-    Search for all parameters in header/url
+    Search for all parameters in endpoint/method/header/body
     variables:
         * e_idx     = index of location, where the enumerate start tag was found
-        * v_idx     = index of location, where the variable start tag was found
+        * v_idx     = index of location, where the global variable start tag was found
         * position  = indicates the location of pointer in string (to avoid searching tags which were already been found)
-        * globe.param_id_counter = current parameter id (global varaible - is reseted to 0 after every combine call)
-        * globe.all_parameters   = list of all parameters collected (reseted after every combine call) 
+        * globe.param_id_counter = current parameter id (each parameter has a different ID - in context of whole app run)
     used functions:
-        * find_between() = to get the content in between starting and ending tag
-            ** returns: 
+        * find_between() = to get the content between the starting and ending tag
     """
-    position = 0
-    # the first search of enumerate and varaible starting tags in string
+    position = 0 # possitional index in the string
+    # the first search of enumerate and variable starting tags in string
     e_idx = content_string.find(enum_start_tag)
     v_idx = content_string.find(variable_start_tag)
-    # end this loop when no more starting tags were found
-    while e_idx != -1 or v_idx != -1:   
+    while e_idx != -1 or v_idx != -1: # end this loop when no more starting tags were found
         """
         If the ENUM and VARIABLE indexes were found in the same index
         -> it means one of them is substring of another one
-        The non substring one has always the priority (priority tags in config class)
+        The one which is not a substring has always the priority
+        * default example: https://<:variable:>
+            -> both '<' and '<:' starts at the same position
+            -> the '<:' is more important
         """
         if e_idx == v_idx:
             if prio_start_tag == enum_start_tag:
                 """
-                Modify contnet_string for current parameter
-                Get the content of current parameter
-                Count the position for next search
-                """
-                # get (modified_content_string, content, position)
-                resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                temp = content_string
+                ENUM tag is the priority one
+                * Get the content of current parameter
+                * Modify a tagged string
+                * Count the position for next search
+                * find_between(string, start_tag, end_tag, start_replacement, end_replacement) returns tuple:
+                    * string cut
+                        * before: https://<:variable:>/the/rest/of/a/url
+                        * after: <>/the/rest/of/a/url
+                    * content between the tags
+                        * 'variable'
+                    * position in url
+                        * 10
+                """                
+                resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start, non_prio_end)
+                original_string = content_string
                 content_string = content_string[:position] + resulted_tuple[0]
                 content = resulted_tuple[1]
-                position = len(temp[:position]) + resulted_tuple[2]
-
-                # check if the content is empty string -> it is a local variable
-                # otherwise it is enumerate type
-                if len(content) == 0:
-                    p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
-                else:
-                    p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
-                
-                # add the information about this parameter to a reulted array
-                parameters.append(p)
+                position = len(original_string[:position]) + resulted_tuple[2]
 
                 """
+                Add the information about this parameter to a resulted array of parameters
+                """
+                # check if the content is empty string
+                if len(content) == 0:
+                    # -> it is a local variable
+                    p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
+                else:
+                    # -> it is a enumerated type
+                    p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
+                parameters.append(p)
+                
+                """
                 Evaluate which tag was already evaluated
-                If e_idx or v_idx was evaluated, the next occurence have to be searched
-                In this case the indexes are the same -> have to search new idx for both
+                If e_idx or v_idx was evaluated, the next occurence of it has to be searched
+                In this case the indexes are the same -> have to search new indexes for both
                 """
                 e_change = e_idx
                 v_change = v_idx
             elif prio_start_tag == variable_start_tag:
                 """
-                Modify content_string for current parameter
-                Get the content of current parameter (variable)
-                Count the position for next search
+                VARIABLE tag is the priority one
+                * Get the content of current parameter
+                * Modify a tagged string
+                * Count the position for next search
                 """
-                # get (modified_content_string, content, position)
-                resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                temp = content_string
+                resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start, non_prio_end)
+                original_string = content_string
                 content_string = content_string[:position] + resulted_tuple[0]
                 variable = resulted_tuple[1]
-                position = len(temp[:position]) + resulted_tuple[2]
+                position = len(original_string[:position]) + resulted_tuple[2]
 
-                # add the information about this parameter to a reulted array
+                """
+                Add the information about this parameter to a resulted array of parameters
+                """
                 p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
                 parameters.append(p)
 
@@ -179,125 +194,135 @@ def general_string_parser(content_string, location):
         else:
             if e_idx < v_idx:
                 """
-                Unless the e_idx == -1
+                ENUM is found before VARIABLE
+                * unless the e_idx is not -1 (no more tag was found)
                 -> e_idx should be evaluated before v_idx
-                -> v_idx will stay the same, new e_idx will be search then
+                -> v_idx will stay the same, only the new e_idx will be search at the end
                 """
                 if e_idx == -1:
                     """
-                    Modify content_string for current parameter
-                    Get the content of current parameter (variable)
-                    Count the position for next search
+                    No more ENUM tags were found in string
+                    * Get the content of current parameter
+                    * Modify a tagged string
+                    * Count the position for next search
                     """
-                    # get (modified_content_string, content, position)
-                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = content_string
+                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start, non_prio_end)
+                    original_string = content_string
                     content_string = content_string[:position] + resulted_tuple[0]
                     variable = resulted_tuple[1]
-                    position = len(temp[:position]) + resulted_tuple[2]
-                    p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
+                    position = len(original_string[:position]) + resulted_tuple[2]
                     
-                    # add the information about this parameter to a reulted array
+                    """
+                    Add the information about this parameter to a resulted array of parameters
+                    """
+                    p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
                     parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
                     If e_idx or v_idx was evaluated, the next occurence have to be searched
                     In this case only the new v_idx should be searched 
-                    (e_idx will be search as well, but from a v_idx starting point) -> algorithm will find the same as before
+                    (e_idx will be search as well, but from a v_idx starting point) -> algorithm will find the same one as before
                     """
                     v_change = v_idx
                     e_change = v_idx
                 else:
                     """
-                    Modify content_string for current parameter
-                    Get the content of current parameter (content)
-                    Count the position for next search
+                    ENUM is found before VARIABLE
+                    * Get the content of current parameter
+                    * Modify a tagged string
+                    * Count the position for next search
                     """
-                    # get (modified_content_string, content, position)
-                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = content_string
+                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start, non_prio_end)
+                    original_string = content_string
                     content_string = content_string[:position] + resulted_tuple[0]
                     content = resulted_tuple[1]
-                    position = len(temp[:position]) + resulted_tuple[2]
+                    position = len(original_string[:position]) + resulted_tuple[2]
 
-                    # check if the content is empty string -> it is a local variable
-                    # otherwise it is enumerate type
+                    """
+                    Add the information about this parameter to a resulted array of parameters
+                    """
+                    # check if the content is empty string
                     if len(content) == 0:
+                        # -> it is a local variable
                         p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
                     else:
+                        # -> it is a enumerated type
                         p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
-
-                    # add the information about this parameter to a reulted array
                     parameters.append(p)
                     
                     """
                     Evaluate which tag was already evaluated
                     If e_idx or v_idx was evaluated, the next occurence have to be searched
                     In this case only the new e_idx should be searched 
-                    (v_idx will be search as well, but from a e_idx starting point) -> algorithm will find the same as before
+                    (v_idx will be search as well, but from a e_idx starting point) -> algorithm will find the same one as before
                     """
                     e_change = e_idx
                     v_change = e_idx
             elif v_idx < e_idx:
                 """
-                Unless the v_idx == -1
+                VARIABLE is found before ENUM
+                * unless the v_idx is not -1 (no more tag was found)
                 -> v_idx should be evaluated before e_idx
-                -> e_idx will stay the same, new v_idx will be search then
+                -> e_idx will stay the same, only the new v_idx will be search at the end
                 """
                 if v_idx == -1:
                     """
-                    Modify content_string for current parameter
-                    Get the content of current parameter (content)
-                    Count the position for next search
+                    No more VARIABLE tags were found in string
+                    * Get the content of current parameter
+                    * Modify a tagged string
+                    * Count the position for next search
                     """
-                    # get (modified_content_string, content, position)
-                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = content_string
+                    resulted_tuple = find_between(content_string[position:], enum_start_tag, enum_end_tag, non_prio_start, non_prio_end)
+                    original_string = content_string
                     content_string = content_string[:position] + resulted_tuple[0]
                     content = resulted_tuple[1]
-                    position = len(temp[:position]) + resulted_tuple[2]
+                    position = len(original_string[:position]) + resulted_tuple[2]
 
-                    # check if the content is empty string -> it is a local variable
-                    # otherwise it is enumerate type
+                    """
+                    Add the information about this parameter to a resulted array of parameters
+                    """
+                    # check if the content is empty string 
                     if len(content) == 0:
+                        # -> it is a local variable
                         p = {"location": location, "type": "local_variable", "id": globe.param_id_counter}
                     else:
+                        # -> it is an enumerated type
                         p = {"location": location, "type": "enumerate", "content": content, "id": globe.param_id_counter}
-
-                    # add the information about this parameter to a reulted array
                     parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
                     If e_idx or v_idx was evaluated, the next occurence have to be searched
                     In this case only the new e_idx should be searched 
-                    (v_idx will be search as well, but from a e_idx starting point) -> algorithm will find the same as before
+                    (v_idx will be search as well, but from a e_idx starting point) -> algorithm will find the same one as before
                     """
                     e_change = e_idx
                     v_change = e_idx
                 else:
                     """
-                    Modify content_string for current parameter
-                    Get the content of current parameter (content)
-                    Count the position for next search
+                    VARIABLE is found before ENUM
+                    * Get the content of current parameter
+                    * Modify a tagged string
+                    * Count the position for next search
                     """
-                    # get (modified_content_string, content, position)
-                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start_tag, non_prio_end_tag)
-                    temp = content_string
+                    resulted_tuple = find_between(content_string[position:], variable_start_tag, variable_end_tag, non_prio_start, non_prio_end)
+                    original_string = content_string
                     content_string = content_string[:position] + resulted_tuple[0]
                     variable = resulted_tuple[1]
-                    position = len(temp[:position]) + resulted_tuple[2]
+                    position = len(original_string[:position]) + resulted_tuple[2]
+
+                    """
+                    Add the information about this parameter to a resulted array of parameters
+                    """
                     p = {"location": location, "type": "global_variable", "name": variable, "id": globe.param_id_counter}
-                    
-                    # add the information about this parameter to a reulted array
                     parameters.append(p)
 
                     """
                     Evaluate which tag was already evaluated
                     If e_idx or v_idx was evaluated, the next occurence have to be searched
                     In this case only the new v_idx should be searched 
-                    (e_idx will be search as well, but from a v_idx starting point) -> algorithm will find the same as before
+                    (e_idx will be search as well, but from a v_idx starting point) -> algorithm will find the same one as before
                     """
                     v_change = v_idx
                     e_change = v_idx
@@ -315,157 +340,166 @@ def general_string_parser(content_string, location):
         e_idx = content_string.find(enum_start_tag, e_change+1)
         v_idx = content_string.find(variable_start_tag, v_change+1)
         globe.param_id_counter += 1
-    
     return content_string,parameters
 
 def remove_single_values_params(taged_string, param_array, location):
-    """ Remove the single values parameters and replace odpovidajici tag ve stringu """
-    # TODO: this function is not tested at all -> just with one use case
-    single_params_array = []
+    """
+    Remove the single values parameters
+    Also, replace their value in tagged string
+    """
+    # this array is discarded and never used at the end of this function (is used just to check that the single+multiple == all)
+    single_params_array = [] 
+    # this array is returned togetger with tagged string 
     combine_params_array = []  
-    param_array_size = len(param_array)
-
-    # print("---- JSEM NA ZACATKU ---")
-    # print(taged_string)
-    # for element in param_array:
-    #     print(element)
-    # print(location)
+    # get the number of all parameters (to validate that the single+multiple == all)
+    all_params_array = len(param_array)
     """
-    Decide which tag should be replaced - endpoint, method, body and header may have different non-priority tag
-    Taged string is taged with a non-priority tag
-    This function is called only with a param_array with the same locations
+    This function should be called only with a param_array with the same locations
     """
-    if location == 'endpoint':
-        tag = str(globe.config.url.non_priority_start) + str(globe.config.url.non_priority_end)
-        start_tag = str(globe.config.url.non_priority_start)
-        end_tag = str(globe.config.url.non_priority_end)
-    elif location == 'method':
-        tag = str(globe.config.method.non_priority_start) + str(globe.config.method.non_priority_end)
-        start_tag = str(globe.config.method.non_priority_start)
-        end_tag = str(globe.config.method.non_priority_end)
-    elif location == 'header':
-        tag = str(globe.config.header.non_priority_start) + str(globe.config.header.non_priority_end)
-        start_tag = str(globe.config.header.non_priority_start)
-        end_tag = str(globe.config.header.non_priority_end)
-    elif location == 'body':
-        tag = str(globe.config.body.non_priority_start) + str(globe.config.body.non_priority_end)
-        start_tag = str(globe.config.body.non_priority_start)
-        end_tag = str(globe.config.body.non_priority_end)
-    else:
-        raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
+    for par in param_array:
+        if par['location'] != location:
+            raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
 
-    # pop all values from param_array one by one
-    param_idx = 0 # this idx indcates on which occurence in struing the tag should be replaced -> it is neccessary to be here
+    """
+    Decide which tag should be replaced - endpoint, method, body and header may have different non-priority tags
+    Tagged string is tagged with a non-priority tag
+    """
+    start_tag = getattr(globe.config, location).non_priority_start
+    end_tag = getattr(globe.config, location).non_priority_end
+    tag = start_tag + end_tag
+
+    """
+    Pop all values from param_array one by one
+    """
+    param_idx = 0 # this counter indicates the nth occurence of tag which should be replaced
     while len(param_array) != 0:
         parameter = param_array.pop(0)
         """
-        Decide what type of parameter is this one - should be the same for all array which is sent
+        Decide what type of parameter is this one
         """
         if parameter['type'] == 'global_variable':
             """ GLOBAL VARIABLE """
-            # if there is 'value' key -> it is a global variable with a already existing value
-            if 'value' in parameter.keys():
+            if 'value' in parameter.keys(): 
+                # if there is 'value' in keys -> it is a global variable with a already existing value
                 # so, it should be removed and replaced
+                # TODO: I think this whole if statement can be removed
+                print("TODO: I think this whole if statement can be removed")
+                exit(1)
                 single_params_array.append(parameter)
                 replacement = parameter['value']
                 taged_string = replace_the_tag_with_value(taged_string, tag, replacement, param_idx)
                 param_idx-=1
                 # TODO: replace the value in string
             else:
-                # check if the 'reserved' element does exist (the global variable has already been added)
                 if ('reserved' in parameter.keys()) and (parameter['reserved'] == True):
-                    # if the 'reserved' element is contained -> it is replaced in a string with a <:varaible_name:> 
+                    # this global variable name has already been used
+                    # it is replaced in a string of global variable name covered in nonpriority tags (example: <varaible_name>) 
                     replacement = start_tag + parameter['name'] + end_tag
                     taged_string = replace_the_tag_with_value(taged_string, tag, replacement, param_idx)
                     single_params_array.append(parameter)
-                    param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
-                # check if the 'content' element does exist or is not array
+                    # the number of tags in string decreased -> the parameters has to be decreased as well (the param_idx has to be the same in next run -> now it gets -1, at the end of while it gets +1)
+                    param_idx-=1 
                 elif ('content' not in parameter.keys()) or (type(parameter['content']) is not list):
+                    # check if the 'content' element does exist or is not array - but should have never gotten here
                     raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
                 else:
-                    # check if the content does have only one element (TODO: should this even be allowed?)
                     if len(parameter['content']) == 1:
+                        # check if the content does have only one element (TODO: should this even be allowed?)
+                        # TODO: single value global variable is not supported anymore -> this block should be removed -> but to be sure it just ends with an error if it gets here
+                        print("TODO: single value global variable is not supported anymore -> this block should be removed")
+                        exit(1)
                         # GLOBLANI PROMENNA BYLA STANOVENA NA ZAKLADE TOHO, ZE TAM JE JEN JEDEN PARAMETER -> MUSI SE PRIDAT DO LOKALNICH PROMENNYCH
                         globe.global_params_with_value[parameter['name']] = parameter['content'][0]
                         # globe.global_params_reserved.append(parameter['name'])
                         single_params_array.append(parameter)
                         taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'][0], param_idx)
-                        param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
+                        # the number of tags in string decreased -> the parameters has to be decreased as well (the param_idx has to be the same in next run -> now it gets -1, at the end of while it gets +1)
+                        param_idx-=1
                     else:
                         combine_params_array.append(parameter)
         elif parameter['type'] == 'local_variable':
             """ LOCAL VARIABLE """
-            # content key should exist in param info
             if 'content' not in parameter.keys():
+                # content key should exist in parameter info
                 raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
-            # content should be an array
             if type(parameter['content']) is not list:
+                # content should be an array
                 raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
             # check if the content does have only one element
             if len(parameter['content']) == 1:
                 single_params_array.append(parameter)
                 taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
-                param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
+                # the number of tags in string decreased -> the parameters has to be decreased as well (the param_idx has to be the same in next run -> now it gets -1, at the end of while it gets +1)
+                param_idx-=1
             else:
                 combine_params_array.append(parameter)
         elif parameter['type'] == 'enumerate':
             """ ENUMERATE """
-            # can be string or list (should have not have a list with one value, but it is supported here as well)
-            # all values should be stored in 'content' element
-            # check if 'content' element does exist
+            # can be string or list (should not have a list with one value, but it is supported here as well just to be sure)
             if 'content' not in parameter.keys():
+                # content key should exist in parameter info
                 raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
-            # check if the type of content is array or string
             if type(parameter['content']) is str:
+                """ STRING """
+                # if enumerate is a string, it has only one value for sure -> can be replaced
                 single_params_array.append(parameter)
                 taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
-                param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
+                # the number of tags in string decreased -> the parameters has to be decreased as well (the param_idx has to be the same in next run -> now it gets -1, at the end of while it gets +1)
+                param_idx-=1
             elif type(parameter['content']) is list:
+                """ ARRAY """
                 # check if the content does have only one element
                 if len(parameter['content']) == 1:
+                    print("TODO: I think this is dead code -> this if statement should have been removed")
+                    exit(1)
                     single_params_array.append(parameter)
                     taged_string = replace_the_tag_with_value(taged_string, tag, parameter['content'], param_idx)
-                    param_idx-=1 # the number of parameters is decreased -> the idx has to be the same in next run (now it is -1, at the end of while, there is +1)
+                    # the number of tags in string decreased -> the parameters has to be decreased as well (the param_idx has to be the same in next run -> now it gets -1, at the end of while it gets +1)
+                    param_idx-=1
                 else:
                     combine_params_array.append(parameter)
             else:
-                # other types are not supported 
+                # other types of content are not supported 
                 raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
         else:
             raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
-        # TODO: removed to fix one problem -> not sure if another problem will not occur
         param_idx+=1
 
-    # Check if size of single_params_array and size of combine_params_array = param_array's size
-    # param_array is already 0, because all values were poped -> the param_array_size is evaluated in the beggining of function
-    if len(single_params_array) + len(combine_params_array) != param_array_size:
+    """
+    Check if the size of single_params_array + combine_params_array == all_params_array
+    """
+    if len(single_params_array) + len(combine_params_array) != all_params_array:
         raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
     
-    # Check if all tags in taged string were replaced - or at least the number of combine params match the numbeer of tags in string
+    """
+    Check if the number of tags in string is still the same as the number of parameters which will be combined (to make sure all tags will be replaced afterwards)
+    """
     tag_count = taged_string.count(tag)
     if tag_count != len(combine_params_array):
-        # the number of parameters which will be sent to combine does not correspond to the number of tags in string
         raise ShouldHaveNotGottenHereError(__name__, "remove_single_values_params")
-    
-    # print(taged_string)
-    # print("---- JSEM NA KONCI ---")
-    # exit(4)
+    # return the tuple of tagged string and the parameters to be combined for this string
     return taged_string,combine_params_array
 
-def edit_the_parameter_array(endpoint_element, parameter_array, location):
+def edit_the_parameter_array(element, parameter_array, location):
     """
-    Evaluate the string parser resulted parameter
+    Edit the given array of parameters
     * check if a global variable already has a value
     * separate the enumerate string by separator
     * remove single values parameters
-    * check if the number of local variables is the same as the nubmer of values in local_params
     * check if the global variable does have the value in global_params
+    * extend the information about parameter of the possible value it can acquire
     """
     """
     Iterate over all elements in returned param array
-    * evaluate global_variable
-    * evaluate local_variable
-    * evaluate enumerate
+    Different behavior for:
+        * global_variable
+            * if the global variable was used before -> set the 'Reserved': True 
+            * if the global variable was not used before -> add a possible values parameter can acquire
+        * local_variable
+        * enumerate
+    Variables:
+    * inputed_global_params = global variables of input json file
+    * global_params_reserved = indicates the global variable names which were used already 
     """ 
     inputed_global_params = globe.inputData.global_params
     separator = getattr(globe.config, location).enum.separator
@@ -473,30 +507,28 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
         if parameter['type'] == 'global_variable':
             """ GLOBAL VARAIBLE """
             if parameter['name'] in globe.global_params_reserved:
-                # check if this global variable was used in current combine call
+                # the global variable was used sometimes before (it will be replaced with a actual value after all combinations)
                 parameter['reserved'] = True
             else:
-                # the global parameter does not have assigned value yet
-                # check if it does exist in input data
+                # the global variable was not used before
                 if parameter['name'] not in inputed_global_params:
                     message = "The global parameter '{}' does not exist in input data".format(parameter['name'])
                     raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)
                 # insert the content array of this global variable into param information
                 parameter['content'] = inputed_global_params[parameter['name']]
-                # add this global to a reserved global variables (if the variable with a smae name occures in the same combine call)
+                # add this global to a reserved global variables (to forbit it to combine it multiple times)
                 globe.global_params_reserved.append(parameter['name'])
         elif parameter['type'] == 'local_variable':
-            """ LOCAL VARAIBLE """
-            # Pop and get the first value of local parameters 
+            """ LOCAL VARAIBLE """ 
             try:
-                pop_result = endpoint_element['local_params'].pop(0)
+                # Pop and get the first valuea of local parameters
+                local_params_pop = element['local_params'].pop(0)
             except IndexError:
                 message = "There is not enough local parameters in {}".format(location)
                 raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)
-            
-            # insert these values into parameter information
             try:
-                parameter['content'] = pop_result['values']
+                # insert these values into parameter information
+                parameter['content'] = local_params_pop['values']
             except:
                 message = "There is something wrong with a local_parameter '{}' (probably missing 'values')".format(parameter['name'])
                 raise EndpointSemanticError(__name__, "edit_the_parameter_array", message)         
@@ -504,154 +536,21 @@ def edit_the_parameter_array(endpoint_element, parameter_array, location):
             """ ENUMERATE VARAIBLE """
             # separate the content by a separator
             splited = parameter['content'].split(separator)
-
             # if there is only one element in splited array -> make it a string
             splited_length = len(splited)
             if splited_length == 1:
                 splited = str(splited[0])
             elif splited_length == 0:
                 raise ShouldHaveNotGottenHereError(__name__, "edit_the_parameter_array") 
-
             # insert the separated values into parameter information
             parameter['content'] = splited
         else:
             ShouldHaveNotGottenHereError(__name__, "edit_the_parameter_array")
 
-
-    # TODO: TODO: TODO: TODO: TODO: this have to be moved somewhere else
-    # if the parameters are in file, it would fail
-    # # check if the local params array is empty
-    # # otherwise it means there is some extra local param which will not be used
-    # if len(endpoint_element['local_params']) != 0:
-    #     message = "The amount of local parameters is bigger than needed"
-    #     raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
-    # # return is not neccessary because it is modified due deep copy
-    # return parameter_array
-
-def method_string_parser(method_string):
+def single_remove_global_from_string(tagged_string, global_values, location):
     """
-    Parse the given method string and retrieve a desired data out of it
-    4 possibilities of method entry:
-        * "GET"
-        * "<GET,POST,DELETE>"
-        * "<>" + local_variable
-        * "<:var:>" + global_variable
-    Result:
-        TODO:
-    """
-    logging.debug('Calling the method_string_parser function with following parameter: {}'.format(method_string))
-
-    # get the length of a method_string
-    len_method_str = len(method_string)
-    # starting and ending parameters
-    enum_start_tag = globe.config.method.enum.start
-    enum_end_tag = globe.config.method.enum.end
-    variable_start_tag = globe.config.method.variable.start
-    variable_end_tag = globe.config.method.variable.end
-    # prio and non prio variables
-    prio_start_tag = globe.config.method.priority_start
-    non_prio_start_tag = globe.config.method.non_priority_start
-    prio_end_tag = globe.config.method.priority_end
-    non_prio_end_tag = globe.config.method.non_priority_end 
-    # count the length of each tag
-    len_prio_start = len(prio_start_tag)
-    len_prio_end = len(prio_end_tag)
-    len_nonprio_start = len(non_prio_start_tag)
-    len_nonprio_end = len(non_prio_end_tag)
-    # find indexes of each tag
-    prio_idx_start = method_string.find(prio_start_tag)
-    prio_idx_end = method_string.find(prio_end_tag) 
-    noprio_idx_start = method_string.find(non_prio_start_tag)
-    noprio_idx_end = method_string.find(non_prio_end_tag)
-
-    """
-    Validate if the given string meets the requirements
-    Requirements:
-        * method_string is actually a string
-        * there should be only one parameter (does not matter if it's global or local)
-        * if there is parameter, check if it is closed as well
-        * the parameter's tags are in correct order
-    Count the number of occurences of:
-        * enum_start_tag
-        * enum_end_tag
-        * variable_start_tag
-        * variable_end_tag
-    Check if these number makes sense 
-    -> there should be only one parameter and it has to contain of start and end tag
-    -> these starting and ending tags should be in correct order
-    """
-    
-    """
-    Evaluation based on a location of priority and non-priority tags in method_string
-    """
-    if prio_idx_start == 0:
-        # there is priority tag at the very beginning 
-        # check if the priority tag is closed as well -> it should be in a very end
-        # the length of ending tag have to be counted in
-        if (prio_idx_end+len(prio_end_tag)) == len(method_string):
-            # the priority tag is closed
-            # get the content between priority tags
-            content = method_string[len_prio_start:(len_method_str-len_prio_end)]
-            # the content cannot contain any tag
-            tags = [enum_start_tag,enum_end_tag,variable_start_tag,variable_end_tag]
-            if any(x in content for x in tags):
-                message = "The content of priority tags contain some other tag"
-                raise EndpointSemanticError(__name__, "method_string_parser", message)
-            # check if the priority tag is varaible or enumerate
-            if prio_start_tag == enum_start_tag:
-                # prio is enumerate
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "method", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
-            else:
-                # prio is variable
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "method", 'type': 'variable', 'name': content, 'id': globe.param_id_counter}
-            globe.all_parameters.append(p)
-            globe.param_id_counter += 1
-        else:
-            message = "The priority tag is not closed properly"
-            raise EndpointSemanticError(__name__, "method_string_parser", message)
-    elif noprio_idx_start == 0:
-        # there is no priority tag, but non-priority tag is there
-        # check if the non-priority tag is closed-> it should be in a very end
-        # the length of ending tag have to be counted in
-        if (noprio_idx_end+len(non_prio_end_tag)) == len(method_string):
-            # the non-priority tag is closed
-            # get the content between non-priority tags
-            content = method_string[len_nonprio_start:(len_method_str-len_nonprio_end)]
-            # the content cannot contain any tag
-            tags = [enum_start_tag,enum_end_tag,variable_start_tag,variable_end_tag]
-            if any(x in content for x in tags):
-                message = "The content of non-priority tags contain some other tag"
-                raise EndpointSemanticError(__name__, "method_string_parser", message)
-            # check if the non-priority tag is varaible or enumerate
-            if non_prio_start_tag == enum_start_tag:
-                # non-prio is enumerate
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "method", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
-            else:
-                # prio is variable
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "method", 'type': 'variable', 'name': content, 'id': globe.param_id_counter}
-            globe.all_parameters.append(p)
-            globe.param_id_counter += 1
-    else:
-        # there is no starting tag of priority and non-priority -> it's a string with a single value
-        # check if the method_string is in list of allowed HTTP methods
-        if method_string in globe.list_of_allowed_http_methods:
-            # it is a legit HTTP method
-            """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-            p = {"location": "method", 'type': 'enumerate', 'content': method_string, 'id': globe.param_id_counter}
-            globe.all_parameters.append(p)
-            globe.param_id_counter += 1
-        else:
-            # it is some random string
-            message = "The value of method string doesn't make sense"
-            raise EndpointSemanticError(__name__, "method_string_parser", message)
-    return p
-
-def single_remove_global_from_string(taged_string, global_values, location):
-    """
+    Replace the given tagged string with a values of global variables (stored in global_values as a dictionary)
+    The location specifies which start and end tags were used to distinguish what is the global variable and what is not
     Input: 
     ('https://mydomain/addUser/4/GET/ABC/1/usr1/asd/fgh/<user>/A', {'user': 4, 'method': 'GET'})
     Output:
@@ -661,248 +560,22 @@ def single_remove_global_from_string(taged_string, global_values, location):
     end_tag = getattr(globe.config, location).non_priority_end
     for key in global_values.keys():
         tag = start_tag + key + end_tag
-        while tag in taged_string:
+        while tag in tagged_string:
             replacement = str(global_values[key])
-            taged_string = replace_the_tag_with_value(taged_string, tag, replacement, 0)
-    return taged_string
+            tagged_string = replace_the_tag_with_value(tagged_string, tag, replacement, 0)
+    return tagged_string
 
-
-def postprocessing_of_globals(tagedString_globals_array, location):
-    new_array = []
-    for element in tagedString_globals_array:
-        new_taged = single_remove_global_from_string(element[0], element[1], location)
-        tuple_replacement = (new_taged,element[1])
-        new_array.append(tuple_replacement)
-    return new_array
-
-def header_string_parser(header_string):
+def postprocessing_of_globals(tagedString_globalsArray, location):
+    """ 
+    Replace the global variables with values
+    * if there is more global variables with a same name in one location -> only the first occurence is replaced if this function is not called
     """
-    Parse the given header string and retrieve a desired data out of it
-    4 possibilities of header entry:
-        "values": "header1.yaml"
-        "values": "<header1.yaml,header2.yaml,header3.yaml>"
-        "values": "<>"
-        "values": "<:header_variable:>"
-    """
-    logging.debug('Calling the header_string_parser function with following parameter: {}'.format(header_string))
-
-    # get the length of a header_string
-    len_header_str = len(header_string)
-    # starting and ending parameters
-    enum_start_tag = globe.config.header.enum.start
-    enum_end_tag = globe.config.header.enum.end
-    variable_start_tag = globe.config.header.variable.start
-    variable_end_tag = globe.config.header.variable.end
-    # prio and non prio variables
-    prio_start_tag = globe.config.header.priority_start
-    non_prio_start_tag = globe.config.header.non_priority_start
-    prio_end_tag = globe.config.header.priority_end
-    non_prio_end_tag = globe.config.header.non_priority_end 
-    # count the length of each tag
-    len_prio_start = len(prio_start_tag)
-    len_prio_end = len(prio_end_tag)
-    len_nonprio_start = len(non_prio_start_tag)
-    len_nonprio_end = len(non_prio_end_tag)
-    # find indexes of each tag
-    prio_idx_start = header_string.find(prio_start_tag)
-    prio_idx_end = header_string.find(prio_end_tag) 
-    noprio_idx_start = header_string.find(non_prio_start_tag)
-    noprio_idx_end = header_string.find(non_prio_end_tag)
-
-    """
-    Evaluation based on a location of priority and non-priority tags in header_string
-    """
-    if prio_idx_start == 0:
-        # there is priority tag at the very beginning 
-        # check if the priority tag is closed as well -> it should be in a very end
-        # the length of ending tag have to be counted in
-        if (prio_idx_end+len(prio_end_tag)) == len(header_string):
-            # the priority tag is closed
-            # get the content between priority tags
-            content = header_string[len_prio_start:(len_header_str-len_prio_end)]
-            # the content cannot contain any tag
-            tags = [enum_start_tag,enum_end_tag,variable_start_tag,variable_end_tag]
-            if any(x in content for x in tags):
-                message = "The content of priority tags contain some other tag"
-                raise EndpointSemanticError(__name__, "header_string_parser", message)
-            # check if the priority tag is varaible or enumerate
-            if prio_start_tag == enum_start_tag:
-                # prio is enumerate
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "header", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
-            else:
-                # prio is variable
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "header", 'type': 'variable', 'name': content, 'id': globe.param_id_counter}
-            globe.all_parameters.append(p)
-            globe.param_id_counter += 1
-        else:
-            message = "The priority tag is not closed properly"
-            raise EndpointSemanticError(__name__, "header_string_parser", message)
-    elif noprio_idx_start == 0:
-        # there is no priority tag, but non-priority tag is there
-        # check if the non-priority tag is closed-> it should be in a very end
-        # the length of ending tag have to be counted in
-        if (noprio_idx_end+len(non_prio_end_tag)) == len(header_string):
-            # the non-priority tag is closed
-            # get the content between non-priority tags
-            content = header_string[len_nonprio_start:(len_header_str-len_nonprio_end)]
-            # the content cannot contain any tag
-            tags = [enum_start_tag,enum_end_tag,variable_start_tag,variable_end_tag]
-            if any(x in content for x in tags):
-                message = "The content of non-priority tags contain some other tag"
-                raise EndpointSemanticError(__name__, "header_string_parser", message)
-            # check if the non-priority tag is varaible or enumerate
-            if non_prio_start_tag == enum_start_tag:
-                # non-prio is enumerate
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "header", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
-            else:
-                # prio is variable
-                """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-                p = {"location": "header", 'type': 'variable', 'name': content, 'id': globe.param_id_counter}
-            globe.all_parameters.append(p)
-            globe.param_id_counter += 1
-    else:
-        # there is no starting tag of priority and non-priority -> it's a string with a single value
-        """ Add the information about this parameter to a global variable 'globe.all_parameters' """
-        content = header_string
-        p = {"location": "header", 'type': 'enumerate', 'content': content, 'id': globe.param_id_counter}
-        globe.all_parameters.append(p)
-        globe.param_id_counter += 1
-    return content
-
-def get_body_info(body_element):
-    """
-    Get the information about body part in call
-    Example inputs:
-    * STRING - file_path / body_content_string (toggle in input json: value_is_body_string)
-        "values": "body.json"
-        "values": "TotoJeTelo"
-        "values": "<>"
-        "values": "<body1.json,body2.json,body3.json>"
-        "values": "<:body_var:>"
-    * FILE    
-    * if only single file is passed -> it can contain a parameters
-    * open a file, get the content of file as a string
-    * similiar logic to header FILE
-    """
-    logging.debug('Getting info about body part')
-
-    print("***********************")
-    print("get_body_info")
-    print("***********************")
-
-    values_type = type(body_element['values'])
-    # check what type of value is given
-    if values_type is str:
-        # value is string -> the content is a file
-        body_tuple = general_string_parser(body_element['values'], 'body')
-        print("------- GENERAL STRING PARSER (STR) -----------")
-        print(body_tuple[0])
-        for element in body_tuple[1]:
-            print(element)
-
-        # edit the output
-        edit_the_parameter_array(body_element, body_tuple[1], 'body')
-        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
-        print(body_tuple[0])
-        for element in body_tuple[1]:
-            print(element)
-
-        # remove the single value parameters
-        # if there are no more parameters left, it means there is only one file -> we should repead the process of 
-        # seraching parameters, but this time in file content
-        body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
-        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
-        print(body_params[0])
-        for element in body_params[1]:
-            print(element)  
-
-        if len(body_params[1]) == 0:
-            # all parameteres have been already filled -> there is only one file
-            # look it in file content
-            file_content = get_file_content(body_params[0])
-            body_file_tuple = general_string_parser(file_content, 'body')
-            print("------- GENERAL STRING PARSER (FILE CONTENT) -----------")
-            print(body_file_tuple[0])
-            for element in body_file_tuple[1]:
-                print(element)
-
-            edit_the_parameter_array(body_element, body_file_tuple[1], 'body')
-            print("------- EDIT THE PARAMETER ARRAY (FILE CONTENT) -----------")
-            print(body_file_tuple[0])
-            for element in body_file_tuple[1]:
-                print(element)
-
-            body_params = remove_single_values_params(body_file_tuple[0], body_file_tuple[1], 'body')
-            print("-------- REMOVE SINGLE VALUES PARAMS (FILE CONTENT) ----------")
-            print(body_params[0])
-            for element in body_params[1]:
-                print(element)  
-
-    elif values_type is dict:
-        # value is dictionary -> change the type to from dictionary to string
-        body_value_string = json.dumps(body_element['values'])
-        body_tuple = general_string_parser(body_value_string, 'body')
-        # edit the output
-        edit_the_parameter_array(body_element, body_tuple[1], 'body')
-        body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
-    else:
-        print("proper error should be raised")
-        exit(2)
-
-    # check if the local params array is empty
-    # otherwise it means there is some extra local param which will not be used
-    if len(body_element['local_params']) != 0:
-        message = "The amount of local parameters is bigger than needed"
-        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
-
-    start_tag = globe.config.body.non_priority_start
-    end_tag = globe.config.body.non_priority_end
-    tag = start_tag + end_tag
-    
-    """
-    T-WAY
-    """
-    # check if the t-way element
-    if 't-way' in body_element.keys():
-        local_combine_call = globe.CombineCallClass()
-        local_combine_call.body['t_strength'] = str(body_element['t-way'])
-
-        for parameter in body_params[1]:
-            add_parameter_to_combine_call(parameter, local_combine_call)
-
-        print("----------COMBNINE INPUT-----------")
-        for element in local_combine_call.body['parameters']:
-            print(element)
-
-        """ Call the combine """
-        combine_response = api_call_combine(local_combine_call)
-        print("----------COMBINE RESPONSE-----------")
-        for element in combine_response:
-            print(element)
-        
-        body_test_cases = evaluate_combine_response(combine_response, body_params, tag, 'body', [])
-        print("----------EVALUATED COMBINE RESPONSE-----------")
-        for element in body_test_cases:
-            print(element)
-
-        new_array = postprocessing_of_globals(body_test_cases, 'body')
-        print("----------POSTPROCESSING AFTER COMBINE-----------")
-        for element in new_array:
-            print(element)            
-        return new_array,'indexes' 
-    else:
-        print("-------NOT TWAY RESULT-----------")
-        print(body_params[0])
-        for element in body_params[1]:
-            print(element)
-
-        if len(body_params[1]) == 0:
-            return body_params,'done_string' 
-        return body_params,'parameters'
-
+    resulted_array = []
+    for element in tagedString_globalsArray:
+        new_tagged_string = single_remove_global_from_string(element[0], element[1], location)
+        resulted_tuple = (new_tagged_string,element[1])
+        resulted_array.append(resulted_tuple)
+    return resulted_array
 
 def add_endpoint_to_combine_request(combine_call, endpoint, endpoint_toggle, info_about_combine_blocks):
     """ 
@@ -1072,7 +745,7 @@ def split_combine_response_into_locations(combine_response, info_about_combine_b
     * if the indexes values are used -> there cannot be any parameter value
     * method can have only one parameter value
     """
-    # TODO: should it be here? It fails now
+    # TODO: should it be here? It fails now -> where else it could be done?
     # # endpoint
     # if (len(endpoint_combined_indexes) > 0) and (len(endpoint_combine_response[0]) > 0):
     #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
@@ -1121,12 +794,12 @@ def split_combine_response_into_locations(combine_response, info_about_combine_b
 
 def evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endpoint_toggle):
     """ Evaluate the endpoint part of combine response """
-    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+    tag = globe.config.endpoint.non_priority_start + globe.config.endpoint.non_priority_end
     endpoint_test_cases = []
     if endpoint_toggle == 'indexes':
         endpoint_test_cases = endpoint_combine_response
     elif endpoint_toggle == 'parameters':
-        endpoint_test_cases = evaluate_combine_response(endpoint_combine_response, endpoint, tag, 'endpoint', [])
+        endpoint_test_cases = evaluate_combine_response(endpoint_combine_response, endpoint, tag, 'endpoint')
     elif endpoint_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (endpoint[0], {})
@@ -1141,7 +814,7 @@ def evaluate_method_part_of_response(method_combine_response, method, method_tog
     tag = globe.config.method.non_priority_start + globe.config.method.non_priority_end
     method_test_cases = []
     if method_toggle == 'parameters':
-        method_test_cases = evaluate_combine_response(method_combine_response, method, tag, 'method', [])
+        method_test_cases = evaluate_combine_response(method_combine_response, method, tag, 'method')
     elif method_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (method[0], {})
@@ -1158,7 +831,7 @@ def evaluate_header_part_of_response(header_combine_response, header, header_tog
     if header_toggle == 'indexes':
         header_test_cases = header_combine_response
     elif header_toggle == 'parameters':
-        header_test_cases = evaluate_combine_response(header_combine_response, header, tag, 'header', [])
+        header_test_cases = evaluate_combine_response(header_combine_response, header, tag, 'header')
     elif header_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (header[0], {})
@@ -1175,7 +848,7 @@ def evaluate_body_part_of_response(body_combine_response, body, body_toggle):
     if body_toggle == 'indexes':
         body_test_cases = body_combine_response
     elif body_toggle == 'parameters':
-        body_test_cases = evaluate_combine_response(body_combine_response, body, tag, 'body', [])
+        body_test_cases = evaluate_combine_response(body_combine_response, body, tag, 'body')
     elif body_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (body[0], {})
@@ -1184,6 +857,228 @@ def evaluate_body_part_of_response(body_combine_response, body, body_toggle):
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
     return body_test_cases
+
+def get_body_info(body_element):
+    """
+    Get the information about body part of request
+    Output
+    * Tuple (tagged_body, body_params) is returned
+    * The body toggle is returned:
+    ** 'indexes' means the combine call was called inside the body element
+    ** 'parameters' means the values are not combined yet
+    ** 'done_string' means nothing needs to be combined in body
+    Possible inputs:
+        * STRING - file path
+            * value_is_body_string == False or value_is_body_string is not set
+            * if only single file is passed, the parameters are searched in file content as well
+            "values": "body.json"
+            "values": "<>"
+            "values": "<body1.json,body2.json,body3.json>"
+            "values": "<:body_var:>"
+        * STRING - body content
+            * value_is_body_string == True
+            "values": "TotoJeTelo"
+            "values": "Toto<1,2,3>Telo"
+            "values": "Toto<:variable:>Telo"
+    """
+    logging.debug('Getting info about body part')
+    ###############DEBUG#################
+    print("***********************")
+    print("get_body_info")
+    print("***********************")
+    #####################################
+
+    """
+    Get the type of a input specification
+    Following formats are allowed:
+    * STRING
+    ** content is a file path (or multiple file paths)
+    ** if value_is_body_string -> the content is not a file path, but the body content
+    ** if there is only single file path -> the parameters can be searched inside of file as well
+    """
+    values_type = type(body_element['values'])
+    if values_type is str:
+        """ STRING """
+
+        """ 
+        Get all the parameters and their information from a given header string 
+        """
+        body_tuple = general_string_parser(body_element['values'], 'body')
+        tagged_string = body_tuple[0]
+        param_array = body_tuple[1]
+
+        ###############DEBUG#################
+        print("------- GENERAL STRING PARSER (STR) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+
+        """
+        Edit the parameters
+        * Insert all the values param can acquire
+        """
+        edit_the_parameter_array(body_element, param_array, 'body')
+
+        ###############DEBUG#################
+        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        """
+        Remove the single values parameters
+        Also, replace their value in tagged string
+        """
+        tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'body')
+
+        ###############DEBUG#################
+        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################  
+
+        """
+        If there is only one file path, search the content of this file and look for a parameters inside
+        """
+        if len(param_array) == 0:
+            """ 
+            Get all the parameters and their information from a given body file content 
+            """
+            file_content = get_file_content(tagged_string)
+            tagged_string,param_array = general_string_parser(file_content, 'body')
+
+            ###############DEBUG#################
+            print("------- GENERAL STRING PARSER (FILE CONTENT) -----------")
+            print(tagged_string)
+            for element in param_array:
+                print(element)
+            #####################################
+
+            """
+            Edit the parameters
+            * Insert all the values param can acquire
+            """
+            edit_the_parameter_array(body_element, param_array, 'body')
+
+            ###############DEBUG#################
+            print("------- EDIT THE PARAMETER ARRAY (FILE CONTENT) -----------")
+            print(tagged_string)
+            for element in param_array:
+                print(element)
+            #####################################
+
+            """
+            Remove the single values parameters
+            Also, replace their value in tagged string
+            """
+            tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'body')
+
+            ###############DEBUG#################
+            print("-------- REMOVE SINGLE VALUES PARAMS (FILE CONTENT) ----------")
+            print(tagged_string)
+            for element in param_array:
+                print(element)  
+            #####################################
+    elif values_type is dict:
+        # TODO: should I support dictionary type in body values?
+        print("The dictioanry type of body is not supported")
+        raise ShouldHaveNotGottenHereError(__name__, "get_body_info")
+        # # value is dictionary -> change the type to from dictionary to string
+        # body_value_string = json.dumps(body_element['values'])
+        # body_tuple = general_string_parser(body_value_string, 'body')
+        # # edit the output
+        # edit_the_parameter_array(body_element, body_tuple[1], 'body')
+        # body_params = remove_single_values_params(body_tuple[0], body_tuple[1], 'body')
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "get_body_info")
+
+    """
+    Check if all the values from local_params were used
+    """
+    if len(body_element['local_params']) != 0:
+        message = "The number of local parameteres of body is higher then needed"
+        raise InputFileError(__name__, "get_body_info", message)
+
+
+    """
+    Check if the 't-way' element is set
+    Combine the parameters only within the body element
+    """
+    tag = globe.config.body.non_priority_start + globe.config.body.non_priority_end
+    if 't-way' in body_element.keys():
+        # get the value of t-way
+        tway_value = body_element['t-way']
+
+        # check if the t-way value does make sense in comparison with number of parameters
+        number_of_parameteres = len(param_array)
+        verify_tway_value(tway_value, number_of_parameteres)
+
+        """
+        Create a combine request for body
+        """
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(tway_value)
+        # insert all parameters into a combine input
+        for parameter in param_array:
+            add_parameter_to_combine_call(parameter, local_combine_call)
+
+        ###############DEBUG#################
+        print("----------COMBNINE INPUT-----------")
+        for element in local_combine_call.body['parameters']:
+            print(element)
+        #####################################
+
+        """ 
+        Call the combine 
+        """
+        combine_response = api_call_combine(local_combine_call)
+
+        ###############DEBUG#################
+        print("----------COMBINE RESPONSE-----------")
+        for element in combine_response:
+            print(element)
+        #####################################
+        
+        """
+        Evaluate the combine response
+        """
+        body_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'body')
+        
+        ###############DEBUG#################
+        print("----------EVALUATED COMBINE RESPONSE-----------")
+        for element in body_test_cases:
+            print(element)
+        #####################################
+
+        """
+        Replace the global params with values
+        * in case of multiple global parameters with a same name, the other occurences are replaced with value
+        """
+        body_test_cases = postprocessing_of_globals(body_test_cases, 'body')
+
+        ###############DEBUG#################
+        print("----------POSTPROCESSING AFTER COMBINE-----------")
+        for element in body_test_cases:
+            print(element)       
+        ##################################### 
+          
+        return body_test_cases,'indexes' 
+    else:
+        ###############DEBUG#################
+        print("-------NOT TWAY RESULT-----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        resulted_tuple = (tagged_string,param_array)
+        if len(param_array) == 0:
+            return resulted_tuple,'done_string' 
+        return resulted_tuple,'parameters'
 
 def get_header_info(header_element):
     """
@@ -1331,7 +1226,7 @@ def get_header_info(header_element):
         verify_tway_value(tway_value, number_of_parameteres)
 
         """
-        Create a combine request for endpoint
+        Create a combine request for header
         """
         local_combine_call = globe.CombineCallClass()
         local_combine_call.body['t_strength'] = str(tway_value)
@@ -1347,15 +1242,15 @@ def get_header_info(header_element):
         """
         Evaluate the combine response
         """
-        endpoint_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'header', [])
+        header_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'header')
 
         """
         Replace the global params with values
         * in case of multiple global parameters in header dictioanry, the other occurences are replaced with value
         """
-        endpoint_test_cases = postprocessing_of_globals(endpoint_test_cases, 'url')
+        header_test_cases = postprocessing_of_globals(header_test_cases, 'header')
 
-        return endpoint_test_cases,'indexes' 
+        return header_test_cases,'indexes' 
 
     resulted_tuple = (tagged_string,param_array)
     if len(param_array) == 0:
@@ -1453,9 +1348,7 @@ def get_endpoint_info(endpoint_element):
     """
     Get the format of tag
     """
-    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
-    start_tag = globe.config.url.non_priority_start
-    end_tag = globe.config.url.non_priority_end
+    tag = globe.config.endpoint.non_priority_start + globe.config.endpoint.non_priority_end
   
     """
     Get all the parameters and their information from a given URL string
@@ -1475,7 +1368,7 @@ def get_endpoint_info(endpoint_element):
     Edit the parameters
     * Insert all the values param can acquire
     """
-    edit_the_parameter_array(endpoint_element, param_array, 'url')
+    edit_the_parameter_array(endpoint_element, param_array, 'endpoint')
 
     ###############DEBUG#################
     print("------- EDIT THE PARAMETER ARRAY -----------")
@@ -1545,7 +1438,7 @@ def get_endpoint_info(endpoint_element):
         """
         Evaluate the combine response
         """
-        endpoint_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'endpoint', [])
+        endpoint_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'endpoint')
 
         ###############DEBUG#################
         print("----------EVALUATED COMBINE RESPONSE-----------")
@@ -1772,8 +1665,8 @@ def create_input_file_for_templator():
             """
             for key in all_globals.keys():
                 # endpoint
-                start_tag = globe.config.url.non_priority_start
-                end_tag = globe.config.url.non_priority_end
+                start_tag = globe.config.endpoint.non_priority_start
+                end_tag = globe.config.endpoint.non_priority_end
                 tag = start_tag + key + end_tag
                 while tag in endpoint:
                     endpoint = replace_the_tag_with_value(endpoint, tag, str(all_globals[key]), 0)

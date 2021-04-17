@@ -1,3 +1,7 @@
+"""
+This module provides the definitions of exceptions used in Suiter application
+"""
+
 class Error(Exception):
     """Base class for other exceptions"""
     pass

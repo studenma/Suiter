@@ -11,7 +11,6 @@ not_priority_tag = ''
 not_priority_tag_end = ''
 
 param_id_counter = 0
-all_parameters = []
 global_params_with_value = {}
 global_params_reserved = []
 combine_request = None
@@ -21,7 +20,7 @@ list_of_allowed_http_methods = ["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT
 # variables
 config_path = '../config.ini'
 
-from preparator import tag_substring_evaluation
+from general import tag_substring_evaluation
 
 class ConfigDataClass(object):
     def __init__(self, config):
@@ -30,8 +29,8 @@ class ConfigDataClass(object):
         self.default_framework = config['GENERAL']['default_framework']
         self.default_input_file = config['GENERAL']['default_input_file']
         self.default_output_folder = config['GENERAL']['default_output_folder']
-        # URL
-        self.url = self.ConfigUrlClass(config['URL'])
+        # ENDPOINT
+        self.endpoint = self.ConfigEndpointClass(config['ENDPOINT'])
         #  METHOD
         self.method = self.ConfigMethodClass(config['METHOD'])
         # HEADER
@@ -40,14 +39,14 @@ class ConfigDataClass(object):
         self.body = self.ConfigBodyClass(config['BODY'])
 
     def extend_of_priority_tags(self):
-        # URL start
-        priority,non_priority = tag_substring_evaluation(self.url.enum.start, self.url.variable.start)
-        self.url.priority_start = priority
-        self.url.non_priority_start = non_priority
-        # URL end
-        priority,non_priority = tag_substring_evaluation(self.url.enum.end, self.url.variable.end)
-        self.url.priority_end = priority
-        self.url.non_priority_end = non_priority
+        # ENDPOINT start
+        priority,non_priority = tag_substring_evaluation(self.endpoint.enum.start, self.endpoint.variable.start)
+        self.endpoint.priority_start = priority
+        self.endpoint.non_priority_start = non_priority
+        # ENDPOINT end
+        priority,non_priority = tag_substring_evaluation(self.endpoint.enum.end, self.endpoint.variable.end)
+        self.endpoint.priority_end = priority
+        self.endpoint.non_priority_end = non_priority
         # METHOD start
         priority,non_priority = tag_substring_evaluation(self.method.enum.start, self.method.variable.start)
         self.method.priority_start = priority
@@ -73,7 +72,7 @@ class ConfigDataClass(object):
         self.body.priority_end = priority
         self.body.non_priority_end = non_priority
 
-    class ConfigUrlClass(object):
+    class ConfigEndpointClass(object):
         def __init__(self, configUrl):
             self.enum = self.ConfigEnumClass(configUrl)
             self.variable = self.ConfigVariableClass(configUrl)

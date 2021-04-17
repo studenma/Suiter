@@ -1,3 +1,6 @@
+"""
+This module provides general functions used in all other modules 
+"""
 from exceptions import *
 import re
 
@@ -41,7 +44,6 @@ def get_file_content(file_path):
         message = 'The file could not be opened'
         raise OpenFileError(__name__, "get_file_content", message)
 
-
 def verify_tway_value(tway_value, number_of_parameteres):
     """ 
     Verify if the value of t_way does make sense in comparison with number of parameters
@@ -53,6 +55,23 @@ def verify_tway_value(tway_value, number_of_parameteres):
     if tway_value > number_of_parameteres:
         message = "T-way value has to be less or equal to number of parameters"
         raise InputFileError(__name__, "verify_tway_value", message)
+
+def tag_substring_evaluation(tag1, tag2):
+    """
+    Return a more important tag:
+        if the first variable is the substring of the second one: return tuple (tag2,tag1)
+        if the second variable is the substring of the first one: return tuple (tag1,tag2)
+    Return None if none of them are substrings
+    """
+    if tag1 == tag2:
+        message = "The start tag '{}' and it's end '{}' can not be the same".format(tag1,tag2)
+        raise ConfigurationFileError(__name__, "conf_variabletag_substring_evaluation_substring_evaluation", message)
+    elif tag1 in tag2:
+        return (tag2,tag1)
+    elif tag2 in tag1:
+        return (tag1,tag2)
+    else:
+        None
 
 
 
