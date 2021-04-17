@@ -55,10 +55,9 @@ import os,sys,inspect
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir) 
-from input_parser import input_file_parser
-from input_parser import is_input_json_valid
+from suiter_input_parser import input_file_parser, is_input_json_valid
 from input_configuration import read_config_file
-from exceptions import *
+from suiter_exceptions import *
 
 mandatory_elements_array = ["test_sequence", "global_params"]
 

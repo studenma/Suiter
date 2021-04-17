@@ -11,10 +11,10 @@ import logging
 logger = logging.getLogger(__name__)
 logger.propagate = False
 
-from exceptions import *
+from suiter_exceptions import *
 import suiter_classes_and_globals as globe
-from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_array_to_a_combine_call
-from general import replace_the_tag_with_value, get_file_content, verify_tway_value
+from suiter_combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_array_to_a_combine_call
+from suiter_general import replace_the_tag_with_value, get_file_content, verify_tway_value
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
     """ 
@@ -803,7 +803,7 @@ def evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endp
     elif endpoint_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (endpoint[0], {})
-        for _ in range(len(combine_response)):
+        for _ in range(len(endpoint_combine_response)):
             endpoint_test_cases.append(temp_tuple)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
@@ -818,7 +818,7 @@ def evaluate_method_part_of_response(method_combine_response, method, method_tog
     elif method_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (method[0], {})
-        for _ in range(len(combine_response)):
+        for _ in range(len(method_combine_response)):
             method_test_cases.append(temp_tuple)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
@@ -835,7 +835,7 @@ def evaluate_header_part_of_response(header_combine_response, header, header_tog
     elif header_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (header[0], {})
-        for _ in range(len(combine_response)):
+        for _ in range(len(header_combine_response)):
             header_test_cases.append(temp_tuple)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
@@ -852,7 +852,7 @@ def evaluate_body_part_of_response(body_combine_response, body, body_toggle):
     elif body_toggle == 'done_string':
         # duplicate this string to have it in the same format (value, globals)
         temp_tuple = (body[0], {})
-        for _ in range(len(combine_response)):
+        for _ in range(len(body_combine_response)):
             body_test_cases.append(temp_tuple)
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
@@ -1563,12 +1563,14 @@ def create_input_file_for_templator():
         ##################################### 
 
         """
-        check if the number of values in combine response is equal to the number of it's descriptions (info_about_combine_blocks)
+        Check if the number of values in combine response is equal to the number of it's descriptions (info_about_combine_blocks)
         """
         if len(info_about_combine_blocks) != len(combine_response[0]):
             raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
 
-        """ Split the combine response into locations """ 
+        """ 
+        Split the combine response into locations 
+        """ 
         splited_combine_request = split_combine_response_into_locations(combine_response, info_about_combine_blocks, endpoint, header, body)
         endpoint_combine_response = splited_combine_request[0]
         method_combine_response = splited_combine_request[1]

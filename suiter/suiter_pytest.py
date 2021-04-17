@@ -24,8 +24,8 @@ Input has a following strucure (the result of input_parser module):
 *** Output ***
 The test suite for python
 """
-from input_parser import get_header_from_file
-from exceptions import OpenFileError
+from suiter_input_parser import get_header_from_file
+from suiter_exceptions import *
 from textwrap import indent
 
 import logging 

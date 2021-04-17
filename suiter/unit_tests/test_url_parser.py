@@ -6,10 +6,10 @@ import os,sys,inspect
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir) 
-from input_parser import url_parser
+from suiter_input_parser import url_parser
 from input_configuration import create_default_config
 from input_configuration import read_config_file
-from exceptions import EndpointSemanticError
+from suiter_exceptions import *
 
 """
 Valid test cases

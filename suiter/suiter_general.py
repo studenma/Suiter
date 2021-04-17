@@ -1,7 +1,7 @@
 """
 This module provides general functions used in all other modules 
 """
-from exceptions import *
+from suiter_exceptions import *
 import re
 
 # https://stackoverflow.com/questions/35091557/replace-nth-occurrence-of-substring-in-string

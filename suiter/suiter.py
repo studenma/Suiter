@@ -1,25 +1,12 @@
 """
-Module provides a generator of test suits
+Main Suiter module
+Provides a entry point of this application (main function)
+
+Functions:
+
+logger_config()
+argument_parser()
 """
-
-# import sys
-# import os
-# import stat
-# import json
-# import simplejson
-# import yaml
-# import requests
-# import logging
-# import subprocess
-# import copy
-# import argparse
-# import importlib
-# import inspect
-# from ast import literal_eval
-
-# from exceptions import LimitExceededError
-# from pprint import pprint
-
 
 # """
 # Global variables
@@ -40,27 +27,16 @@ Module provides a generator of test suits
 # tab = "    "
 # config_path = '../config.ini'
 
-# from template_picker import get_executable_template
-# from input_parser import get_test_cases
-# from input_parser import get_first_test_case
-# from input_parser import input_file_parser
 
-# from input_configuration import create_default_config
-# from input_configuration import read_config_file
-
-# full_template = True
-
-""" general """
 import logging
 import argparse
-""" Suiter modules """
-from input_parser import read_config_file, open_input_json_file, input_json_structure_validator
-from exceptions import *
-from suiter_classes_and_globals import InputDataClass
-from preparator import get_endpoint_info, get_method_info, get_header_info, get_body_info, single_remove_global_from_string
+
+from suiter_input_parser import read_config_file, open_input_json_file, input_json_structure_validator
+from suiter_exceptions import *
+from suiter_preparator import get_endpoint_info, get_method_info, get_header_info, get_body_info, single_remove_global_from_string, create_input_file_for_templator
 import suiter_classes_and_globals as globe
-from combine_request import create_combine_call, add_array_to_a_combine_call, add_parameter_to_combine_call, api_call_combine, evaluate_combine_response
-from general import replace_the_tag_with_value
+from suiter_combine_request import create_combine_call, add_array_to_a_combine_call, add_parameter_to_combine_call, api_call_combine, evaluate_combine_response
+from suiter_general import replace_the_tag_with_value
 
 def logger_config():
     """
@@ -159,8 +135,7 @@ if __name__ == "__main__":
     if is_valid[0] == False:
         message = is_valid[1]
         raise InputFileError(__name__, "main", message)
-    globe.inputData = InputDataClass(file_content)
-
+    globe.inputData = globe.InputDataClass(file_content)
 
     """
     Create a input file for templator module
@@ -170,54 +145,71 @@ if __name__ == "__main__":
     ** Call a combine to get all requests with combined values of endpoint, method, header and body
     * Combine all the resulted requests together with other requests in sequence
     """
-    from preparator import create_input_file_for_templator
-    super_duper_result = create_input_file_for_templator()
+    combined_requests = create_input_file_for_templator() 
+    number_of_requests_in_sequence = len(combined_requests)
+    # TODO: check if it corresponds to the nubmer of calls from input json file
 
-
+    ###############DEBUG#################
     print("**************************************")
     print("**************************************")
     print(" SUPERDUPER UPLNEJ KONEC")
     print("**************************************")
     print("**************************************")
-    """ SUPER DUPER COMBINE REQUEST """
-    super_duper_call = globe.CombineCallClass()
-    super_duper_call.body['t_strength'] = 2
+    #####################################
 
-    for call_idx in range(len(super_duper_result)):
-        block_name = "SUPERDUPER_{}".format(call_idx)
+    """
+    Create a combine request for final call combination
+    If the 't-way' key is specified, set the value of it, otherwise all combinations are made (the t-way value is the same as the number of combine parameter)
+    """
+    final_combine_call = globe.CombineCallClass()
+    if 't-way' in file_content:
+        tway_value = file_content['t-way']
+    else:
+        tway_value = number_of_requests_in_sequence
+    final_combine_call.body['t_strength'] = tway_value
+
+    """
+    Add values to combine request body
+    * the values are given to combine just as a 'indexes' to an existing array, where are these parameteres described
+    ** the indexes to the array have to be combined instead of actual value (to avoid problems with global variables)
+    """
+    for call_idx in range(number_of_requests_in_sequence):
+        block_name = "FINAL_REQUEST_{}".format(call_idx)
         list_of_indexes = []
-        for idx in range(len(super_duper_result[call_idx])):
+        for idx in range(len(combined_requests[call_idx])):
             list_of_indexes.append(str(idx))
-        add_array_to_a_combine_call(list_of_indexes, super_duper_call, block_name)
+        add_array_to_a_combine_call(list_of_indexes, final_combine_call, block_name)
 
-    # list_of_indexes = []
-    # for idx in range(len(super_duper_result[1])):
-    #     list_of_indexes.append(str(idx))
-    # add_array_to_a_combine_call(list_of_indexes, super_duper_call, "SUPERDUPER_SECOND")
-
-
-
+    ###############DEBUG#################
     print("------ SUPER DUPER COMBINE CALLS ----")
-    for element in super_duper_call.body['parameters']:
+    for element in final_combine_call.body['parameters']:
         print(element)
+    #####################################
 
-    combine_response = api_call_combine(super_duper_call)
+    """
+    Call a combine
+    """
+    combine_response = api_call_combine(final_combine_call)
+    ###############DEBUG#################
     print("----------COMBINE SUPER DUPER RESPONSE-----------")
     for element in combine_response:
         print(element)
-
-
+    #####################################
 
     final_result = []
-    # Projdi jednotlive pripady z combine response
-    case_idx = 0
     for case in combine_response:
-        # projdi vsechny jeho hodnoty
+        """
+        Go through all the cases in combine response
+        """
         case_array = []
         all_globals = {}
         for value_idx in range(len(case)):
-            value_of_case = super_duper_result[value_idx][int(case[value_idx])][0]
-            case_globals = super_duper_result[value_idx][int(case[value_idx])][1]
+            """
+            Go through every value in case
+            Get all the test case variables
+            """
+            value_of_case = combined_requests[value_idx][int(case[value_idx])][0]
+            case_globals = combined_requests[value_idx][int(case[value_idx])][1]
             all_globals.update(case_globals)
             case_array.append(value_of_case)
 
@@ -229,34 +221,32 @@ if __name__ == "__main__":
                 part = single_remove_global_from_string(part, all_globals, 'body')
                 element_array.append(part)
             new_globals.append(element_array)
-        
-        # case_array = []
-        # case_array.append(new_globals)
+    
         final_result.append(new_globals)
-        # print(final_result)
-        # exit(4)
-        case_idx+=1
-        # final_result.append(new_globals)
 
+    ###############DEBUG#################
     print("**************************************")
     print("**************************************")
     print("MEGA SUPER FINAL FINAL RESULT EVALUATED")
     print("**************************************")
     print("**************************************")
+    #####################################
     for element in final_result:
         print(element)
 
-
-
-
-    # create a file for templator
+    """
+    Create a file for templator
+    """
     try:
         f = open('templator_input2', 'w')
     except:
         message = "Could not open a templator input file: " + header_path
         raise OpenFileError(__name__, "crate_templator_input_file", message)
     
-    # pretify the string for templator to the readable format
+
+    """ 
+    Pretify the string for templator to the readable format
+    """
     tab = '\t'
     print("----------")
     # FIRST LAYER
@@ -290,9 +280,10 @@ if __name__ == "__main__":
     f.write(']' + '\n')
     f.close()
 
+    print("Jsem na uplnem konci")
     exit(1)
 
-    from input_parser import get_test_cases, get_executable_template
+    from suiter_input_parser import get_test_cases, get_executable_template
     # test_cases = get_test_cases("../test_cases/calls_4/tests_100")
     test_cases = get_test_cases("./templator_input2")
     template = get_executable_template("Pytest", test_cases)

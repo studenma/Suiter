@@ -6,9 +6,9 @@ import requests
 import logging
 logger = logging.getLogger(__name__)
 
-from exceptions import *
+from suiter_exceptions import *
 import suiter_classes_and_globals as globe
-from general import replace_the_tag_with_value
+from suiter_general import replace_the_tag_with_value
 
 def api_call_combine(combine_info):
     """

@@ -20,7 +20,7 @@ list_of_allowed_http_methods = ["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT
 # variables
 config_path = '../config.ini'
 
-from general import tag_substring_evaluation
+from suiter_general import tag_substring_evaluation
 
 class ConfigDataClass(object):
     def __init__(self, config):
@@ -132,7 +132,6 @@ class InputDataClass(object):
     def __init__(self, json_content):
         self.test_sequence = json_content['test_sequence']
         self.global_params = json_content['global_params']
-        # self.main_level_tway = json_content['t-way']
 
 class CombineCallClass(object):
     def __init__(self):

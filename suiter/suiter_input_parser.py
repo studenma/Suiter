@@ -7,9 +7,8 @@ import json
 import configparser
 import logging
 logger = logging.getLogger(__name__)
-
 from suiter_classes_and_globals import ConfigDataClass
-from exceptions import *
+from suiter_exceptions import *
 
 def create_default_config(file_path):
     """ change the configuration values - used for testing purposes """
@@ -86,14 +85,16 @@ def input_json_structure_validator(json_content):
             (after combining all API calls, also the combination of them has to be done)
     """
     logger.debug("Validating of a first level")
-    first_level_keys = ['test_sequence', 'global_params']
+    mandatory_first_level_keys = ['test_sequence', 'global_params']
+    optional_first_level_keys = ['t-way']
     first_level_input_keys = json_content.keys()
-    if len(first_level_input_keys) != len(first_level_keys):
-        message = "The number of keys at the first level of input json file is not correct"
-        return False,message
-    for element in first_level_keys:
+    for element in mandatory_first_level_keys:
         if element not in first_level_input_keys:
             message = "The '{}' element was not found in input json file".format(element) 
+            return False,message
+    for element in first_level_input_keys:
+        if (element not in mandatory_first_level_keys) and (element not in optional_first_level_keys):
+            message = "The '{}' element is not allowed to be in the first level of input json file".format(element) 
             return False,message
 
     """ TEST SEQUENCE
@@ -326,7 +327,7 @@ def input_json_structure_validator(json_content):
 
 
 """ MESS """
-from general import get_file_content
+from suiter_general import get_file_content
 from ast import literal_eval
 
 
