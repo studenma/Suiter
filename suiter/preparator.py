@@ -5,7 +5,7 @@ logger.propagate = False
 
 from exceptions import *
 import suiter_classes_and_globals as globe
-from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_indexes_of_parameter_to_combine_call
+from combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_indexes_of_parameter_to_combine_call, add_array_to_a_combine_call
 from general import replace_the_tag_with_value, get_file_content, verify_tway_value
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
@@ -675,163 +675,6 @@ def postprocessing_of_globals(tagedString_globals_array, location):
         new_array.append(tuple_replacement)
     return new_array
 
-def get_endpoint_info(endpoint_element):
-    """
-    Get the information about endpoint part in call
-    Tuple (modified_url, endpoint_params) is returned
-    Return:
-        * Differenet output if the combine was called and if not
-        COMBINE CALLED  -> (already filled url cases,True)
-        NOT CALLED      -> ((taged_string, parameter_info),False)
-    """
-    logging.debug('Getting info about endpoint part')
-
-    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
-    start_tag = globe.config.url.non_priority_start
-    end_tag = globe.config.url.non_priority_end
-
-    """ URL 
-    TODO: Check if the url structure is valid - nested tags and so on
-    Get the information about url
-    """
-
-    print("***********************")
-    print("get_endpoint_info")
-    print("***********************")
-    
-    parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
-    print("------- GENERAL STRING PARSER -----------")
-    print(parameters_tuple[0])
-    for element in parameters_tuple[1]:
-        print(element)
-
-    #########################################################################################
-    # this function was removed from this part and then modified to support endpoint,method, header and body
-    edit_the_parameter_array(endpoint_element, parameters_tuple[1], 'url')
-    #########################################################################################
-    print("------- EDIT THE PARAMETER ARRAY -----------")
-    print(parameters_tuple[0])
-    for element in parameters_tuple[1]:
-        print(element)
-
-    # chek if the endpoint_element['local_params'] is empty (indicates that all the local parameters was used)
-    # has to be here, because if the parameters are serached in file, it fails 
-    if len(endpoint_element['local_params']) != 0:
-        print(endpoint_element['local_params'])
-        message = "The number of local parameteres is higher then needed"
-        raise InputFileError(__name__, "edit_the_parameter_array", message)
-        exit(1)
-
-
-    # remove the single values parameters -> also replace their value in modified string
-    combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'endpoint')
-    print("-------- REMOVE SINGLE VALUES PARAMS ----------")
-    print(combine_params[0])
-    for element in combine_params[1]:
-        print(element)    
-
-    """
-    T-WAY
-    """
-    # check if the t-way element
-    if 't-way' in endpoint_element.keys():
-        tway_value = endpoint_element['t-way']
-
-        # check if the t-way value does make sense in comparison with number of parameters
-        number_of_parameteres = len(combine_params[1])
-        from general import verify_tway_value
-        verify_tway_value(tway_value, number_of_parameteres)
-
-        print("jsem az tady")
-        exit(1)
-
-        local_combine_call = globe.CombineCallClass()
-        local_combine_call.body['t_strength'] = str(tway_value)
-
-        
-
-        for parameter in combine_params[1]:
-            add_parameter_to_combine_call(parameter, local_combine_call)
-       
-        print("----------COMBNINE INPUT-----------")
-        for element in local_combine_call.body['parameters']:
-            print(element)
-
-        """ Call the combine """
-        combine_response = api_call_combine(local_combine_call)
-
-        print("----------COMBINE RESPONSE-----------")
-        for element in combine_response:
-            print(element)
-
-        endpoint_test_cases = evaluate_combine_response(combine_response, combine_params, tag, 'endpoint', [])
-
-        print("----------EVALUATED COMBINE RESPONSE-----------")
-        for element in endpoint_test_cases:
-            print(element)
-        
-
-        new_array = postprocessing_of_globals(endpoint_test_cases, 'url')
-        
-        print("----------POSTPROCESSING AFTER COMBINE-----------")
-        for element in new_array:
-            print(element)
-
-        return new_array,"indexes"   
-    else:
-        print("-------NOT TWAY RESULT-----------")
-        print(combine_params[0])
-        for element in combine_params[1]:
-            print(element)
-
-        if len(combine_params[1]) == 0:
-            return combine_params,"done_string"
-        else:
-            return combine_params,"parameters"
-        
-def get_method_info(method_element):
-    """
-    Get the information about endpoint part in call
-    Method_param info is returned:
-        * ex.: {"location": "method", 'type': 'enumerate', 'content': 'GET', 'id': 4}
-        * ex.: {"location": "method", 'type': 'variable', 'content': '', 'name': 'var', 'id': 4}
-    """
-    logging.debug('Getting info about method part')
-
-    print("***********************")
-    print("get_method_info")
-    print("***********************")
-
-    # method_p = method_string_parser(method_element['values'])
-    parameters_tuple = general_string_parser(method_element['values'], 'method')
-    print("------- GENERAL STRING PARSER -----------")
-    print(parameters_tuple[0])
-    for element in parameters_tuple[1]:
-        print(element)
-
-    edit_the_parameter_array(method_element, parameters_tuple[1], 'method')
-    print("------- EDIT THE PARAMETER ARRAY -----------")
-    print(parameters_tuple[0])
-    for element in parameters_tuple[1]:
-        print(element)
-
-
-    """
-    Evaluate if the method should be added to a combine call -> if there is a signle value, the method is just set to this value
-    """
-    # remove the single values parameters -> also replace their value in modified string
-    combine_params = remove_single_values_params(parameters_tuple[0], parameters_tuple[1], 'method')
-
-    print("-------- REMOVE SINGLE VALUES PARAMS (RETURNED) ----------")
-    print(combine_params[0])
-    for element in combine_params[1]:
-        print(element)  
-
-    if len(combine_params[1]) == 0:
-        return combine_params,'done_string'
-    else:
-        return combine_params,'parameters'
-
 def header_string_parser(header_string):
     """
     Parse the given header string and retrieve a desired data out of it
@@ -928,134 +771,6 @@ def header_string_parser(header_string):
         globe.all_parameters.append(p)
         globe.param_id_counter += 1
     return content
-
-def get_header_info(header_element):
-    """
-    Get the information about header part in call
-    Header_param info is returned:
-        * ex.: {"location": "header", 'type': 'enumerate', 'content': 'header1.yaml', 'id': 3}
-        * ex.: {"location": "header", 'type': 'variable', 'content': '', 'name': 'var', 'id': 3}
-    Example inputs:
-    * String
-        "values": "header1.yaml"
-        "values": "<header1.yaml,header2.yaml,header3.yaml>"
-        "values": "<>"
-        "values": "<:header_variable:>"  
-    * Dictionary
-        "values": {'Content-type': 'json', 'test': 'test_value'}
-        "values": {'Content-type': 'json', 'test': 'test_value'}
-        "values": {'Content-type': '<'1','2','3','4'>', 'test': '<1,2,3,4,5,6>'}
-        "values": {'<>': '<>', 'test': 'test_value'}  
-    * If there is only one header file, the parameteres can be in file content as well
-        Content-Type: <123456>
-		Host: <:var:>
-    """
-    logging.debug('Getting info about header part')
-    print("***********************")
-    print("get_header_info")
-    print("***********************")
-
-    """ Co je potreba udelat
-    1. Podivat se, co mi to vlastne bylo predano
-    check if the given element is string or dictionary
-    STRING
-    * do the same magic as in method? -> call header_string_parser
-    * check if there is only one header file or there are some more
-    # if there is only one -> check if there are some parametres in file content
-    # if not -> ignore previous step and do the same logic as in method
-    DICTIONARY
-    * transfer dictioanry to the string ({} are not allowed to be as a tag - only in this case - otherwise it is allowed)
-    * find all parameters - same logic was alredy done before in url
-    FILE
-    * open a file, get the content of file as a string
-    * similiar logic to DICTIONARY
-    * muze byt file modifikovan? nebo jen ulozit? pravdepdoobne vytvorit kopii - stejne se bude vytvaret kupa souboru pro test suite
-    """
-    values_type = type(header_element['values'])
-    # check what type of value is given
-    if values_type is str:
-        # value is string -> the content is a file
-        # header = header_string_parser(header_element['values'])
-        header_tuple = general_string_parser(header_element['values'], 'header')
-        print("------- GENERAL STRING PARSER (STR) -----------")
-        print(header_tuple[0])
-        for element in header_tuple[1]:
-            print(element)
-
-        # edit the output
-        edit_the_parameter_array(header_element, header_tuple[1], 'header')
-        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
-        print(header_tuple[0])
-        for element in header_tuple[1]:
-            print(element)
-        # remove the single value parameters
-        # if there are no more parameters left, it means there is only one file -> we should repead the process of 
-        # seraching parameters, but this time in file content
-        header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
-        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
-        print(header_params[0])
-        for element in header_params[1]:
-            print(element)  
-            
-        if len(header_params[1]) == 0:
-            # all parameteres have been already filled -> there is only one file
-            # look it in file content
-            file_content = get_file_content(header_params[0])
-            header_file_tuple = general_string_parser(file_content, 'header')
-            edit_the_parameter_array(header_element, header_file_tuple[1], 'header')
-            header_params = remove_single_values_params(header_file_tuple[0], header_file_tuple[1], 'header')
-    elif values_type is dict:
-        # value is dictionary -> change the type to from dictionary to string
-        header_value_string = json.dumps(header_element['values'])
-        header_tuple = general_string_parser(header_value_string, 'header')
-        print("------- GENERAL STRING PARSER (DICT) -----------")
-        print(header_tuple[0])
-        for element in header_tuple[1]:
-            print(element)
-
-        # edit the output
-        edit_the_parameter_array(header_element, header_tuple[1], 'header')
-        print("------- EDIT THE PARAMETER ARRAY (DICT) -----------")
-        print(header_tuple[0])
-        for element in header_tuple[1]:
-            print(element)
-
-        header_params = remove_single_values_params(header_tuple[0], header_tuple[1], 'header')
-        print("-------- REMOVE SINGLE VALUES PARAMS (DICT) ----------")
-        print(header_params[0])
-        for element in header_params[1]:
-            print(element)  
-    else:
-        print("proper error should be raised")
-        exit(2)
-
-    # check if the local params array is empty
-    # otherwise it means there is some extra local param which will not be used
-    if len(header_element['local_params']) != 0:
-        message = "The amount of local parameters is bigger than needed"
-        raise EndpointSemanticError(__name__, "get_endpoint_info", message) 
-
-    tag = globe.config.header.non_priority_start + globe.config.header.non_priority_end
-
-    """
-    T-WAY
-    """
-    # check if the t-way element is on endpoint dictionary
-    if 't-way' in header_element.keys():
-        local_combine_call = globe.CombineCallClass()
-        local_combine_call.body['t_strength'] = str(header_element['t-way'])
-
-        for parameter in header_params[1]:
-            add_parameter_to_combine_call(parameter, local_combine_call)
-       
-        """ Call the combine """
-        combine_response = api_call_combine(local_combine_call)
-        endpoint_test_cases = evaluate_combine_response(combine_response, header_params, tag, 'header', [])
-        return endpoint_test_cases,'indexes' 
-
-    if len(header_params[1]) == 0:
-        return header_params,'done_string'
-    return header_params,'parameters'
 
 def get_body_info(body_element):
     """
@@ -1266,42 +981,52 @@ def add_body_to_combine_request(combine_call, body, body_toggle, info_about_comb
     else:
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
 
-def evaluate_combine_response_main(combine_response, info_about_combine_blocks, test_cases_arrays):   
-    endpoint_test_cases = test_cases_arrays[0]
-    method_test_cases = test_cases_arrays[1]
-    header_test_cases = test_cases_arrays[2]
-    body_test_cases = test_cases_arrays[3]
+def split_combine_response_into_locations(combine_response, info_about_combine_blocks, endpoint, header, body):
+    """
+    Split the given combinations (combine result) by the location in which the parameter is used
+    Evaluate if the result does make sense:
+    * there can be only one 'indexes' value within the one location
+    * if there is 'inexes' value -> there cannot be any 'parameters' values
+    Example output:
+        endpoint_combined_indexes = [5,1,3,4,5,2] - the values are indexes to array
+            or
+        endpoint_combine_response = [
+            ['a', 1, 'aaa'],
+            ['b', 2, 'bbb'],
+            ['c', 3, 'ccc']
+        ]
+    """
+    endpoint_combined_indexes = []
+    header_combined_indexes = []
+    body_combined_indexes = []
 
-    endpoint_param_array = []
-    method_param_array = []
-    header_param_array = []
-    body_param_array = []     
-    # Projdi jednotlive pripady z combine response
-    case_cnt = 0
+    endpoint_combine_response = []
+    method_combine_response = []
+    header_combine_response = []
+    body_combine_response = [] 
+    """ Split the combine response into another arrays """
+    # Go through all test cases of combine request
     for case in combine_response:
-        # TODO: co udelat for idx in len combine response + call=combine_response.pop()
-        test_case_parts = []
+        endies = []
         headies = []
         bodies = []
-        endies = []
         methies = []
-        # projdi vsechny jeho hodnoty
+        # Go through all of the case's values
         for value_idx in range(len(case)):
-            # get the infromation about this value
+            # Get the infromation about this value
             info_about_current_block = info_about_combine_blocks[value_idx]
             if info_about_current_block['location'] == 'endpoint':
                 """ ENDPOINT """
                 if info_about_current_block['type'] == 'indexes':
                     """ indexes """
-                    value_of_case = endpoint[int(case[value_idx])]
-                    endpoint_test_cases.append(value_of_case)
+                    index_value_of_this_case = endpoint[int(case[value_idx])]
+                    endpoint_combined_indexes.append(index_value_of_this_case)
                 elif info_about_current_block['type'] == 'parameters':
                     """ parameters """
                     value_of_case = case[value_idx]
                     endies.append(value_of_case)
                 else:
-                    print("Chyba")
-                    exit(1)
+                    raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
             elif info_about_current_block['location'] == 'method':
                 """ METHOD """
                 if info_about_current_block['type'] == 'parameters':
@@ -1309,39 +1034,552 @@ def evaluate_combine_response_main(combine_response, info_about_combine_blocks, 
                     value_of_case = case[value_idx]
                     methies.append(value_of_case)
                 else:
-                    exit(1)
+                    raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
             elif info_about_current_block['location'] == 'header':
                 """ HEADER """
                 if info_about_current_block['type'] == 'indexes':
                     """ indexes """
                     value_of_case = header[int(case[value_idx])]
-                    header_test_cases.append(value_of_case)
+                    header_combined_indexes.append(value_of_case)
                 elif info_about_current_block['type'] == 'parameters':
                     """ parameters """
                     value_of_case = case[value_idx]
                     headies.append(value_of_case)
                 else:
-                    exit(1)
+                    raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
             elif info_about_current_block['location'] == 'body':
                 """ BODY """
                 if info_about_current_block['type'] == 'indexes':
                     """ indexes """
                     value_of_case = body[int(case[value_idx])]
-                    body_test_cases.append(value_of_case)
+                    body_combined_indexes.append(value_of_case)
                 elif info_about_current_block['type'] == 'parameters':
                     """ parameters """
                     value_of_case = case[value_idx]
                     bodies.append(value_of_case)
                 else:
-                    exit(1)
+                    raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
             else:
-                exit(1)
-        endpoint_param_array.append(endies)
-        method_param_array.append(methies)
-        header_param_array.append(headies)
-        body_param_array.append(bodies)
-        case_cnt+=1
-    return (endpoint_param_array,method_param_array,header_param_array,body_param_array)
+                raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+        endpoint_combine_response.append(endies)
+        method_combine_response.append(methies)
+        header_combine_response.append(headies)
+        body_combine_response.append(bodies)
+
+    """ 
+    Evaluate if the resulted arrays does make sense 
+    * the amount of indexes used in one location cannot be higher then 1
+    * if the indexes values are used -> there cannot be any parameter value
+    * method can have only one parameter value
+    """
+    # TODO: should it be here? It fails now
+    # # endpoint
+    # if (len(endpoint_combined_indexes) > 0) and (len(endpoint_combine_response[0]) > 0):
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # elif len(endpoint_combined_indexes) > 1:
+    #     print(endpoint_combined_indexes)
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # # method 
+    # if len(method_combine_response[0]) > 1:
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # # header
+    # if (len(header_combined_indexes) > 0) and (len(header_combine_response[0]) > 0):
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # elif len(header_combined_indexes) > 1:
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # # body
+    # if (len(body_combined_indexes) > 0) and (len(body_combine_response[0]) > 0):
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+    # elif len(body_combined_indexes) > 1:
+    #     raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+
+    """ 
+    Decide what should be returned
+    * if the 'indexes' were used in location -> return {location}_combined_indexes
+    * if the 'parameters' were used in location -> return {location}_combine_response
+    """ 
+    resulted_array = []
+    # endpoint
+    if len(endpoint_combined_indexes) > 0:
+        resulted_array.append(endpoint_combined_indexes)
+    else:
+        resulted_array.append(endpoint_combine_response)
+    # method
+    resulted_array.append(method_combine_response)
+    # header
+    if len(header_combined_indexes) > 0:
+        resulted_array.append(header_combined_indexes)
+    else:
+        resulted_array.append(header_combine_response)
+    # body
+    if len(body_combined_indexes) > 0:
+        resulted_array.append(body_combined_indexes)
+    else:
+        resulted_array.append(body_combine_response)
+
+    return resulted_array
+
+def evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endpoint_toggle):
+    """ Evaluate the endpoint part of combine response """
+    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+    endpoint_test_cases = []
+    if endpoint_toggle == 'indexes':
+        endpoint_test_cases = endpoint_combine_response
+    elif endpoint_toggle == 'parameters':
+        endpoint_test_cases = evaluate_combine_response(endpoint_combine_response, endpoint, tag, 'endpoint', [])
+    elif endpoint_toggle == 'done_string':
+        # duplicate this string to have it in the same format (value, globals)
+        temp_tuple = (endpoint[0], {})
+        for _ in range(len(combine_response)):
+            endpoint_test_cases.append(temp_tuple)
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+    return endpoint_test_cases
+
+def evaluate_method_part_of_response(method_combine_response, method, method_toggle):
+    """ Evaluate the method part of combine response """
+    tag = globe.config.method.non_priority_start + globe.config.method.non_priority_end
+    method_test_cases = []
+    if method_toggle == 'parameters':
+        method_test_cases = evaluate_combine_response(method_combine_response, method, tag, 'method', [])
+    elif method_toggle == 'done_string':
+        # duplicate this string to have it in the same format (value, globals)
+        temp_tuple = (method[0], {})
+        for _ in range(len(combine_response)):
+            method_test_cases.append(temp_tuple)
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+    return method_test_cases
+
+def evaluate_header_part_of_response(header_combine_response, header, header_toggle):
+    """ Evaluate the header part of combine response """
+    tag = globe.config.header.non_priority_start + globe.config.header.non_priority_end
+    header_test_cases = []
+    if header_toggle == 'indexes':
+        header_test_cases = header_combine_response
+    elif header_toggle == 'parameters':
+        header_test_cases = evaluate_combine_response(header_combine_response, header, tag, 'header', [])
+    elif header_toggle == 'done_string':
+        # duplicate this string to have it in the same format (value, globals)
+        temp_tuple = (header[0], {})
+        for _ in range(len(combine_response)):
+            header_test_cases.append(temp_tuple)
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+    return header_test_cases
+
+def evaluate_body_part_of_response(body_combine_response, body, body_toggle):
+    """ Evaluate the body part of combine response """
+    tag = globe.config.body.non_priority_start + globe.config.body.non_priority_end
+    body_test_cases = []
+    if body_toggle == 'indexes':
+        body_test_cases = body_combine_response
+    elif body_toggle == 'parameters':
+        body_test_cases = evaluate_combine_response(body_combine_response, body, tag, 'body', [])
+    elif body_toggle == 'done_string':
+        # duplicate this string to have it in the same format (value, globals)
+        temp_tuple = (body[0], {})
+        for _ in range(len(combine_response)):
+            body_test_cases.append(temp_tuple)
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+    return body_test_cases
+
+def get_header_info(header_element):
+    """
+    Get the information about header part of request
+    Header param info is returned:
+        * ex.: {"location": "header", 'type': 'enumerate', 'content': 'header1.yaml', 'id': 3}
+        * ex.: {"location": "header", 'type': 'local_variable', 'content': '', 'name': 'var', 'id': 3}
+        * ex.: {'location': 'header', 'type': 'global_variable', 'name': 'user', 'id': 4}
+    Example inputs:
+    * String
+        "values": "header1.yaml"
+        "values": "<header1.yaml,header2.yaml,header3.yaml>"
+        "values": "<>"
+        "values": "<:header_variable:>"  
+    * Dictionary
+        "values": {'Content-type': 'json', 'test': 'test_value'}
+        "values": {'Content-type': 'json', 'test': 'test_value'}
+        "values": {'Content-type': '<'1','2','3','4'>', 'test': '<1,2,3,4,5,6>'}
+        "values": {'<>': '<>', 'test': 'test_value'}  
+    * If there is only one header file, the parameteres can be in file content as well
+        Content-Type: <123456>
+		Host: <:var:>
+    """
+    logging.debug('Getting info about header part')
+    ###############DEBUG#################
+    print("***********************")
+    print("get_header_info")
+    print("***********************")
+    #####################################
+
+    """
+    Get the type of a input specification
+    Following formats are allowed:
+    * STRING
+    ** content is a file path (or multiple file paths)
+    ** if there is only single file path -> the parameters can be searched inside of file as well
+    * DICTIONARY
+    """
+    values_type = type(header_element['values'])
+    if values_type is str:
+        """ STRING """
+        """ Get all the parameters and their information from a given header string """
+        header_tuple = general_string_parser(header_element['values'], 'header')
+        tagged_string = header_tuple[0]
+        param_array = header_tuple[1]
+
+        ###############DEBUG#################
+        print("------- GENERAL STRING PARSER (STR) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        """
+        Edit the parameters
+        * Insert all the values param can acquire
+        """
+        edit_the_parameter_array(header_element, param_array, 'header')
+
+        ###############DEBUG#################
+        print("------- EDIT THE PARAMETER ARRAY (STR) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        """
+        Remove the single values parameters
+        Also, replace their value in tagged string
+        """
+        tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'header')
+
+        ###############DEBUG#################
+        print("-------- REMOVE SINGLE VALUES PARAMS (STR) ----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)  
+        #####################################
+
+        """
+        If there is only one file path, search the content of this file and look for a parameters inside
+        """
+        if len(param_array) == 0:
+            # get file content
+            file_content = get_file_content(tagged_string)
+            # get the information of parameters inside of a file
+            header_file_tuple = general_string_parser(file_content, 'header')
+            # edit the parameters (insert all the values param can acquire)
+            edit_the_parameter_array(header_element, header_file_tuple[1], 'header')
+            # remove single values parameters
+            tagged_string,param_array = remove_single_values_params(header_file_tuple[0], header_file_tuple[1], 'header')
+    elif values_type is dict:
+        """ DICTIONARY """
+        # read the value and transfer it to a python dictionary
+        header_value_string = json.dumps(header_element['values'])
+        # get the information of parameters inside of a file
+        tagged_string,param_array = general_string_parser(header_value_string, 'header')
+
+        ###############DEBUG#################
+        print("------- GENERAL STRING PARSER (DICT) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        # edit the parameters (insert all the values param can acquire)
+        edit_the_parameter_array(header_element, param_array, 'header')
+
+        ###############DEBUG#################
+        print("------- EDIT THE PARAMETER ARRAY (DICT) -----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'header')
+
+        ###############DEBUG#################
+        print("-------- REMOVE SINGLE VALUES PARAMS (DICT) ----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)  
+        #####################################
+    else:
+        raise ShouldHaveNotGottenHereError(__name__, "get_header_info")
+
+    """
+    Check if all the values from local_params were used
+    """
+    if len(header_element['local_params']) != 0:
+        message = "The number of local parameteres of header is higher then needed"
+        raise InputFileError(__name__, "get_endpoint_info", message)
+
+    """
+    Check if the 't-way' element is set
+    Combine the parameters only within the header element
+    """
+    tag = globe.config.header.non_priority_start + globe.config.header.non_priority_end
+    if 't-way' in header_element.keys():
+        # get the value of t-way
+        tway_value = header_element['t-way']
+        
+        # check if the t-way value does make sense in comparison with number of parameters
+        number_of_parameteres = len(param_array)
+        verify_tway_value(tway_value, number_of_parameteres)
+
+        """
+        Create a combine request for endpoint
+        """
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(tway_value)
+        # insert all parameters into a combine input 
+        for parameter in param_array:
+            add_parameter_to_combine_call(parameter, local_combine_call)
+       
+        """ 
+        Call the combine 
+        """
+        combine_response = api_call_combine(local_combine_call)
+
+        """
+        Evaluate the combine response
+        """
+        endpoint_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'header', [])
+
+        """
+        Replace the global params with values
+        * in case of multiple global parameters in header dictioanry, the other occurences are replaced with value
+        """
+        endpoint_test_cases = postprocessing_of_globals(endpoint_test_cases, 'url')
+
+        return endpoint_test_cases,'indexes' 
+
+    resulted_tuple = (tagged_string,param_array)
+    if len(param_array) == 0:
+        return resulted_tuple,'done_string'
+    return resulted_tuple,'parameters'
+
+def get_method_info(method_element):
+    """
+    Get the information about method part of request
+    Output
+    * array of method parameters is returned:
+        * ex.: {"location": "method", 'type': 'enumerate', 'content': 'GET', 'id': 4}
+        * ex.: {"location": "method", 'type': 'variable', 'content': '', 'name': 'var', 'id': 4}
+    * method toggle is returned
+    ** 'parameters' means that the values in method needs to be combined
+    ** 'done_string' means that the value is already evaluated and no combination is neccessary
+    """
+    logging.debug('Getting info about method part')
+    ###############DEBUG#################
+    print("***********************")
+    print("get_method_info")
+    print("***********************")
+    #####################################
+
+    """
+    Get all the parameters and their information from a given method specification
+    """
+    parameters_tuple = general_string_parser(method_element['values'], 'method')
+    tagged_string = parameters_tuple[0]
+    param_array = parameters_tuple[1]
+
+    ###############DEBUG#################
+    print("------- GENERAL STRING PARSER -----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)
+    #####################################
+
+    """
+    Edit the parameters
+    * Insert all the values param can acquire
+    """
+    edit_the_parameter_array(method_element, param_array, 'method')
+
+    ###############DEBUG#################
+    print("------- EDIT THE PARAMETER ARRAY -----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)
+    #####################################
+
+    """
+    Check if all the values from local_params were used
+    """
+    if len(method_element['local_params']) != 0:
+        message = "The number of local parameteres of method is higher then needed"
+        raise InputFileError(__name__, "edit_the_parameter_array", message)
+
+    """
+    Remove the single values parameters
+    Also, replace their value in tagged string
+    """
+    tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'method')
+
+    ###############DEBUG#################
+    print("-------- REMOVE SINGLE VALUES PARAMS (RETURNED) ----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)  
+    #####################################
+
+    resulted_tuple = (tagged_string,param_array)
+    if len(param_array) == 0:
+        return resulted_tuple,'done_string'
+    else:
+        return resulted_tuple,'parameters'
+
+def get_endpoint_info(endpoint_element):
+    """
+    Get the information about endpoint part of request
+    Output
+    * Tuple (tagged_url, endpoint_params) is returned
+    * The endpoint toggle is returned:
+    ** 'indexes' means the combine call was called inside the endpoint element
+    ** 'parameters' means the values are not combined yet
+    ** 'done_string' means nothing needs to be combined in endpoint url
+    """
+    logging.debug('Getting info about endpoint part')
+    ###############DEBUG#################
+    print("***********************")
+    print("get_endpoint_info")
+    print("***********************")
+    #####################################
+
+    """
+    Get the format of tag
+    """
+    tag = globe.config.url.non_priority_start + globe.config.url.non_priority_end
+    start_tag = globe.config.url.non_priority_start
+    end_tag = globe.config.url.non_priority_end
+  
+    """
+    Get all the parameters and their information from a given URL string
+    """
+    parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
+    tagged_string = parameters_tuple[0]
+    param_array = parameters_tuple[1]
+
+    ###############DEBUG#################
+    print("------- GENERAL STRING PARSER -----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)
+    #####################################
+
+    """
+    Edit the parameters
+    * Insert all the values param can acquire
+    """
+    edit_the_parameter_array(endpoint_element, param_array, 'url')
+
+    ###############DEBUG#################
+    print("------- EDIT THE PARAMETER ARRAY -----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)
+    #####################################
+
+    """
+    Check if all the values from local_params were used
+    """
+    if len(endpoint_element['local_params']) != 0:
+        message = "The number of local parameteres of endpoint is higher then needed"
+        raise InputFileError(__name__, "edit_the_parameter_array", message)
+
+    """
+    Remove the single values parameters
+    Also, replace their value in tagged string
+    """
+    tagged_string,param_array = remove_single_values_params(tagged_string, param_array, 'endpoint')
+
+    ###############DEBUG#################
+    print("-------- REMOVE SINGLE VALUES PARAMS ----------")
+    print(tagged_string)
+    for element in param_array:
+        print(element)    
+    #####################################
+
+    """
+    Check if the 't-way' element is set
+    Combine the parameters only within the endpoint element
+    """
+    if 't-way' in endpoint_element.keys():
+        # get the value of t-way
+        tway_value = endpoint_element['t-way']
+
+        # check if the t-way value does make sense in comparison with number of parameters
+        number_of_parameteres = len(param_array)
+        verify_tway_value(tway_value, number_of_parameteres)
+
+        """
+        Create a combine request for endpoint
+        """
+        local_combine_call = globe.CombineCallClass()
+        local_combine_call.body['t_strength'] = str(tway_value)
+        # insert all parameters into a combine input 
+        for parameter in param_array:
+            add_parameter_to_combine_call(parameter, local_combine_call)
+       
+        ###############DEBUG#################
+        print("----------COMBNINE INPUT-----------")
+        for element in local_combine_call.body['parameters']:
+            print(element)
+        #####################################
+
+        """ 
+        Call the combine 
+        """
+        combine_response = api_call_combine(local_combine_call)
+
+        ###############DEBUG#################
+        print("----------COMBINE RESPONSE-----------")
+        for element in combine_response:
+            print(element)
+        #####################################
+
+        """
+        Evaluate the combine response
+        """
+        endpoint_test_cases = evaluate_combine_response(combine_response, (tagged_string,param_array), tag, 'endpoint', [])
+
+        ###############DEBUG#################
+        print("----------EVALUATED COMBINE RESPONSE-----------")
+        for element in endpoint_test_cases:
+            print(element)
+        #####################################
+    
+        """
+        Replace the global params with values
+        * in case of multiple global parameters in url string, the other occurences are replaced with value
+        """
+        endpoint_test_cases = postprocessing_of_globals(endpoint_test_cases, 'url')
+        
+        ###############DEBUG#################
+        print("----------POSTPROCESSING AFTER COMBINE-----------")
+        for element in endpoint_test_cases:
+            print(element)
+        #####################################
+
+        # 'indexes' indicates that the combine call was called inside of a endpoint element
+        return endpoint_test_cases,"indexes"   
+    else:
+        ###############DEBUG#################
+        print("-------NOT TWAY RESULT-----------")
+        print(tagged_string)
+        for element in param_array:
+            print(element)
+        #####################################
+
+        resulted_tuple = (tagged_string,param_array)
+        if len(param_array) == 0:
+            return resulted_tuple,"done_string"
+        else:
+            return resulted_tuple,"parameters"
 
 def create_input_file_for_templator():
     """
@@ -1437,10 +1675,22 @@ def create_input_file_for_templator():
         if len(info_about_combine_blocks) != len(combine_response[0]):
             raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
 
+        """ Split the combine response into locations """ 
+        splited_combine_request = split_combine_response_into_locations(combine_response, info_about_combine_blocks, endpoint, header, body)
+        endpoint_combine_response = splited_combine_request[0]
+        method_combine_response = splited_combine_request[1]
+        header_combine_response = splited_combine_request[2]
+        body_combine_response = splited_combine_request[3]
 
+        ###############DEBUG#################       
+        print("----------SPLIT INTO LOCATIONS-----------")
+        for element in splited_combine_request:
+            print(element)
+        #####################################
+        
         """
         Evaluate the combine response
-        Look into endpoint taged url 
+        * Look into endpoint taged url 
             -> are there any tags? Or is it fulfiled? Should I have some toggle to indicate that?
             -> fill the tags with values -> what with a global variables behaviour -> should be similiar 
                 algorithm to the one before -> but it has to support global variables across the all parts
@@ -1449,67 +1699,12 @@ def create_input_file_for_templator():
         Look into header taged string
         Look into body taged string
         """
-        endpoint_test_cases = []
-        method_test_cases = []
-        header_test_cases = []
-        body_test_cases = []
-        test_cases_arrays = [endpoint_test_cases,method_test_cases,header_test_cases,body_test_cases]
-        
-        endpoint_param_array,method_param_array,header_param_array,body_param_array = evaluate_combine_response_main(combine_response, info_about_combine_blocks, test_cases_arrays)
+        endpoint_test_cases = evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endpoint_toggle)
+        method_test_cases = evaluate_method_part_of_response(method_combine_response, method, method_toggle)
+        header_test_cases = evaluate_header_part_of_response(header_combine_response, header, header_toggle)
+        body_test_cases = evaluate_body_part_of_response(body_combine_response, body, body_toggle)
 
-        """ ENDPOINT """
-        if endpoint_toggle == 'indexes':
-            # nothing needs to be done
-            endpoint_test_cases = endpoint_test_cases
-        elif endpoint_toggle == 'parameters':
-            endpoint_test_cases = evaluate_combine_response(endpoint_param_array, endpoint, '<>', 'endpoint', [])
-        elif endpoint_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (endpoint[0], {})
-            for _ in range(len(combine_response)):
-                endpoint_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
-        """ METHOD """
-        if method_toggle == 'parameters':
-            method_test_cases = evaluate_combine_response(method_param_array, method, '<>', 'method', [])
-        elif method_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (method[0], {})
-            for _ in range(len(combine_response)):
-                method_test_cases.append(temp_tuple)
-        else:
-            exit(4)
-
-        """ HEADER """
-        if header_toggle == 'indexes':
-            # nothing needs to be done
-            header_test_cases = header_test_cases
-        elif header_toggle == 'parameters':
-            header_test_cases = evaluate_combine_response(header_param_array, header, '<>', 'header', [])
-        elif header_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (header[0], {})
-            for _ in range(len(combine_response)):
-                header_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
-        """ BODY """
-        if body_toggle == 'indexes':
-            # nothing needs to be done
-            body_test_cases = body_test_cases
-        elif body_toggle == 'parameters':
-            body_test_cases = evaluate_combine_response(body_param_array, body, '<>', 'body', [])
-        elif body_toggle == 'done_string':
-            # duplicate this string to have it in the same format (value, globals)
-            temp_tuple = (body[0], {})
-            for _ in range(len(combine_response)):
-                body_test_cases.append(temp_tuple)
-        else:
-            exit(6)
-
+        ###############DEBUG#################
         print("----------ENDPOINT TEST CASES-----------")
         for element in endpoint_test_cases:
             print(element)
@@ -1522,42 +1717,49 @@ def create_input_file_for_templator():
         print("----------BODY TEST CASES-----------")
         for element in body_test_cases:
             print(element)
-
+        #####################################
 
         """
-        result = [
-            ([URL, method, header, body], {GLOBALS}),
-            ([URL, method, header, body], {GLOBALS})
-            ....
-        ]
+        The number of endpoint, method, header and body values should be the same 
+        Also, it should be the same as the number of cases returned from combine request
         """
-        result = []
-
-
         combine_response_length = len(combine_response)
         endpoint_test_cases_length = len(endpoint_test_cases)
         method_test_cases_length = len(method_test_cases)
         header_test_cases_length = len(header_test_cases)
         body_test_cases_length = len(body_test_cases)
+
+        ###############DEBUG#################
         print("----------ENDPOINT TEST CASES LENGTH-----------")
         print(combine_response_length)
         print(endpoint_test_cases_length)
         print(method_test_cases_length)
         print(header_test_cases_length)
         print(body_test_cases_length)
+        #####################################
+
         if not (combine_response_length == endpoint_test_cases_length == method_test_cases_length == header_test_cases_length == body_test_cases_length):
-            print("Ty sracky se sobe nerovnaji")
-            exit(5)
-
-
-
-
+            raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+                
+        """
+        Replace all global params at all locations
+        * Each global_variable is searched in all parts: endpoint, method, header, body
+        Output example:
+            result = [
+                ([URL, method, header, body], {GLOBALS}),
+                ([URL, method, header, body], {GLOBALS})
+                ....
+            ]
+        """
+        resulted_request_combination = []
         for test_case_idx in range(len(combine_response)):
+            # get the values of endpoint, method, header and body for current test case
             endpoint,endpoint_globals = endpoint_test_cases[test_case_idx]
             method,method_globals = method_test_cases[test_case_idx]
             header,header_globals = header_test_cases[test_case_idx]
             body,body_globals = body_test_cases[test_case_idx]
 
+            # get all the global params for this test case
             all_globals = {}
             all_globals.update(endpoint_globals)
             all_globals.update(method_globals)
@@ -1565,7 +1767,8 @@ def create_input_file_for_templator():
             all_globals.update(body_globals)
 
             """
-            Nahrad globalni promenne
+            Replace all global params at all locations
+            * Each global_variable is searched in all parts: endpoint, method, header, body
             """
             for key in all_globals.keys():
                 # endpoint
@@ -1574,45 +1777,49 @@ def create_input_file_for_templator():
                 tag = start_tag + key + end_tag
                 while tag in endpoint:
                     endpoint = replace_the_tag_with_value(endpoint, tag, str(all_globals[key]), 0)
-                    print("ENDPOINT REPLACEMENT")
-
                 # method
                 start_tag = globe.config.method.non_priority_start
                 end_tag = globe.config.method.non_priority_end
                 tag = start_tag + key + end_tag
                 while tag in method:
                     method = replace_the_tag_with_value(method, tag, str(all_globals[key]), 0)
-                    print("METHOD REPLACEMENT")
-
                 # header
                 start_tag = globe.config.header.non_priority_start
                 end_tag = globe.config.header.non_priority_end
                 tag = start_tag + key + end_tag
                 while tag in header:
                     header = replace_the_tag_with_value(header, tag, str(all_globals[key]), 0)
-                    print("HEADER REPLACEMENT")
-
                 # body
                 start_tag = globe.config.body.non_priority_start
                 end_tag = globe.config.body.non_priority_end
                 tag = start_tag + key + end_tag
                 while tag in body:
                     body = replace_the_tag_with_value(body, tag, str(all_globals[key]), 0)
-                    print("BODY REPLACEMENT")
             test_case = [endpoint, method, header, body]
-            resulted_tuple = (test_case, all_globals)
-            result.append(resulted_tuple)
+            resulted_test_case_tuple = (test_case, all_globals)
+            resulted_request_combination.append(resulted_test_case_tuple)
 
-        
-
-        print("----------RESULT-----------")
-        for element in result:
+        ###############DEBUG#################
+        print("----------RESULT OF CALL COMBINATION-----------")
+        for element in resulted_request_combination:
             print(element)
+        #####################################
 
-        super_duper_result.append(result)
+        """ Add the resulted combinations of current request to the array with all requests in test sequence """
+        super_duper_result.append(resulted_request_combination)
+
+        ###############DEBUG#################
         for idx in range(len(super_duper_result)):
-            print("----------SUPER DUPER RESULT {}-----------".format(idx))
+            print("----------TEMPORARY SUPER DUPER RESULT {}-----------".format(idx))
             for element in super_duper_result[idx]:
                 print(element)
+        #####################################
 
+    
+    ###############DEBUG#################
+    for idx in range(len(super_duper_result)):
+        print("----------FINAL SUPER DUPER RESULT {}-----------".format(idx))
+        for element in super_duper_result[idx]:
+            print(element)
+    #####################################
     return super_duper_result

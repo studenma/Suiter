@@ -2,7 +2,7 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/<>",
+		    	"values": "https://mydomain/addUser/<>/<1,2,3>/<A,B,C>",
 			    "local_params": [
 					{
 						"values": ["ABC", "DEF", "G"]

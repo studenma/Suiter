@@ -190,6 +190,11 @@ enum
 {'location': 'body', 'type': 'parameters'}
 {'location': 'body', 'type': 'parameters'}
 {'location': 'body', 'type': 'parameters'}
+----------SPLIT INTO LOCATIONS-----------
+[['ABC'], ['ABC'], ['DEF'], ['DEF'], ['G'], ['G'], ['G'], ['G'], ['ABC'], ['ABC'], ['G'], ['DEF'], ['G'], ['ABC'], ['DEF'], ['ABC'], ['DEF'], ['DEF'], ['ABC'], ['ABC'], ['ABC']]
+[['GET'], ['POST'], ['GET'], ['POST'], ['GET'], ['POST'], ['GET'], ['POST'], ['GET'], ['POST'], ['GET'], ['POST'], ['GET'], ['GET'], ['GET'], ['POST'], ['GET'], ['GET'], ['GET'], ['GET'], ['GET']]
+[['json', 'TestValue', 4], ['yaml', ' SecondValue', 52], ['yaml', 'TestValue', 3], ['json', ' SecondValue', 1], ['json', ' SecondValue', 4], ['yaml', 'TestValue', 77], ['yaml', 'TestValue', 1], ['json', ' SecondValue', 3], ['json', ' SecondValue', 77], ['yaml', 'TestValue', 4], ['json', 'TestValue', 52], ['yaml', ' SecondValue', 4], ['json', 'TestValue', 4], ['json', 'TestValue', 3], ['json', 'TestValue', 77], ['json', 'TestValue', 1], ['json', 'TestValue', 52], ['json', 'TestValue', 4], ['json', 'TestValue', 3], ['json', 'TestValue', 77], ['json', 'TestValue', 4]]
+[[1, 'a', 'aaaa'], [2, 'b', 'bbb'], [3, 'c', 'ccccc'], [1, 'c', 'aaaa'], [2, 'a', 'ccccc'], [1, 'b', 'aaaa'], [2, 'a', 'bbb'], [3, 'a', 'bbb'], [3, 'b', 'ccccc'], [1, 'c', 'bbb'], [1, 'c', 'ccccc'], [2, 'b', 'bbb'], [3, 'c', 'aaaa'], [1, 'b', 'aaaa'], [2, 'a', 'aaaa'], [3, 'b', 'ccccc'], [3, 'a', 'aaaa'], [3, 'b', 'aaaa'], [2, 'c', 'aaaa'], [1, 'c', 'bbb'], [1, 'a', 'ccccc']]
 ----------ENDPOINT TEST CASES-----------
 ('https://mydomain/addUser/ABC', {})
 ('https://mydomain/addUser/ABC', {})
@@ -284,48 +289,6 @@ enum
 21
 21
 21
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
-BODY REPLACEMENT
 ----------RESULT-----------
 (['https://mydomain/addUser/ABC', 'GET', '{"Content-type": "json", "test": "TestValue", "dalsiTest": "4"}', 'sdklfnskfnm1sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd4\ngda\ngdsa\ngdsaaaa\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa'], {'user': 4, 'UUUUUUUUU': 'a'})
 (['https://mydomain/addUser/ABC', 'POST', '{"Content-type": "yaml", "test": " SecondValue", "dalsiTest": "52"}', 'sdklfnskfnm2sdkmnfsdk;lfmsld;fm,sdfsdsd\ndg\ndf\ngd52\ngdb\ngdsb\ngdsbbb\ngdf\ngdsgdsfgdsfgdsfgsdgdsfgdgdAAAAAAAAAAAAAa'], {'user': 52, 'UUUUUUUUU': 'b'})
@@ -482,6 +445,11 @@ enum
 {'location': 'method', 'type': 'parameters'}
 {'location': 'header', 'type': 'parameters'}
 {'location': 'body', 'type': 'parameters'}
+----------SPLIT INTO LOCATIONS-----------
+[['GET', 'usr1'], ['GET', 'usr2'], ['POST', 'usr1'], ['POST', 'usr2'], ['DELETE', 'usr1'], ['DELETE', 'usr2']]
+[['GET'], ['POST'], ['POST'], ['GET'], ['GET'], ['POST']]
+[['header1.yaml'], ['header2.yaml'], ['header1.yaml'], ['header2.yaml'], ['header2.yaml'], ['header1.yaml']]
+[['body1'], ['body2'], ['body2'], ['body1'], ['body2'], ['body1']]
 ----------ENDPOINT TEST CASES-----------
 ('https://<user>/GET/usr1/<user>/<UUUUUUUUU>', {'method': 'GET', 'userStr': 'usr1'})
 ('https://<user>/GET/usr2/<user>/<UUUUUUUUU>', {'method': 'GET', 'userStr': 'usr2'})
