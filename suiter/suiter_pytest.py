@@ -24,7 +24,7 @@ Input has a following strucure (the result of input_parser module):
 *** Output ***
 The test suite for python
 """
-from suiter_input_parser import get_header_from_file
+from suiter_general import get_header_from_file
 from suiter_exceptions import *
 from textwrap import indent
 
@@ -143,7 +143,8 @@ def prepare_test_case_list_tag(tc):
                 new_line = indent("method = \"" + str(test_case[call_idx-1][1]) + "\"\n", 3*tab)
                 result += new_line
                 # HEADER
-                header = get_header_from_file(test_case[call_idx-1][2])
+                # header = get_header_from_file(test_case[call_idx-1][2])
+                header = test_case[call_idx-1][2]
                 new_line = indent("header = " + str(header) + "\n", 3*tab)
                 result += new_line
                 # BODY
@@ -240,8 +241,7 @@ def fill_the_pre_template(path, tc):
     Fill the tags in pre-template with a values for the first test case 
     Output: New file created - containing the executable template with the first test cases
     """
-    logger_message = "Calling the fill_the_pre_template method with following parameters: [{}, {}]".format(path,tc)
-    logger.debug(logger_message)
+    logger.debug("Calling the fill_the_pre_template method")
 
     tc_amount = len(tc)
 
@@ -271,19 +271,21 @@ def fill_the_pre_template(path, tc):
                     new_file_content += line 
             else:
                 new_file_content += line
-    
-    # close file
     f.close() 
     
     # open and write into a file the new content
-    f = open('./result/template.py', 'w')
+    f = open('./result/python_script.py', 'w')
     f.write(new_file_content)
     f.close()
 
 def create_template(content, tc):
     """
-    Based on a content of pre-template creates a executable template for user
+    Entry point of this module
+    Based on the pre-template creates a executable template for user
     """
     logger.debug('Calling the create_template method')
 
+    """
+    Fill in the pre-template with a corresponding values
+    """
     fill_the_pre_template(content, tc)

@@ -69,6 +69,7 @@ def evaluate_combine_response(response, str_and_array, tag, location):
     Evaluate the response from combine
     * replace the values in tagged string for each test_case 
     * create an array out of all of these
+    TODO: body should support other types then string
     """
     tagged_string = str_and_array[0]
     list_of_parameters_in_string = str_and_array[1]

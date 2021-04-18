@@ -1,0 +1,16 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    
+					"GlossSee1": "markup"
+                    ;
+                    "ID2": "SGML"
+                }
+            }
+        }
+    }
+}

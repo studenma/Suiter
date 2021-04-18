@@ -18,16 +18,16 @@
 				]
 			},
 			"header": {
-				"values": {"Content-type": "<json,yaml>", "test": "<TestValue, SecondValue>", "dalsiTest": "<:user:>"},
-				"local_params": []
-			},
-			"body": {
-				"values": "<../input/body0.json>",
+				"values": {"Content-type": "<json,yaml>", "testInt": "<>", "dalsiTest": "<:user:>"},
 				"local_params": [
 					{
 						"values": [1,2,3]
 					}
 				]
+			},
+			"body": {
+				"values": "<../input/body-2.json>",
+				"local_params": []
 			},
 			"t-way": 2
 		},
@@ -41,7 +41,7 @@
 				"local_params": []
 			},
 			"header": {
-				"values": "<header1.yaml,header2.yaml>",
+				"values": "<:glob_header:>",
 				"local_params": []
 			},
 			"body": {

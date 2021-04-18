@@ -1,0 +1,15 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    
+					"GlossSee2": "markup"
+                    
+                }
+            }
+        }
+    }
+}

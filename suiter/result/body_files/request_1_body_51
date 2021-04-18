@@ -1,0 +1,14 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    
+					"Abbrev1": "ISO 8879:1986"
+                }
+            }
+        }
+    }
+}

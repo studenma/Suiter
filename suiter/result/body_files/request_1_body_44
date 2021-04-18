@@ -1,0 +1,14 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    
+					"GlossTerm1": "Standard Generalized Markup Language"
+                }
+            }
+        }
+    }
+}

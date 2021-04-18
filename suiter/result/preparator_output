@@ -1,0 +1,602 @@
+[
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/GET/usr1/4/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/GET/usr2/4/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/POST/usr1/4/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/POST/usr2/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/DELETE/usr1/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_1'],
+		['https://4/DELETE/usr2/4/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/GET/usr1/52/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/GET/usr2/52/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/POST/usr1/52/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/POST/usr2/52/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/DELETE/usr1/52/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/B', 'POST', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "52"}', './body_files/request_1_body_2'],
+		['https://52/DELETE/usr2/52/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/GET/usr1/3/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/GET/usr2/3/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/POST/usr1/3/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/POST/usr2/3/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/DELETE/usr1/3/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "3"}', './body_files/request_1_body_3'],
+		['https://3/DELETE/usr2/3/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/GET/usr1/1/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/GET/usr2/1/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/POST/usr1/1/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/POST/usr2/1/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/DELETE/usr1/1/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/1/B', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "1"}', './body_files/request_1_body_4'],
+		['https://1/DELETE/usr2/1/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/GET/usr1/4/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/GET/usr2/4/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/POST/usr1/4/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/POST/usr2/4/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/DELETE/usr1/4/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/A', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_5'],
+		['https://4/DELETE/usr2/4/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/GET/usr1/77/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/GET/usr2/77/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/POST/usr1/77/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/POST/usr2/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/DELETE/usr1/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'POST', '{"Content-type": "yaml", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_6'],
+		['https://77/DELETE/usr2/77/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/GET/usr1/52/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/GET/usr2/52/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/POST/usr1/52/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/POST/usr2/52/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/DELETE/usr1/52/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_7'],
+		['https://52/DELETE/usr2/52/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/GET/usr1/4/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/GET/usr2/4/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/POST/usr1/4/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/POST/usr2/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/DELETE/usr1/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/A', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_8'],
+		['https://4/DELETE/usr2/4/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/GET/usr1/77/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/GET/usr2/77/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/POST/usr1/77/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/POST/usr2/77/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/DELETE/usr1/77/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/3/B', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "77"}', './body_files/request_1_body_9'],
+		['https://77/DELETE/usr2/77/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/GET/usr1/3/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/GET/usr2/3/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/POST/usr1/3/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/POST/usr2/3/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/DELETE/usr1/3/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/2/C', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_10'],
+		['https://3/DELETE/usr2/3/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/GET/usr1/1/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/GET/usr2/1/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/POST/usr1/1/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/POST/usr2/1/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/DELETE/usr1/1/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'POST', '{"Content-type": "yaml", "testInt": "3", "dalsiTest": "1"}', './body_files/request_1_body_11'],
+		['https://1/DELETE/usr2/1/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/GET/usr1/4/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/GET/usr2/4/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/POST/usr1/4/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/POST/usr2/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/DELETE/usr1/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/C', 'GET', '{"Content-type": "yaml", "testInt": "2", "dalsiTest": "4"}', './body_files/request_1_body_12'],
+		['https://4/DELETE/usr2/4/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/GET/usr1/4/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/GET/usr2/4/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/POST/usr1/4/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/POST/usr2/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/DELETE/usr1/4/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/B', 'POST', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_13'],
+		['https://4/DELETE/usr2/4/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/GET/usr1/3/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/GET/usr2/3/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/POST/usr1/3/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/POST/usr2/3/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/DELETE/usr1/3/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/1/A', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "3"}', './body_files/request_1_body_14'],
+		['https://3/DELETE/usr2/3/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/GET/usr1/52/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/GET/usr2/52/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/POST/usr1/52/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/POST/usr2/52/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/DELETE/usr1/52/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/A', 'GET', '{"Content-type": "json", "testInt": "3", "dalsiTest": "52"}', './body_files/request_1_body_15'],
+		['https://52/DELETE/usr2/52/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/GET/usr1/77/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/GET/usr2/77/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/POST/usr1/77/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/POST/usr2/77/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/DELETE/usr1/77/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/C', 'GET', '{"Content-type": "json", "testInt": "2", "dalsiTest": "77"}', './body_files/request_1_body_16'],
+		['https://77/DELETE/usr2/77/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/GET/usr1/4/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/GET/usr2/4/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/POST/usr1/4/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/POST/usr2/4/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/DELETE/usr1/4/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/DEF/3/C', 'POST', '{"Content-type": "json", "testInt": "3", "dalsiTest": "4"}', './body_files/request_1_body_17'],
+		['https://4/DELETE/usr2/4/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/GET/usr1/1/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/GET/usr2/1/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/POST/usr1/1/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/POST/usr2/1/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/DELETE/usr1/1/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/G/2/C', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_18'],
+		['https://1/DELETE/usr2/1/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/GET/usr1/4/c', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/GET/usr2/4/c', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/POST/usr1/4/c', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/POST/usr2/4/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/DELETE/usr1/4/c', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_19'],
+		['https://4/DELETE/usr2/4/c', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/GET/usr1/3/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/GET/usr2/3/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/POST/usr1/3/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/POST/usr2/3/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/DELETE/usr1/3/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/B', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "3"}', './body_files/request_1_body_20'],
+		['https://3/DELETE/usr2/3/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/GET/usr1/1/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/GET/usr2/1/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/POST/usr1/1/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/POST/usr2/1/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/DELETE/usr1/1/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/3/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "1"}', './body_files/request_1_body_21'],
+		['https://1/DELETE/usr2/1/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/GET/usr1/77/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/GET/usr2/77/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/POST/usr1/77/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/POST/usr2/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/DELETE/usr1/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/2/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_22'],
+		['https://77/DELETE/usr2/77/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/GET/usr1/52/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/GET/usr2/52/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/POST/usr1/52/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/POST/usr2/52/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/DELETE/usr1/52/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "52"}', './body_files/request_1_body_23'],
+		['https://52/DELETE/usr2/52/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/GET/usr1/4/b', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/GET/usr2/4/b', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/POST/usr1/4/b', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/POST/usr2/4/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/DELETE/usr1/4/b', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "4"}', './body_files/request_1_body_24'],
+		['https://4/DELETE/usr2/4/b', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/GET/usr1/77/a', 'GET', '{"Content-Type": "application/json"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/GET/usr2/77/a', 'POST', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/POST/usr1/77/a', 'POST', '{"Content-Type": "application/json"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/POST/usr2/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body1']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/DELETE/usr1/77/a', 'GET', '{"Content-Type": "application/json", "Test": "test"}', 'body2']
+	],
+	[
+		['https://mydomain/addUser/ABC/1/A', 'GET', '{"Content-type": "json", "testInt": "1", "dalsiTest": "77"}', './body_files/request_1_body_25'],
+		['https://77/DELETE/usr2/77/a', 'POST', '{"Content-Type": "application/json"}', 'body1']
+	]
+]

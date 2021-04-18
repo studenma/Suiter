@@ -37,6 +37,7 @@ from suiter_preparator import get_endpoint_info, get_method_info, get_header_inf
 import suiter_classes_and_globals as globe
 from suiter_combine_request import create_combine_call, add_array_to_a_combine_call, add_parameter_to_combine_call, api_call_combine, evaluate_combine_response
 from suiter_general import replace_the_tag_with_value
+from suiter_templator import get_test_cases, get_executable_template
 
 def logger_config():
     """
@@ -83,9 +84,7 @@ def argument_parser():
     return args
     
 if __name__ == "__main__":
-    """ 
-    The entry point of Suiter application 
-    """
+    """ The entry point of Suiter application """
 
     """
     Setup the logging messages 
@@ -145,149 +144,33 @@ if __name__ == "__main__":
     ** Call a combine to get all requests with combined values of endpoint, method, header and body
     * Combine all the resulted requests together with other requests in sequence
     """
-    combined_requests = create_input_file_for_templator() 
-    number_of_requests_in_sequence = len(combined_requests)
-    # TODO: check if it corresponds to the nubmer of calls from input json file
-
-    ###############DEBUG#################
-    print("**************************************")
-    print("**************************************")
-    print(" SUPERDUPER UPLNEJ KONEC")
-    print("**************************************")
-    print("**************************************")
-    #####################################
+    preparator_output_file = './result/preparator_output'
+    combined_requests = create_input_file_for_templator(file_content, preparator_output_file) 
 
     """
-    Create a combine request for final call combination
-    If the 't-way' key is specified, set the value of it, otherwise all combinations are made (the t-way value is the same as the number of combine parameter)
+    Create a resulted test script
     """
-    final_combine_call = globe.CombineCallClass()
-    if 't-way' in file_content:
-        tway_value = file_content['t-way']
-    else:
-        tway_value = number_of_requests_in_sequence
-    final_combine_call.body['t_strength'] = tway_value
-
-    """
-    Add values to combine request body
-    * the values are given to combine just as a 'indexes' to an existing array, where are these parameteres described
-    ** the indexes to the array have to be combined instead of actual value (to avoid problems with global variables)
-    """
-    for call_idx in range(number_of_requests_in_sequence):
-        block_name = "FINAL_REQUEST_{}".format(call_idx)
-        list_of_indexes = []
-        for idx in range(len(combined_requests[call_idx])):
-            list_of_indexes.append(str(idx))
-        add_array_to_a_combine_call(list_of_indexes, final_combine_call, block_name)
-
-    ###############DEBUG#################
-    print("------ SUPER DUPER COMBINE CALLS ----")
-    for element in final_combine_call.body['parameters']:
-        print(element)
-    #####################################
-
-    """
-    Call a combine
-    """
-    combine_response = api_call_combine(final_combine_call)
-    ###############DEBUG#################
-    print("----------COMBINE SUPER DUPER RESPONSE-----------")
-    for element in combine_response:
-        print(element)
-    #####################################
-
-    final_result = []
-    for case in combine_response:
-        """
-        Go through all the cases in combine response
-        """
-        case_array = []
-        all_globals = {}
-        for value_idx in range(len(case)):
-            """
-            Go through every value in case
-            Get all the test case variables
-            """
-            value_of_case = combined_requests[value_idx][int(case[value_idx])][0]
-            case_globals = combined_requests[value_idx][int(case[value_idx])][1]
-            all_globals.update(case_globals)
-            case_array.append(value_of_case)
-
-        """ clean globals """
-        new_globals = []
-        for element in case_array:
-            element_array = []
-            for part in element:
-                part = single_remove_global_from_string(part, all_globals, 'body')
-                element_array.append(part)
-            new_globals.append(element_array)
+    template = get_executable_template("Pytest", preparator_output_file)
     
-        final_result.append(new_globals)
-
-    ###############DEBUG#################
-    print("**************************************")
-    print("**************************************")
-    print("MEGA SUPER FINAL FINAL RESULT EVALUATED")
-    print("**************************************")
-    print("**************************************")
-    #####################################
-    for element in final_result:
-        print(element)
-
-    """
-    Create a file for templator
-    """
-    try:
-        f = open('templator_input2', 'w')
-    except:
-        message = "Could not open a templator input file: " + header_path
-        raise OpenFileError(__name__, "crate_templator_input_file", message)
-    
-
-    """ 
-    Pretify the string for templator to the readable format
-    """
-    tab = '\t'
-    print("----------")
-    # FIRST LAYER
-    f.write('[' + '\n')
-    current_tc_idx = 0
-    index_of_last_tc = len(final_result) - 1
-    for test_case in final_result:
-        # SECOND LAYER
-        f.write(tab+'[' + '\n')
-        index_of_last_call = len(test_case) - 1
-        current_call_idx = 0
-        for call in test_case:
-            # THIRD LAYER
-            if current_call_idx == index_of_last_call:
-                # no comma at the end
-                f.write(2*tab + str(call) + '\n')
-            else:
-                # comma at the end
-                f.write(2*tab + str(call) + ',\n')
-            # END THIRD LAYER
-            current_call_idx += 1
-        # SECOND LAYER END
-        if current_tc_idx == index_of_last_tc:
-            # no comma at the end
-            f.write(tab+']' + '\n')
-        else:
-            # comma at the end
-            f.write(tab+']' + ',\n')
-        current_tc_idx+=1
-    # FIRST LAYER END
-    f.write(']' + '\n')
-    f.close()
-
     print("Jsem na uplnem konci")
     exit(1)
 
-    from suiter_input_parser import get_test_cases, get_executable_template
-    # test_cases = get_test_cases("../test_cases/calls_4/tests_100")
-    test_cases = get_test_cases("./templator_input2")
-    template = get_executable_template("Pytest", test_cases)
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # from ast import literal_eval
     # from general import get_file_content
     # from decider import get_executable_template

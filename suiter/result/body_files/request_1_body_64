@@ -1,0 +1,15 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    
+					"GlossDef2": {
+                        "para2": "A meta-markup language
+                }
+            }
+        }
+    }
+}

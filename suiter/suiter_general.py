@@ -1,8 +1,12 @@
 """
 This module provides general functions used in all other modules 
 """
-from suiter_exceptions import *
 import re
+import logging
+logger = logging.getLogger(__name__)
+
+from suiter_exceptions import *
+
 
 # https://stackoverflow.com/questions/35091557/replace-nth-occurrence-of-substring-in-string
 def replace_the_tag_with_value(taged_string, tag, content, nth):
@@ -41,7 +45,7 @@ def get_file_content(file_path):
             data = file.read()
         return data
     except:
-        message = 'The file could not be opened'
+        message = 'The file could not be opened: {}'.format(file_path)
         raise OpenFileError(__name__, "get_file_content", message)
 
 def verify_tway_value(tway_value, number_of_parameteres):
@@ -74,5 +78,23 @@ def tag_substring_evaluation(tag1, tag2):
         None
 
 
-
+def get_header_from_file(header_path):
+    """ 
+    Get the headers from a input file
+    """
+    logger.debug("calling the get_header_from_file method with following parameter: " + header_path)
     
+    try:
+        f = open(header_path, 'r')
+    except:
+        message = "Could not open a header file: " + header_path
+        raise OpenFileError(__name__, "get_header_from_file", message)
+
+    header_dict = {}
+    for line in f:
+        header = line.split(":", 1)
+        head = header[0].rstrip(' ')
+        value = header[1].rstrip('\n').lstrip()
+        header_dict[head] = value
+    f.close()
+    return header_dict

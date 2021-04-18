@@ -9,12 +9,195 @@ Functions:
 import json
 import logging
 logger = logging.getLogger(__name__)
-logger.propagate = False
 
 from suiter_exceptions import *
 import suiter_classes_and_globals as globe
 from suiter_combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_array_to_a_combine_call
 from suiter_general import replace_the_tag_with_value, get_file_content, verify_tway_value
+from suiter_general import get_header_from_file
+
+def create_a_resulted_file_pretty(final_result_array, file_path):
+    """ 
+    Create a file for templator and open it for reading 
+    """
+    try:
+        f = open(file_path, 'w')
+    except:
+        message = "Could not open a templator input file"
+        raise OpenFileError(__name__, "create_a_resulted_file_pretty", message)
+
+    """ 
+    Pretify the string for templator to the readable format
+    Write it to the file simultaneously
+    """
+    tab = '\t' # TODO: tab should be a global variable (it is used in other parts of code as well)
+    # FIRST LAYER
+    f.write('[' + '\n')
+    current_tc_idx = 0
+    index_of_last_tc = len(final_result_array) - 1
+    for test_case in final_result_array:
+        # SECOND LAYER
+        f.write(tab+'[' + '\n')
+        index_of_last_call = len(test_case) - 1
+        current_call_idx = 0
+        for call in test_case:
+            # THIRD LAYER
+            if current_call_idx == index_of_last_call:
+                # no comma at the end
+                f.write(2*tab + str(call) + '\n')
+            else:
+                # comma at the end
+                f.write(2*tab + str(call) + ',\n')
+            # END THIRD LAYER
+            current_call_idx += 1
+        # SECOND LAYER END
+        if current_tc_idx == index_of_last_tc:
+            # no comma at the end
+            f.write(tab+']' + '\n')
+        else:
+            # comma at the end
+            f.write(tab+']' + ',\n')
+        current_tc_idx+=1
+    # FIRST LAYER END
+    f.write(']' + '\n')
+    f.close()
+
+def create_a_body_files(final_combinations):
+    """
+    Create a body file for each combination in request
+    """
+    final_combinations_with_files = []
+    request_idx = 1
+    for request in final_combinations:
+        """ Go through all the request in test sequence """
+        """ BODY """
+        create_body_toggle = request[1]
+        if create_body_toggle == True:
+            """ The request's body has to be moved to a file """
+            idx = 1
+            for combination in request[0]:
+                """ Iterate through all the request combiantions """
+                # every combination consist of the value and it's variables (values are at index 0) 
+                # every value consists of: [URL, method, header, body] -> body is index 3
+                file_content = str(combination[0][3])
+                with open("./result/body_files/request_{}_body_{}".format(request_idx, idx), "w") as f:
+                        f.write(file_content)
+                # replace the content of body in combiantion with it's file path
+                combination[0][3] = "./body_files/request_{}_body_{}".format(request_idx, idx)
+                idx+=1
+        elif create_body_toggle == False:
+            # nothing needs to be done
+            None
+        else:
+            raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+        final_combinations_with_files.append(request[0])
+        """ HEADER """
+        request_idx+=1
+    return final_combinations_with_files
+
+def prepare_final_combine_request(combined_requests, file_content):
+    """
+    From a given calls cases, make a last combine request to combine them 
+    """
+    number_of_requests_in_sequence = len(combined_requests)
+
+     # Check if the number of resulted calls is the same as the number of calls in input json
+    if len(globe.inputData.test_sequence) != number_of_requests_in_sequence:
+        raise ShouldHaveNotGottenHereError(__name__, "prepare_final_combine_request")
+
+    ###############DEBUG#################
+    print("**************************************")
+    print("**************************************")
+    print(" SUPERDUPER UPLNEJ KONEC")
+    print("**************************************")
+    print("**************************************")
+    #####################################
+
+    """
+    Create a combine request for final call combination
+    If the 't-way' key is specified, set the value of it, otherwise all combinations are made (the t-way value is the same as the number of combine parameter)
+    """
+    final_combine_call = globe.CombineCallClass()
+    if 't-way' in file_content:
+        tway_value = file_content['t-way']
+    else:
+        tway_value = number_of_requests_in_sequence
+    final_combine_call.body['t_strength'] = tway_value
+
+    """
+    Add values to combine request body
+    * the values are given to combine just as an 'index' to an existing array, where are these parametere values stored
+    ** the indexes to the array have to be combined instead of actual value (to avoid problems with global variables)
+    """
+    for call_idx in range(number_of_requests_in_sequence):
+        block_name = "FINAL_REQUEST_{}".format(call_idx)
+        list_of_indexes = []
+        for idx in range(len(combined_requests[call_idx])):
+            list_of_indexes.append(str(idx))
+        add_array_to_a_combine_call(list_of_indexes, final_combine_call, block_name)
+
+    ###############DEBUG#################
+    print("------ SUPER DUPER COMBINE CALLS ----")
+    for element in final_combine_call.body['parameters']:
+        print(element)
+    #####################################
+
+    """
+    Call a combine
+    """
+    combine_response = api_call_combine(final_combine_call)
+
+    ###############DEBUG#################
+    print("----------COMBINE SUPER DUPER RESPONSE-----------")
+    for element in combine_response:
+        print(element)
+    #####################################
+
+    """
+    Evaluate the final combine response
+    Replace all global variables with its actual value
+    """
+    final_result = []
+    for case in combine_response:
+        """ Go through all the cases in combine response """
+        cases_array = []
+        all_globals = {}
+        for value_idx in range(len(case)):
+            """
+            Go through every value in case. 
+            * Replace the call indexes with their value and append the test case to a new array 'cases_array'
+            * Get all the test case variables.
+            """
+            value_of_case = combined_requests[value_idx][int(case[value_idx])][0]
+            case_globals = combined_requests[value_idx][int(case[value_idx])][1]
+            all_globals.update(case_globals)
+            cases_array.append(value_of_case)
+
+
+        """ 
+        Replace all the globals in the resulted test cases stored in a 'cases_array'
+        """
+        test_cases = []
+        for element in cases_array:
+            element_array = []
+            for part in element:
+                part = single_remove_global_from_string(part, all_globals, 'body')
+                element_array.append(part)
+            test_cases.append(element_array)
+    
+        final_result.append(test_cases)
+
+    ###############DEBUG#################
+    print("**************************************")
+    print("**************************************")
+    print("MEGA SUPER FINAL FINAL RESULT EVALUATED")
+    print("**************************************")
+    print("**************************************")
+    #####################################
+    for element in final_result:
+        print(element)
+
+    return final_result
 
 def find_between(string, start_tag, end_tag, replace_with_start, replace_with_end):
     """ 
@@ -888,6 +1071,9 @@ def get_body_info(body_element):
     print("***********************")
     #####################################
 
+    # this toggle indicates whatever the body files should have been created for each combination of the parameters (at the end of Suiter application)
+    create_files_toggle = False
+
     """
     Get the type of a input specification
     Following formats are allowed:
@@ -899,7 +1085,6 @@ def get_body_info(body_element):
     values_type = type(body_element['values'])
     if values_type is str:
         """ STRING """
-
         """ 
         Get all the parameters and their information from a given header string 
         """
@@ -947,7 +1132,10 @@ def get_body_info(body_element):
         if len(param_array) == 0:
             """ 
             Get all the parameters and their information from a given body file content 
+            Set the create_files_toggle = True
+            * at the end of the Suiter application, the body file for every combination has to be created
             """
+            create_files_toggle = True
             file_content = get_file_content(tagged_string)
             tagged_string,param_array = general_string_parser(file_content, 'body')
 
@@ -1066,7 +1254,7 @@ def get_body_info(body_element):
             print(element)       
         ##################################### 
           
-        return body_test_cases,'indexes' 
+        return body_test_cases,'indexes',create_files_toggle
     else:
         ###############DEBUG#################
         print("-------NOT TWAY RESULT-----------")
@@ -1078,7 +1266,7 @@ def get_body_info(body_element):
         resulted_tuple = (tagged_string,param_array)
         if len(param_array) == 0:
             return resulted_tuple,'done_string' 
-        return resulted_tuple,'parameters'
+        return resulted_tuple,'parameters',create_files_toggle
 
 def get_header_info(header_element):
     """
@@ -1114,7 +1302,7 @@ def get_header_info(header_element):
     Following formats are allowed:
     * STRING
     ** content is a file path (or multiple file paths)
-    ** if there is only single file path -> the parameters can be searched inside of file as well
+    ** if there is only single file path -> the parameters can be searched inside a file as well
     * DICTIONARY
     """
     values_type = type(header_element['values'])
@@ -1170,6 +1358,30 @@ def get_header_info(header_element):
             edit_the_parameter_array(header_element, header_file_tuple[1], 'header')
             # remove single values parameters
             tagged_string,param_array = remove_single_values_params(header_file_tuple[0], header_file_tuple[1], 'header')
+        else:
+            """
+            Replace the file paths with its value
+            """
+            for parameter in param_array:
+                new_content_array = []
+                for header_path in parameter['content']:
+                    """ get the content of this file """
+                    try:
+                        header_file_content = json.dumps(get_header_from_file(header_path))
+                    except:
+                        message = "The header file content cannot be transfered to json"
+                        raise OpenFileError(__name__, "get_header_info", message)
+                    """ replace the quotes to double qoutes """
+                    # replace the content from file path to it's value
+                    new_content_array.append(header_file_content)
+                parameter['content'] = new_content_array
+
+            ###############DEBUG#################
+            print("-------- REPLACE PATHS WITH VALUE ----------")
+            print(tagged_string)
+            for element in param_array:
+                print(element)  
+            #####################################
     elif values_type is dict:
         """ DICTIONARY """
         # read the value and transfer it to a python dictionary
@@ -1474,12 +1686,13 @@ def get_endpoint_info(endpoint_element):
         else:
             return resulted_tuple,"parameters"
 
-def create_input_file_for_templator():
+def create_input_file_for_templator(file_content, file_path):
     """
     Create a input file for templator module
     """
     call_idx = -1
-    super_duper_result = []
+    # the array with all the combinations + the information if the body/header files should have been created for each test_case
+    final_combinations = []
     for call in globe.inputData.test_sequence:
         call_idx+=1
         logging.debug('Getting info about call')
@@ -1508,7 +1721,7 @@ def create_input_file_for_templator():
         endpoint,endpoint_toggle = get_endpoint_info(call['endpoint'])
         method,method_toggle = get_method_info(call['method'])
         header,header_toggle = get_header_info(call['header'])
-        body,body_toggle = get_body_info(call['body'])
+        body,body_toggle,create_files_toggle = get_body_info(call['body'])
 
         """
         Create a combine request
@@ -1700,21 +1913,48 @@ def create_input_file_for_templator():
             print(element)
         #####################################
 
-        """ Add the resulted combinations of current request to the array with all requests in test sequence """
-        super_duper_result.append(resulted_request_combination)
-
-        ###############DEBUG#################
-        for idx in range(len(super_duper_result)):
-            print("----------TEMPORARY SUPER DUPER RESULT {}-----------".format(idx))
-            for element in super_duper_result[idx]:
-                print(element)
-        #####################################
-
+        """ 
+        Add the resulted combinations of current request to the array with all requests in test sequence 
+        """
+        resulted_tuple = (resulted_request_combination, create_files_toggle)
+        final_combinations.append(resulted_tuple)
+    # END FOR
     
     ###############DEBUG#################
-    for idx in range(len(super_duper_result)):
+    for idx in range(len(final_combinations)):
         print("----------FINAL SUPER DUPER RESULT {}-----------".format(idx))
-        for element in super_duper_result[idx]:
+        print(final_combinations[idx][1]) # create_body_files?
+        for element in final_combinations[idx][0]: 
+            print(element) # combinations
+    #####################################
+
+    """
+    Create a body files 
+    """
+    final_combinations = create_a_body_files(final_combinations)
+
+    ###############DEBUG#################
+    for idx in range(len(final_combinations)):
+        print("----------RESULT OF CALL COMBINATION WITH FILES {}-----------".format(idx))
+        for element in final_combinations[idx]:
             print(element)
     #####################################
-    return super_duper_result
+
+    """
+    Combine the resulted requests array 
+    Create a file for templator in pretty format
+    """
+    final_result = prepare_final_combine_request(final_combinations, file_content)
+
+    """
+    Check if the number of test cases isn't too high
+    The limit for number of test cases is specified in config file (default 100) 
+    """
+    number_of_allowed = 150
+    number_of_test_cases = len(final_result)
+    if number_of_test_cases > number_of_allowed:
+        message = "The number of resulted test cases is higher then allowed. The number of test cases: {}, the nubmer of allowed test cases: {}. If you want to continue anyway, run an Suiter with --force argument".format(number_of_test_cases, number_of_allowed)
+        raise LimitExceededError(__name__, "create_input_file_for_templator", message)
+    
+    # create a file for templator
+    create_a_resulted_file_pretty(final_result, file_path)

@@ -1,0 +1,13 @@
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                     used to create markup languages such as DocBook."
+                }
+            }
+        }
+    }
+}
