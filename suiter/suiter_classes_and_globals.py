@@ -37,6 +37,8 @@ class ConfigDataClass(object):
         self.header = self.ConfigHeaderClass(config['HEADER'])
         # BODY
         self.body = self.ConfigBodyClass(config['BODY'])
+        # COMBINATION_LIMIT
+        self.limits = self.ConfigLimitClass(config['COMBINATION_LIMIT'])
 
     def extend_of_priority_tags(self):
         # ENDPOINT start
@@ -127,6 +129,13 @@ class ConfigDataClass(object):
             def __init__(self, configVariable):
                 self.start = configVariable['body_variable_start']
                 self.end = configVariable['body_variable_end']
+
+    class ConfigLimitClass(object):
+        def __init__(self, limits):
+            self.inside_element_limit = limits['inside_element_limit']
+            self.request_limit = limits['request_limit']
+            self.final_tc_limit = limits['final_tc_limit']
+            self.created_files_in_body_sequence = limits['created_files_in_body_sequence']
 
 class InputDataClass(object):
     def __init__(self, json_content):

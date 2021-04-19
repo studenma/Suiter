@@ -144,8 +144,8 @@ if __name__ == "__main__":
     ** Call a combine to get all requests with combined values of endpoint, method, header and body
     * Combine all the resulted requests together with other requests in sequence
     """
-    preparator_output_file = './result/preparator_output'
-    combined_requests = create_input_file_for_templator(file_content, preparator_output_file) 
+    preparator_output_file = './result/preparator_output'   
+    combined_requests = create_input_file_for_templator(file_content, preparator_output_file)
 
     """
     Create a resulted test script

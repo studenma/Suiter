@@ -13,8 +13,7 @@ logger = logging.getLogger(__name__)
 from suiter_exceptions import *
 import suiter_classes_and_globals as globe
 from suiter_combine_request import api_call_combine, evaluate_combine_response, add_parameter_to_combine_call, add_array_to_a_combine_call
-from suiter_general import replace_the_tag_with_value, get_file_content, verify_tway_value
-from suiter_general import get_header_from_file
+from suiter_general import replace_the_tag_with_value, get_file_content, verify_tway_value, yes_or_no, get_header_from_file
 
 def create_a_resulted_file_pretty(final_result_array, file_path):
     """ 
@@ -88,6 +87,16 @@ def create_a_body_files(final_combinations):
         elif create_body_toggle == False:
             # nothing needs to be done
             None
+        elif create_body_toggle == 'no_params':
+            """ 
+            There are no parameters in body
+            Create just a single file 
+            """
+            file_content = request[0][0][0][3]
+            with open("./result/body_files/request_{}_body_1".format(request_idx), "w") as f:
+                f.write(file_content)
+            for combination in request[0]:
+                combination[0][3] = "./body_files/request_{}_body_1".format(request_idx)
         else:
             raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
         final_combinations_with_files.append(request[0])
@@ -101,7 +110,7 @@ def prepare_final_combine_request(combined_requests, file_content):
     """
     number_of_requests_in_sequence = len(combined_requests)
 
-     # Check if the number of resulted calls is the same as the number of calls in input json
+    # Check if the number of resulted calls is the same as the number of calls in input json
     if len(globe.inputData.test_sequence) != number_of_requests_in_sequence:
         raise ShouldHaveNotGottenHereError(__name__, "prepare_final_combine_request")
 
@@ -121,7 +130,7 @@ def prepare_final_combine_request(combined_requests, file_content):
     if 't-way' in file_content:
         tway_value = file_content['t-way']
     else:
-        tway_value = number_of_requests_in_sequence
+        raise ShouldHaveNotGottenHereError(__name__, "prepare_final_combine_request")
     final_combine_call.body['t_strength'] = tway_value
 
     """
@@ -134,7 +143,8 @@ def prepare_final_combine_request(combined_requests, file_content):
         list_of_indexes = []
         for idx in range(len(combined_requests[call_idx])):
             list_of_indexes.append(str(idx))
-        add_array_to_a_combine_call(list_of_indexes, final_combine_call, block_name)
+        else:
+            add_array_to_a_combine_call(list_of_indexes, final_combine_call, block_name)
 
     ###############DEBUG#################
     print("------ SUPER DUPER COMBINE CALLS ----")
@@ -867,6 +877,10 @@ def split_combine_response_into_locations(combine_response, info_about_combine_b
         headies = []
         bodies = []
         methies = []
+
+        if type(case) is not list:
+            raise ShouldHaveNotGottenHereError(__name__, "split_combine_response_into_locations")
+
         # Go through all of the case's values
         for value_idx in range(len(case)):
             # Get the infromation about this value
@@ -1041,6 +1055,165 @@ def evaluate_body_part_of_response(body_combine_response, body, body_toggle):
         raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
     return body_test_cases
 
+def evaluate_main_combine_response(combine_response, info_about_combine_blocks, final_combinations, endpoint, method, header, body, toggles):
+    """
+    Evaluate the main combine response (combine the endpoint, method, header and body)
+    Return an resulted combination tuple (array of values and it's variables)
+    """
+    endpoint_toggle = toggles[0]
+    method_toggle = toggles[1]
+    header_toggle = toggles[2]
+    body_toggle = toggles[3]
+    create_files_toggle = toggles[4]
+
+    ###############DEBUG#################
+    print("----------COMBINE MAIN RESPONSE-----------")
+    print(combine_response)
+    for element in combine_response:
+        print(element)
+    print("----------INFO ABOUT COMBINE BLOCKS-----------")
+    for element in info_about_combine_blocks:
+        print(element)
+    ##################################### 
+
+    """ 
+    Split the combine response into locations 
+    """ 
+    splited_combine_request = split_combine_response_into_locations(combine_response, info_about_combine_blocks, endpoint, header, body)
+    endpoint_combine_response = splited_combine_request[0]
+    method_combine_response = splited_combine_request[1]
+    header_combine_response = splited_combine_request[2]
+    body_combine_response = splited_combine_request[3]
+
+    ###############DEBUG#################       
+    print("----------SPLIT INTO LOCATIONS-----------")
+    for element in splited_combine_request:
+        print(element)
+    #####################################
+
+    """
+    Evaluate the combine response
+    * Look into endpoint taged url 
+        -> are there any tags? Or is it fulfiled? Should I have some toggle to indicate that?
+        -> fill the tags with values -> what with a global variables behaviour -> should be similiar 
+            algorithm to the one before -> but it has to support global variables across the all parts
+    Look into method taged string 
+        -> should it be skiped? Or should the value be taken
+    Look into header taged string
+    Look into body taged string
+    """
+    endpoint_test_cases = evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endpoint_toggle)
+    method_test_cases = evaluate_method_part_of_response(method_combine_response, method, method_toggle)
+    header_test_cases = evaluate_header_part_of_response(header_combine_response, header, header_toggle)
+    body_test_cases = evaluate_body_part_of_response(body_combine_response, body, body_toggle)
+
+    ###############DEBUG#################
+    print("----------ENDPOINT TEST CASES-----------")
+    for element in endpoint_test_cases:
+        print(element)
+    print("----------METHOD TEST CASES-----------")
+    for element in method_test_cases:
+        print(element)
+    print("----------HEADER TEST CASES-----------")
+    for element in header_test_cases:
+        print(element)
+    print("----------BODY TEST CASES-----------")
+    for element in body_test_cases:
+        print(element)
+    #####################################
+
+    """
+    The number of endpoint, method, header and body values should be the same 
+    Also, it should be the same as the number of cases returned from combine request
+    """
+    combine_response_length = len(combine_response)
+    endpoint_test_cases_length = len(endpoint_test_cases)
+    method_test_cases_length = len(method_test_cases)
+    header_test_cases_length = len(header_test_cases)
+    body_test_cases_length = len(body_test_cases)
+
+    ###############DEBUG#################
+    print("----------ENDPOINT TEST CASES LENGTH-----------")
+    print(combine_response_length)
+    print(endpoint_test_cases_length)
+    print(method_test_cases_length)
+    print(header_test_cases_length)
+    print(body_test_cases_length)
+    #####################################
+
+    if not (combine_response_length == endpoint_test_cases_length == method_test_cases_length == header_test_cases_length == body_test_cases_length):
+        raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
+            
+    """
+    Replace all global params at all locations
+    * Each global_variable is searched in all parts: endpoint, method, header, body
+    Output example:
+        result = [
+            ([URL, method, header, body], {GLOBALS}),
+            ([URL, method, header, body], {GLOBALS})
+            ....
+        ]
+    """
+    resulted_request_combination = []
+    for test_case_idx in range(len(combine_response)):
+        # get the values of endpoint, method, header and body for current test case
+        endpoint,endpoint_globals = endpoint_test_cases[test_case_idx]
+        method,method_globals = method_test_cases[test_case_idx]
+        header,header_globals = header_test_cases[test_case_idx]
+        body,body_globals = body_test_cases[test_case_idx]
+
+        # get all the global params for this test case
+        all_globals = {}
+        all_globals.update(endpoint_globals)
+        all_globals.update(method_globals)
+        all_globals.update(header_globals)
+        all_globals.update(body_globals)
+
+        """
+        Replace all global params at all locations
+        * Each global_variable is searched in all parts: endpoint, method, header, body
+        """
+        for key in all_globals.keys():
+            # endpoint
+            start_tag = globe.config.endpoint.non_priority_start
+            end_tag = globe.config.endpoint.non_priority_end
+            tag = start_tag + key + end_tag
+            while tag in endpoint:
+                endpoint = replace_the_tag_with_value(endpoint, tag, str(all_globals[key]), 0)
+            # method
+            start_tag = globe.config.method.non_priority_start
+            end_tag = globe.config.method.non_priority_end
+            tag = start_tag + key + end_tag
+            while tag in method:
+                method = replace_the_tag_with_value(method, tag, str(all_globals[key]), 0)
+            # header
+            start_tag = globe.config.header.non_priority_start
+            end_tag = globe.config.header.non_priority_end
+            tag = start_tag + key + end_tag
+            while tag in header:
+                header = replace_the_tag_with_value(header, tag, str(all_globals[key]), 0)
+            # body
+            start_tag = globe.config.body.non_priority_start
+            end_tag = globe.config.body.non_priority_end
+            tag = start_tag + key + end_tag
+            while tag in body:
+                body = replace_the_tag_with_value(body, tag, str(all_globals[key]), 0)
+        test_case = [endpoint, method, header, body]
+        resulted_test_case_tuple = (test_case, all_globals)
+        resulted_request_combination.append(resulted_test_case_tuple)
+
+    ###############DEBUG#################
+    print("----------RESULT OF CALL COMBINATION-----------")
+    for element in resulted_request_combination:
+        print(element)
+    #####################################
+
+    """ 
+    Add the resulted combinations of current request to the array with all requests in test sequence 
+    """
+    resulted_tuple = (resulted_request_combination, create_files_toggle)
+    final_combinations.append(resulted_tuple)
+
 def get_body_info(body_element):
     """
     Get the information about body part of request
@@ -1138,6 +1311,12 @@ def get_body_info(body_element):
             create_files_toggle = True
             file_content = get_file_content(tagged_string)
             tagged_string,param_array = general_string_parser(file_content, 'body')
+
+            """
+            if no parameters were found in file content, each file for each body will not be created
+            """
+            if len(param_array) == 0:
+                create_files_toggle = 'no_params'
 
             ###############DEBUG#################
             print("------- GENERAL STRING PARSER (FILE CONTENT) -----------")
@@ -1265,7 +1444,7 @@ def get_body_info(body_element):
 
         resulted_tuple = (tagged_string,param_array)
         if len(param_array) == 0:
-            return resulted_tuple,'done_string' 
+            return resulted_tuple,'done_string',create_files_toggle
         return resulted_tuple,'parameters',create_files_toggle
 
 def get_header_info(header_element):
@@ -1763,163 +1942,51 @@ def create_input_file_for_templator(file_content, file_path):
         
         """ 
         Call combine 
+        Check if there are at least 2 parameters to be combined 
         """
-        combine_response = api_call_combine(combine_call)
-
-        ###############DEBUG#################
-        print("----------COMBINE MAIN RESPONSE-----------")
-        for element in combine_response:
-            print(element)
-        print("----------INFO ABOUT COMBINE BLOCKS-----------")
-        for element in info_about_combine_blocks:
-            print(element)
-        ##################################### 
-
-        """
-        Check if the number of values in combine response is equal to the number of it's descriptions (info_about_combine_blocks)
-        """
-        if len(info_about_combine_blocks) != len(combine_response[0]):
-            raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
-
-        """ 
-        Split the combine response into locations 
-        """ 
-        splited_combine_request = split_combine_response_into_locations(combine_response, info_about_combine_blocks, endpoint, header, body)
-        endpoint_combine_response = splited_combine_request[0]
-        method_combine_response = splited_combine_request[1]
-        header_combine_response = splited_combine_request[2]
-        body_combine_response = splited_combine_request[3]
-
-        ###############DEBUG#################       
-        print("----------SPLIT INTO LOCATIONS-----------")
-        for element in splited_combine_request:
-            print(element)
-        #####################################
-        
-        """
-        Evaluate the combine response
-        * Look into endpoint taged url 
-            -> are there any tags? Or is it fulfiled? Should I have some toggle to indicate that?
-            -> fill the tags with values -> what with a global variables behaviour -> should be similiar 
-                algorithm to the one before -> but it has to support global variables across the all parts
-        Look into method taged string 
-            -> should it be skiped? Or should the value be taken
-        Look into header taged string
-        Look into body taged string
-        """
-        endpoint_test_cases = evaluate_endpoint_part_of_response(endpoint_combine_response, endpoint, endpoint_toggle)
-        method_test_cases = evaluate_method_part_of_response(method_combine_response, method, method_toggle)
-        header_test_cases = evaluate_header_part_of_response(header_combine_response, header, header_toggle)
-        body_test_cases = evaluate_body_part_of_response(body_combine_response, body, body_toggle)
-
-        ###############DEBUG#################
-        print("----------ENDPOINT TEST CASES-----------")
-        for element in endpoint_test_cases:
-            print(element)
-        print("----------METHOD TEST CASES-----------")
-        for element in method_test_cases:
-            print(element)
-        print("----------HEADER TEST CASES-----------")
-        for element in header_test_cases:
-            print(element)
-        print("----------BODY TEST CASES-----------")
-        for element in body_test_cases:
-            print(element)
-        #####################################
-
-        """
-        The number of endpoint, method, header and body values should be the same 
-        Also, it should be the same as the number of cases returned from combine request
-        """
-        combine_response_length = len(combine_response)
-        endpoint_test_cases_length = len(endpoint_test_cases)
-        method_test_cases_length = len(method_test_cases)
-        header_test_cases_length = len(header_test_cases)
-        body_test_cases_length = len(body_test_cases)
-
-        ###############DEBUG#################
-        print("----------ENDPOINT TEST CASES LENGTH-----------")
-        print(combine_response_length)
-        print(endpoint_test_cases_length)
-        print(method_test_cases_length)
-        print(header_test_cases_length)
-        print(body_test_cases_length)
-        #####################################
-
-        if not (combine_response_length == endpoint_test_cases_length == method_test_cases_length == header_test_cases_length == body_test_cases_length):
-            raise ShouldHaveNotGottenHereError(__name__, "add_method_to_combine_request")
-                
-        """
-        Replace all global params at all locations
-        * Each global_variable is searched in all parts: endpoint, method, header, body
-        Output example:
-            result = [
-                ([URL, method, header, body], {GLOBALS}),
-                ([URL, method, header, body], {GLOBALS})
-                ....
-            ]
-        """
-        resulted_request_combination = []
-        for test_case_idx in range(len(combine_response)):
-            # get the values of endpoint, method, header and body for current test case
-            endpoint,endpoint_globals = endpoint_test_cases[test_case_idx]
-            method,method_globals = method_test_cases[test_case_idx]
-            header,header_globals = header_test_cases[test_case_idx]
-            body,body_globals = body_test_cases[test_case_idx]
-
-            # get all the global params for this test case
-            all_globals = {}
-            all_globals.update(endpoint_globals)
-            all_globals.update(method_globals)
-            all_globals.update(header_globals)
-            all_globals.update(body_globals)
-
-            """
-            Replace all global params at all locations
-            * Each global_variable is searched in all parts: endpoint, method, header, body
-            """
-            for key in all_globals.keys():
-                # endpoint
-                start_tag = globe.config.endpoint.non_priority_start
-                end_tag = globe.config.endpoint.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in endpoint:
-                    endpoint = replace_the_tag_with_value(endpoint, tag, str(all_globals[key]), 0)
-                # method
-                start_tag = globe.config.method.non_priority_start
-                end_tag = globe.config.method.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in method:
-                    method = replace_the_tag_with_value(method, tag, str(all_globals[key]), 0)
-                # header
-                start_tag = globe.config.header.non_priority_start
-                end_tag = globe.config.header.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in header:
-                    header = replace_the_tag_with_value(header, tag, str(all_globals[key]), 0)
-                # body
-                start_tag = globe.config.body.non_priority_start
-                end_tag = globe.config.body.non_priority_end
-                tag = start_tag + key + end_tag
-                while tag in body:
-                    body = replace_the_tag_with_value(body, tag, str(all_globals[key]), 0)
-            test_case = [endpoint, method, header, body]
-            resulted_test_case_tuple = (test_case, all_globals)
-            resulted_request_combination.append(resulted_test_case_tuple)
-
-        ###############DEBUG#################
-        print("----------RESULT OF CALL COMBINATION-----------")
-        for element in resulted_request_combination:
-            print(element)
-        #####################################
-
-        """ 
-        Add the resulted combinations of current request to the array with all requests in test sequence 
-        """
-        resulted_tuple = (resulted_request_combination, create_files_toggle)
-        final_combinations.append(resulted_tuple)
+        combine_response = []
+        if len(info_about_combine_blocks) == 1:
+            if info_about_combine_blocks[0]['location'] == 'endpoint':
+                for element in endpoint[1][0]['content']:
+                    combine_response.append([str(element)])
+            elif info_about_combine_blocks[0]['location'] == 'method':
+                for element in method[1][0]['content']:
+                    combine_response.append([str(element)])
+            elif info_about_combine_blocks[0]['location'] == 'header':
+                for element in header[1][0]['content']:
+                    combine_response.append([str(element)])
+            elif info_about_combine_blocks[0]['location'] == 'body':
+                for element in body[1][0]['content']:
+                    combine_response.append([str(element)])
+            toggles = [endpoint_toggle, method_toggle, header_toggle, body_toggle, create_files_toggle]
+            evaluate_main_combine_response(combine_response, info_about_combine_blocks, final_combinations, endpoint, method, header, body, toggles)
+        elif len(info_about_combine_blocks) == 0:
+            """ 
+            There are no parameters to combine
+            * tway has to be equal 1 (checked in verify_tway_value function)
+            * combine is not called
+            * the combine_response is simualted (returns empty array)
+            """ 
+            # resulted_tuple = (resulted_request_combination, create_files_toggle)
+            # final_combinations.append(resulted_tuple)
+            resulted_request_combination = [([endpoint[0], method[0], header[0], body[0]], {})]
+            resulted_tuple = (resulted_request_combination, create_files_toggle)
+            final_combinations.append(resulted_tuple)
+        else:
+            combine_response = api_call_combine(combine_call)
+            toggles = [endpoint_toggle, method_toggle, header_toggle, body_toggle, create_files_toggle]
+            evaluate_main_combine_response(combine_response, info_about_combine_blocks, final_combinations, endpoint, method, header, body, toggles)
     # END FOR
-    
+
+    # print("----")
+    # print(type(final_combinations))
+    # print(len(final_combinations))
+    # print(type(final_combinations[0]))
+    # print(final_combinations[0][0])
+    # print(final_combinations[0][1])
+    # print(final_combinations[1][0])
+    # print(final_combinations[1][1])
+    # exit(1)
     ###############DEBUG#################
     for idx in range(len(final_combinations)):
         print("----------FINAL SUPER DUPER RESULT {}-----------".format(idx))
@@ -1944,17 +2011,58 @@ def create_input_file_for_templator(file_content, file_path):
     Combine the resulted requests array 
     Create a file for templator in pretty format
     """
-    final_result = prepare_final_combine_request(final_combinations, file_content)
+    # Check if there are multiple requests to be combined + at least one of the request has to have multiple combination values
+    # TODO: Kdyz bude zadane t-way, bude se volat combine - kdyz to spadne, je to chyba uzivatele
+    # TODO: Upravit podminku, ze pokud t-way, zkontroluje se, ze dava smysl s poctem paramteru
+    # TODO: zrusit podminku, ze test_sequence musi byt vetsi nez 1 - zavisi to na uzivateli
+    if 't-way' in file_content:
+        final_result = prepare_final_combine_request(final_combinations, file_content)
+    else:
+        print("tway neexistuje")
+        # Do each with each
+        array = []
+        for element in final_combinations:
+            array.append(element[0][0])
+
+        # TODO: Je potreba predat indexem a pak ziskat zpet hodnotu
+        
+        # for el in array:
+        #     print(el)
+        # exit(1)
+
+        # TODO: O tomhlo muzu napsat v textu klidne cely odstavec
+        import itertools
+        combined = []
+        # lists = [['a', 'b', 'c'], ['1', '2', '3'], ['A', 'B', 'C'], ['A', 'B']]
+        for pair in itertools.product(*array):
+            combined.append(''.join(pair))
+
+        print("----")
+        print(combined)
+        print(len(combined))
+        exit(1)
+
+        final_result = None
+    exit(1)
+    # if len(globe.inputData.test_sequence) > 1:
+    #     final_result = prepare_final_combine_request(final_combinations, file_content)
+    # else:
+    #     # get the content of preparator output for single request sequence
+    #     final_result = []
+    #     for element in final_combinations[0]:
+    #         final_result.append([element[0]])  
 
     """
     Check if the number of test cases isn't too high
-    The limit for number of test cases is specified in config file (default 100) 
+    The limit for number of test cases is specified in config file
+    If the limit is exceeded -> ask user if he really wants to do that
     """
-    number_of_allowed = 150
+    number_of_allowed = int(globe.config.limits.final_tc_limit)
     number_of_test_cases = len(final_result)
     if number_of_test_cases > number_of_allowed:
-        message = "The number of resulted test cases is higher then allowed. The number of test cases: {}, the nubmer of allowed test cases: {}. If you want to continue anyway, run an Suiter with --force argument".format(number_of_test_cases, number_of_allowed)
-        raise LimitExceededError(__name__, "create_input_file_for_templator", message)
+        message = "The number of resulted test cases is higher then allowed. The number of test cases: {}, the nubmer of allowed test cases: {}. If you want to continue without asking, run an Suiter with --force argument. Do you want to continue?".format(number_of_test_cases, number_of_allowed)
+        if yes_or_no(message) == False:
+            exit(1)
     
     # create a file for templator
     create_a_resulted_file_pretty(final_result, file_path)

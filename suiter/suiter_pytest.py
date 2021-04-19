@@ -161,7 +161,8 @@ def prepare_test_case_list_tag(tc):
             new_line = indent("method = \"" + str(test_case[0][1]) + "\"\n", 2*tab)
             result += new_line
             # HEADER
-            header = get_header_from_file(test_case[0][2])
+            # header = get_header_from_file(test_case[0][2])
+            header = test_case[0][2]
             new_line = indent("header = " + str(header) + "\n", 2*tab)
             result += new_line
             # BODY

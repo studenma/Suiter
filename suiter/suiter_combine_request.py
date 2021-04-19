@@ -23,6 +23,20 @@ def api_call_combine(combine_info):
     header = combine_info.header
     body = combine_info.body
 
+    """ 
+    Check if there are at least 2 parameters to be combined 
+    """
+    if len(body['parameters']) < 2:
+        message = "Cannot combine single parameter"
+        raise CombineCallError(__name__, "api_call_combine", message)
+    """
+    Check if each parameter has at least two values
+    """
+    for parameter in body['parameters']:
+        if len(parameter['blocks']) < 2:
+            message = "Cannot combine a parameter with single value"
+            raise CombineCallError(__name__, "api_call_combine", message)
+
     ###############DEBUG#################
     print("**************************************")
     print("Called combine with following body:")

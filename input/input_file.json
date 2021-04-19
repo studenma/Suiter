@@ -2,60 +2,45 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/<>/<1,2,3>/<A,B,C>",
-			    "local_params": [
-					{
-						"values": ["ABC", "DEF", "G"]
-					}
-				]
-		    },
-		    "method": {
-				"values": "<>",
-				"local_params": [
-					{
-						"values": ["GET","POST"]
-					}
-				]
-			},
-			"header": {
-				"values": {"Content-type": "<json,yaml>", "testInt": "<>", "dalsiTest": "<:user:>"},
-				"local_params": [
-					{
-						"values": [1,2,3]
-					}
-				]
-			},
-			"body": {
-				"values": "<../input/body-2.json>",
-				"local_params": []
-			},
-			"t-way": 2
-		},
-		{
-		    "endpoint": {
-		    	"values": "https://<:user:>/<:method:>/<:userStr:>/<:user:>/<:UUUUUUUUU:>",
+		    	"values": "https://mydomain/addUser/",
 			    "local_params": []
 		    },
 		    "method": {
-				"values": "<GET,POST>",
+				"values": "GET",
 				"local_params": []
 			},
 			"header": {
-				"values": "<:glob_header:>",
+				"values": {"Content-type": "json", "testInt": "12", "dalsiTest": "test"},
 				"local_params": []
 			},
 			"body": {
-				"values": "<body1,body2>",
+				"values": "../input/body_no_params.json",
 				"local_params": []
 			},
-			"t-way": 2
+			"t-way": 1
+		},
+		{
+			"endpoint": {
+		    	"values": "https://mydomain/addUser/",
+			    "local_params": []
+		    },
+		    "method": {
+				"values": "POST",
+				"local_params": []
+			},
+			"header": {
+				"values": {"Content-type": "json", "testInt": "12", "dalsiTest": "test"},
+				"local_params": []
+			},
+			"body": {
+				"values": "../input/body_no_params.json",
+				"local_params": []
+			},
+			"t-way": 1
 		}
 	],
 	"global_params": {
-		"user": [4,52,3,1,4,77],
-		"userStr": ["usr1", "usr2"],
-		"method": ["GET", "POST", "DELETE"],
-		"glob_header": ["../input/header1", "../input/header2"],
-		"UUUUUUUUU": ["a", "b", "c"]
+		"user": [1,2,3],
+		"method": ["GET", "POST"]
 	}
 }

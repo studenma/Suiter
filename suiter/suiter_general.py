@@ -57,8 +57,9 @@ def verify_tway_value(tway_value, number_of_parameteres):
         raise InputFileError(__name__, "verify_tway_value", message)
     # tway value has to be less or equal to nubmer of parameters
     if tway_value > number_of_parameteres:
-        message = "T-way value has to be less or equal to number of parameters"
-        raise InputFileError(__name__, "verify_tway_value", message)
+        if number_of_parameteres != 0 and tway_value != 1:
+            message = "T-way value has to be less or equal to number of parameters"
+            raise InputFileError(__name__, "verify_tway_value", message)
 
 def tag_substring_evaluation(tag1, tag2):
     """
@@ -76,7 +77,6 @@ def tag_substring_evaluation(tag1, tag2):
         return (tag1,tag2)
     else:
         None
-
 
 def get_header_from_file(header_path):
     """ 
@@ -98,3 +98,12 @@ def get_header_from_file(header_path):
         header_dict[head] = value
     f.close()
     return header_dict
+
+def yes_or_no(message):
+    """ Ask user if he really wants to continue """
+    while "the answer is invalid":
+        reply = str(input(message+' (y/n): ')).lower().strip()
+        if reply[0] == 'y':
+            return True
+        if reply[0] == 'n':
+            return False
