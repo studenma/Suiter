@@ -2,6 +2,18 @@ from unittest import TestCase
 from json import dumps
 import requests
 
+class ContextClass(object):
+    def __init__(self, request, endpoint_params, method_params, header_params, body_params):
+        self.endpoint = request[0]
+        self.method = request[1]
+        self.header = request[2]
+        self.body = request[3]
+        # parameters
+        self.endpoint_params = endpoint_params
+        self.method_params = method_params
+        self.header_params = header_params
+        self.body_params = body_params
+
 def setup():
     #####################################
     # TODO: HERE IS YOUR CODE
@@ -14,10 +26,6 @@ def verify(test_case, request_id, response, context):
     Take into account that these if-else statements will be duplicated for all test cases
     You can also rewrite whole method from scretch and use [TODO:] argument while calling 
     suiter to avoid code duplicate 
-    context[0] = URL (string)
-    context[1] = METHOD (string)
-    context[2] = HEADERS (list)
-    context[3] = BODY (file path)
     """
     # DO NOT TOUCH THIS <DUPLICATE>
 <VERIFY>    
@@ -32,7 +40,7 @@ def teardown():
     ## def teardown(test_case):
     None
 
-def list_of_all_cases(test_case, request_id):
+def all_test_cases(test_case, request_id):
     """
     List of all test cases in this test suite
     """

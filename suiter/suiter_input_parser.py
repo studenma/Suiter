@@ -262,13 +262,14 @@ def input_json_structure_validator(json_content):
         # check mandatory body keys
         body_keys_mandatory = ['values', 'local_params']
         body_keys_optional = ['t-way']
+        body_keys_optional_boolean = ['value_is_string']
         for element in body_keys_mandatory:
             if element not in json_content['test_sequence'][idx]['body'].keys():
                 message = "The '{}' element was not found in body json_content".format(element) 
                 return False,message
         # check all body keys
         for element in json_content['test_sequence'][idx]['body'].keys():
-            if (element not in body_keys_mandatory) and (element not in body_keys_optional):
+            if (element not in body_keys_mandatory) and (element not in body_keys_optional) and (element not in body_keys_optional_boolean):
                 message = "The '{}' element is not supported".format(element) 
                 return False,message
             # all optional keys should be integers
@@ -276,6 +277,12 @@ def input_json_structure_validator(json_content):
                 el_type = type(json_content['test_sequence'][idx]['body'][element])
                 if el_type is not int:
                     message = "The '{}' element does not have a valid type: expected: integer, {} is given".format(element, el_type) 
+                    return False,message 
+            # check boolean types
+            if element in body_keys_optional_boolean:
+                el_type = type(json_content['test_sequence'][idx]['body'][element])
+                if el_type is not bool:
+                    message = "The '{}' element does not have a valid type: expected: boolean, {} is given".format(element, el_type) 
                     return False,message 
         # check local_param is array
         local_params_type = type(json_content['test_sequence'][idx]['body']['local_params'])

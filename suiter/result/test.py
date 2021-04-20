@@ -2,17 +2,25 @@ from unittest import TestCase
 from json import dumps
 import requests
 
+
 class ContextClass(object):
-    def __init__(self, request, endpoint_params, method_params, header_params, body_params):
-        self.endpoint = request[0]
-        self.method = request[1]
-        self.header = request[2]
-        self.body = request[3]
-        # parameters
-        self.endpoint_params = endpoint_params
-        self.method_params = method_params
-        self.header_params = header_params
-        self.body_params = body_params
+    def __init__(self, requests, endpoint_params, method_params, header_params, body_params):
+        self.list_of_requests = []
+        for req_idx in range(len(requests)):
+            request = self.requestClass(requests[req_idx], endpoint_params[req_idx], method_params[req_idx], header_params[req_idx], body_params[req_idx])
+            self.list_of_requests.append(request)
+    class requestClass(object):
+        def __init__(self, request, endpoint_params, method_params, header_params, body_params):
+            # actual values
+            self.endpoint = request[0]
+            self.method = request[1]
+            self.header = request[2]
+            self.body = request[3]
+            # parameters
+            self.endpoint_params = endpoint_params
+            self.method_params = method_params
+            self.header_params = header_params
+            self.body_params = body_params
 
 def setup():
     #####################################
@@ -26,14 +34,18 @@ def verify(test_case, request_id, response, context):
     Take into account that these if-else statements will be duplicated for all test cases
     You can also rewrite whole method from scretch and use [TODO:] argument while calling 
     suiter to avoid code duplicate 
+    context[0] = URL (string)
+    context[1] = METHOD (string)
+    context[2] = HEADERS (list)
+    context[3] = BODY (file path)
     """
     if test_case == "test_case_01":
         if request_id == "call_1":
-            # Test Case Information
+            """ Test Case 01 request 1
             # endpoint = http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=0
             # method = GET
             # header = {"Content-type": "json", "testInt": "12", "dalsiTest": "test"}
-            # body = ./body_files/request_1_body_1
+            # body = ./body_files/request_1_body_1 """
             assert response.status_code == 200
         elif request_id == "call_2":
             # Test Case Information
@@ -651,16 +663,25 @@ def teardown():
     ## def teardown(test_case):
     None
 
-def all_test_cases(test_case, request_id):
+def list_of_all_cases(test_case, request_id):
     """
     List of all test cases in this test suite
     """
     if test_case == "test_case_01":
         if request_id == "call_1":
+            # request specification
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=0"
             method = "GET"
             header = {"Content-type": "json", "testInt": "12", "dalsiTest": "test"}
             body = "./body_files/request_1_body_1"
+            request = [url, method, header, body]
+            # parameters
+            endpoint_params = ["add", "0", "0"]
+            method_params = []
+            header_params = ["json", "12"]
+            body_params = ['"ID": "SGML"']
+
+            moje_classa = ContextClass(request,endpoint_params,method_params,header_params,body_params)
         elif request_id == "call_2":
             url = "http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=0"
             method = "GET"
@@ -1133,12 +1154,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_01", "call_1")
+        call = list_of_all_cases("test_case_01", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_01", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_01", "call_2")
+        call = list_of_all_cases("test_case_01", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_01", "call_2", response, call)
@@ -1149,12 +1170,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_02", "call_1")
+        call = list_of_all_cases("test_case_02", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_02", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_02", "call_2")
+        call = list_of_all_cases("test_case_02", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_02", "call_2", response, call)
@@ -1165,12 +1186,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_03", "call_1")
+        call = list_of_all_cases("test_case_03", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_03", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_03", "call_2")
+        call = list_of_all_cases("test_case_03", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_03", "call_2", response, call)
@@ -1181,12 +1202,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_04", "call_1")
+        call = list_of_all_cases("test_case_04", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_04", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_04", "call_2")
+        call = list_of_all_cases("test_case_04", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_04", "call_2", response, call)
@@ -1197,12 +1218,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_05", "call_1")
+        call = list_of_all_cases("test_case_05", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_05", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_05", "call_2")
+        call = list_of_all_cases("test_case_05", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_05", "call_2", response, call)
@@ -1213,12 +1234,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_06", "call_1")
+        call = list_of_all_cases("test_case_06", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_06", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_06", "call_2")
+        call = list_of_all_cases("test_case_06", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_06", "call_2", response, call)
@@ -1229,12 +1250,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_07", "call_1")
+        call = list_of_all_cases("test_case_07", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_07", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_07", "call_2")
+        call = list_of_all_cases("test_case_07", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_07", "call_2", response, call)
@@ -1245,12 +1266,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_08", "call_1")
+        call = list_of_all_cases("test_case_08", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_08", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_08", "call_2")
+        call = list_of_all_cases("test_case_08", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_08", "call_2", response, call)
@@ -1261,12 +1282,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_09", "call_1")
+        call = list_of_all_cases("test_case_09", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_09", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_09", "call_2")
+        call = list_of_all_cases("test_case_09", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_09", "call_2", response, call)
@@ -1277,12 +1298,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_10", "call_1")
+        call = list_of_all_cases("test_case_10", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_10", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_10", "call_2")
+        call = list_of_all_cases("test_case_10", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_10", "call_2", response, call)
@@ -1293,12 +1314,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_11", "call_1")
+        call = list_of_all_cases("test_case_11", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_11", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_11", "call_2")
+        call = list_of_all_cases("test_case_11", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_11", "call_2", response, call)
@@ -1309,12 +1330,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_12", "call_1")
+        call = list_of_all_cases("test_case_12", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_12", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_12", "call_2")
+        call = list_of_all_cases("test_case_12", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_12", "call_2", response, call)
@@ -1325,12 +1346,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_13", "call_1")
+        call = list_of_all_cases("test_case_13", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_13", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_13", "call_2")
+        call = list_of_all_cases("test_case_13", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_13", "call_2", response, call)
@@ -1341,12 +1362,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_14", "call_1")
+        call = list_of_all_cases("test_case_14", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_14", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_14", "call_2")
+        call = list_of_all_cases("test_case_14", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_14", "call_2", response, call)
@@ -1357,12 +1378,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_15", "call_1")
+        call = list_of_all_cases("test_case_15", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_15", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_15", "call_2")
+        call = list_of_all_cases("test_case_15", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_15", "call_2", response, call)
@@ -1373,12 +1394,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_16", "call_1")
+        call = list_of_all_cases("test_case_16", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_16", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_16", "call_2")
+        call = list_of_all_cases("test_case_16", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_16", "call_2", response, call)
@@ -1389,12 +1410,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_17", "call_1")
+        call = list_of_all_cases("test_case_17", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_17", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_17", "call_2")
+        call = list_of_all_cases("test_case_17", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_17", "call_2", response, call)
@@ -1405,12 +1426,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_18", "call_1")
+        call = list_of_all_cases("test_case_18", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_18", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_18", "call_2")
+        call = list_of_all_cases("test_case_18", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_18", "call_2", response, call)
@@ -1421,12 +1442,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_19", "call_1")
+        call = list_of_all_cases("test_case_19", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_19", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_19", "call_2")
+        call = list_of_all_cases("test_case_19", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_19", "call_2", response, call)
@@ -1437,12 +1458,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_20", "call_1")
+        call = list_of_all_cases("test_case_20", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_20", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_20", "call_2")
+        call = list_of_all_cases("test_case_20", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_20", "call_2", response, call)
@@ -1453,12 +1474,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_21", "call_1")
+        call = list_of_all_cases("test_case_21", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_21", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_21", "call_2")
+        call = list_of_all_cases("test_case_21", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_21", "call_2", response, call)
@@ -1469,12 +1490,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_22", "call_1")
+        call = list_of_all_cases("test_case_22", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_22", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_22", "call_2")
+        call = list_of_all_cases("test_case_22", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_22", "call_2", response, call)
@@ -1485,12 +1506,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_23", "call_1")
+        call = list_of_all_cases("test_case_23", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_23", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_23", "call_2")
+        call = list_of_all_cases("test_case_23", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_23", "call_2", response, call)
@@ -1501,12 +1522,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_24", "call_1")
+        call = list_of_all_cases("test_case_24", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_24", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_24", "call_2")
+        call = list_of_all_cases("test_case_24", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_24", "call_2", response, call)
@@ -1517,12 +1538,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_25", "call_1")
+        call = list_of_all_cases("test_case_25", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_25", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_25", "call_2")
+        call = list_of_all_cases("test_case_25", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_25", "call_2", response, call)
@@ -1533,12 +1554,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_26", "call_1")
+        call = list_of_all_cases("test_case_26", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_26", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_26", "call_2")
+        call = list_of_all_cases("test_case_26", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_26", "call_2", response, call)
@@ -1549,12 +1570,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_27", "call_1")
+        call = list_of_all_cases("test_case_27", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_27", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_27", "call_2")
+        call = list_of_all_cases("test_case_27", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_27", "call_2", response, call)
@@ -1565,12 +1586,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_28", "call_1")
+        call = list_of_all_cases("test_case_28", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_28", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_28", "call_2")
+        call = list_of_all_cases("test_case_28", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_28", "call_2", response, call)
@@ -1581,12 +1602,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_29", "call_1")
+        call = list_of_all_cases("test_case_29", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_29", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_29", "call_2")
+        call = list_of_all_cases("test_case_29", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_29", "call_2", response, call)
@@ -1597,12 +1618,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_30", "call_1")
+        call = list_of_all_cases("test_case_30", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_30", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_30", "call_2")
+        call = list_of_all_cases("test_case_30", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_30", "call_2", response, call)
@@ -1613,12 +1634,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_31", "call_1")
+        call = list_of_all_cases("test_case_31", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_31", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_31", "call_2")
+        call = list_of_all_cases("test_case_31", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_31", "call_2", response, call)
@@ -1629,12 +1650,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_32", "call_1")
+        call = list_of_all_cases("test_case_32", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_32", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_32", "call_2")
+        call = list_of_all_cases("test_case_32", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_32", "call_2", response, call)
@@ -1645,12 +1666,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_33", "call_1")
+        call = list_of_all_cases("test_case_33", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_33", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_33", "call_2")
+        call = list_of_all_cases("test_case_33", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_33", "call_2", response, call)
@@ -1661,12 +1682,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_34", "call_1")
+        call = list_of_all_cases("test_case_34", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_34", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_34", "call_2")
+        call = list_of_all_cases("test_case_34", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_34", "call_2", response, call)
@@ -1677,12 +1698,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_35", "call_1")
+        call = list_of_all_cases("test_case_35", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_35", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_35", "call_2")
+        call = list_of_all_cases("test_case_35", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_35", "call_2", response, call)
@@ -1693,12 +1714,12 @@ class TestClass(TestCase):
         ### SUT Setup ###
         setup()
         ### 1. Request ###
-        call = all_test_cases("test_case_36", "call_1")
+        call = list_of_all_cases("test_case_36", "call_1")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_36", "call_1", response, call)
         ### 2. Request ###
-        call = all_test_cases("test_case_36", "call_2")
+        call = list_of_all_cases("test_case_36", "call_2")
         with open(call[3],'rb') as payload:
             response = requests.request(call[1], call[0], headers=call[2], data=payload)
         verify("test_case_36", "call_2", response, call)

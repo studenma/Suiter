@@ -77,12 +77,17 @@ def prepare_verify_tag(tc):
             for call_idx in range(CALL_CNT_START, CALL_CNT_START+call_amount):
                 # change the call counter number to a format calculated by the number of calls
                 stringified_call_counter = prefix_call_format.format(call_idx)
-
                 if call_idx == CALL_CNT_START:
                     new_line = indent("if {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 else:
                     new_line = indent("elif {} == \"{}{}\":\n".format(CALL_VARIABLE_NAME, call_identifier, stringified_call_counter), 2*tab)
                 result += new_line
+                # print the information about request
+                result += indent("# Test Case Information\n", 3*tab)
+                result += indent("# endpoint = {}\n".format(str(test_case[call_idx-1][0])), 3*tab)
+                result += indent("# method = {}\n".format(str(test_case[call_idx-1][1])), 3*tab)
+                result += indent("# header = {}\n".format(str(test_case[call_idx-1][2])), 3*tab)
+                result += indent("# body = {}\n".format(str(test_case[call_idx-1][3])), 3*tab)
                 for line in block:
                     line = indent(line, 3*tab)
                     result += line
@@ -91,6 +96,12 @@ def prepare_verify_tag(tc):
             new_line += indent("raise Exception({})\n".format(EXPECTION_ELSE_MESSAGE), 3*tab)
             result += new_line
         else:
+            # print the information about request
+            result += indent("# Test Case Information\n", 2*tab)
+            result += indent("# endpoint = {}\n".format(str(test_case[0][0])), 2*tab)
+            result += indent("# method = {}\n".format(str(test_case[call_idx-1][1])), 2*tab)
+            result += indent("# header = {}\n".format(str(test_case[call_idx-1][2])), 2*tab)
+            result += indent("# body = {}\n".format(str(test_case[call_idx-1][3])), 2*tab)
             for line in block:
                 line = indent(line, 2*tab)
                 result += line
@@ -114,6 +125,11 @@ def prepare_test_case_list_tag(tc):
     test_case_counter = TEST_CASE_CNT_START
     prefix_format = prefix_format_calculation(len(tc))
     for test_case in tc:
+
+        # for element in tc:
+        #     print(element)
+        # exit(1)
+
         # change the test counter number to following format: '000'
         stringified_tc_counter = prefix_format.format(test_case_counter)
 
@@ -217,7 +233,7 @@ def prepare_sequence_tag(tc):
             # block.append('\"\"\"')
             block.append('### {}. Request ###'.format(stringified_call_counter))
             # block.append('# execution')
-            block.append('call = list_of_all_cases(\"{}{}\", \"{}\")'.format(test_case_identifier, stringified_tc_counter, call_tag))
+            block.append('call = all_test_cases(\"{}{}\", \"{}\")'.format(test_case_identifier, stringified_tc_counter, call_tag))
             block.append('with open(call[3],\'rb\') as payload:')
             block.append('{}response = requests.request(call[1], call[0], headers=call[2], data=payload)'.format(tab))
             # block.append('# request verification')

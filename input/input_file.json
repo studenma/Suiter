@@ -2,8 +2,13 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/",
-			    "local_params": []
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<>&num1=<:num1:>&num2=<:num2:>",
+			    "local_params": [
+					{
+						"values": ["add","substract","multiply","divide"]
+					}
+				],
+				"t-way":2
 		    },
 		    "method": {
 				"values": "GET",
@@ -14,33 +19,35 @@
 				"local_params": []
 			},
 			"body": {
-				"values": "../input/body_no_params.json",
-				"local_params": []
+				"values": "",
+				"local_params": [],
+				"value_is_string": true
 			},
 			"t-way": 1
 		},
 		{
 			"endpoint": {
-		    	"values": "https://mydomain/addUser/",
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<add,substract,multiply,divide>&num1=<0,1,2,3,4,5>&num2=<0,1,2,3,4,5>",
 			    "local_params": []
 		    },
 		    "method": {
-				"values": "POST",
+				"values": "GET",
 				"local_params": []
 			},
 			"header": {
-				"values": {"Content-type": "json", "testInt": "12", "dalsiTest": "test"},
+				"values": {"Content-type": "json"},
 				"local_params": []
 			},
 			"body": {
-				"values": "../input/body_no_params.json",
-				"local_params": []
+				"values": "",
+				"local_params": [],
+				"value_is_string": true
 			},
 			"t-way": 1
 		}
 	],
 	"global_params": {
-		"user": [1,2,3],
-		"method": ["GET", "POST"]
+		"num1": [0,1,2,3,4,5],
+		"num2": [0,1,2,3,4,5]
 	}
 }

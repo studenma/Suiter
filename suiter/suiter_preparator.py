@@ -1258,6 +1258,20 @@ def get_body_info(body_element):
     values_type = type(body_element['values'])
     if values_type is str:
         """ STRING """
+        """
+        Check if the string consists of file paths or body content
+        """
+        if 'value_is_string' in body_element:
+            # get the boolean value 
+            value_is_string = body_element['value_is_string']
+        else:
+            # value is file path
+            value_is_string = False
+
+        if value_is_string == True:
+            """ if the content of body is given in input file, file has to be created for it """
+            create_files_toggle = 'no_params'
+
         """ 
         Get all the parameters and their information from a given header string 
         """
@@ -1302,7 +1316,7 @@ def get_body_info(body_element):
         """
         If there is only one file path, search the content of this file and look for a parameters inside
         """
-        if len(param_array) == 0:
+        if len(param_array) == 0 and value_is_string == False:
             """ 
             Get all the parameters and their information from a given body file content 
             Set the create_files_toggle = True
@@ -1841,7 +1855,7 @@ def get_endpoint_info(endpoint_element):
         Replace the global params with values
         * in case of multiple global parameters in url string, the other occurences are replaced with value
         """
-        endpoint_test_cases = postprocessing_of_globals(endpoint_test_cases, 'url')
+        endpoint_test_cases = postprocessing_of_globals(endpoint_test_cases, 'endpoint')
         
         ###############DEBUG#################
         print("----------POSTPROCESSING AFTER COMBINE-----------")
@@ -1875,7 +1889,6 @@ def create_input_file_for_templator(file_content, file_path):
     for call in globe.inputData.test_sequence:
         call_idx+=1
         logging.debug('Getting info about call')
-
         ###############DEBUG#################
         print("""
         **************************************
@@ -1901,6 +1914,9 @@ def create_input_file_for_templator(file_content, file_path):
         method,method_toggle = get_method_info(call['method'])
         header,header_toggle = get_header_info(call['header'])
         body,body_toggle,create_files_toggle = get_body_info(call['body'])
+
+        print(endpoint[1])
+        exit(1)
 
         """
         Create a combine request
@@ -2019,31 +2035,51 @@ def create_input_file_for_templator(file_content, file_path):
         final_result = prepare_final_combine_request(final_combinations, file_content)
     else:
         print("tway neexistuje")
-        # Do each with each
-        array = []
-        for element in final_combinations:
-            array.append(element[0][0])
-
-        # TODO: Je potreba predat indexem a pak ziskat zpet hodnotu
-        
-        # for el in array:
-        #     print(el)
-        # exit(1)
-
+        """ Create an array with values """
         # TODO: O tomhlo muzu napsat v textu klidne cely odstavec
+        final_result = []
+        values_array = []
+        indexes_array = []
+        for element in final_combinations:
+            ar = []
+            idx_ar = []
+            cnt = 0
+            for combination in element:
+                ar.append(combination[0])
+                idx_ar.append(cnt)
+                cnt+=1
+            values_array.append(ar)
+            indexes_array.append(idx_ar)
+        """ Print an values_array with values """
+        print(":----")
+        for element in values_array:
+            print(element)
+        print("----------")
+        """ print indexes array """
+        for element in indexes_array:
+            print(element)
+        print(":----:")       
+
+        """ Combine each to each """
         import itertools
         combined = []
-        # lists = [['a', 'b', 'c'], ['1', '2', '3'], ['A', 'B', 'C'], ['A', 'B']]
-        for pair in itertools.product(*array):
-            combined.append(''.join(pair))
+        for pair in itertools.product(*indexes_array):
+            combined.append(pair)
 
-        print("----")
-        print(combined)
-        print(len(combined))
-        exit(1)
+        """ Get the values back """
+        for combination in combined:
+            print(combination)
+            value_idx = 0
+            temp_array = []
+            for value in combination:
+                # print(value, value_idx, values_array[value_idx][value])
+                temp_array.append(values_array[value_idx][value])
+                value_idx+=1
+            final_result.append(temp_array)
 
-        final_result = None
-    exit(1)
+        """ Print final result """
+        for element in final_result:
+            print(element)
     # if len(globe.inputData.test_sequence) > 1:
     #     final_result = prepare_final_combine_request(final_combinations, file_content)
     # else:
