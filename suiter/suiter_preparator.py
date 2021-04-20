@@ -1750,6 +1750,7 @@ def get_endpoint_info(endpoint_element):
     print("***********************")
     #####################################
 
+
     """
     Get the format of tag
     """
@@ -1761,6 +1762,8 @@ def get_endpoint_info(endpoint_element):
     parameters_tuple = general_string_parser(endpoint_element['values'], 'endpoint')
     tagged_string = parameters_tuple[0]
     param_array = parameters_tuple[1]
+
+    all_endpoint_params = param_array
 
     ###############DEBUG#################
     print("------- GENERAL STRING PARSER -----------")
@@ -1809,6 +1812,10 @@ def get_endpoint_info(endpoint_element):
     if 't-way' in endpoint_element.keys():
         # get the value of t-way
         tway_value = endpoint_element['t-way']
+
+        # for element in all_endpoint_params:
+        #     print(element)
+        # exit(14)
 
         # check if the t-way value does make sense in comparison with number of parameters
         number_of_parameteres = len(param_array)
@@ -1915,8 +1922,8 @@ def create_input_file_for_templator(file_content, file_path):
         header,header_toggle = get_header_info(call['header'])
         body,body_toggle,create_files_toggle = get_body_info(call['body'])
 
-        print(endpoint[1])
-        exit(1)
+        # print(endpoint[1])
+        # exit(1)
 
         """
         Create a combine request
@@ -2036,16 +2043,20 @@ def create_input_file_for_templator(file_content, file_path):
     else:
         print("tway neexistuje")
         """ Create an array with values """
-        # TODO: O tomhlo muzu napsat v textu klidne cely odstavec
         final_result = []
         values_array = []
         indexes_array = []
+        globals_array = []
+
+        print("*-*")
         for element in final_combinations:
             ar = []
             idx_ar = []
+            glob_ar = {}
             cnt = 0
             for combination in element:
-                ar.append(combination[0])
+                tup = (combination[0],combination[1])
+                ar.append(tup)
                 idx_ar.append(cnt)
                 cnt+=1
             values_array.append(ar)
@@ -2077,9 +2088,56 @@ def create_input_file_for_templator(file_content, file_path):
                 value_idx+=1
             final_result.append(temp_array)
 
+        """
+        Replace all global variables with its actual value
+        """
+        final_final_result = []
+        for case in final_result:
+            """ Go through all the cases in combine response """
+            cases_array = []
+            all_globals = {}
+            for req in case:
+                """
+                Go through every value in case. 
+                * Replace the call indexes with their value and append the test case to a new array 'cases_array'
+                * Get all the test case variables.
+                """
+                value_of_case = req[0]
+                case_globals = req[1]
+                all_globals.update(case_globals)
+                cases_array.append(value_of_case)
+
+            """ 
+            Replace all the globals in the resulted test cases stored in a 'cases_array'
+            """
+            test_cases = []
+            for element in cases_array:
+                element_array = []
+                location_cnt = 0 # 0 = endpoint, 1 = metrhod, 2 = header, 3 = body
+                for part in element:
+                    # what is the location -> to use the proper non priority tag
+                    # TODO: tohle by se melo udelat i v combine casti
+                    if location_cnt == 0:
+                        loc = 'endpoint'
+                    elif location_cnt == 1:
+                        loc = 'method'
+                    elif location_cnt == 2:
+                        loc = 'header'
+                    elif location_cnt == 3:
+                        loc = 'body'
+                    else:
+                        print("Tady bych nemel byt")
+                        exit(2)
+                    part = single_remove_global_from_string(part, all_globals, loc)
+                    element_array.append(part)
+                    location_cnt+=1
+                test_cases.append(element_array)
+            final_final_result.append(test_cases)
+
         """ Print final result """
-        for element in final_result:
+        for element in final_final_result:
             print(element)
+        exit(1)
     # if len(globe.inputData.test_sequence) > 1:
     #     final_result = prepare_final_combine_request(final_combinations, file_content)
     # else:

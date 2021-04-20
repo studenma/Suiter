@@ -2,13 +2,8 @@
 	"test_sequence": [
 		{
 			"endpoint": {
-		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<>&num1=<:num1:>&num2=<:num2:>",
-			    "local_params": [
-					{
-						"values": ["add","substract","multiply","divide"]
-					}
-				],
-				"t-way":2
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=<:num1:>&num2=<:num2:>",
+			    "local_params": []
 		    },
 		    "method": {
 				"values": "GET",
@@ -27,15 +22,19 @@
 		},
 		{
 			"endpoint": {
-		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<add,substract,multiply,divide>&num1=<0,1,2,3,4,5>&num2=<0,1,2,3,4,5>",
-			    "local_params": []
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<>&num1=<:num1:>&num2=<:num2:>",
+			    "local_params": [
+					{
+						"values": ["add","substract","multiply","divide"]
+					}
+				]
 		    },
 		    "method": {
 				"values": "GET",
 				"local_params": []
 			},
 			"header": {
-				"values": {"Content-type": "json"},
+				"values": {"Content-type": "json", "testInt": "12", "dalsiTest": "test"},
 				"local_params": []
 			},
 			"body": {
