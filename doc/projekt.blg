@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: projekt.aux
+Reallocating 'name_of_file' (item size: 1) to 25 items.
+The style file: bib-styles/Pysny/czplain.bst
+Reallocating 'name_of_file' (item size: 1) to 35 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: projekt-20-literatura-bibliography.bib
+Warning--empty edition in 3_IntroductionToSWTesting
+Warning--"{" isn't a brace-balanced string for entry rfc2616
+while executing--line 3240 of file bib-styles/Pysny/czplain.bst
+You've used 11 entries,
+            3946 wiz_defined-function locations,
+            883 strings with 7251 characters,
+and the built_in function-call counts, 4420 in all, are:
+= -- 350
+> -- 175
+< -- 11
++ -- 63
+- -- 52
+* -- 217
+:= -- 613
+add.period$ -- 42
+call.type$ -- 11
+change.case$ -- 84
+chr.to.int$ -- 6
+cite$ -- 12
+duplicate$ -- 287
+empty$ -- 527
+format.name$ -- 52
+if$ -- 1035
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 0
+newline$ -- 80
+num.names$ -- 22
+pop$ -- 144
+preamble$ -- 1
+purify$ -- 53
+quote$ -- 0
+skip$ -- 183
+stack$ -- 0
+substring$ -- 130
+swap$ -- 44
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 26
+warning$ -- 1
+while$ -- 24
+width$ -- 13
+write$ -- 143
+(There were 2 warnings)

@@ -1,0 +1,30 @@
+\babel@toc {czech}{}
+\contentsline {chapter}{\numberline {1}Úvod}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Kombinační testování}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definice základních pojmů}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Rozklad vstupní domény}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Kritérium pokrytí}{7}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Rozhraní pro programování aplikací}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Webové služby}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Simple Object Access Protocol}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Representational State Transfer}{13}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Hypertext Transfer Protocol}{16}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Návrh nástroje Suiter}{20}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Požadavky aplikace}{20}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Architektura nástroje}{25}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Implementace nástroje Suiter}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Použité technologie}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Implementace vstupního rozhraní}{29}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Způsob označení parametrů}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Datový typ parametrů}{33}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Využití nástroje Combine}{33}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Šablony pro tvorbu skriptů}{34}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Testování}{36}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Závěr}{38}{chapter.6}%
+\contentsline {chapter}{Literatura}{39}{chapter*.35}%
+\contentsline {chapter}{\numberline {A}Obsah přiloženého média}{40}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Přehled nástrojů platformy Testos}{41}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Vstupní a konfigurační soubory}{42}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Šablona testovacího skriptu pro Python}{44}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Obsah těla HTTP požadavku odeslaného nástroji Combine}{45}{appendix.E}%
+\contentsfinish 

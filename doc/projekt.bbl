@@ -1,0 +1,92 @@
+\makeatletter
+\makeatother
+\begin{thebibliography}{10}
+
+\bibitem{3_IntroductionToSWTesting}
+{\sc\bgroup}Ammann{\egroup}, P. a~{\sc\bgroup}Offutt{\egroup}, J.
+\newblock {\em Introduction to Software Testing}.
+\newblock Cambridge: Cambridge University Press, 2017.
+\newblock ISBN 9781107172012.
+
+\bibitem{rfc3986}
+{\sc\bgroup}Berners Lee{\egroup}, T., {\sc\bgroup}Fielding{\egroup}, R.~T.
+  a~{\sc\bgroup}Masinter{\egroup}, L.~M.
+\newblock {\em RFC3986 Uniform Resource Identifier (URI): Generic Syntax}.
+\newblock 2005.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://tools.ietf.org/html/rfc3986}}.
+
+\bibitem{1_Combine}
+{\sc\bgroup}Červinka{\egroup}, R.
+\newblock {\em Asistent pro generování testovacích scénářů}.
+\newblock 2018.
+\newblock Bakalářská práce.
+\newblock Vysoké učení technické v Brně, Fakulta informačních
+  technologií.
+\newblock Vedoucí práce Ing. Aleš Smrčka, Ph.D.
+
+\bibitem{rfc2616}
+{\sc\bgroup}Fielding{\egroup}, R., {\sc\bgroup}Gettys{\egroup}, J.,
+  {\sc\bgroup}Mogul{\egroup}, J., {\sc\bgroup}Frystyk{\egroup}, H.,
+  {\sc\bgroup}Masinter{\egroup}, L. et~al.
+\newblock {\em {RFC 2616, Hypertext Transfer Protocol -- HTTP/1.1}}.
+\newblock June 1999.
+\newblock Dostupn{\'{e}} z:
+  ~{\small\url{https://www.ietf.org/rfc/rfc2616.txt}}.
+
+\bibitem{Roy}
+{\sc\bgroup}{Fielding, Roy Thomas}{\egroup}.
+\newblock {\em Architectural Styles and the Design of Network-based Software
+  Architectures}.
+\newblock 2000.
+\newblock Doctoral dissertation.
+\newblock University of California, Irvine.
+\newblock Dostupn{\'{e}} z:
+  ~{\small\url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}}.
+
+\bibitem{Kosek_InteligentniPodporaNavigace}
+{\sc\bgroup}Kosek{\egroup}, J.
+\newblock {\em Inteligentní podpora navigace na WWW s využitím XML}.
+\newblock 2002.
+\newblock Diplomová práce.
+\newblock Vysoká škola ekonomická v Praze, Fakulta informatiky a statistiky.
+\newblock Vedoucí práce Ing. Vojtěch Svátek, Dr.
+
+\bibitem{4_IntroductionToCombinatorialTesting}
+{\sc\bgroup}Kuhn{\egroup}, D.~R., {\sc\bgroup}Kacker{\egroup}, R.~N.
+  a~{\sc\bgroup}Lei{\egroup}, Y.
+\newblock {\em Introduction to Combinatorial Testing}.
+\newblock 1st.
+\newblock Chapman \& Hall/CRC, 2013.
+\newblock ISBN 1466552298.
+
+\bibitem{mozilla}
+{\sc\bgroup}{Mozilla Corporation}{\egroup}.
+\newblock {\em Web technology for developers - HTTP Messages}.
+\newblock 2021.
+\newblock Dostupn{\'{e}} z:
+  ~{\small\url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages/httpmsgstructure2.png}}.
+
+\bibitem{W3C_web_services_architecture}
+{\sc\bgroup}Orchard{\egroup}, D., {\sc\bgroup}Ferris{\egroup}, C.,
+  {\sc\bgroup}Newcomer{\egroup}, E., {\sc\bgroup}Booth{\egroup}, D.,
+  {\sc\bgroup}Haas{\egroup}, H. et~al.
+\newblock {\em Web Services Architecture}.
+\newblock W3C, 2004.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://www.w3.org/TR/ws-arch/}}.
+
+\bibitem{Schmidl}
+{\sc\bgroup}Schmidl{\egroup}, T.
+\newblock {\em Návrh a implementace RESTových rozhraní}.
+\newblock 2016.
+\newblock Bakalářská práce.
+\newblock Fakulta informatiky Masarykovy univerzity.
+\newblock Vedoucí práce doc. RNDr. Petr Sojka, Ph.D.
+
+\bibitem{w3schools}
+{\sc\bgroup}w3schools{\egroup}.
+\newblock {\em XML Soap}.
+\newblock 2021.
+\newblock Dostupn{\'{e}} z:
+  ~{\small\url{https://www.w3schools.com/xml/xml_soap.asp}}.
+
+\end{thebibliography}

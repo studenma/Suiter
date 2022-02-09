@@ -1,0 +1,28 @@
+{
+	"test_sequence": [
+		{
+			"endpoint": {
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<add,substract>&num1=<:num1:>&num2=<:num2:>",
+			    "local_params": []
+		    },
+		    "method": {
+				"values": "<GET,POST>",
+				"local_params": []
+			},
+			"header": {
+				"values": {"Content-type": "json"},
+				"local_params": []
+			},
+			"body": {
+				"values": "",
+				"local_params": [],
+                "value_is_string": true
+			},
+			"t-way": 3
+		}
+	],
+	"global_params": {
+        "num1": [0,1,2,3,4,5],
+        "num2": [0,1,2,3,4,5]   
+    }
+}

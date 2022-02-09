@@ -1,0 +1,103 @@
+{
+	"test_cases": [
+		{
+			"endpoint": {
+		    	"url": "https://mydomain/addUser/<user>,<user>",
+		    	"T-strength": 2,
+				"allow-duplicities": 0,
+			    "parameters": [
+			       {
+			          "values": [4,52,3,1,4,77]
+			       }
+			    ]
+		    },
+		    "method": ["POST"],
+			"header": ["header1.yaml"],
+			"body": [],
+			"T-strength": 1,
+			"tag_id": "add-delete"
+		},
+		{
+		    "endpoint": {
+		    	"url": "https://mydomain/getUser/<>?format=<>",
+		    	"T-strength": 1,
+			    "parameters": [
+			       {
+			          "values": [4,52,3,1,4,77,99,-1,2,999999]
+			       },
+			       {
+			          "values": ["json","yaml","xml"]
+			       }
+			    ]
+		    },
+		    "method": ["GET","POST"],
+			"header": ["header1.yaml", "header2.yaml"],
+			"body": ["body1.json","body2.json"],
+			"T-strength": 1,
+			"all-in-one-test": 1
+		},
+		{
+		    "endpoint": {
+		    	"url": "https://mydomain/deleteUser/<user>,<>",
+		    	"T-strength": 1,
+			    "parameters": [
+			       {
+			          "values": [4,52,3,1,4,77]
+			       }
+			    ]
+		    },
+		    "method": ["DELETE"],
+			"header": ["header1.yaml"],
+			"body": [],
+			"T-strength": 1,
+			"tag_id": "add-delete"
+		}
+	]
+}
+// 36x add
+// 10x read
+// 36x delete
+// tc = 36
+
+
+// Combine 
+{
+    "name":"SUT name",
+    "t_strength":"2",
+    "dont_care_values":"yes",
+    "values":"values",
+    "parameters":[
+       {
+          "identificator":"INT",
+          "type":"integer",
+          "blocks":[
+             "INT=4",
+             "INT=52",
+             "INT=3",
+             "INT=1",
+             "INT=4",
+             "INT=77"
+          ]
+       },
+       {
+          "identificator":"I2",
+          "type":"integer",
+          "blocks":[
+             "I2=4",
+             "I2=52",
+             "I2=3",
+             "I2=1",
+             "I2=4",
+             "I2=77"
+          ]
+       }
+    ],
+    "constraints":[
+       "INT.1 -> !I2.1",
+       "INT.2 -> !I2.2",
+       "INT.3 -> !I2.3",
+       "INT.4 -> !I2.4",
+       "INT.5 -> !I2.5",
+       "INT.6 -> !I2.6"
+    ]
+ }

@@ -1,0 +1,559 @@
+@font-face {
+    font-family: Vafle;
+    src: url('fonts/Vafle VUT Regular.ttf');
+}
+
+@font-face {
+    font-family: VafleBold;
+    src: url('fonts/Vafle VUT Bold.ttf');
+}
+
+@font-face {
+    font-family: VafleLight;
+    src: url('fonts/Vafle VUT Light.ttf');
+}
+
+@font-face {
+    font-family: OpenSansRegular;
+    src: url('fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: OpenSansLight;
+    src: url('fonts/OpenSans-Light.ttf');
+}
+
+body {
+	font-family: OpenSansLight;
+	margin: 0;
+	text-align: center;
+	font-size: 16px;
+}
+
+header {
+	border: none;
+	height: 80px;
+	background-color: #005482;
+	color: white;
+	position: relative;
+}
+
+#testos_logo {
+	position: absolute;
+	height: 60px;
+	left: 60px;
+	top: 10px;
+}
+
+h1 {
+	margin: 0;
+	line-height: 80px;
+	font-family: VafleLight;
+}
+/*
+h4, h5 {
+	font-family: VafleLight;
+	font-weight: normal;
+}
+h4 {
+	font-size: 30px;
+}
+h5 {
+	font-size: 22px;
+}
+*/
+.yellow_button {
+	cursor: pointer;
+	height: 30px;
+	line-height: 30px;
+	padding: 0px 40px 0px 40px;
+	background: none;
+	color: #FD8900;
+	font-family: VafleBold;
+	border: 2px solid #FD8900;
+	text-align: center;
+	font-size: 15px;
+}
+
+.yellow_button:hover {
+	border-color: #FD8900;
+	background-color: #FD8900;
+	color: white;
+	cursor: pointer;
+}
+
+.blue_button {
+	cursor: pointer;
+	font-family: Vafle;
+	height: 25px;
+	line-height: 25px;
+	padding: 0px 5px 0px 5px;
+	background: none;
+	color: #005482;
+	border: 2px solid #005482;
+}
+
+.blue_button:hover {
+	border-color: #005482;
+	background-color: #005482;
+	color: white;
+	cursor: pointer;
+}
+
+#help {
+	position: absolute;
+	height: 40px;
+	right: 60px;
+	top: 20px;
+}
+
+#interface_input {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+section {
+	width: 100%;
+	border: none;
+}
+
+#form_section {
+	width: 100%;
+	text-align: left;
+	padding-left: 60px;
+	padding-right: 60px;
+	display: flex;
+	flex-direction: column;
+}
+
+#form_section form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form_row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 30px 0 0 0;
+}
+
+.form_row_line_below {
+	border-bottom: 1px dotted black;
+	padding-bottom: 30px;
+}
+
+#first_form_row {
+	margin: 50px 0 0 0;
+	border-bottom: 2px solid black;
+}
+
+#gen_test_set span, #randomize_vals span{
+	font-size: 13px;
+}
+
+#new_param_id {
+	width: 180px;
+}
+
+.new_param_warning {
+	font-size: 13px;
+	color: red;
+	display: none;
+}
+
+#list_of_params {
+
+}
+
+#list_of_params > .form_row {
+	flex-direction: column;
+	align-items: initial;
+}
+
+.param_menu {
+	width: 90%;
+	margin: auto;
+	margin-bottom: 30px;
+}
+
+.param_menu h3 {
+	margin: 0 0 2px 0;
+	display: inline;
+}
+
+.remove_param_button {
+	width: 20px;
+	height: 20px;
+	background-image: url('img/cross.png');
+	background-position: center;
+	background-size: 20px 20px;
+	display: inline;
+	float: right;
+	margin-left: 30px;
+	border: none;
+	background-color: white;
+
+}
+
+.remove_param_button:hover {
+	background-image: url('img/cross_lower_opacity.png');
+	cursor: pointer;
+}
+
+.param_type {
+	font-size: 14px;
+	font-style: italic;
+	margin-bottom: 15px;
+	display: block;
+}
+
+.block_header {
+	float: left;
+	width: 100px;
+	text-align: center;
+}
+
+.block_constr_header {
+	width: 75%;
+	float: left;
+	text-align: center;
+}
+
+.block_number {
+	width: 100px;
+	text-align: center;
+	float: left;	
+}
+
+.add_block_button {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	line-height: 30px;
+	text-align: center;
+	font-size: 30px;
+	padding: 0;
+	border-width: 1px;
+	font-family: VafleLight;
+	margin-left: 7%;
+}
+
+.block {
+	margin: auto;
+	width: 90%;
+	margin-bottom: 20px;
+}
+.block input {
+	margin-left: 30px;
+	width: 75%;
+}
+
+.remove_block_button {
+	width: initial !important;
+	background-color: white;
+	border: none;
+	font-family: VafleBold;
+	font-size: 15px;
+}
+
+.remove_block_button:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+#constr_header_div {
+	margin-bottom: 30px;
+}
+.constr_header {
+	float: left;
+	width: 100px;
+	text-align: center;
+}
+
+.constr_between_header {
+	width: 75%;
+	float: left;
+	text-align: center;
+}
+
+.constr_number {
+	width: 100px;
+	text-align: center;
+	float: left;	
+}
+
+.constraint {
+	margin-bottom: 20px;
+}
+
+#list_of_constraints {
+	flex-direction: column;
+	align-items: initial;
+	width: 90%;
+	margin: auto;
+	margin-top: 30px;
+}
+
+#list_of_constraints h3 {
+	margin: 0 0 30px 0;
+	display: inline;
+}
+
+#list_of_constraints input {
+	margin-left: 30px;
+	width: 70%;
+}
+
+.remove_constr_button {
+	width: initial !important;
+	background-color: white;
+	border: none;
+	font-family: VafleBold;
+	font-size: 15px;
+	margin-left: 30px !important;
+}
+
+.remove_constr_button:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+#add_constr_button {
+	height: 30px;
+	width: 30px !important;
+	border-radius: 50%;
+	line-height: 30px;
+	text-align: center;
+	font-size: 30px;
+	padding: 0;
+	border-width: 1px;
+	font-family: VafleLight;
+	margin-left: 2% !important;
+}
+
+#generate_button {
+	margin: auto;
+	margin-bottom: 30px;
+	width: 30%;
+	height: 50px;
+	font-size: 25px;
+
+}
+
+#download_panel {
+	height: 70px;
+	background-color: #005482;
+	color: white;
+	line-height: 70px;
+	display: none;
+
+}
+/*
+#download_panel form {
+	display: flex;
+	
+
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	margin-right: 60px;
+}
+*/
+#download_panel .yellow_button {
+	margin-right: 40px;
+}
+
+#stand_by {
+	display: none;
+}
+
+#progress_bar {
+	width: 95%;
+	height: 30px;
+	margin: auto;
+	background-color: #e2e2e2;
+}
+
+#colored {
+	height: inherit;
+	width: 5%;
+	background-color: #005482;
+}
+
+#loader {
+	display: block;
+	width: 50px;
+	height: 50px;
+	border: 10px solid #e2e2e2;
+	border-top: 10px solid #005482;
+	border-radius: 50%;
+	margin: auto;
+	margin-top: 10px;
+	-webkit-animation: spin 1.7s cubic-bezier(0.74, 0.01, 0.29, 0.99) infinite;
+	animation: spin 1.7s cubic-bezier(0.74, 0.01, 0.29, 0.99) infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#generated_test_set {
+	display: none;
+	padding-top: 50px;
+	padding-bottom: 70px;
+}
+
+#test_set_header {
+	border-bottom: 2px solid black;
+}
+
+.test_set_row {
+	width: 95%;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border-bottom: 1px dotted black;
+	line-height: 2;
+}
+
+.test_set_row div{
+	width: 100%;
+}
+
+.test_set_first_column {
+	border-right: 1px solid black;
+	width: 20% !important;
+}
+
+
+/* ------------------------------ help.html ------------------------------ */
+
+#help_body {
+	text-align: left;
+}
+
+#help_body h1, #help_body h2 {
+	text-align: center;
+}
+
+#help_body h2 {
+	margin-bottom: 30px;
+}
+
+#help_body p {
+	font-size: 11pt;
+}
+
+#help_body table, #help_body ul {
+	font-size: 11pt;
+}
+
+.help_section {
+	width: 90%;
+	margin: auto;
+	padding-top: 70px;
+}
+
+#head_section {
+	background-color: white;
+	border-bottom: 1px solid #005482;
+}
+
+.fixed_head {
+	position: fixed;
+	top: 0;
+  	width: 90%;
+  	background-color: white;
+	border-bottom: 1px solid #005482;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	
+}
+.fixed_head + #desc {
+  padding-top: 102px;
+}
+
+#head_section ul {
+	padding: 0;
+	margin: 0;
+	padding: 15px 0 15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#head_section ul li {
+	list-style-type: none;
+}
+
+#head_section ul li a {
+	text-decoration: none;
+	color: #005482;
+	font-weight: bold;
+}
+
+#head_section ul li a:hover {
+	text-decoration: none;
+	color: #005482;
+	font-weight: bold;
+	border-bottom: 3px solid #005482;
+}
+
+#help_body table {
+	border-collapse: collapse;
+	text-align: center;
+	margin: auto;
+}
+
+#help_body table, #help_body th, #help_body td {
+    border: 1px solid black;
+}
+
+#desc th, #desc td {
+	width: 70px;
+}
+.example {
+	text-align: center;
+}
+
+#lang table {
+	line-height: 2;
+}
+
+#lang table tr {
+	width: 100%;
+}
+
+#lang table tr > td, #lang table tr > tr{
+	width: 30%;
+}
+
+/*
+#lang table tr > td {
+	text-align: left;
+}*/
+
+#lang table tr :first-child {
+	width: 10% !important;
+}
+
+#constr table {
+	width: 100%
+}
+
+#constr table tr td {
+	width: 50%;
+}

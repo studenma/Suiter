@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35412728-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-35412728-4');
+    </script>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}">
+	<link rel="icon" href="static/img/favicon.png" type="image/x-icon">
+	<script src="{{ url_for('static', filename='script.js') }}"></script>
+	<title>Suiter</title>
+</head>
+
+<body>
+	<header>
+		<a href="http://testos.org"><img id="testos_logo" src="static/img/testos-logo.png"></a>
+		<h1>Suiter</h1>
+		<a href="help" target="_blank"><button class="yellow_button" id="help">How to use Suiter</button></a>
+	</header>
+
+	
+		<h2>Enter Characteristic</h2>
+
+		<form name="char">
+		  <textarea name="message" rows="10" cols="30">
+			{
+			    "name": "SUT name", 
+			    "t_strength": "2", 
+			    "dont_care_values": "no", 
+			    "values": "values", 
+			    "parameters": [
+			        {"identificator": "P1", "type": "integer", "blocks": ["P1<0", "P1>0", "P1=0"]}, 
+			        {"identificator": "P2", "type": "boolean", "blocks": [false, true]}
+			    ], 
+			    "constraints": []
+			}
+		  </textarea>
+		  <br><br>
+		  <input type="button" value="Generate!" class="blue_button" id="generate_button" onclick="generateTestSuite();">
+		</form>
+</body>
+
+</html>

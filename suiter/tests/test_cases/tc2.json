@@ -1,0 +1,37 @@
+{
+	"test_cases": [
+		{
+			"endpoint": {
+		    	"url": "https://mydomain/addUser/{}/{}/{}/{}",
+		    	"T-strength": 2,
+			    "parameters": [
+			       {
+			        "values": [4,52,3,1,4,77]
+			       },
+                   {
+                    "values": ["val1","val2","val3","val4","val5"]
+                   },
+                   {
+                    "values": ["aaaaaaaaaaaaaa", "bbbbbbbbb"]
+                   },
+                   {
+                    "values": [4009797897, 40046456456, 400161454]
+                   }
+			    ]
+		    },
+		    "method": ["GET","POST","DELETE"],
+			"header": ["header1.yaml", "header2.yaml", "header3.yaml"],
+			"body": ["body1.json", "body2.json", "body3.json", "body4.json"],
+			"T-strength": 2
+		}
+	]
+}
+
+// 30x testu url
+// 3x methoda
+// 3x
+// 4x
+// tc = 1080
+
+// Combine
+{"name":"SUT name","t_strength":"2","dont_care_values":"no","values":"values","parameters":[{"identificator":"a","type":"integer","blocks":["a=4","a=52","a=3","a=1","a=4","a=77"]},{"identificator":"b","type":"string","blocks":["b='val1'","b='val2'","b='val3'","b='val4'","b='val5'"]},{"identificator":"d","type":"integer","blocks":["d=4009797897","d=40046456456","d=400161454"]},{"identificator":"c","type":"string","blocks":["c='aaaaaaaaaaaaaaa'","c='bbbbbbbbbbbbbbbbb'"]}],"constraints":[]}

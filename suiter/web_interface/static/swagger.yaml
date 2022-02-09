@@ -1,0 +1,61 @@
+---
+swagger: '2.0'
+info:
+  description: 'This is a sample API server used to test the [Suiter](http://127.0.0.1:5000/) tool'
+  title: Swagger Suiter
+host: http://127.0.0.1:5000
+basePath: "/api/v1"
+tags:
+- name: Calculator
+  description: Supported operations - Add, Substract, Multiply, Divide
+paths:
+  "/calculator":
+    get:
+      tags:
+      - Calculator
+      parameters:
+      - name: operation
+        in: path
+        description: Operation
+        required: true
+        type: string
+        minLength: 3
+        maxLength: 20
+      - name: num1
+        in: path
+        description: The first integer
+        required: true
+        type: integer
+      - name: num2
+        in: path
+        description: The second integer
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema: 
+            type: object
+            properties:
+              result:
+                type: integer
+                description: The resulted value
+    post:
+      tags:
+      - Calculator
+      parameters:
+      - name: dfgdfg
+        in: 1
+      - name: aaa
+        in: 2
+      - name: bbb
+        in: 3
+      responses:
+        '200':
+          description: Successful operation
+          schema: 
+            type: object
+            properties:
+              result:
+                type: integer
+                description: The resulted value

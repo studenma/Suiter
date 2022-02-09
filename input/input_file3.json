@@ -1,0 +1,60 @@
+{
+	"test_sequence": [
+		{
+			"endpoint": {
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<>&num1=<:num1:>&num2=<1,2,0>",
+			    "local_params": [
+					{
+						"values": ["add", "substract", "multiply", "divide"]
+					}
+				]
+		    },
+		    "method": {
+				"values": "<>",
+				"local_params": [
+					{
+						"values": ["POST"]
+					}
+				]
+			},
+			"header": {
+				"values": {"Content-type": "json"},
+				"local_params": []
+			},
+			"body": {
+				"values": "",
+				"local_params": [],
+				"value_is_string": true
+			},
+			"t-way": 2
+		},
+		{
+			"endpoint": {
+		    	"values": "http://127.0.0.1:5000/api/v1/calculator?operation=<>&num1=<4,5,6>&num2=<:num1:>",
+			    "local_params": [
+					{
+						"values": ["add","substract","multiply"]
+					}
+				]
+		    },
+		    "method": {
+				"values": "GET",
+				"local_params": []
+			},
+			"header": {
+				"values": {"Content-type": "json"},
+				"local_params": []
+			},
+			"body": {
+				"values": "",
+				"local_params": [],
+				"value_is_string": true
+			},
+			"t-way": 1
+		}
+	],
+	"t-way": 2,
+	"global_params": {
+		"num1": [0,1,2,3,4,5]
+	}
+}

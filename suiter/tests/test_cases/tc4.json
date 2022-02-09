@@ -1,0 +1,61 @@
+{
+	"test_cases": [
+		{
+            "endpoint": ["https://mydomain/addUser"],
+		    "method": ["GET","POST"],
+			"header": ["header1.yaml"],
+			"body": ["body1.json"],
+			"T-strength": 2
+		}
+	]
+}
+
+
+Valid Data Types
+In JSON, values must be one of the following data types:
+* a string
+* a number
+* an object (JSON object)
+* an array
+* a boolean
+* null
+
+<"Title1", "Title2", "Title3">
+<123,456,789>
+<True,False,null>
+<{ "name":"John", "age":30, "city":"New York" },{ "name":"Martin", "age":20, "city":"Prostejov" }>
+<["AAA1", "AAA2"],["BBB1", "BBB2"],["BBB3", "BBB3"]>
+
+1*2*1*(3*3*3*2*3)=162*2=324
+
+body1.json
+{
+    "glossary": {
+        "title": "<<<<<>>>>>>>><<><><><<<><><>",
+		"GlossDiv": {
+            "title": <"Title1", "Title2", "Title3">,
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": <123,456,789>,
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": <True,False,null>,
+					"GlossDef": {
+                        "para": <{ "name":"John", "age":30, "city":"New York" },{ "name":"Martin", "age":20, "city":"Prostejov" }>,
+						"GlossSeeAlso": <["AAA1", "AAA2"],["BBB1", "BBB2"],["BBB3", "BBB3"]>
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+
+
+
+{"name":"SUT name","t_strength":"5","dont_care_values":"no","values":"values","parameters":[{"identificator":"a","type":"string","blocks":["a='Title1'","a='Title2'","a='Title3'"]},{"identificator":"b","type":"integer","blocks":["b=123","b=456","b=789"]},{"identificator":"c","type":"enum","blocks":["True","False","null"]},{"identificator":"e","type":"enum","blocks":["['AAA1', 'AAA2']","['BBB1', 'BBB2']","['BBB3', 'BBB3']"]},{"identificator":"d","type":"enum","blocks":["{ 'name':'John', 'age':30, 'city':'New York' }","{ 'name':'Martin', 'age':20, 'city':'Prostejov' }"]}],"constraints":[]}
+
+
+
+

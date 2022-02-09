@@ -1,0 +1,290 @@
+[
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=1&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=1&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=1&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=2&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=2&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=2&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=0&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=0&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=0&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=2&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=2&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=2&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=3&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=3&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=3&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=4&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=4&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=4&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=0&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=0&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=0&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=1&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=3&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=3&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=3&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=4&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=4&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=4&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=5&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=5&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=5&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=0&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=0', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=1&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=1&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=1&num2=3', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=1', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=2&num2=2', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=2', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=3&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=3', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=4&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=4', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=add&num1=4&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=substract&num1=5&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	],
+	[
+		['http://127.0.0.1:5000/api/v1/calculator?operation=divide&num1=5&num2=1', 'POST', '{"Content-type": "json"}', './body_files/request_1_body_1'],
+		['http://127.0.0.1:5000/api/v1/calculator?operation=multiply&num1=6&num2=5', 'GET', '{"Content-type": "json"}', './body_files/request_2_body_1']
+	]
+]

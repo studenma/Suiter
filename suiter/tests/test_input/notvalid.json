@@ -1,0 +1,61 @@
+{
+	"test_sequence" [
+		{
+			"endpoint": {
+		    	"values": "https://mydomain/addUser/<:user:>",
+		    	"T-way": 1,
+				"allow-duplicities": 1,
+			    "local_params": []
+		    },
+		    "method": {
+				"values": ["<:method:>"],
+				"values2": ["GET", "POST"],
+				"local_params": []
+			},
+			"header": ["header1.yaml"],
+			"body": [],
+			"t-way": 2,
+			"allow_duplicities": 1
+		},
+		{
+		    "endpoint": {
+		    	"values": "https://mydomain/getUser/<>?fo<>rmat=<json,yaml,xml>",
+		    	"T-strength": 1,
+			    "local_params": [
+			       {
+			          "values": [4,52,3,1,4,77,99,-1,2,999999]
+			       },
+				   {
+					"values": [4,52,3,1,4,77,99,-1,2,999999]
+				 	}
+			    ]
+		    },
+		    "method": {
+				"values": ["GET","POST"],
+				"local_params": []
+			},
+			"header": ["header1.yaml", "header2.yaml"],
+			"body": ["body1.json","body2.json"],
+			"T-strength": 1,
+			"all-in-one-test": 1
+		},
+		{
+		    "endpoint": {
+		    	"values": "https://mydomain/deleteUser/<:user:>",
+		    	"T-strength": 1,
+			    "local_params": []
+		    },
+		    "method": {
+				"values": ["GET","POST"],
+				"local_params": []
+			},
+			"header": ["header1.yaml"],
+			"body": [],
+			"T-strength": 1
+		}
+	],
+	"global_params": {
+		"user": [4,52,3,1,4,77],
+		"method": ["GET", "POST", "DELETE"]
+	}
+}

@@ -1,0 +1,62 @@
+{
+	"test_cases": [
+		{
+            "endpoint": ["https://mydomain/addUser"],
+		    "method": ["GET","POST"],
+			"header": ["header1.yaml"],
+			"body": ["body1.yaml", "body2.yaml"],
+			"T-strength": 2
+		}
+	]
+}
+
+http://blogs.perl.org/users/tinita/2018/03/strings-in-yaml---to-quote-or-not-to-quote.html
+
+body1.yaml
+---
+# An employee record
+name: Martin D'vloper
+job: @<>
+skill: Elite
+employed: True
+foods:
+  - Apple
+  - Orange
+  - Strawberry
+  - Mango
+languages:
+  perl: Elite
+  python: Elite
+  pascal: Lame
+education: |
+  4 GCSEs
+     3 A-Levels
+  BSc in the Internet of Things
+fold_newlines: >
+  this is really a
+  single line of text
+  despite appearances
+martin: {name: Martin D'vloper, job: Developer, skill: Elite}
+test: <>
+
+
+body2.yaml
+---
+# An employee record
+name: Martin D'vloper
+job: Developer
+skill: Elite
+employed: True
+foods:
+  - Apple
+  - Orange
+  - Strawberry
+  - Mango
+languages:
+  perl: Elite
+  python: Elite
+  pascal: Lame
+education: |
+  4 GCSEs
+  3 A-Levels
+  BSc in the Internet of Things
